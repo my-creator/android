@@ -42,4 +42,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+
+    // data visualization
+    implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
 }
