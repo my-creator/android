@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
+import android.util.Log
 import android.view.View
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Fragment.CommunityFragment
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         when (v){
             activity_main_navi_home_container->{
                 clearSelected()
+                Log.e("click","click home icon")
                 activity_main_navi_home_container.isSelected = true
                 activity_main_navi_txt_home.setTextColor(ContextCompat.getColor(this, R.color.violet_pink))
                 replaceFragment(HomeFragment())
@@ -54,16 +56,15 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-        addFragment(HomeFragment())
-        activity_main_navi_home_container.isSelected = true
-
-
         activity_main_navi_home_container.setOnClickListener(this)
         activity_main_navi_rank_container.setOnClickListener(this)
         activity_main_navi_vote_container.setOnClickListener(this)
         activity_main_navi_community_container.setOnClickListener(this)
         activity_main_navi_mypage_container.setOnClickListener(this)
+
+        addFragment(HomeFragment())
+        activity_main_navi_home_container.isSelected = true
+
     }
 
     fun clearSelected(){

@@ -19,6 +19,8 @@ allprojects {
     repositories {
         google()
         jcenter()
+        // data visualization
+        maven {url 'https://jitpack.io'}
     }
 }
 
