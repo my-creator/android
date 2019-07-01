@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+    <TextView
+            android:id="@+id/rv_item_today_rank_number"
+            android:layout_width="9dp"
+            android:layout_height="24dp"
+            android:text="1"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:lineHeight="24sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"/>
+
+    <TextView
+            android:id="@+id/rv_item_today_rank_creator"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="쯔양"
+            android:textSize="14sp"
+            android:lineHeight="20sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/rv_item_today_rank_number"/>
+
+    <ImageView
+            android:id="@+id/rv_item_today_rank_arrow"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icn_up"    />
+    <TextView
+            android:id="@+id/rv_item_today_rank_gap"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:text="82145"
+            android:textSize="14sp"
+            android:lineHeight="20sp"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/rv_item_today_rank_arrow"/>
+
+
+</RelativeLayout>

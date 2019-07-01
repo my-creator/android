@@ -1,12 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorAccent">
+        android:background="@color/white">
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="홈화면"/>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+    <RelativeLayout
+            android:id="@+id/fragment_home_rl_search_container"
+            android:layout_width="match_parent" 
+            android:layout_height="wrap_content">
+        <FrameLayout 
+                android:layout_width="match_parent" android:layout_height="50dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:padding="2dp"
+                android:background="@drawable/home_search_container_border_out">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="12dp"
+                    android:background="@drawable/home_search_container_border_in">
+                <ImageView
+                        android:id="@+id/fragment_home_iv_logo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/logo"/>
+                <View
+                        android:layout_width="1dp"
+                        android:layout_height="24dp"
+                        android:background="@color/pinkish_grey"
+                        android:layout_marginHorizontal="10dp"/>
+
+                <EditText
+                        android:id="@+id/fragment_home_edit_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:hint="크리에이터 검색"
+                        android:textColor="@color/black"
+                        android:lineSpacingExtra="8sp"
+                        android:textSize="16sp"
+                        android:background="@null"/>
+                </LinearLayout>
+            </FrameLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingVertical="10dp"
+                android:paddingHorizontal="20dp"
+                android:orientation="horizontal">
+            <TextView
+                    android:id="@+id/fragment_home_txt_hot_creator_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="실시간 크리에이터"
+                    android:textSize="14sp"
+                    android:lineHeight="20dp"
+                    android:textColor="@color/violet_pink"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="3 백종원의 요리비책"
+                    android:textSize="14sp"
+                    android:lineHeight="20dp"
+                    android:layout_toRightOf="@+id/fragment_home_txt_hot_creator_label"
+                    android:layout_marginLeft="80dp"
+                    android:textColor="@color/black"/>
+
+            <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/icn_hide_on"
+                    android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/pinkish_grey"/>
+
+        <android.support.design.widget.TabLayout
+                android:id="@+id/fragment_home_tl_today_rank"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/light_grey">
+        </android.support.design.widget.TabLayout>
+        
+        <android.support.v4.view.ViewPager
+                android:id="@+id/fragment_home_vp_today_rank"
+                android:layout_width="match_parent"
+                android:layout_height="200dp">
+
+        </android.support.v4.view.ViewPager>
+        
+    </LinearLayout>
 </FrameLayout>

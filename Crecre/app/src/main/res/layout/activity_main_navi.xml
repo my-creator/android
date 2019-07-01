@@ -26,8 +26,7 @@
                 android:text="홈"
                 android:textSize="12sp"
                 android:layout_marginTop="2dp"
-                android:textColor="@color/brownish_grey"
-                />
+                android:textColor="@drawable/navigation_text_selector"/>
     </LinearLayout>
 
     <LinearLayout
@@ -49,7 +48,7 @@
                 android:text="랭킹"
                 android:textSize="12sp"
                 android:layout_marginTop="2dp"
-                android:textColor="@color/brownish_grey"/>
+                android:textColor="@drawable/navigation_text_selector"/>
     </LinearLayout>
 
     <LinearLayout
@@ -71,7 +70,7 @@
                 android:text="투표"
                 android:textSize="12sp"
                 android:layout_marginTop="2dp"
-                android:textColor="@color/brownish_grey"/>
+                android:textColor="@drawable/navigation_text_selector"/>
     </LinearLayout>
 
     <LinearLayout
@@ -90,10 +89,10 @@
                 android:id="@+id/activity_main_navi_txt_community"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="커뮤니티"
+                android:text="게시판"
                 android:textSize="12sp"
                 android:layout_marginTop="2dp"
-                android:textColor="@color/brownish_grey"/>
+                android:textColor="@drawable/navigation_text_selector"/>
     </LinearLayout>
 
     <LinearLayout
@@ -115,6 +114,6 @@
                 android:text="MY"
                 android:textSize="12sp"
                 android:layout_marginTop="2dp"
-                android:textColor="@color/brownish_grey"/>
+                android:textColor="@drawable/navigation_text_selector"/>
     </LinearLayout>
 </LinearLayout>
