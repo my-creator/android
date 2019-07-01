@@ -3,6 +3,7 @@ package com.crecrew.crecre.UI.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat
 import android.view.View
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Fragment.CommunityFragment
@@ -10,6 +11,7 @@ import com.crecrew.crecre.UI.Fragment.VoteFragment
 import com.crecrew.crecreUI.Fragment.MypageFragment
 import com.crecrew.crecreUI.Fragment.RankFragment
 import kotlinx.android.synthetic.main.activity_main_navi.*
+import org.jetbrains.anko.textColor
 import scom.crecrew.crecre.UI.Fragment.HomeFragment
 
 class MainActivity : AppCompatActivity(), View.OnClickListener{
@@ -20,7 +22,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
             activity_main_navi_home_container->{
                 clearSelected()
                 activity_main_navi_home_container.isSelected = true
+                activity_main_navi_txt_home.setTextColor(ContextCompat.getColor(this, R.color.violet_pink))
                 replaceFragment(HomeFragment())
+
             }
             activity_main_navi_rank_container->{
                 clearSelected()
@@ -71,7 +75,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener{
 
     }
 
-    fun addFragment(fragment:Fragment) : Unit{
+    fun addFragment(fragment : Fragment) : Unit{
         val fm = supportFragmentManager
         val transaction = fm.beginTransaction()
         transaction.add(R.id.activity_main_fl_container, fragment)
