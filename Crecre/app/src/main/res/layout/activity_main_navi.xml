@@ -18,7 +18,7 @@
                 android:id="@+id/activity_main_navi_iv_home"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:background="@color/tab_gray"/>
+                android:src="@drawable/navigation_home_selector"/>
         <TextView
                 android:id="@+id/activity_main_navi_txt_home"
                 android:layout_width="wrap_content"
@@ -26,6 +26,7 @@
                 android:text="홈"
                 android:textSize="12sp"
                 android:layout_marginTop="2dp"
+                android:textColor="@color/brownish_grey"
                 />
     </LinearLayout>
 
@@ -40,14 +41,15 @@
                 android:id="@+id/activity_main_navi_iv_rank"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:background="@color/tab_gray"/>
+                android:src="@drawable/navigation_rank_selector"/>
         <TextView
                 android:id="@+id/activity_main_navi_txt_rank"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="랭킹"
                 android:textSize="12sp"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="2dp"
+                android:textColor="@color/brownish_grey"/>
     </LinearLayout>
 
     <LinearLayout
@@ -61,14 +63,15 @@
                 android:id="@+id/activity_main_navi_iv_vote"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:background="@color/tab_gray"/>
+                android:src="@drawable/navigation_vote_selector"/>
         <TextView
                 android:id="@+id/activity_main_navi_txt_vote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="투표"
                 android:textSize="12sp"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="2dp"
+                android:textColor="@color/brownish_grey"/>
     </LinearLayout>
 
     <LinearLayout
@@ -82,14 +85,15 @@
                 android:id="@+id/activity_main_navi_iv_community"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:background="@color/tab_gray"/>
+                android:src="@drawable/navigation_community_selector"/>
         <TextView
                 android:id="@+id/activity_main_navi_txt_community"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="커뮤니티"
                 android:textSize="12sp"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="2dp"
+                android:textColor="@color/brownish_grey"/>
     </LinearLayout>
 
     <LinearLayout
@@ -103,13 +107,14 @@
                 android:id="@+id/activity_main_navi_iv_mypage"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:background="@color/tab_gray"/>
+                android:background="@drawable/navigation_mypage_selector"/>
         <TextView
                 android:id="@+id/activity_main_navi_txt_mypage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MY"
                 android:textSize="12sp"
-                android:layout_marginTop="2dp"/>
+                android:layout_marginTop="2dp"
+                android:textColor="@color/brownish_grey"/>
     </LinearLayout>
 </LinearLayout>

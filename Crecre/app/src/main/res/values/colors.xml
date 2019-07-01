@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+    <resources>
+
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="white">#FFFFFF</color>
-    <color name="tab_gray">#c4c4c4</color>
-    <color name="colorPrimaryPink">#ff57f7</color>
-</resources>
+
+        <color name="white">#ffffff</color>
+        <color name="pale_grey">#f0f3f4</color>
+        <color name="white_two">#f0f0f0</color>
+        <color name="black">#1c1c1c</color>
+        <color name="violet_pink">#ff57f7</color>
+        <color name="pale_grey_two">#f2f6f8</color>
+        <color name="bright_light_blue">#2befef</color>
+        <color name="black_two">#333333</color>
+        <color name="light_grey">#f8faf9</color>
+        <color name="greyish">#aaaaaa</color>
+        <color name="white_three">#f5f5f5</color>
+        <color name="violet_pink_two">#ff56f6</color>
+        <color name="pinkish_grey">#c1c1c1</color>
+        <color name="brownish_grey">#666666</color>
+        <color name="black_60">#99000000</color>
+        <color name="bright_light_blue_two">#2aefef</color>
+    </resources>
