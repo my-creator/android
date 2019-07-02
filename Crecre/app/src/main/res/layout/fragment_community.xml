@@ -2,7 +2,7 @@
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -52,19 +52,18 @@
                 android:layout_below="@+id/rl_toolbar_community_frag"
                 android:orientation="vertical"
         >
-            <include
-                    layout="@layout/fragment_community_navi"
-                    android:layout_width="match_parent"
-                    android:layout_height="42dp"
-            />
 
-            <FrameLayout
-                    android:id="@+id/fl_nav_new_posting"
+            <android.support.design.widget.TabLayout
+                    android:id="@+id/tl_community_post_frag"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-            >
+                    android:layout_height="wrap_content"
+                    app:tabIndicatorColor="@color/violet_pink"/>
 
-            </FrameLayout>
+
+            <android.support.v4.view.ViewPager
+                    android:id="@+id/vp_community_post_frag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
         </LinearLayout>
 
