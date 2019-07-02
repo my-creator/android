@@ -21,9 +21,7 @@ import org.jetbrains.anko.support.v4.startActivity
 class CommunityFragment: Fragment() {
 
     private lateinit var rootView: View
-
     //private val communityfavoriteDataList = ArrayList<CommunityFavoriteData>()
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_community, container, false)
@@ -31,7 +29,17 @@ class CommunityFragment: Fragment() {
         rootView.btn_search_community_frag.setOnClickListener() {
             startActivity<CommunitySearchActivity>()
         }
+
         return rootView
+
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        configureMainTab()
+
+//        tablayoutTextColor()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -47,7 +55,8 @@ class CommunityFragment: Fragment() {
         dataList.add(CommunityFavoriteData("자유게시판", 0))
         dataList.add(CommunityFavoriteData("온도Ondo", 1))
         dataList.add(CommunityFavoriteData("입짧은 햇님", 1))
-
+        dataList.add(CommunityFavoriteData("입짧은 햇미니인", 1))
+        dataList.add(CommunityFavoriteData("바보바보", 1))
 
         val communityfavoriteRecyclerViewAdapter = CommunityFavoriteRecyclerViewAdapter(activity!!, dataList)
         rv_favorite_community_frag.adapter = communityfavoriteRecyclerViewAdapter
@@ -55,27 +64,30 @@ class CommunityFragment: Fragment() {
 
     }
 
-/*
     //ViewPager
     private fun configureMainTab() {
 
-        val fm = childFragmentManager
-        val transaction = fm.beginTransaction()
-        val communityFragment = CommunityFragment()
-
-
-        vp_community_post_frag.adapter = CommunityPostFragmentAdapter(requireFragmentManager(), 2)
+        vp_community_post_frag.adapter = CommunityPostFragmentAdapter(fragmentManager!!, 2)
         vp_community_post_frag.offscreenPageLimit = 1
+/*
+
+        tl_community_post_frag.run {
+            setupWithViewPager(vp_community_post_frag)
+
+            getTabAt(0)!!.setText("최신글")
+            getTabAt(1)!!.setText("인기글")
+        }
+*/
         tl_community_post_frag.setupWithViewPager(vp_community_post_frag)
-        val navCategoryMainLayout: View = (this.getSystemService(android.content.Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater)
-            .inflate(R.layout.fragment_community_navi, null, false)
-        tl_community_post_frag.getTabAt(0)!!.customView = navCategoryMainLayout.
+        val topTabLayout: View = activity!!.layoutInflater.inflate(R.layout.fragment_community_navi, null, false)
+        tl_community_post_frag.getTabAt(0)!!.customView = topTabLayout.
             findViewById(R.id.rl_recentpost_community_navi_frag) as RelativeLayout
-        tl_community_post_frag.getTabAt(1)!!.customView = navCategoryMainLayout.
+        tl_community_post_frag.getTabAt(1)!!.customView = topTabLayout.
             findViewById(R.id.rl_popularpost_community_navi_frag) as RelativeLayout
 
     }
 
+/*
     // 처음 프래그먼트 추가
     private fun addFragment(fragment : Fragment){
         val fm = childFragmentManager

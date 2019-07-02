@@ -28,7 +28,7 @@ class CommunityPostFragmentAdapter(fm: FragmentManager, private val num_fragment
             return when(p0){
                 0 -> getcommunityRecentFragment()
                 1 -> getEndProductMainFragment()
-                else -> null
+                else -> return null
             }
         }
 

@@ -29,13 +29,9 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
 
         // thumbnail 이미지
         if(dataList[position].thumbnail == "")
-        {
             Glide.with(ctx).load(R.drawable.icn_img_x).into(holder.thumbnail)
-        }
         else
-        {
             Glide.with(ctx).load(dataList[position].thumbnail).into(holder.thumbnail)
-        }
 
         //hot이미지
         if(dataList[position].hot_img == 0){
@@ -55,6 +51,12 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         //작성시간
         holder.time.text = dataList[position].time.toString()
 
+        //게시판카테고리
+        if(dataList[position].category.toString() == "")
+            holder.category.text = ""
+        else
+            holder.category.text = dataList[position].category.toString()
+
         //container 눌렀을 시
         holder.container.setOnClickListener {
 
@@ -67,9 +69,10 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         var thumbnail = itemView.findViewById(R.id.img_thumbnail_hotpost_community_act) as ImageView
         var hot_img = itemView.findViewById(R.id.img_hot_icon_community_hot_act) as ImageView
         var title = itemView.findViewById(R.id.tv_title_community_hot_act) as TextView
-        var recommendation = itemView.findViewById(R.id.tv_recommendation_community_act) as TextView
-        var comment = itemView.findViewById(R.id.tv_comment_hotpost_com_act) as TextView
-        var time = itemView.findViewById(R.id.tv_posttime_hotpost_com_act) as TextView
+        var recommendation = itemView!!.findViewById(R.id.tv_recommendation_community_act) as TextView
+        var comment = itemView!!.findViewById(R.id.tv_comment_hotpost_com_act) as TextView
+        var time = itemView!!.findViewById(R.id.tv_posttime_hotpost_com_act) as TextView
+        var category = itemView!!.findViewById(R.id.tv_postcategory_hotpost_com_act) as TextView
 
     }
 }

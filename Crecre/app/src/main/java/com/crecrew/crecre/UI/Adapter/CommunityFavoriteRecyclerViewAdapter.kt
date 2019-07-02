@@ -21,14 +21,15 @@ class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : Arr
     override fun getItemCount(): Int = dataList.size
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-
+        //게시판제목
         holder.title.text = dataList[position].title
 
+        //container클릭시
         holder.container.setOnClickListener {
         }
 
         var img_like = 0
-        //하트 클릭시
+
         holder.img_like.setOnClickListener {
             if(img_like == 0)
             {
