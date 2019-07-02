@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <RelativeLayout
+                android:id = "@+id/rl_toolbar_vote_frag"
+                android:layout_width = "match_parent"
+                android:layout_height = "56dp"
+                android:background = "@drawable/community_header">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:text="투표하기"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/white"/>
+        </RelativeLayout>
+        <TextView
+                android:layout_width="117dp"
+                android:layout_height="29dp"
+                android:text="진행 중인 투표"
+                android:textSize="29sp"/>
+    </RelativeLayout>
+</FrameLayout>
