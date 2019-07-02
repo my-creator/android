@@ -24,6 +24,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".UI.Activity.CreatorProfileActivity"/>
+        <activity android:name=".UI.Activity.CommunitySearchActivity"/>
     </application>
 
 </manifest>
