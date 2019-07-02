@@ -20,11 +20,12 @@
                     android:textSize="18sp"
                     android:text="투표하기"
                     android:layout_centerInParent="true"
-                    android:textColor="@color/white"
-            />
+                    android:textColor="@color/white"/>
         </RelativeLayout>
-        <android.support.v7.weight.Carview>
-            <!--여기 채우세요-->
-        </android.support.v7.weight.Carview>
+        <TextView
+                android:layout_width="117dp"
+                android:layout_height="29dp"
+                android:text="진행 중인 투표"
+                android:textSize="29sp"/>
     </RelativeLayout>
 </FrameLayout>
