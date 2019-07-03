@@ -2,5 +2,6 @@ package com.crecrew.crecre.Data
 
 data class CommunityFavoriteData(
     var title : String,
-    var img_like : Int
+    var img_like : Int,
+    var user_id : Int
 )

@@ -9,15 +9,18 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.crecrew.crecre.R
+import com.crecrew.crecre.UI.Activity.CommunityHotPostActivity
+import kotlinx.android.synthetic.main.fragment_community_popular.*
+import org.jetbrains.anko.support.v4.startActivity
 
 class CommunityRecentFragment : Fragment() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
 
-        }
+
+
     }
 
     override fun onCreateView(

@@ -14,14 +14,14 @@
     >
         <!--Toolbar-->
         <RelativeLayout
-                android:id="@+id/rl_toolbar_community_frag"
+                android:id="@+id/rl_toolbar_community_hotpost_act"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/community_header"
         >
             <!--btn_back-->
             <RelativeLayout
-                    android:id="@+id/btn_back_community_search"
+                    android:id="@+id/btn_back_hotpost_community_act"
                     android:layout_width="48dp"
                     android:layout_height="64dp">
 
@@ -45,7 +45,7 @@
 
             <!--search_btn-->
             <RelativeLayout
-                    android:id="@+id/btn_search_community_frag"
+                    android:id="@+id/btn_search_community_hotpost_act"
                     android:layout_width="42dp"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
