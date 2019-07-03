@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent" android:layout_height="match_parent">
 
     <RelativeLayout
             android:layout_width="match_parent"
@@ -44,66 +44,102 @@
 
         </RelativeLayout>
 
-        <!--최신글,인기글fragment-->
-        <LinearLayout
-                android:id="@+id/ll_community_post_frag"
+        <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/rl_toolbar_community_frag"
-                android:orientation="vertical"
+                android:layout_height="match_parent"
+                 android:layout_below="@+id/rl_toolbar_community_frag"
         >
 
-            <android.support.design.widget.TabLayout
-                    android:id="@+id/tl_community_post_frag"
+            <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:tabIndicatorColor="@color/violet_pink"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+            >
+
+                <!--최신글,인기글fragment-->
+                <LinearLayout
+                        android:id="@+id/ll_community_post_frag"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/rl_toolbar_community_frag"
+                        android:orientation="vertical"
+                >
+
+                    <android.support.design.widget.TabLayout
+                            android:id="@+id/tl_community_post_frag"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:tabSelectedTextColor="@color/violet_pink"
+                            app:tabIndicatorColor="@color/violet_pink"/>
+
+                    <android.support.v4.view.ViewPager
+                            android:id="@+id/vp_community_post_frag"
+                            android:layout_width="match_parent"
+                            android:layout_height="328dp"/>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                        android:id="@+id/rl_community_empty"
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        android:layout_below="@+id/ll_community_post_frag"
+                        android:background="#e8eef0"
+                >
+
+                </RelativeLayout>
+
+                <!--즐겨찾는 게시판-->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_below="@+id/rl_community_empty"
+                        android:descendantFocusability="blocksDescendants"
+                        android:orientation="vertical"
+                >
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:text="즐겨찾는 게시판"
+                            android:textSize="18sp"
+                            android:textColor="@color/violet_pink"
+                    />
+
+                    <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_favorite_community_frag"
+                            android:layout_marginTop="16dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                    </android.support.v7.widget.RecyclerView>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                        android:id="@+id/rl_community_empty2"
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        android:layout_below="@+id/ll_community_post_frag"
+                        android:background="#e8eef0"
+                >
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_postlist_community_fg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="12dp"
+                >
+                </android.support.v7.widget.RecyclerView>
 
 
-            <android.support.v4.view.ViewPager
-                    android:id="@+id/vp_community_post_frag"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+            </LinearLayout>
 
-        </LinearLayout>
-
-        <RelativeLayout
-                android:id="@+id/rl_community_empty"
-                android:layout_width="match_parent"
-                android:layout_height="16dp"
-                android:layout_below="@+id/ll_community_post_frag"
-                android:background="#e8eef0"
-        >
-
-        </RelativeLayout>
-
-        <!--즐겨찾는 게시판-->
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_below="@+id/rl_community_empty"
-                android:orientation="vertical"
-        >
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="즐겨찾는 게시판"
-                    android:textSize="18sp"
-                    android:textColor="@color/violet_pink"
-            />
-
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_favorite_community_frag"
-                    android:layout_marginTop="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-            </android.support.v7.widget.RecyclerView>
-
-        </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 
     </RelativeLayout>
 

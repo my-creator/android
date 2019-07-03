@@ -3,8 +3,8 @@ package com.crecrew.crecre.UI.Adapter
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.crecrew.crecre.UI.Fragment.CommunityPopularFragment
-import com.crecrew.crecre.UI.Fragment.CommunityRecentFragment
+import com.crecrew.crecre.UI.Fragment.Community.CommunityPopularFragment
+import com.crecrew.crecre.UI.Fragment.Community.CommunityRecentFragment
 
 class CommunityPostFragmentAdapter(fm: FragmentManager, private val num_fragment: Int) : FragmentStatePagerAdapter(fm) {
 
@@ -13,13 +13,15 @@ class CommunityPostFragmentAdapter(fm: FragmentManager, private val num_fragment
             private var communityPopularFragment: CommunityPopularFragment? = null
 
             @Synchronized
-            fun getcommunityRecentFragment(): CommunityRecentFragment{
-                if(communityRecentFragment == null) communityRecentFragment = CommunityRecentFragment()
+            fun getcommunityRecentFragment(): CommunityRecentFragment {
+                if(communityRecentFragment == null) communityRecentFragment =
+                    CommunityRecentFragment()
                 return communityRecentFragment!!
             }
             @Synchronized
-            fun getEndProductMainFragment(): CommunityPopularFragment{
-                if(communityPopularFragment == null) communityPopularFragment = CommunityPopularFragment()
+            fun getEndProductMainFragment(): CommunityPopularFragment {
+                if(communityPopularFragment == null) communityPopularFragment =
+                    CommunityPopularFragment()
                 return communityPopularFragment!!
             }
         }
@@ -28,7 +30,7 @@ class CommunityPostFragmentAdapter(fm: FragmentManager, private val num_fragment
             return when(p0){
                 0 -> getcommunityRecentFragment()
                 1 -> getEndProductMainFragment()
-                else -> null
+                else -> return null
             }
         }
 

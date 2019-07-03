@@ -1,7 +1,5 @@
-package com.crecrew.crecre.UI.Fragment
+package com.crecrew.crecre.UI.Fragment.Community
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -9,13 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.crecrew.crecre.R
+import com.crecrew.crecre.UI.Activity.CommunityHotPostActivity
+import kotlinx.android.synthetic.main.fragment_community_popular.*
+import org.jetbrains.anko.support.v4.startActivity
 
-class CommunityPopularFragment : Fragment() {
+class CommunityRecentFragment : Fragment() {
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-        }
+
+
+
     }
 
     override fun onCreateView(
@@ -23,7 +26,7 @@ class CommunityPopularFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_community_popular, container, false)
+        return inflater.inflate(R.layout.fragment_community_recent, container, false)
     }
 
 }

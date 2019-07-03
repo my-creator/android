@@ -6,5 +6,10 @@ data class CommunityHotPostData (
     var title : String,
     var recommendation : Int,
     var comment : Int,
-    var time : String
+    var time : String,
+    var category: String,
+    var user_id : Int,
+    var post_id : Int
+
+
 )
