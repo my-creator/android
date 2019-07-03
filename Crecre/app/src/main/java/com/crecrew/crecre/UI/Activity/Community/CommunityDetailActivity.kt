@@ -1,4 +1,4 @@
-package com.crecrew.crecre.UI.Activity
+package com.crecrew.crecre.UI.Activity.Community
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
