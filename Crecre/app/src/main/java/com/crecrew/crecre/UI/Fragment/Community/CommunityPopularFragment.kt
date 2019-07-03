@@ -41,15 +41,15 @@ class CommunityPopularFragment : Fragment() {
 
         var dataList: ArrayList<CommunityHotPostData> = ArrayList()
         dataList.add(CommunityHotPostData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",1,
-            "햇님이 먹었던 과자 브랜드 이게 맞나?", 10, 10, "18:47","인기게시판"))
+            "햇님이 먹었던 과자 브랜드 이게 맞나?", 10, 10, "18:47","인기게시판",0,0))
         dataList.add(CommunityHotPostData("", 1,"안녀안알ㄴ여ㅏㄴ여낭",
-            1, 8, "14:27","입짧은 햇님"))
+            1, 8, "14:27","입짧은 햇님",0,0))
         dataList.add(CommunityHotPostData("",1,
-            "입짧은햇님보세여", 19, 19, "12:35","온도"))
+            "입짧은햇님보세여", 19, 19, "12:35","온도",0,0))
         dataList.add(CommunityHotPostData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",0,
-            "먹방요정", 4, 8, "11:20","인기게시판"))
+            "먹방요정", 4, 8, "11:20","인기게시판",0,0))
         dataList.add(CommunityHotPostData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",0,
-            "바부야", 2, 7, "04:30","감성"))
+            "바부야", 2, 7, "04:30","감성",0,0))
 
 
         communityPopularRecyclerViewAdapter = CommunityHotPostRecyclerViewAdapter(context!!, dataList)

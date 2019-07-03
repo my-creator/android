@@ -11,6 +11,10 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.crecrew.crecre.Data.CommunityFavoriteData
 import com.crecrew.crecre.R
+import com.crecrew.crecre.UI.Activity.CommunityDetailActivity
+import com.crecrew.crecre.UI.Activity.CommunityHotPostActivity
+import com.crecrew.crecre.UI.Activity.CommunitySearchActivity
+import org.jetbrains.anko.startActivity
 
 class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : ArrayList<CommunityFavoriteData>) : RecyclerView.Adapter<CommunityFavoriteRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
@@ -26,6 +30,10 @@ class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : Arr
 
         //container클릭시
         holder.container.setOnClickListener {
+            ctx.startActivity<CommunityHotPostActivity>(
+                "title" to dataList[position].title,
+                "idx" to dataList[position].user_id
+            )
         }
 
         var img_like = 0

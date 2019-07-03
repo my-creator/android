@@ -44,7 +44,7 @@
 
         </RelativeLayout>
 
-        <ScrollView
+        <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                  android:layout_below="@+id/rl_toolbar_community_frag"
@@ -93,8 +93,9 @@
                 <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="24dp"
+                        android:layout_marginHorizontal="24dp"
                         android:layout_below="@+id/rl_community_empty"
+                        android:descendantFocusability="blocksDescendants"
                         android:orientation="vertical"
                 >
 
@@ -117,9 +118,28 @@
 
                 </LinearLayout>
 
+                <RelativeLayout
+                        android:id="@+id/rl_community_empty2"
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        android:layout_below="@+id/ll_community_post_frag"
+                        android:background="#e8eef0"
+                >
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_postlist_community_fg"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="12dp"
+                >
+                </android.support.v7.widget.RecyclerView>
+
+
             </LinearLayout>
 
-        </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
 
     </RelativeLayout>
 

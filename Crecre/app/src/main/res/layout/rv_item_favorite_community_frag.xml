@@ -11,7 +11,7 @@
             android:id="@+id/rl_item_favorite_container"
             android:layout_width="match_parent"
             android:layout_height="42dp"
-            android:paddingHorizontal="34dp"
+            android:paddingHorizontal="10dp"
     >
 
         <RelativeLayout
@@ -41,18 +41,12 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-        </RelativeLayout>
-
     </RelativeLayout>
 
     <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_marginHorizontal="34dp"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="10dp"
             android:background="#f3f3f3"
     >
     </RelativeLayout>
