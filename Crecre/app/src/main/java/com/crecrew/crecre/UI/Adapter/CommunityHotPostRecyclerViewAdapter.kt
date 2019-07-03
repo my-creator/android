@@ -63,13 +63,13 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         else
             holder.category.text = dataList[position].category.toString()
 
-        //더보기 눌렀을 때
+     /*   //더보기 눌렀을 때
         holder.more_btn.setOnClickListener {
             ctx.startActivity<CommunityHotPostActivity>(
                 "post_idx" to dataList[position].post_id,
                 "idx" to dataList[position].user_id
             )
-        }
+        }*/
 
         //container 눌렀을 시
         holder.container.setOnClickListener {
@@ -91,7 +91,7 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         var comment = itemView!!.findViewById(R.id.tv_comment_hotpost_com_act) as TextView
         var time = itemView!!.findViewById(R.id.tv_posttime_hotpost_com_act) as TextView
         var category = itemView!!.findViewById(R.id.tv_postcategory_hotpost_com_act) as TextView
-        var more_btn = itemView.findViewById(R.id.btn_more_community_popular_fg) as LinearLayout
+        //var more_btn = itemView.findViewById(R.id.btn_more_community_popular_fg) as LinearLayout
 
     }
 }
