@@ -8,7 +8,7 @@ import android.view.View
 import android.widget.LinearLayout
 import com.crecrew.crecre.Base.BasePagerAdapter
 import com.crecrew.crecre.R
-import com.crecrew.crecre.UI.Fragment.CommunityFragment
+import com.crecrew.crecre.UI.Fragment.Community.CommunityFragment
 import com.crecrew.crecre.UI.Fragment.VoteFragment
 import com.crecrew.crecreUI.Fragment.MypageFragment
 import com.crecrew.crecreUI.Fragment.RankFragment

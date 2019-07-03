@@ -1,21 +1,15 @@
-package com.crecrew.crecre.UI.Fragment
+package com.crecrew.crecre.UI.Fragment.Community
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.crecrew.crecre.Data.CommunityFavoriteData
 import com.crecrew.crecre.Data.CommunityHotPostData
 
 import com.crecrew.crecre.R
-import com.crecrew.crecre.UI.Activity.CommunityHotPostActivity
-import com.crecrew.crecre.UI.Adapter.CommunityFavoriteRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
-import kotlinx.android.synthetic.main.fragment_community.*
 import kotlinx.android.synthetic.main.fragment_community_popular.*
 
 class CommunityPopularFragment : Fragment() {
