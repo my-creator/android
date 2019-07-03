@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankBottomFragment
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankTopFragment
 
-class TodayRankPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm){
+class TodayRankPagerAdapter(fm: FragmentManager, private val num_fragment: Int) : FragmentStatePagerAdapter(fm){
     override fun getItem(p0: Int): Fragment? {
         when (p0) {
             0 -> return HomeTodayRankTopFragment()
@@ -15,12 +15,13 @@ class TodayRankPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm)
         return null
     }
 
-    override fun getCount() = 2
+    override fun getCount() = num_fragment
 
+    /*
     override fun getPageTitle(position: Int): CharSequence? {
         return when(position){
             0->"1~5위"
             else->"6~10위"
         }
-    }
+    }*/
 }

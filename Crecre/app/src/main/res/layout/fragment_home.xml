@@ -58,7 +58,7 @@
                 android:paddingHorizontal="20dp"
                 android:orientation="horizontal">
             <TextView
-                    android:id="@+id/fragment_home_txt_hot_creator_label"
+                    android:id="@+id/fragment_home_txt_today_hot_label"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="실시간 크리에이터"
@@ -66,16 +66,18 @@
                     android:lineHeight="20dp"
                     android:textColor="@color/violet_pink"/>
             <TextView
+                    android:id="@+id/fragment_home_txt_today_hot_creator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3 백종원의 요리비책"
                     android:textSize="14sp"
                     android:lineHeight="20dp"
-                    android:layout_toRightOf="@+id/fragment_home_txt_hot_creator_label"
+                    android:layout_toRightOf="@+id/fragment_home_txt_today_hot_label"
                     android:layout_marginLeft="80dp"
                     android:textColor="@color/black"/>
 
             <ImageView
+                    android:id="@+id/fragment_home_iv_today_hot_btn"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/icn_hide_on"
@@ -86,19 +88,61 @@
                 android:layout_height="1dp"
                 android:background="@color/pinkish_grey"/>
 
+        <LinearLayout
+                android:id="@+id/fragment_home_today_rank_container"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
         <android.support.design.widget.TabLayout
                 android:id="@+id/fragment_home_tl_today_rank"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/light_grey">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:tabIndicatorColor="@color/light_grey"
+                android:background="@color/light_grey">
         </android.support.design.widget.TabLayout>
         
         <android.support.v4.view.ViewPager
                 android:id="@+id/fragment_home_vp_today_rank"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="204dp">
 
         </android.support.v4.view.ViewPager>
-        
+
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/pinkish_grey"/>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingLeft="20dp"
+                android:paddingVertical="12dp">
+            <TextView
+                    android:id="@+id/fragment_home_today_rank_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2019.06.26 17:42:00"
+                    android:textSize="10sp"
+                    android:textColor="@color/brownish_grey"/>
+            <TextView
+                    android:layout_toRightOf="@+id/fragment_home_today_rank_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 검색 트래픽 기준"
+                    android:textSize="10sp"
+                    android:textColor="@color/brownish_grey"/>
+
+        </RelativeLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/pinkish_grey"/>
+
+        </LinearLayout>
+
     </LinearLayout>
 </FrameLayout>

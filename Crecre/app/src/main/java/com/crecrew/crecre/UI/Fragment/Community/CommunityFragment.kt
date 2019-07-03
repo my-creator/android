@@ -1,4 +1,4 @@
-package com.crecrew.crecre.UI.Fragment
+package com.crecrew.crecre.UI.Fragment.Community
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
