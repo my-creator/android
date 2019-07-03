@@ -30,16 +30,6 @@ class MainActivity : AppCompatActivity() {
                 addFragment(MypageFragment())
             }
 
-            //Refresh menu
-            addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
-                override fun onPageScrolled(position: Int, positionOffset: Float, positionOffsetPixels: Int) {}
-                override fun onPageSelected(position: Int) {
-                    invalidateOptionsMenu()
-                }
-
-                override fun onPageScrollStateChanged(state: Int) {}
-            })
-
             offscreenPageLimit = 4
         }
 
