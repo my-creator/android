@@ -29,6 +29,9 @@ class TodayRankRecyclerViewAdapter(private val ctx : Context, private val dataLi
         // 범위내로 안뜸
         if(tab == 1) {
             if(dataList[position].number >= 1 && dataList[position].number <=5) {
+                if(dataList[position].number >= 1 && dataList[position].number <=3){
+                    holder.number.setTextColor(Color.parseColor("#ff57f7"))
+                }
                 holder.number.text = dataList[position].number.toString()
                 holder.creator.text = dataList[position].creator
                 if (dataList[position].gap > 0)

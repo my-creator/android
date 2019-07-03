@@ -6,14 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.crecrew.crecre.Data.CommunityFavoriteData
 import com.crecrew.crecre.R
-import com.crecrew.crecre.UI.Activity.CommunityDetailActivity
-import com.crecrew.crecre.UI.Activity.CommunityHotPostActivity
-import com.crecrew.crecre.UI.Activity.CommunitySearchActivity
+import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import org.jetbrains.anko.startActivity
 
 class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : ArrayList<CommunityFavoriteData>) : RecyclerView.Adapter<CommunityFavoriteRecyclerViewAdapter.Holder>() {

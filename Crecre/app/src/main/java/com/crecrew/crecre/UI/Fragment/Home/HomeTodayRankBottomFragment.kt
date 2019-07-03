@@ -11,7 +11,9 @@ import com.crecrew.crecre.Data.TodayRankData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.TodayRankRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_home_today_rank_bottom.*
-import kotlinx.android.synthetic.main.fragment_home_today_rank_top.*
+import android.view.animation.AnimationUtils
+import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
+
 
 class HomeTodayRankBottomFragment : Fragment(){
 
@@ -26,6 +28,14 @@ class HomeTodayRankBottomFragment : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         configureRecyclerView()
+
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if (isVisibleToUser) {
+            animateRV()
+        }
     }
 
     private fun configureRecyclerView(){
@@ -43,6 +53,16 @@ class HomeTodayRankBottomFragment : Fragment(){
         todayRankRecyclerViewAdapter = TodayRankRecyclerViewAdapter(activity!!, dataList, 2)
         fragment_home_today_rank_bottom_rv.adapter = todayRankRecyclerViewAdapter
         fragment_home_today_rank_bottom_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        fragment_home_today_rank_bottom_rv.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
+        fragment_home_today_rank_bottom_rv.addItemDecoration(SimpleDividerItemDecoration(R.drawable.line_divider, 1))
     }
+
+    private fun animateRV(){
+        val controller = AnimationUtils.loadLayoutAnimation(activity, R.anim.fade_in_anim)
+
+        fragment_home_today_rank_bottom_rv.setLayoutAnimation(controller)
+        todayRankRecyclerViewAdapter.notifyDataSetChanged()
+        fragment_home_today_rank_bottom_rv.scheduleLayoutAnimation()
+    }
+
+
 }
