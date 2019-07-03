@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/rv_item_today_post_container"
+        android:layout_width="match_parent"
+        android:layout_height="96dp"
+        android:paddingVertical="12dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="29dp">
+
+    <ImageView
+            android:id="@+id/rv_item_today_post_thumnail"
+            android:layout_width="88dp"
+            android:layout_height="72dp"
+            android:background="@drawable/today_post_thumnail_rounding"
+            android:layout_marginRight="10dp"/>
+
+    <TextView
+            android:id="@+id/rv_item_today_post_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/rv_item_today_post_thumnail"
+            android:text="딕헌터와 영알남 커플, 현실에서의 만남은 더 심쿵!"
+            android:textSize="14sp"
+            android:textColor="@color/black"
+            android:layout_marginTop="2dp"
+            android:lineHeight="18sp"/>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:layout_marginBottom="1dp"
+            android:layout_toRightOf="@+id/rv_item_today_post_thumnail">
+        <TextView
+                android:id="@+id/rv_item_today_post_category"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="먹방"
+                android:textSize="12sp"
+                android:lineHeight="20sp"
+                android:textColor="@color/greyish"
+                android:paddingRight="9dp"/>
+        <View
+                android:layout_width="0.5dp"
+                android:layout_height="10dp"
+                android:background="@color/greyish"
+                android:layout_gravity="center"/>
+
+        <TextView
+                android:id="@+id/rv_item_today_post_recommend"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="추천 89"
+                android:textSize="12sp"
+                android:lineHeight="20sp"
+                android:textColor="@color/greyish"
+                android:paddingHorizontal="9dp"/>
+        <View
+                android:layout_width="0.5dp"
+                android:layout_height="10dp"
+                android:background="@color/greyish"
+                android:layout_gravity="center"/>
+        <TextView
+                android:id="@+id/rv_item_today_post_comment"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="댓글 32"
+                android:textSize="12sp"
+                android:lineHeight="20sp"
+                android:textColor="@color/greyish"
+                android:paddingHorizontal="9dp"/>
+        <View
+                android:layout_width="0.5dp"
+                android:layout_height="10dp"
+                android:background="@color/greyish"
+                android:layout_gravity="center"/>
+        <TextView
+                android:id="@+id/rv_item_today_post_time"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="30분 전"
+                android:textSize="12sp"
+                android:lineHeight="20sp"
+                android:textColor="@color/greyish"
+                android:paddingHorizontal="9dp"/>
+
+    </LinearLayout>
+</RelativeLayout>

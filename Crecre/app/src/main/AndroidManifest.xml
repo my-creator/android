@@ -13,11 +13,10 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".UI.Activity.CommunityDetailActivity">
+        <activity android:name=".UI.Activity.Community.CommunityDetailActivity">
         </activity>
-        <activity android:name=".UI.Activity.CommunityHotPostActivity">
+        <activity android:name=".UI.Activity.Community.CommunityHotPostActivity">
         </activity>
-        <activity android:name=".UI.Activity.VoteSuggestActivity"/>
         <activity android:name=".UI.Activity.MainActivity"
                   android:windowSoftInputMode="adjustNothing">
             <intent-filter>
@@ -29,7 +28,7 @@
         </activity>
 
         <activity android:name=".UI.Activity.CreatorProfileActivity"/>
-        <activity android:name=".UI.Activity.CommunitySearchActivity"/>
+        <activity android:name=".UI.Activity.Community.CommunitySearchActivity"/>
 
 
 

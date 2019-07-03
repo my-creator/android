@@ -2,8 +2,6 @@ package com.crecrew.crecre.UI.Fragment.Community
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -11,13 +9,11 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.crecrew.crecre.Data.CommunityFavoriteData
 import com.crecrew.crecre.R
-import com.crecrew.crecre.UI.Activity.CommunitySearchActivity
+import com.crecrew.crecre.UI.Activity.Community.CommunitySearchActivity
 import com.crecrew.crecre.UI.Adapter.CommunityFavoriteRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.CommunityPostFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_community.*
 import kotlinx.android.synthetic.main.fragment_community.view.*
-import kotlinx.android.synthetic.main.rv_item_favorite_community_frag.*
-import org.jetbrains.anko.sdk25.coroutines.onClick
 import org.jetbrains.anko.support.v4.startActivity
 
 class CommunityFragment: Fragment() {

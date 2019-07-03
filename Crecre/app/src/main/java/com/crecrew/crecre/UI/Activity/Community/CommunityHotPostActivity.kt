@@ -1,4 +1,4 @@
-package com.crecrew.crecre.UI.Activity
+package com.crecrew.crecre.UI.Activity.Community
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -10,6 +10,7 @@ import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.CommunityPostFragmentAdapter
 import kotlinx.android.synthetic.main.activity_community_hot_post.*
 import kotlinx.android.synthetic.main.activity_community_search.*
+import org.jetbrains.anko.startActivity
 
 class CommunityHotPostActivity : AppCompatActivity() {
 
@@ -24,6 +25,10 @@ class CommunityHotPostActivity : AppCompatActivity() {
         btn_back_hotpost_community_act.setOnClickListener {
             finish()
         }
+        btn_search_community_hotpost_act.setOnClickListener {
+            startActivity<CommunitySearchActivity>()
+        }
+
     }
 
     //추가해야할 부분 ##서버통신
@@ -45,6 +50,7 @@ class CommunityHotPostActivity : AppCompatActivity() {
     }
     */
 
+    //recyclerView
     private fun configureRecyclerView() {
         var dataList: ArrayList<CommunityHotPostData> = ArrayList()
         dataList.add(CommunityHotPostData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",1,

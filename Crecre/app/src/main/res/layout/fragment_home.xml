@@ -4,8 +4,9 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
+        android:background="@color/pale_grey">
 
+<android.support.v4.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="wrap_content">
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -14,14 +15,15 @@
     <RelativeLayout
             android:id="@+id/fragment_home_rl_search_container"
             android:layout_width="match_parent" 
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/white">
         <FrameLayout 
                 android:layout_width="match_parent" android:layout_height="50dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
                 android:padding="2dp"
                 android:background="@drawable/home_search_container_border_out">
-            <LinearLayout
+            <LinearLayout0
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
@@ -47,7 +49,7 @@
                         android:lineSpacingExtra="8sp"
                         android:textSize="16sp"
                         android:background="@null"/>
-                </LinearLayout>
+                </LinearLayout0>
             </FrameLayout>
         </RelativeLayout>
 
@@ -56,7 +58,8 @@
                 android:layout_height="40dp"
                 android:paddingVertical="10dp"
                 android:paddingHorizontal="20dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/white">
             <TextView
                     android:id="@+id/fragment_home_txt_today_hot_label"
                     android:layout_width="wrap_content"
@@ -65,16 +68,26 @@
                     android:textSize="14sp"
                     android:lineHeight="20dp"
                     android:textColor="@color/violet_pink"/>
-            <TextView
-                    android:id="@+id/fragment_home_txt_today_hot_creator"
+
+            <RelativeLayout
+                    android:id="@+id/fragment_home_today_hot_creator_container"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="3 백종원의 요리비책"
-                    android:textSize="14sp"
-                    android:lineHeight="20dp"
-                    android:layout_toRightOf="@+id/fragment_home_txt_today_hot_label"
                     android:layout_marginLeft="80dp"
-                    android:textColor="@color/black"/>
+                    android:layout_toRightOf="@+id/fragment_home_txt_today_hot_label"
+            >
+                <TextView
+                        android:id="@+id/fragment_home_txt_today_hot_creator"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3 백종원의 요리비책"
+                        android:textSize="14sp"
+                        android:lineHeight="20dp"
+
+                        android:textColor="@color/black"/>
+
+            </RelativeLayout>
+
 
             <ImageView
                     android:id="@+id/fragment_home_iv_today_hot_btn"
@@ -93,7 +106,9 @@
                 android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_marginBottom="16dp">
 
 
         <android.support.design.widget.TabLayout
@@ -107,7 +122,8 @@
         <android.support.v4.view.ViewPager
                 android:id="@+id/fragment_home_vp_today_rank"
                 android:layout_width="match_parent"
-                android:layout_height="204dp">
+                android:layout_height="204dp"
+                android:background="@color/white">
 
         </android.support.v4.view.ViewPager>
 
@@ -120,7 +136,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:paddingLeft="20dp"
-                android:paddingVertical="12dp">
+                android:paddingVertical="12dp"
+                android:background="@color/white">
             <TextView
                     android:id="@+id/fragment_home_today_rank_time"
                     android:layout_width="wrap_content"
@@ -144,5 +161,198 @@
 
         </LinearLayout>
 
+        <RelativeLayout
+                android:id="@+id/fragment_home_now_vote_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/light_grey"
+                android:paddingHorizontal="20dp"
+                android:paddingTop="16dp"
+                android:paddingBottom="23dp">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="진행 중인 투표"
+                        android:textSize="20sp"
+                        android:lineHeight="29sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/noto_sans_kr_bold"
+                        android:layout_weight="1"/>
+                <TextView
+                        android:id="@+id/fragment_home_now_vote_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="전체보기"
+                        android:fontFamily="@font/noto_sans_kr_medium"
+                        android:textColor="@color/violet_pink"
+                        android:textSize="16sp"
+                        android:lineHeight="24sp"
+
+                        android:layout_gravity="center_vertical"/>
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingTop="23dp"
+                android:paddingBottom="32dp"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/fragment_home_last_vote_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="믿고보는 지난 투표"
+                    android:textSize="20sp"
+                    android:lineHeight="29sp"
+                    android:textColor="@color/black_two"
+                    android:fontFamily="@font/noto_sans_kr_bold"
+                    android:layout_marginLeft="20dp"/>
+            
+            <RelativeLayout
+                    android:id="@+id/fragment_home_last_vote_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:layout_marginTop="16dp">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="지난 투표들의 결과가 여기에 나올 것입니당!"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginHorizontal="20dp"
+                    android:gravity="center"
+                    android:paddingVertical="24dp"
+                    android:background="@drawable/home_vote_recommendation_box_background">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="투표가 마음에 안드시나요?"
+                        android:textSize="16sp"
+                        android:textAlignment="center"
+                        android:textColor="@color/black_two"
+                        android:lineHeight="24sp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="투표를 직접 제안할 수 있어요"
+                        android:textSize="16sp"
+                        android:textAlignment="center"
+                        android:fontFamily="@font/noto_sans_kr_medium"
+                        android:textColor="@color/black_two"
+                        android:layout_marginTop="5dp"
+                        android:lineHeight="24sp"/>
+                <Button
+                        android:id="@+id/fragment_home_vote_recommendation_btn"
+                        android:layout_width="128dp"
+                        android:layout_height="32dp"
+                        android:text="투표 제안하기"
+                        android:textSize="14sp"
+                        android:lineHeight="20sp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/noto_sans_kr_medium"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/home_vote_recommendation_btn_background"/>
+            </LinearLayout>
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/pinkish_grey"/>
+
+        <LinearLayout
+                android:id="@+id/fragment_home_hot_post_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="12dp"
+                    android:orientation="horizontal">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="오늘 뜨는 인기글"
+                        android:textSize="16sp"
+                        android:lineHeight="24sp"
+                        android:textColor="@color/violet_pink"
+                        android:fontFamily="@font/noto_sans_kr_bold"
+                        android:layout_weight="1"/>
+                <TextView
+                        android:id="@+id/fragment_home_txt_today_hot_post_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="더보기"
+                        android:fontFamily="@font/noto_sans_kr_medium"
+                        android:textColor="@color/brownish_grey"
+                        android:textSize="16sp"
+                        android:lineHeight="24sp"/>
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/fragment_home_rv_today_hot_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+        <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/pinkish_grey"/>
+
+        <LinearLayout
+                android:id="@+id/fragment_home_new_post_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="12dp"
+                    android:orientation="horizontal">
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="방금 막 올라온 최신글"
+                        android:textSize="16sp"
+                        android:lineHeight="24sp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/noto_sans_kr_bold"
+                        android:layout_weight="1"/>
+                <TextView
+                        android:id="@+id/fragment_home_txt_today_new_post_more"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="더보기"
+                        android:fontFamily="@font/noto_sans_kr_medium"
+                        android:textColor="@color/brownish_grey"
+                        android:textSize="16sp"
+                        android:lineHeight="24sp"/>
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/fragment_home_rv_today_new_post"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
     </LinearLayout>
+</android.support.v4.widget.NestedScrollView>
 </FrameLayout>
