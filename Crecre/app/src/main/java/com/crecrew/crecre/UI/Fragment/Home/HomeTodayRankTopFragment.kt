@@ -24,19 +24,19 @@ class HomeTodayRankTopFragment : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         configureRecyclerView()
-
+        animateRV()
     }
 
-    /*
+
+/*
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         super.setUserVisibleHint(isVisibleToUser)
         if (isVisibleToUser) {
             animateRV()
         }
-    }*/
-
+    }
+*/
     private fun configureRecyclerView(){
 
         var dataList: ArrayList<TodayRankData> = ArrayList()
@@ -51,14 +51,14 @@ class HomeTodayRankTopFragment : Fragment(){
         todayRankRecyclerViewAdapter = TodayRankRecyclerViewAdapter(activity!!, dataList, 1)
         fragment_home_today_rank_top_rv.adapter = todayRankRecyclerViewAdapter
         fragment_home_today_rank_top_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        fragment_home_today_rank_top_rv.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
+
     }
 
     private fun animateRV(){
         val controller = AnimationUtils.loadLayoutAnimation(activity, R.anim.fade_in_anim)
-/*
+
         fragment_home_today_rank_top_rv.setLayoutAnimation(controller)
         todayRankRecyclerViewAdapter.notifyDataSetChanged()
-        fragment_home_today_rank_top_rv.scheduleLayoutAnimation()*/
+        fragment_home_today_rank_top_rv.scheduleLayoutAnimation()
     }
 }

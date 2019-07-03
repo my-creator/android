@@ -2,8 +2,6 @@ package scom.crecrew.crecre.UI.Fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.view.ViewPager
 import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
@@ -11,26 +9,16 @@ import android.view.ViewGroup
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.animation.Animation
 import android.widget.RelativeLayout
-import com.crecrew.crecre.Data.CommunityFavoriteData
 import com.crecrew.crecre.R
-import com.crecrew.crecre.UI.Adapter.CommunityFavoriteRecyclerViewAdapter
-import kotlinx.android.synthetic.main.fragment_community.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.util.*
-import android.system.Os.poll
-import android.view.animation.AnimationUtils.loadAnimation
-import android.view.animation.AnimationUtils
 import com.crecrew.crecre.Base.BasePagerAdapter
 import com.crecrew.crecre.Data.TodayPost
-import com.crecrew.crecre.Data.TodayRankData
 import com.crecrew.crecre.UI.Adapter.TodayPostRecyclerViewAdapter
-import com.crecrew.crecre.UI.Adapter.TodayRankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankBottomFragment
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankTopFragment
-import kotlinx.android.synthetic.main.fragment_home_today_rank_bottom.*
 
 
 class HomeFragment: Fragment() {
@@ -43,7 +31,6 @@ class HomeFragment: Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
-
 
         // ViewPager
         rootView.let {
@@ -62,15 +49,12 @@ class HomeFragment: Fragment() {
                 getTabAt(1)!!.customView =
                     navigationLayout.findViewById(R.id.fragment_home_today_rank_navi_bottom) as RelativeLayout
             }
-        }
-
-        rootView.fragment_home_iv_today_hot_btn.setOnClickListener() {
-
-            openTodayHotChart()
+            it.fragment_home_iv_today_hot_btn.setOnClickListener() {
+                openTodayHotChart()
+            }
         }
 
         return rootView
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -123,6 +107,5 @@ class HomeFragment: Fragment() {
         fragment_home_rv_today_new_post.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
 
     }
-
 }
 
