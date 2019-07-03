@@ -17,6 +17,7 @@
         </activity>
         <activity android:name=".UI.Activity.CommunityHotPostActivity">
         </activity>
+        <activity android:name=".UI.Activity.VoteSuggestActivity"/>
         <activity android:name=".UI.Activity.MainActivity"
                   android:windowSoftInputMode="adjustNothing">
             <intent-filter>

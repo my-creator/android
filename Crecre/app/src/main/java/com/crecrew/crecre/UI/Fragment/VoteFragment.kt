@@ -15,3 +15,4 @@ class VoteFragment: Fragment(){
         return inflater.inflate(R.layout.fragment_vote, container, false)
     }
 }
+//fragment_vote
