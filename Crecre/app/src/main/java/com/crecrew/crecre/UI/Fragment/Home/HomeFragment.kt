@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.RelativeLayout
@@ -15,10 +16,21 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.util.*
 import com.crecrew.crecre.Base.BasePagerAdapter
+import com.crecrew.crecre.Data.LastVoteData
 import com.crecrew.crecre.Data.TodayPost
+import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
+import com.crecrew.crecre.UI.Adapter.LastVoteOverviewRecyclerView
 import com.crecrew.crecre.UI.Adapter.TodayPostRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankBottomFragment
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankTopFragment
+import kotlinx.android.synthetic.main.rv_item_last_vote.*
+import org.jetbrains.anko.support.v4.ctx
+import org.jetbrains.anko.support.v4.startActivity
+
+
+
+
+
 
 
 class HomeFragment: Fragment() {
@@ -27,12 +39,13 @@ class HomeFragment: Fragment() {
     private var isChartOpen = false
 
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
+    lateinit var lastVoteOverviewRecyclerViewAdapter: LastVoteOverviewRecyclerView
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // ViewPager
+        // today rank ViewPager
         rootView.let {
             it.fragment_home_vp_today_rank.run {
                 adapter = BasePagerAdapter(fragmentManager!!).apply {
@@ -54,6 +67,11 @@ class HomeFragment: Fragment() {
             }
         }
 
+        // 투표 제안 btn
+       rootView.fragment_home_vote_recommendation_btn.setOnClickListener {
+           startActivity<VoteSuggestActivity>()
+       }
+
         return rootView
     }
 
@@ -61,6 +79,7 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         configureRecyclerView()
+
     }
 
 
@@ -81,6 +100,17 @@ class HomeFragment: Fragment() {
     }
 
     private fun configureRecyclerView(){
+
+        // last vote
+        var lastVoteData: ArrayList<LastVoteData> = ArrayList()
+
+        lastVoteData.add(LastVoteData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","https://news.imaeil.com/inc/photos/2019/04/29/2019042900310562698_l.jpg", "시연조교",1,"크리크리 짱, 2줄 넘어갔을 때 처리도 해야 함 !! 홍루이젠 맛있다."))
+        lastVoteData.add(LastVoteData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800", "가희바희보",1,"하나빼기 일 >___<"))
+        lastVoteData.add(LastVoteData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","", "현희여신",1,"오늘은 잼을 가져오셨다."))
+
+        lastVoteOverviewRecyclerViewAdapter = LastVoteOverviewRecyclerView(activity!!, lastVoteData)
+        fragment_home_last_vote_rv_box.adapter = lastVoteOverviewRecyclerViewAdapter
+        fragment_home_last_vote_rv_box.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
         // hot post
         var todayHotDataList: ArrayList<TodayPost> = ArrayList()
@@ -107,5 +137,7 @@ class HomeFragment: Fragment() {
         fragment_home_rv_today_new_post.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
 
     }
+
+    // Todo: 지난 투표 width 기기에 맞게
 }
 

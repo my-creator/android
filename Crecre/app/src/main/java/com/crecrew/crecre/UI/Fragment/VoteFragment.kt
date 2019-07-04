@@ -13,6 +13,6 @@ class VoteFragment: Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_vote, container, false)
-
     }
 }
+//fragment_vote
