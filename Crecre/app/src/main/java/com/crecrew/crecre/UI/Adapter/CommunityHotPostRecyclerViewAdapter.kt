@@ -12,7 +12,6 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.CommunityHotPostData
 import com.crecrew.crecre.R
-import com.crecrew.crecre.UI.Activity.Community.CommunityDetailActivity
 import org.jetbrains.anko.startActivity
 
 class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : ArrayList<CommunityHotPostData>) : RecyclerView.Adapter<CommunityHotPostRecyclerViewAdapter.Holder>() {
