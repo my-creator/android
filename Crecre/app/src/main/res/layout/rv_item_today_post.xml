@@ -13,7 +13,7 @@
             android:layout_width="88dp"
             android:layout_height="72dp"
             android:background="@drawable/today_post_thumnail_rounding"
-            android:layout_marginRight="8dp"/>
+            android:layout_marginRight="10dp"/>
 
     <TextView
             android:id="@+id/rv_item_today_post_title"
@@ -23,6 +23,7 @@
             android:text="딕헌터와 영알남 커플, 현실에서의 만남은 더 심쿵!"
             android:textSize="14sp"
             android:textColor="@color/black"
+            android:layout_marginTop="2dp"
             android:lineHeight="18sp"/>
 
     <LinearLayout
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:orientation="horizontal"
+            android:layout_marginBottom="1dp"
             android:layout_toRightOf="@+id/rv_item_today_post_thumnail">
         <TextView
                 android:id="@+id/rv_item_today_post_category"

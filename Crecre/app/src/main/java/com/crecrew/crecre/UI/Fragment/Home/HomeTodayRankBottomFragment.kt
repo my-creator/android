@@ -12,7 +12,7 @@ import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.TodayRankRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_home_today_rank_bottom.*
 import android.view.animation.AnimationUtils
-
+import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
 
 
 class HomeTodayRankBottomFragment : Fragment(){
@@ -42,7 +42,7 @@ class HomeTodayRankBottomFragment : Fragment(){
 
         var dataList: ArrayList<TodayRankData> = ArrayList()
         dataList.clear()
-        //dataList.add(TodayRankData(5,"호호",2019))
+
         dataList.add(TodayRankData(6,"창규니",1254))
         dataList.add(TodayRankData(7,"시연조교",242))
         dataList.add(TodayRankData(8,"크리크리",318))
@@ -53,7 +53,7 @@ class HomeTodayRankBottomFragment : Fragment(){
         todayRankRecyclerViewAdapter = TodayRankRecyclerViewAdapter(activity!!, dataList, 2)
         fragment_home_today_rank_bottom_rv.adapter = todayRankRecyclerViewAdapter
         fragment_home_today_rank_bottom_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        fragment_home_today_rank_bottom_rv.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
+        fragment_home_today_rank_bottom_rv.addItemDecoration(SimpleDividerItemDecoration(R.drawable.line_divider, 1))
     }
 
     private fun animateRV(){
