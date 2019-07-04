@@ -1,5 +1,6 @@
 package scom.crecrew.crecre.UI.Fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
@@ -18,12 +19,15 @@ import java.util.*
 import com.crecrew.crecre.Base.BasePagerAdapter
 import com.crecrew.crecre.Data.LastVoteData
 import com.crecrew.crecre.Data.TodayPost
+import com.crecrew.crecre.UI.Activity.Community.CommunityDetailActivity
+import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
 import com.crecrew.crecre.UI.Adapter.LastVoteOverviewRecyclerView
 import com.crecrew.crecre.UI.Adapter.TodayPostRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankBottomFragment
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankTopFragment
 import kotlinx.android.synthetic.main.rv_item_last_vote.*
+import kotlinx.android.synthetic.main.rv_item_today_post.view.*
 import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 
@@ -67,10 +71,22 @@ class HomeFragment: Fragment() {
             }
         }
 
-        // 투표 제안 btn
-       rootView.fragment_home_vote_recommendation_btn.setOnClickListener {
-           startActivity<VoteSuggestActivity>()
-       }
+        rootView.let{
+            // 투표 제안 btn
+            it.fragment_home_vote_recommendation_btn.setOnClickListener {
+                startActivity<VoteSuggestActivity>()
+            }
+            it.fragment_home_txt_today_hot_post_more.setOnClickListener {
+                startActivity<CommunityHotPostActivity>()
+                // hot과 new 구분하기!
+            }
+            it.fragment_home_txt_today_new_post_more.setOnClickListener {
+                startActivity<CommunityHotPostActivity>()
+            }
+        }
+
+
+
 
         return rootView
     }

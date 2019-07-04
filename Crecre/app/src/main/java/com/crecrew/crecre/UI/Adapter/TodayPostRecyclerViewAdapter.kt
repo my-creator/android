@@ -12,7 +12,8 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.TodayPost
 import com.crecrew.crecre.R
-
+import com.crecrew.crecre.UI.Activity.Community.CommunityDetailActivity
+import org.jetbrains.anko.startActivity
 
 
 class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<TodayPost>) : RecyclerView.Adapter<TodayPostRecyclerViewAdapter.Holder>() {
@@ -42,7 +43,9 @@ class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataLi
         // 제목 긴거 자르기
 
         holder.container.setOnClickListener {
-
+            ctx.startActivity<CommunityDetailActivity>(
+               // TODO: 정보 넣기
+            )
         }
     }
 
