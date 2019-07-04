@@ -3,6 +3,7 @@
           package="com.crecrew.crecre">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
@@ -13,12 +14,17 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".UI.Activity.Community.CommunityWriteActivity">
+        </activity>
+        <activity android:name=".UI.Activity.Community.CommunityRequestActivity">
+        </activity>
         <activity android:name=".UI.Activity.Community.CommunityDetailActivity">
         </activity>
         <activity android:name=".UI.Activity.Community.CommunityHotPostActivity">
         </activity>
-        <activity android:name=".UI.Activity.MainActivity">
-                  android:windowSoftInputMode="adjustNothing">
+        <activity
+                android:name=".UI.Activity.MainActivity"
+                android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
@@ -26,12 +32,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity android:name=".UI.Activity.CreatorProfileActivity"/>
         <activity android:name=".UI.Activity.Community.CommunitySearchActivity"/>
-
-
-
     </application>
 
 </manifest>

@@ -2,7 +2,6 @@ package com.crecrew.crecre.UI.Fragment
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +10,7 @@ import android.view.animation.AnimationUtils
 import com.crecrew.crecre.Data.TodayRankData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.TodayRankRecyclerViewAdapter
+import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_home_today_rank_top.*
 
 class HomeTodayRankTopFragment : Fragment(){
@@ -51,6 +51,7 @@ class HomeTodayRankTopFragment : Fragment(){
         todayRankRecyclerViewAdapter = TodayRankRecyclerViewAdapter(activity!!, dataList, 1)
         fragment_home_today_rank_top_rv.adapter = todayRankRecyclerViewAdapter
         fragment_home_today_rank_top_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        fragment_home_today_rank_top_rv.addItemDecoration(SimpleDividerItemDecoration(R.drawable.line_divider, 1))
 
     }
 

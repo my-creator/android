@@ -218,13 +218,16 @@
             <RelativeLayout
                     android:id="@+id/fragment_home_last_vote_container"
                     android:layout_width="match_parent"
-                    android:layout_height="280dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="16dp">
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/fragment_home_last_vote_rv_box"
+                        android:layout_marginLeft="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="290dp">
 
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="지난 투표들의 결과가 여기에 나올 것입니당!"/>
+                </android.support.v7.widget.RecyclerView>
+
 
             </RelativeLayout>
 
@@ -234,7 +237,9 @@
                     android:orientation="vertical"
                     android:layout_marginHorizontal="20dp"
                     android:gravity="center"
-                    android:paddingVertical="24dp"
+                    android:layout_marginTop="32dp"
+                    android:paddingTop="24dp"
+                    android:paddingBottom="19dp"
                     android:background="@drawable/home_vote_recommendation_box_background">
                 <TextView
                         android:layout_width="wrap_content"
@@ -264,6 +269,7 @@
                         android:textColor="@color/white"
                         android:fontFamily="@font/noto_sans_kr_medium"
                         android:layout_marginTop="16dp"
+                        android:layout_marginBottom="5dp"
                         android:background="@drawable/home_vote_recommendation_btn_background"/>
             </LinearLayout>
         </LinearLayout>

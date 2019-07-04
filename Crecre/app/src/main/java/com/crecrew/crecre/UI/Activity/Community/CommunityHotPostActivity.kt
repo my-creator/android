@@ -3,6 +3,7 @@ package com.crecrew.crecre.UI.Activity.Community
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
 import com.crecrew.crecre.Data.CommunityHotPostData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.CommunityFavoriteRecyclerViewAdapter
@@ -10,24 +11,38 @@ import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.CommunityPostFragmentAdapter
 import kotlinx.android.synthetic.main.activity_community_hot_post.*
 import kotlinx.android.synthetic.main.activity_community_search.*
+import kotlinx.android.synthetic.main.activity_community_write.*
 import org.jetbrains.anko.startActivity
 
-class CommunityHotPostActivity : AppCompatActivity() {
+class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var communityHotPostRecyclerViewAdapter:CommunityHotPostRecyclerViewAdapter
+
+    override fun onClick(v : View?) {
+        when(v!!) {
+            //뒤로가기버튼
+            btn_back_hotpost_community_act -> {
+                finish()
+            }
+            //검색버튼
+            btn_search_community_hotpost_act -> {
+                startActivity<CommunitySearchActivity>()
+            }
+            //글 작성버튼
+            writing_btn_hotpost_community_act -> {
+                startActivity<CommunityWriteActivity>()
+            }
+
+        }
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community_hot_post)
 
+        init()
         configureRecyclerView()
-
-        btn_back_hotpost_community_act.setOnClickListener {
-            finish()
-        }
-        btn_search_community_hotpost_act.setOnClickListener {
-            startActivity<CommunitySearchActivity>()
-        }
 
     }
 
@@ -68,6 +83,12 @@ class CommunityHotPostActivity : AppCompatActivity() {
         rv_community_hotpost_act_list.adapter = communityHotPostRecyclerViewAdapter
         rv_community_hotpost_act_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
+    }
+
+    private fun init(){
+        btn_back_hotpost_community_act.setOnClickListener(this)
+        btn_search_community_hotpost_act.setOnClickListener(this)
+        writing_btn_hotpost_community_act.setOnClickListener(this)
     }
 
 

@@ -42,7 +42,7 @@ class HomeTodayRankBottomFragment : Fragment(){
 
         var dataList: ArrayList<TodayRankData> = ArrayList()
         dataList.clear()
-        //dataList.add(TodayRankData(5,"호호",2019))
+
         dataList.add(TodayRankData(6,"창규니",1254))
         dataList.add(TodayRankData(7,"시연조교",242))
         dataList.add(TodayRankData(8,"크리크리",318))
