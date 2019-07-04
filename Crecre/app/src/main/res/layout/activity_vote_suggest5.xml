@@ -3,64 +3,97 @@
                                              xmlns:app="http://schemas.android.com/apk/res-auto"
                                              xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
                                              android:layout_height="match_parent">
-    <RelativeLayout
-            android:id="@+id/rl_toolbar_vote_suggest"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:background="@drawable/community_header"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
 
-        <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                app:srcCompat="@drawable/check_btn"
-                android:id="@+id/imageView_vote_suggest_check"
-                android:layout_marginTop="10dp" android:layout_marginBottom="10dp"
-                android:layout_marginStart="303dp" android:layout_marginEnd="17dp"
-        />
-        <TextView
-                android:layout_width="66dp"
-                android:layout_height="27dp"
-                android:textSize="18sp"
-                android:text="투표제안"
-                android:textColor="@color/white"
-                android:layout_marginBottom="15dp"
-                android:layout_marginEnd="140dp"
-                android:layout_marginStart="153dp"
-                android:layout_marginTop="14dp"
-                app:lineHeight="27sp"
-        />
-
-    </RelativeLayout>
 
     <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:id="@+id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@+id/rl_toolbar_vote_suggest"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             android:orientation="vertical"
     >
-        <EditText
-                android:layout_width="312dp"
-                android:layout_height="48dp"
-                android:inputType="textPersonName"
-                android:text="투표 내용을 입력해주세요"
-                android:ems="10"
-                android:id="@+id/vote_suggest_typing_subj"
+        <RelativeLayout
+                android:id="@+id/rl_toolbar_vote_suggest"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/community_header"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+        >
+
+            <RelativeLayout
+                    android:layout_width="57dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+            >
+                <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/check_btn"
+                        android:id="@+id/imageView_vote_suggest_check"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="0dp"
+                />
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="57dp"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+            >
+                <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        app:srcCompat="@drawable/btn_back_wt"
+                        android:id="@+id/imageView_vote_suggest_back"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="10dp"
+                />
+            </RelativeLayout>
+
+
+            <TextView
+                    android:layout_width="66dp"
+                    android:layout_height="27dp"
+                    android:textSize="18sp"
+                    android:text="투표제안"
+                    android:textColor="@color/white"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="15dp"
+                    android:layout_marginEnd="140dp"
+                    android:layout_marginStart="153dp"
+                    android:layout_marginTop="14dp"
+                    app:lineHeight="27sp"
+            />
+
+        </RelativeLayout>
+
+        <RelativeLayout
                 android:layout_marginTop="25dp"
-                android:layout_marginStart="24dp"
-                android:textColor="@color/greyish"
-                android:selectAllOnFocus="true"
-                android:textSize="16sp"
-                android:background="@drawable/vote_suggest_gray_back"
-                android:paddingLeft="20dp"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:layout_marginBottom="16dp"
-        />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+        >
+            <EditText
+                    android:layout_width="312dp"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="24dp"
+                    android:inputType="textPersonName"
+                    android:text="투표 내용을 입력해주세요"
+                    android:ems="10"
+                    android:id="@+id/vote_suggest_typing_subj"
+                    android:textColor="@color/greyish"
+                    android:selectAllOnFocus="true"
+                    android:textSize="16sp"
+                    android:background="@drawable/vote_suggest_gray_back"
+                    android:paddingLeft="20dp"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:layout_marginBottom="16dp"
+                    android:gravity="center_vertical"/>
+        </RelativeLayout>
         <EditText
                 android:layout_width="312dp"
                 android:layout_height="48dp"
@@ -77,6 +110,7 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:layout_marginTop="16dp"
+                android:textColorHighlight="#ff90fc"
         />
         <EditText
                 android:layout_width="312dp"
@@ -94,6 +128,7 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:layout_marginTop="16dp"
+                android:textColorHighlight="#ff90fc"
         />
         <EditText
                 android:layout_width="312dp"
@@ -111,6 +146,7 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:layout_marginTop="16dp"
+                android:textColorHighlight="#ff90fc"
         />
         <EditText
                 android:layout_width="312dp"
@@ -128,6 +164,7 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:layout_marginTop="16dp"
+                android:textColorHighlight="#ff90fc"
         />
         <EditText
                 android:layout_width="312dp"
@@ -145,6 +182,7 @@
                 android:paddingTop="12dp"
                 android:paddingBottom="12dp"
                 android:layout_marginTop="16dp"
+                android:textColorHighlight="#ff90fc"
         />
         <TextView
                 android:id="@+id/vote_suggest_additem"

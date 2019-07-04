@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" android:background="#F8FAF9">
     <FrameLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,13 +11,14 @@
 
         <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
             <RelativeLayout
-                    android:id = "@+id/rl_toolbar_vote_frag"
-                    android:layout_width = "match_parent"
-                    android:layout_height = "56dp"
-                    android:background = "@drawable/community_header">
+                    android:id="@+id/rl_toolbar_vote_frag"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:background="@drawable/community_header">
 
                 <TextView
                         android:layout_width="34dp"
@@ -26,7 +27,7 @@
                         android:text="투표"
                         android:textColor="@color/white"
                         android:layout_marginBottom="14dp"
-                        android:layout_marginEnd="165dp"
+                        android:layout_marginEnd="163dp"
                         android:layout_marginStart="162dp"
                         android:layout_marginTop="15dp"
                         app:lineHeight="27sp"
@@ -39,13 +40,50 @@
                         android:textColor="@color/white"
                         android:layout_alignParentEnd="true"
                         android:layout_marginEnd="18dp"
-                        android:layout_marginStart="288dp"
+                        android:layout_marginStart="289dp"
                         android:layout_marginTop="17dp"
                         android:layout_marginBottom="19dp"
                         app:lineHeight="20sp"
                 />
             </RelativeLayout>
-        </LinearLayout>
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:orientation="horizontal"
+                    android:background="#f8faf9"
+            >
+                <TextView
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:text="진행중인 투표"
+                        android:gravity="center"
+                        android:lineSpacingExtra="6sp"
+                        android:textSize="14sp"
+                        android:textColor="@color/violet_pink"
+                />
+                <TextView
+                        android:layout_weight="1"
+                        android:layout_height="match_parent"
+                        android:layout_width="wrap_content"
+                        android:text="지난 투표"
+                        android:gravity="center"
+                        android:lineSpacingExtra="6sp"
+                        android:textSize="14sp"
+                        android:textColor="#a4a4a4"
+                />
 
+
+            </LinearLayout>
+            <android.support.design.widget.TabLayout
+                    android:id="@+id/tl_community_post_frag"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabSelectedTextColor="@color/violet_pink"
+                    app:tabIndicatorColor="@color/violet_pink"
+            />
+
+
+        </LinearLayout>
     </FrameLayout>
 </ScrollView>
