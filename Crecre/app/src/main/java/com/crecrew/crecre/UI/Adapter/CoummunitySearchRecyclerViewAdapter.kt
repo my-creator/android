@@ -9,7 +9,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.crecrew.crecre.Data.SearchResultData
 import com.crecrew.crecre.R
-import org.w3c.dom.Text
 
 class CoummunitySearchRecyclerViewAdapter (val ctx : Context, val dataList : ArrayList<SearchResultData>) : RecyclerView.Adapter<CoummunitySearchRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {

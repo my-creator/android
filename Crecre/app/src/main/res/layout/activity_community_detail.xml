@@ -29,6 +29,7 @@
 
         </RelativeLayout>
 
+        <!--title_category-->
         <TextView
                 android:id="@+id/tv_category_community_detail_act"
                 android:layout_width="wrap_content"
@@ -38,6 +39,48 @@
                 android:textColor="@color/white"
                 android:layout_centerInParent="true"
         />
+
+        <!--btn alter, delete-->
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:orientation="horizontal"
+        >
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:text="수정"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_vertical"
+            />
+
+            <LinearLayout
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="20dp"
+                    android:background="@color/white"
+            >
+
+
+            </LinearLayout>
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="삭제"
+                    android:textSize="12sp"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="24dp"
+                    android:layout_gravity="center_vertical"
+            />
+
+        </LinearLayout>
 
     </RelativeLayout>
 
@@ -50,7 +93,6 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
                 android:orientation="vertical"
         >
 
@@ -61,6 +103,7 @@
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:layout_marginTop="18dp"
+                    android:layout_marginHorizontal="24dp"
                     android:text="종강이 싫은 대학생의 에타후기.jpg"
             />
 
@@ -68,6 +111,7 @@
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
                     android:layout_marginTop="9dp"
                     android:layout_marginBottom="13dp"
             >
@@ -122,10 +166,12 @@
 
             </LinearLayout>
 
+            <!--main화면의 사용자 정보, title-->
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#f0f0f0"
+                    android:layout_marginHorizontal="24dp"
             >
 
             </LinearLayout>
@@ -134,6 +180,7 @@
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="20dp"
             >
@@ -142,6 +189,7 @@
                         android:id="@+id/img_main_community_detail"
                         android:layout_width="296dp"
                         android:layout_height="192dp"
+                        android:layout_centerHorizontal="true"
                         android:scaleType="fitXY"
                         android:src="@drawable/icn_img_x"
                 />
@@ -150,6 +198,7 @@
                         android:id="@+id/tv_main_context_community_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/img_main_community_detail"
                         android:layout_below="@+id/img_main_community_detail"
                         android:layout_marginTop="14dp"
                         android:textSize="20sp"
@@ -217,8 +266,24 @@
 
                     </LinearLayout>
 
-
                 </LinearLayout>
+
+            </RelativeLayout>
+
+            <!--댓글창-->
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+            >
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_comment_commu_detail_act"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white_four"
+                >
+
+                </android.support.v7.widget.RecyclerView>
 
             </RelativeLayout>
 
@@ -233,23 +298,80 @@
             android:background="#f3f3f3"
             android:layout_alignParentBottom="true"
     >
+        <!--editbox-->
         <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:id="@+id/rl_edit_box_community_search_act"
                 android:layout_margin="8dp"
-                android:background="@color/white"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_below="@+id/rl_toolbar_community_search_act"
+                android:background="#FFFFFF"
         >
-            <TextView
+
+            <!--익명버튼-->
+            <ImageView
+                    android:id="@+id/btn_anonymous_detail_com_act"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/violet_pink"
-                    android:text="등록"
+                    android:background="@drawable/community_anonymous_btn"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_centerVertical="true"
             />
 
+            <!--editText-->
+            <LinearLayout
+                    android:id="@+id/et_community_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:background="#FFFFFF"
+                    android:layout_toRightOf="@+id/btn_anonymous_detail_com_act"
+            >
+
+                <EditText
+                        android:layout_width="379dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="12dp"
+                        android:hint="댓글을 입력하세요."
+                        android:background="@null"
+                />
+
+            </LinearLayout>
+
+            <!--검색 버튼-->
+            <LinearLayout
+                    android:id="@+id/btn_find_search_com_act"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:orientation="horizontal"
+            >
+
+                <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="34dp"
+                        android:background="@color/violet_pink"
+                >
+
+                </LinearLayout>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/violet_pink"
+                        android:layout_marginHorizontal="18dp"
+                        android:textSize="10sp"
+                        android:text="등록"
+                        android:layout_gravity="center_vertical"
+                        android:layout_alignParentEnd="true"
+                />
+
+            </LinearLayout>
 
         </RelativeLayout>
 
     </RelativeLayout>
-
 
 </RelativeLayout>
