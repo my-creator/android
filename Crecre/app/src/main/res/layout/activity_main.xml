@@ -19,5 +19,7 @@
                 android:id="@+id/activity_main_tl_navi"
                 android:layout_width="match_parent"
                 android:layout_height="64dp"
-                app:tabIndicatorColor="@color/white"/>
+                app:tabIndicatorColor="@color/white"
+                android:elevation="12dp"
+                android:background="@color/white"/>
 </LinearLayout>

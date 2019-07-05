@@ -66,6 +66,7 @@
             android:layout_below="@+id/rl_toolbar_community_write_act"
     >
         <EditText
+                android:id="@+id/et_title_commu_write_act"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="24dp"
@@ -85,6 +86,7 @@
         </LinearLayout>
 
         <EditText
+                android:id="@+id/et_context_commu_write_act"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="24dp"

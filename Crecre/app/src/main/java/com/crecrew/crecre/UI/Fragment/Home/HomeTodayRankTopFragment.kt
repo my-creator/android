@@ -1,5 +1,6 @@
 package com.crecrew.crecre.UI.Fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -51,7 +52,7 @@ class HomeTodayRankTopFragment : Fragment(){
         todayRankRecyclerViewAdapter = TodayRankRecyclerViewAdapter(activity!!, dataList, 1)
         fragment_home_today_rank_top_rv.adapter = todayRankRecyclerViewAdapter
         fragment_home_today_rank_top_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        fragment_home_today_rank_top_rv.addItemDecoration(SimpleDividerItemDecoration(R.drawable.line_divider, 1))
+        fragment_home_today_rank_top_rv.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
 
     }
 
