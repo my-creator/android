@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.crecrew.crecre.R
+import com.crecrew.crecre.utils.SearchAlarmDialog
 import kotlinx.android.synthetic.main.activity_community_write.*
 
 class CommunityWriteActivity : AppCompatActivity(), View.OnClickListener {
@@ -18,6 +19,20 @@ class CommunityWriteActivity : AppCompatActivity(), View.OnClickListener {
     var btn_anonymous = 0
     val My_READ_STORAGE_REQUEST_CODE = 88
     private val REQ_CODE_SELECT_IMAGE = 100
+
+    val titleInputDialog: SearchAlarmDialog by lazy {
+        SearchAlarmDialog(
+            this@CommunityWriteActivity, "알림", "제목을 입력해주세요.",
+            TitleConfirmListener, "확인"
+        )
+    }
+
+    val contextInputDialog: SearchAlarmDialog by lazy {
+        SearchAlarmDialog(
+            this@CommunityWriteActivity, "알림", "내용을 입력해주세요.",
+            ContextConfirmListener, "확인"
+        )
+    }
 
     override fun onClick(v: View?) {
 
@@ -36,16 +51,25 @@ class CommunityWriteActivity : AppCompatActivity(), View.OnClickListener {
                     btn_anonymous = 0
                 }
             }
+            //작성완료 체크버튼 눌렀을 때
             btn_complete_community_write_act -> {
-                //##통신붙이기
-                finish()
+
+                if (et_title_commu_write_act.text.length == 0)
+                    titleInputDialog.show()
+                else if (et_context_commu_write_act.text.length == 0)
+                    contextInputDialog.show()
+                else
+                    //##통신붙이기
+                    finish()
             }
+
             //키보드 다운 함수
             rl_community_write_act -> {
                 downKeyboard(rl_community_write_act)
             }
+
             //갤러리 접근
-            btn_cam_write_com_act ->{
+            btn_cam_write_com_act -> {
                 //##이미지 어디에 집어넣어서 줘야할지? 통신
                 requestReadExternalStoragePermission()
             }
@@ -70,19 +94,28 @@ class CommunityWriteActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     //키보드 다운
-    private fun downKeyboard(view : View) {
-        val imm: InputMethodManager = applicationContext!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    private fun downKeyboard(view: View) {
+        val imm: InputMethodManager =
+            applicationContext!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
     //저장소 권한 확인
     private fun requestReadExternalStoragePermission() {
 
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 //사용자에게 권한을 왜 허용해야되는지에 메세지를 주기 위한 대한 로직을 추가하면 이 블락에서 하면됩니다!
             } else {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), My_READ_STORAGE_REQUEST_CODE)
+                ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE),
+                    My_READ_STORAGE_REQUEST_CODE
+                )
             }
         } else {
             showAlbum()
@@ -108,4 +141,16 @@ class CommunityWriteActivity : AppCompatActivity(), View.OnClickListener {
         intent.data = android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         startActivityForResult(intent, REQ_CODE_SELECT_IMAGE)
     }
+
+    private val TitleConfirmListener = View.OnClickListener {
+        titleInputDialog!!.dismiss()
+        //##title EditText에 포커스 주기
+    }
+
+    private val ContextConfirmListener = View.OnClickListener {
+        contextInputDialog!!.dismiss()
+        //##context EditText에 포커스 주기
+    }
+
+
 }
