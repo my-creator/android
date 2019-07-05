@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding = "utf-8"?>
-<Relative xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width = "wrap_content"
+                android:layout_width = "match_parent"
                 android:layout_height = "wrap_content"
                 >
     <LinearLayout
-        android:id="@+id/vote_cardview"
+        android:id="@+id/vote_image"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -15,6 +15,72 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:id="@+id/card_image"
+                tools:src="@mipmap/ic_launcher"
+                android:src="@mipmap/ic_launcher"
+        />
+        <TextView
+                android:layout_width="260dp"
+                android:layout_height="51dp"
+                android:textSize="18sp"
+                android:layout_marginStart="16dp"
+                android:text="템플스테이 묵언수행하면 가장 먼저 탈락할 것 같은 유튜버는?"
+                app:lineHeight="24sp"
+        />
+        <TextView
+                android:layout_width="206dp"
+                android:layout_height="20dp"
+                android:textSize="14sp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="28dp"
+                android:text="# 이 투표에 대한 운영자의 서브 설명"
+                app:lineHeight="18sp"
+        />
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="16dp"
+        >
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:src="@mipmap/ic_launcher"
+            />
+            <TextView
+                    android:layout_width="38dp"
+                    android:layout_height="20dp"
+                    android:text="딕헌터"
+                    android:textSize="14sp"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:textColor="#000000"
+            />
+            <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"></View>
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="false"
+                    tools:srcCompat="@drawable/btn_check"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+            />
+
+        </LinearLayout>
+        <TextView
+                android:id="@+id/lets_vote"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/vote_round_gray_rect"
+                android:text="투표하기"
+                android:textSize="16sp"
+                android:lineHeight="24sp"
+                android:textColor="#ff57f7"
+                android:gravity="center"
         />
     </LinearLayout>
-</Relative>
+</RelativeLayout>
