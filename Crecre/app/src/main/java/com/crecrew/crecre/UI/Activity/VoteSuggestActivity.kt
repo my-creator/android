@@ -6,10 +6,9 @@ import android.view.View
 import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.activity_vote_suggest5.*
 var stopClick: Int = 2;
-class VoteSuggestActivity:AppCompatActivity() {
+class VoteSuggestActivity :AppCompatActivity() {
 
     var item_list = ArrayList<String>()
-
 
     fun changePinkGray(v: View){
         v.setOnFocusChangeListener(){v,hasFocus->

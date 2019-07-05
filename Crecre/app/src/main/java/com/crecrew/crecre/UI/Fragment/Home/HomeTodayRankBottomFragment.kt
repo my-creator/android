@@ -1,5 +1,6 @@
 package com.crecrew.crecre.UI.Fragment
 
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
@@ -13,6 +14,7 @@ import com.crecrew.crecre.UI.Adapter.TodayRankRecyclerViewAdapter
 import kotlinx.android.synthetic.main.fragment_home_today_rank_bottom.*
 import android.view.animation.AnimationUtils
 import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
+import kotlinx.android.synthetic.main.fragment_home_today_rank_top.*
 
 
 class HomeTodayRankBottomFragment : Fragment(){
@@ -53,7 +55,7 @@ class HomeTodayRankBottomFragment : Fragment(){
         todayRankRecyclerViewAdapter = TodayRankRecyclerViewAdapter(activity!!, dataList, 2)
         fragment_home_today_rank_bottom_rv.adapter = todayRankRecyclerViewAdapter
         fragment_home_today_rank_bottom_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        fragment_home_today_rank_bottom_rv.addItemDecoration(SimpleDividerItemDecoration(R.drawable.line_divider, 1))
+        fragment_home_today_rank_top_rv.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
     }
 
     private fun animateRV(){
