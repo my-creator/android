@@ -40,8 +40,6 @@ class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataLi
         else
             holder.time.text = (dataList[position].time/60).toString() + "시간 전"
 
-        // 제목 긴거 자르기
-
         holder.container.setOnClickListener {
             ctx.startActivity<CommunityDetailActivity>(
                // TODO: 정보 넣기

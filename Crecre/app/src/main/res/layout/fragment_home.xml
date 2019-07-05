@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
+        android:id="@+id/fragment_home_container"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
@@ -28,7 +29,9 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:padding="12dp"
-                    android:background="@drawable/home_search_container_border_in">
+                    android:background="@drawable/home_search_container_border_in"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true">
                 <ImageView
                         android:id="@+id/fragment_home_iv_logo"
                         android:layout_width="wrap_content"
@@ -47,7 +50,9 @@
                         android:hint="크리에이터 검색"
                         android:textColor="@color/black"
                         android:lineSpacingExtra="8sp"
+                        android:singleLine="true"
                         android:textSize="16sp"
+                        android:imeOptions="actionSearch"
                         android:background="@null"/>
                 </LinearLayout>
             </FrameLayout>
@@ -73,17 +78,19 @@
                     android:id="@+id/fragment_home_today_hot_creator_container"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="80dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_toLeftOf="@id/fragment_home_iv_today_hot_btn"
                     android:layout_toRightOf="@+id/fragment_home_txt_today_hot_label"
             >
                 <TextView
                         android:id="@+id/fragment_home_txt_today_hot_creator"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="3 백종원의 요리비책"
+                        android:text="3 백종원의 요리비책호로롤로롤"
                         android:textSize="14sp"
                         android:lineHeight="20dp"
-
+                        android:singleLine="true"
+                        android:layout_marginRight="15dp"
                         android:textColor="@color/black"/>
 
             </RelativeLayout>
@@ -361,4 +368,4 @@
         </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
-</FrameLayout>
+</RelativeLayout>

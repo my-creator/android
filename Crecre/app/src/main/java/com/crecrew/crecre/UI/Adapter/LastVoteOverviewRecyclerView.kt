@@ -28,6 +28,7 @@ class LastVoteOverviewRecyclerView(private val ctx : Context, private val dataLi
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
         Glide.with(ctx).load(dataList[position].image).into(holder.image)
+        holder.image.scaleType = ImageView.ScaleType.CENTER_CROP
 
         if(dataList[position].profile == "")
             Glide.with(ctx).load(R.drawable.img_profile).into(holder.profile)
@@ -39,7 +40,6 @@ class LastVoteOverviewRecyclerView(private val ctx : Context, private val dataLi
 
         holder.creator.text = dataList[position].creator
         holder.content.text = dataList[position].content
-        // Todo: 내용 2줄 이상이면 자르기
 
         holder.container.setOnClickListener {
 

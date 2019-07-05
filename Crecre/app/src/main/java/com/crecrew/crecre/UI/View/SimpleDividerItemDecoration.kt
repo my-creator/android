@@ -3,6 +3,10 @@ package com.crecrew.crecre.UI.View
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.support.v7.widget.RecyclerView
+import android.R
+import android.content.Context
+import android.graphics.drawable.Drawable
+
 
 class SimpleDividerItemDecoration(
     private val color: Int, private val height: Int

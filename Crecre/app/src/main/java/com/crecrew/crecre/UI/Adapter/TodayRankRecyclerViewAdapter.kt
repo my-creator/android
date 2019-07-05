@@ -60,7 +60,6 @@ class TodayRankRecyclerViewAdapter(private val ctx : Context, private val dataLi
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        // nullable 처리 다 해야하나?
         var container = itemView.findViewById(R.id.rv_item_today_rank_container) as RelativeLayout
         var number = itemView.findViewById(R.id.rv_item_today_rank_number) as TextView
         var creator = itemView.findViewById(R.id.rv_item_today_rank_creator) as TextView

@@ -8,9 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.support.v7.widget.LinearLayoutManager
-import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.RelativeLayout
 import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -19,23 +20,16 @@ import java.util.*
 import com.crecrew.crecre.Base.BasePagerAdapter
 import com.crecrew.crecre.Data.LastVoteData
 import com.crecrew.crecre.Data.TodayPost
-import com.crecrew.crecre.UI.Activity.Community.CommunityDetailActivity
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
 import com.crecrew.crecre.UI.Adapter.LastVoteOverviewRecyclerView
 import com.crecrew.crecre.UI.Adapter.TodayPostRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankBottomFragment
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankTopFragment
-import kotlinx.android.synthetic.main.rv_item_last_vote.*
-import kotlinx.android.synthetic.main.rv_item_today_post.view.*
-import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
-
-
-
-
-
-
+import android.view.inputmethod.EditorInfo
+import android.widget.Toast
+import com.crecrew.crecre.UI.Activity.CreatorProfileActivity
 
 class HomeFragment: Fragment() {
 
@@ -45,6 +39,8 @@ class HomeFragment: Fragment() {
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
     lateinit var lastVoteOverviewRecyclerViewAdapter: LastVoteOverviewRecyclerView
 
+    lateinit var imm : InputMethodManager
+    lateinit var et : EditText
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
@@ -57,6 +53,7 @@ class HomeFragment: Fragment() {
                     addFragment(HomeTodayRankBottomFragment())
                 }
             }
+
             it.fragment_home_tl_today_rank.run {
                 val navigationLayout: View =
                     LayoutInflater.from(activity!!).inflate(R.layout.fragment_home_today_rank_navi, null, false)
@@ -71,22 +68,36 @@ class HomeFragment: Fragment() {
             }
         }
 
-        rootView.let{
-            // 투표 제안 btn
-            it.fragment_home_vote_recommendation_btn.setOnClickListener {
+        // 화면 전환
+        rootView.run {
+            fragment_home_vote_recommendation_btn.setOnClickListener {
                 startActivity<VoteSuggestActivity>()
             }
-            it.fragment_home_txt_today_hot_post_more.setOnClickListener {
+            fragment_home_txt_today_hot_post_more.setOnClickListener {
                 startActivity<CommunityHotPostActivity>()
-                // hot과 new 구분하기!
+                // TODO: hot과 new 구분하기!
             }
-            it.fragment_home_txt_today_new_post_more.setOnClickListener {
+            fragment_home_txt_today_new_post_more.setOnClickListener {
                 startActivity<CommunityHotPostActivity>()
+            }
+            fragment_home_edit_search.setOnEditorActionListener { v, actionId, event ->
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+
+                    if(fragment_home_edit_search.text.length == 0){
+                        Toast.makeText(activity,"크리에이터를 입력해주세요!",Toast.LENGTH_LONG).show()
+                    }
+                    else {
+                        // TODO: 검색결과가 없을 때는 화면이 다름!-> 처리
+                        val intent = Intent(activity, CreatorProfileActivity::class.java)
+                        intent.putExtra("creator_name", fragment_home_edit_search.text.toString())
+                        startActivity(intent)
+                    }
+                    true
+                } else {
+                    false
+                }
             }
         }
-
-
-
 
         return rootView
     }
@@ -96,8 +107,8 @@ class HomeFragment: Fragment() {
 
         configureRecyclerView()
 
-    }
 
+    }
 
     // 실시간 크리에이터 차트 열고 닫기
     private fun openTodayHotChart(){
@@ -120,9 +131,9 @@ class HomeFragment: Fragment() {
         // last vote
         var lastVoteData: ArrayList<LastVoteData> = ArrayList()
 
-        lastVoteData.add(LastVoteData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","https://news.imaeil.com/inc/photos/2019/04/29/2019042900310562698_l.jpg", "시연조교",1,"크리크리 짱, 2줄 넘어갔을 때 처리도 해야 함 !! 홍루이젠 맛있다."))
-        lastVoteData.add(LastVoteData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800", "가희바희보",1,"하나빼기 일 >___<"))
-        lastVoteData.add(LastVoteData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","", "현희여신",1,"오늘은 잼을 가져오셨다."))
+        lastVoteData.add(LastVoteData("https://img.sbs.co.kr/newimg/news/20170907/201091232_1280.jpg","https://news.imaeil.com/inc/photos/2019/04/29/2019042900310562698_l.jpg", "시연조교",1,"크리크리 짱, 2줄 넘어갔을 때 처리도 해야 함 !! 홍루이젠 맛있다."))
+        lastVoteData.add(LastVoteData("https://s-i.huffpost.com/gen/1771947/images/n-DEFAULT-628x314.jpg","https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800", "가희바희보",1,"하나빼기 일 >___<"))
+        lastVoteData.add(LastVoteData("https://www.sanghafarm.co.kr/sanghafarm_Data/upload/shop/product/201803/A0000101_2018032109513585717.jpg","", "현희여신",1,"오늘은 잼을 가져오셨다."))
 
         lastVoteOverviewRecyclerViewAdapter = LastVoteOverviewRecyclerView(activity!!, lastVoteData)
         fragment_home_last_vote_rv_box.adapter = lastVoteOverviewRecyclerViewAdapter
@@ -131,7 +142,7 @@ class HomeFragment: Fragment() {
         // hot post
         var todayHotDataList: ArrayList<TodayPost> = ArrayList()
 
-        todayHotDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","딕헌터와 영알남 커플, 현실에서의 만남은 더 심쿵!", "먹방",89,32,30))
+        todayHotDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","딕헌터와 영알남 커플, 현실에서의 만남 더 심쿵! 하라락후루룩 호로록 줄이넘어간다링 안넘어간다", "먹방",89,32,30))
         todayHotDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","2019년 7월 3일 현재 나는 배가 고프다. 어깨도 아픔", "개발",1004,52,50))
         todayHotDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","지금 정호,예원,다연,민정,가희,신우,혁표,현희랑 같이 있음 크리크리짱", "솝트",999,14,80))
 
@@ -154,6 +165,5 @@ class HomeFragment: Fragment() {
 
     }
 
-    // Todo: 지난 투표 width 기기에 맞게
 }
 
