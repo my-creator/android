@@ -2,14 +2,17 @@
 <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/fragment_home_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/pale_grey">
 
-    <android.support.v4.widget.NestedScrollView android:layout_width="match_parent"
-                                                android:layout_height="wrap_content">
+    <android.support.v4.widget.NestedScrollView
+            android:id="@+id/fragment_home_scroll_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadingEdgeLength="0px">
         <LinearLayout
+                android:id="@+id/fragment_home_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -48,6 +51,7 @@
                                 android:id="@+id/fragment_home_edit_search"
                                 android:layout_width="match_parent"
                                 android:layout_height="24dp"
+                                android:windowSoftInputMode="adjustResize"
                                 android:hint="크리에이터 검색"
                                 android:textColor="@color/black"
                                 android:lineSpacingExtra="8sp"
@@ -228,25 +232,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp">
-
                     <android.support.v4.view.ViewPager
                             android:id="@+id/frag_home_vp_clsd"
                             android:layout_width="match_parent"
                             android:layout_height="290dp"
                             android:paddingLeft="20dp"
                             android:paddingRight="100dp"
-                            android:clipToPadding="false">
-
-
-                    </android.support.v4.view.ViewPager>
-                    <!--<android.support.v7.widget.RecyclerView-->
-                    <!--android:id="@+id/fragment_home_last_vote_rv_box"-->
-                    <!--android:layout_marginLeft="12dp"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="290dp">-->
-
-                    <!--</android.support.v7.widget.RecyclerView>-->
-
+                            android:clipToPadding="false"/>
 
                 </RelativeLayout>
 

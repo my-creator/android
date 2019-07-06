@@ -1,8 +1,15 @@
 package scom.crecrew.crecre.UI.Fragment
 
+import android.accessibilityservice.AccessibilityService
+import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
@@ -40,14 +47,12 @@ class HomeFragment: Fragment() {
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
     lateinit var lastVoteOverviewRecyclerViewAdapter: LastVoteOverviewRecyclerView
 
-    lateinit var imm : InputMethodManager
-    lateinit var et : EditText
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // today rank ViewPager
+
         rootView.let {
+            // today rank ViewPager
             it.fragment_home_vp_today_rank.run {
                 adapter = BasePagerAdapter(fragmentManager!!).apply {
                     addFragment(HomeTodayRankTopFragment())
@@ -84,10 +89,9 @@ class HomeFragment: Fragment() {
             fragment_home_edit_search.setOnEditorActionListener { v, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
-                    if(fragment_home_edit_search.text.length == 0){
-                        Toast.makeText(activity,"크리에이터를 입력해주세요!",Toast.LENGTH_LONG).show()
-                    }
-                    else {
+                    if (fragment_home_edit_search.text.length == 0) {
+                        Toast.makeText(activity, "크리에이터를 입력해주세요!", Toast.LENGTH_LONG).show()
+                    } else {
                         // TODO: 검색결과가 없을 때는 화면이 다름!-> 처리
                         val intent = Intent(activity, CreatorProfileActivity::class.java)
                         intent.putExtra("creator_name", fragment_home_edit_search.text.toString())
@@ -97,6 +101,10 @@ class HomeFragment: Fragment() {
                 } else {
                     false
                 }
+            }
+
+            fragment_home_container.setOnClickListener {
+                downKeyboard(fragment_home_container)
             }
         }
 
@@ -108,6 +116,13 @@ class HomeFragment: Fragment() {
 
         configureRecyclerView()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        fragment_home_edit_search.setText(null)
+        fragment_home_edit_search.clearFocus();
 
     }
 
@@ -173,5 +188,13 @@ class HomeFragment: Fragment() {
 
     }
 
-}
+    private fun downKeyboard(view: View) {
 
+        val imm: InputMethodManager =
+            activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+
+        fragment_home_edit_search.clearFocus()
+    }
+
+}

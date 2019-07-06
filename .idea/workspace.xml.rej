@@ -1,0 +1,9 @@
+diff a/.idea/workspace.xml b/.idea/workspace.xml	(rejected hunks)
+@@ -84,6 +84,7 @@
+       <pane id="Scope" />
+       <pane id="ProjectPane">
+         <subPane>
++          <expand>
+             <path>
+               <item name="Crecre-android" type="b2602c69:ProjectViewProjectNode" />
+               <item name="Crecre-android" type="462c0819:PsiDirectoryNode" />

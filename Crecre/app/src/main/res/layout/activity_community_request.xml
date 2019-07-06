@@ -34,6 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="게시판요청"
+                android:fontFamily="@font/noto_sans_kr_bold"
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:layout_centerInParent="true"
@@ -58,6 +59,7 @@
                 android:textSize="16sp"
                 android:layout_gravity="center_vertical"
                 android:hint="유투버 이름을 입력해주세요."
+                android:fontFamily="@font/noto_sans_kr_medium"
                 android:paddingHorizontal="16dp"
                 android:background="@drawable/community_typing_searchbox"
         />
@@ -71,6 +73,7 @@
                 android:textColorHint="@color/greyish"
                 android:textSize="16sp"
                 android:layout_gravity="center_vertical"
+                android:fontFamily="@font/noto_sans_kr_medium"
                 android:hint="유투버 채널 링크를 입력해주세요."
                 android:paddingHorizontal="16dp"
                 android:background="@drawable/community_typing_searchbox"
@@ -96,6 +99,7 @@
                     android:text="요청하기"
                     android:textColor= "@color/white"
                     android:textSize="16sp"
+                    android:fontFamily="@font/noto_sans_kr_medium"
                     android:layout_centerInParent="true"
             />
 

@@ -55,7 +55,7 @@ class HomeTodayRankBottomFragment : Fragment(){
         todayRankRecyclerViewAdapter = TodayRankRecyclerViewAdapter(activity!!, dataList, 2)
         fragment_home_today_rank_bottom_rv.adapter = todayRankRecyclerViewAdapter
         fragment_home_today_rank_bottom_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        fragment_home_today_rank_top_rv.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
+        fragment_home_today_rank_bottom_rv.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
     }
 
     private fun animateRV(){
