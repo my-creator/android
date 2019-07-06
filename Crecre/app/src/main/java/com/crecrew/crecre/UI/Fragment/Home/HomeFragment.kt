@@ -37,9 +37,6 @@ import org.jetbrains.anko.support.v4.startActivity
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.crecrew.crecre.UI.Activity.CreatorProfileActivity
-import kotlinx.android.synthetic.main.activity_community_search.*
-import android.widget.LinearLayout
-import gun0912.tedkeyboardobserver.TedKeyboardObserver
 
 class HomeFragment: Fragment() {
 
@@ -110,13 +107,6 @@ class HomeFragment: Fragment() {
             }
         }
 
-
-        TedKeyboardObserver(activity!!).listen{
-                isShow-> Toast.makeText(activity, "크리에이터를 입력해주세요!", Toast.LENGTH_LONG).show()
-
-            //fragment_home_edit_search.clearFocus()
-        }
-
         return rootView
     }
 
@@ -167,9 +157,9 @@ class HomeFragment: Fragment() {
         // hot post
         var todayHotDataList: ArrayList<TodayPost> = ArrayList()
 
-        todayHotDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","딕헌터와 영알남 커플, 현실에서의 만남 더 심쿵! 하라락후루룩 호로록 줄이넘어간다링 안넘어간다", "먹방",89,32,30))
-        todayHotDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","2019년 7월 3일 현재 나는 배가 고프다. 어깨도 아픔", "개발",1004,52,50))
-        todayHotDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","지금 정호,예원,다연,민정,가희,신우,혁표,현희랑 같이 있음 크리크리짱", "솝트",999,14,80))
+        todayHotDataList.add(TodayPost("http://mblogthumb4.phinf.naver.net/MjAxODA1MTJfMTMx/MDAxNTI2MTMxOTAwMDQw.nYJ52P9m33uVBVaA4D9Y8aEpngi2BhTwZhlmPi11xnwg.jl2N0ZuJDxZDdTZZsNbrQTpGemFNgLS342YMnUcYeKMg.JPEG.jini2877/12.jpg?type=w800","딕헌터와 영알남 커플, 현실에서의 만남 더 심쿵! 하라락후루룩 호로록 줄이넘어간다링 안넘어간다", "먹방",89,32,30))
+        todayHotDataList.add(TodayPost("http://www.mrtt.news/news/photo/201810/1093_4186_485.jpg","2019년 7월 3일 현재 나는 배가 고프다. 어깨도 아픔", "개발",1004,52,50))
+        todayHotDataList.add(TodayPost("https://byline.network/wp-content/uploads/2018/12/tiye.png","지금 정호,예원,다연,민정,가희,신우,혁표,현희랑 같이 있음 크리크리짱", "솝트",999,14,80))
 
         todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayHotDataList)
         fragment_home_rv_today_hot_post.adapter = todayPostRecyclerViewAdapter
@@ -179,9 +169,9 @@ class HomeFragment: Fragment() {
         // new post
         var todayNewDataList: ArrayList<TodayPost> = ArrayList()
 
-        todayNewDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","왼쪽 어깨 너무 아프당. 내일 알바가기 시르다", "건강",89,32,30))
-        todayNewDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","와 좀있으면 홈화면 끝난다", "개발",1004,52,50))
-        todayNewDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","헐 1일 1커밋해야하는데, 이제 커밋해야지", "개발",999,14,80))
+        todayNewDataList.add(TodayPost("https://i.ytimg.com/vi/SzJo9QfhZg8/maxresdefault.jpg","왼쪽 어깨 너무 아프당. 내일 알바가기 시르다", "건강",89,32,30))
+        todayNewDataList.add(TodayPost("https://scontent-bru2-1.cdninstagram.com/vp/8689f4c9fc508fd674d2f60a5c23b2a0/5DC25F71/t51.2885-15/e35/56184620_383987605521824_7189641354343536955_n.jpg?_nc_ht=scontent-bru2-1.cdninstagram.com","와 좀있으면 홈화면 끝난다", "개발",1004,52,50))
+        todayNewDataList.add(TodayPost("http://static.hubzum.zumst.com/hubzum/2017/10/19/10/09828761654d4f02af8ba6cf86bc4cc3.png","헐 1일 1커밋해야하는데, 이제 커밋해야지", "개발",999,14,80))
 
         todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayNewDataList)
         fragment_home_rv_today_new_post.adapter = todayPostRecyclerViewAdapter
