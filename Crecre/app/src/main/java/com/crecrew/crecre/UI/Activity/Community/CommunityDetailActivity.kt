@@ -1,6 +1,7 @@
 package com.crecrew.crecre.UI.Activity.Community
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -12,11 +13,14 @@ import com.crecrew.crecre.UI.Adapter.CommunityDetailCommentRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_community_detail.*
 import kotlinx.android.synthetic.main.activity_community_hot_post.*
+import kotlinx.android.synthetic.main.activity_community_write.*
+import org.jetbrains.anko.textColor
 
 class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     var btn_like = 0
     var btn_unlike = 0
+    var btn_anonymous =0
     lateinit var communityDetailCommentRecyclerViewAdapter:CommunityDetailCommentRecyclerViewAdapter
 
     //click
@@ -25,24 +29,66 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
 
             //추천 누르기
             btn_like_community_detail_act -> {
-                if (btn_like == 0) {
-                    btn_like_community_detail_act.isSelected = true
-                    btn_like = 1
-                } else {
-                    btn_like_community_detail_act.isSelected = false
-                    btn_like = 0
-                }
 
+                if(btn_unlike == 1){
+                    btn_unlike_community_detail_act.isSelected = false
+                    tv_unlike_community_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
+                    btn_unlike = 0
+
+                    if (btn_like == 0) {
+                        btn_like_community_detail_act.isSelected = true
+                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#ff57f7"))
+                        btn_like = 1
+                    } else {
+                        btn_like_community_detail_act.isSelected = false
+                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
+                        btn_like = 0
+                    }
+
+                }
+                else {
+                    if (btn_like == 0) {
+                        btn_like_community_detail_act.isSelected = true
+                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#ff57f7"))
+                        btn_like = 1
+                    } else {
+                        btn_like_community_detail_act.isSelected = false
+                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
+                        btn_like = 0
+                    }
+                }
             }
 
             //비추천 누르기
             btn_unlike_community_detail_act -> {
-                if (btn_unlike == 0) {
-                    btn_unlike_community_detail_act.isSelected = true
-                    btn_unlike = 1
-                } else {
-                    btn_unlike_community_detail_act.isSelected = false
-                    btn_unlike = 0
+
+                if(btn_like == 1)
+                {
+                    btn_like_community_detail_act.isSelected = false
+                    tv_recommend_number_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
+                    btn_like = 0
+
+                    if (btn_unlike == 0) {
+                        btn_unlike_community_detail_act.isSelected = true
+                        tv_unlike_community_detail_act.setTextColor(Color.parseColor("#36ebf0"))
+                        btn_unlike = 1
+                    } else {
+                        btn_unlike_community_detail_act.isSelected = false
+                        tv_unlike_community_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
+                        btn_unlike = 0
+                    }
+                }
+                else
+                {
+                    if (btn_unlike == 0) {
+                        btn_unlike_community_detail_act.isSelected = true
+                        tv_unlike_community_detail_act.setTextColor(Color.parseColor("#36ebf0"))
+                        btn_unlike = 1
+                    } else {
+                        btn_unlike_community_detail_act.isSelected = false
+                        tv_unlike_community_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
+                        btn_unlike = 0
+                    }
                 }
             }
 
@@ -51,6 +97,19 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
 
+            btn_anonymous_detail_com_act -> {
+                //익명버튼
+                if (btn_anonymous == 0) {
+                    btn_anonymous_detail_com_act.isSelected = true
+                    btn_anonymous = 1
+                } else {
+                    btn_anonymous_detail_com_act.isSelected = false
+                    btn_anonymous = 0
+                }
+            }
+
+
+            //키보드 down
             rl_commu_detail_act -> {
                 downKeyboard(rl_commu_detail_act)
             }
@@ -70,6 +129,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
         btn_like_community_detail_act.setOnClickListener(this)
         btn_unlike_community_detail_act.setOnClickListener(this)
         btn_back_community_detail_act.setOnClickListener(this)
+        btn_anonymous_detail_com_act.setOnClickListener(this)
     }
 
     //recyclerView

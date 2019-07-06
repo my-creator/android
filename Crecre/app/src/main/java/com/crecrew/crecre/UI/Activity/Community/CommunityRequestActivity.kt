@@ -3,6 +3,7 @@ package com.crecrew.crecre.UI.Activity.Community
 import android.content.Context
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.crecrew.crecre.R
@@ -52,10 +53,7 @@ class CommunityRequestActivity : AppCompatActivity() {
 
     private val completeConfirmListener = View.OnClickListener {
         requestDialog!!.dismiss()
-
-        //startActivityFromFragmet
-
-        //startActivity<CommunityFragment>()
+        finish()
     }
 
     private val completefailConfirmListener = View.OnClickListener {

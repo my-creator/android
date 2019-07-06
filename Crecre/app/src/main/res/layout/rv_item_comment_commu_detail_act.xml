@@ -33,6 +33,7 @@
                     android:id="@+id/tv_user_name_detail_act_rv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_kr_bold"
                     android:textSize="12sp"
                     android:textColor="#707070"
                     android:text="익명"
@@ -43,6 +44,7 @@
                         android:id="@+id/tv_write_time_detail_act_rv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_kr_medium"
                         android:textColor="#a4a4a4"
                         android:textSize="10sp"
                         android:text="18초 전"
@@ -55,6 +57,7 @@
                         android:layout_marginTop="6dp"
                         android:textColor="@color/black"
                         android:textSize="12sp"
+                        android:fontFamily="@font/noto_sans_kr_medium"
                         android:text="내가 무슨 부귀영화를 누리려고 이 글에 들어왔지"
                 />
 
