@@ -20,12 +20,8 @@ import org.jetbrains.anko.startActivity
 
 class CommunitySearchActivity : AppCompatActivity() {
 
-    lateinit var communitysearchRecyclerViewAdapter : CoummunitySearchRecyclerViewAdapter
+    lateinit var communitysearchRecyclerViewAdapter: CoummunitySearchRecyclerViewAdapter
 
-    val requestDialog :  SearchAlarmDialog by lazy {
-        SearchAlarmDialog(this@CommunitySearchActivity, "알림","검색어가 너무 짧습니다.",
-            completeConfirmListener,"확인")
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,27 +31,38 @@ class CommunitySearchActivity : AppCompatActivity() {
             downKeyboard(rl_search_comm_act)
         }
 
+        //뒤로가기
         btn_back_community_search.setOnClickListener {
             finish()
         }
 
+        //검색 버튼을 눌렀을 경우
         btn_find_search_com_act.setOnClickListener {
 
-            //검색한 글자가 1글자면 경고 다이얼로그
-            if(et_searchword_search_act.text.length == 0 || et_searchword_search_act.text.length == 1)
-            {
-                requestDialog.show()
-            }
-            else{
-                //제대로 검색이 되었을 경우
-                rl_after_search_view.visibility = View.VISIBLE
-                ll_first_search_view_com_act.visibility = View.GONE
-            }
+            /*
+            //검색한 결과가 없다면 나오는 뷰
+            //##추후 통신
+            ll_no_resul_com_search_act.visibility = View.VISIBLE
+            rl_after_search_view.visibility = View.GONE
+            ll_first_search_view_com_act.visibility = View.GONE
+            */
+
+            //제대로 검색이 되었을 경우
+            rl_after_search_view.visibility = View.VISIBLE
+            ll_no_resul_com_search_act.visibility = View.GONE
+            ll_first_search_view_com_act.visibility = View.GONE
         }
 
+        //communityrequestactivity로 넘어갈 때
         btn_search_request_community_act.setOnClickListener {
             startActivity<CommunityRequestActivity>()
+            finish()
         }
+
+        btn1_search_request_community_act.setOnClickListener {
+            startActivity<CommunityRequestActivity>()
+            finish()
+    }
 
         configureRecyclerView()
     }
@@ -64,31 +71,25 @@ class CommunitySearchActivity : AppCompatActivity() {
     private fun configureRecyclerView() {
         var dataList: ArrayList<SearchResultData> = ArrayList()
         dataList.add(
-            SearchResultData("햇님이",0)
+            SearchResultData("햇님이", 0)
         )
         dataList.add(
-            SearchResultData("햇님123123",0)
+            SearchResultData("햇님123123", 0)
         )
         dataList.add(
-            SearchResultData("입짧은 햇님이와 친구엥ㅇ",1)
+            SearchResultData("입짧은 햇님이와 친구엥ㅇ", 1)
         )
         dataList.add(
-            SearchResultData("햇님",0)
+            SearchResultData("햇님", 0)
         )
         dataList.add(
-            SearchResultData("햇님무이",1)
+            SearchResultData("햇님무이", 1)
         )
 
         communitysearchRecyclerViewAdapter = CoummunitySearchRecyclerViewAdapter(this, dataList)
         rv_search_result_com_sear_act.adapter = communitysearchRecyclerViewAdapter
         rv_search_result_com_sear_act.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-    }
-
-    //다이얼로그 확인 버튼
-    private val completeConfirmListener = View.OnClickListener {
-        requestDialog!!.dismiss()
-        //startActivity<CommunityFragment>()
     }
 
     //키보드 다운
