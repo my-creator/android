@@ -18,7 +18,8 @@
                     android:id="@+id/rl_toolbar_vote_frag"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:background="@drawable/community_header">
+                    android:background="@drawable/community_header"
+            >
 
                 <TextView
                         android:layout_width="34dp"

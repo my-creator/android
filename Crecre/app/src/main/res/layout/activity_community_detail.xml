@@ -96,9 +96,11 @@
     </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView
+            android:id="@+id/sv_content_community_detail_act"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rl_toolbar_community_detail_act"
+            android:layout_above="@+id/rl_comment_container_community_search_act"
             android:focusable="false"
     >
         <LinearLayout
@@ -312,6 +314,7 @@
 
     <!--댓글창-->
     <RelativeLayout
+            android:id="@+id/rl_comment_container_community_search_act"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="#f3f3f3"

@@ -140,12 +140,17 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/HomeFragment.kt" />
     <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/CommunityFragment.kt" />
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/RankFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
         </state>
       </provider>
+=======
+    <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
     </entry>
     <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/VoteFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
@@ -161,6 +166,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Crecre/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -175,6 +181,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
     <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/MypageFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -188,8 +196,24 @@
     <entry file="file://$PROJECT_DIR$/my-creator-android.iml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor" />
+=======
+    <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Activity/MainActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="49" column="9" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Crecre/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+        </state>
+      </provider>
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
     </entry>
   </component>
   <component name="masterDetails">

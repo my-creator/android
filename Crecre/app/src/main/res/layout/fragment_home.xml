@@ -1,371 +1,377 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        android:id="@+id/fragment_home_container"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/pale_grey">
-
-<android.support.v4.widget.NestedScrollView android:layout_width="match_parent" android:layout_height="wrap_content">
-    <LinearLayout
+    <RelativeLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:background="@color/pale_grey">
 
-    <RelativeLayout
-            android:id="@+id/fragment_home_rl_search_container"
-            android:layout_width="match_parent" 
-            android:layout_height="wrap_content"
-            android:background="@color/white">
-        <FrameLayout 
-                android:layout_width="match_parent" android:layout_height="50dp"
-                android:layout_marginHorizontal="20dp"
-                android:layout_marginTop="16dp"
-                android:padding="2dp"
-                android:background="@drawable/home_search_container_border_out">
+        <android.support.v4.widget.NestedScrollView
+                android:id="@+id/fragment_home_scroll_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fadingEdgeLength="0px">
             <LinearLayout
+                    android:id="@+id/fragment_home_container"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="12dp"
-                    android:background="@drawable/home_search_container_border_in"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true">
-                <ImageView
-                        android:id="@+id/fragment_home_iv_logo"
-                        android:layout_width="wrap_content"
+                    android:orientation="vertical">
+
+                <RelativeLayout
+                        android:id="@+id/fragment_home_rl_search_container"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/logo"/>
+                        android:background="@color/white">
+                    <FrameLayout
+                            android:layout_width="match_parent" android:layout_height="50dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="16dp"
+                            android:padding="2dp"
+                            android:background="@drawable/home_search_container_border_out">
+                        <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="horizontal"
+                                android:padding="12dp"
+                                android:background="@drawable/home_search_container_border_in"
+                                android:focusable="true"
+                                android:focusableInTouchMode="true">
+                            <ImageView
+                                    android:id="@+id/fragment_home_iv_logo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/logo"/>
+                            <View
+                                    android:layout_width="1dp"
+                                    android:layout_height="24dp"
+                                    android:background="@color/pinkish_grey"
+                                    android:layout_marginHorizontal="10dp"/>
+
+                            <EditText
+                                    android:id="@+id/fragment_home_edit_search"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="24dp"
+                                    android:windowSoftInputMode="adjustResize"
+                                    android:hint="크리에이터 검색"
+                                    android:textColor="@color/black"
+                                    android:lineSpacingExtra="8sp"
+                                    android:singleLine="true"
+                                    android:textSize="16sp"
+                                    android:imeOptions="actionSearch"
+                                    android:background="@null"/>
+                        </LinearLayout>
+                    </FrameLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:paddingVertical="10dp"
+                        android:paddingHorizontal="20dp"
+                        android:orientation="horizontal"
+                        android:background="@color/white">
+                    <TextView
+                            android:id="@+id/fragment_home_txt_today_hot_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="실시간 크리에이터"
+                            android:textSize="14sp"
+                            android:lineHeight="20dp"
+                            android:textColor="@color/violet_pink"/>
+
+                    <RelativeLayout
+                            android:id="@+id/fragment_home_today_hot_creator_container"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="60dp"
+                            android:layout_toLeftOf="@id/fragment_home_iv_today_hot_btn"
+                            android:layout_toRightOf="@+id/fragment_home_txt_today_hot_label"
+                    >
+                        <TextView
+                                android:id="@+id/fragment_home_txt_today_hot_creator"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="3 백종원의 요리비책호로롤로롤"
+                                android:textSize="14sp"
+                                android:lineHeight="20dp"
+                                android:singleLine="true"
+                                android:layout_marginRight="15dp"
+                                android:textColor="@color/black"/>
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                            android:id="@+id/fragment_home_iv_today_hot_btn"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/icn_hide_on"
+                            android:layout_alignParentRight="true"/>
+                </RelativeLayout>
                 <View
-                        android:layout_width="1dp"
-                        android:layout_height="24dp"
-                        android:background="@color/pinkish_grey"
-                        android:layout_marginHorizontal="10dp"/>
-
-                <EditText
-                        android:id="@+id/fragment_home_edit_search"
                         android:layout_width="match_parent"
-                        android:layout_height="24dp"
-                        android:hint="크리에이터 검색"
-                        android:textColor="@color/black"
-                        android:lineSpacingExtra="8sp"
-                        android:singleLine="true"
-                        android:textSize="16sp"
-                        android:imeOptions="actionSearch"
-                        android:background="@null"/>
+                        android:layout_height="1dp"
+                        android:background="@color/pinkish_grey"/>
+
+                <LinearLayout
+                        android:id="@+id/fragment_home_today_rank_container"
+                        android:visibility="gone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:background="@color/white"
+                        android:layout_marginBottom="16dp">
+
+
+                    <android.support.design.widget.TabLayout
+                            android:id="@+id/fragment_home_tl_today_rank"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:tabIndicatorColor="@color/light_grey"
+                            android:background="@color/light_grey">
+                    </android.support.design.widget.TabLayout>
+
+                    <android.support.v4.view.ViewPager
+                            android:id="@+id/fragment_home_vp_today_rank"
+                            android:layout_width="match_parent"
+                            android:layout_height="204dp"
+                            android:background="@color/white">
+
+                    </android.support.v4.view.ViewPager>
+
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/pinkish_grey"/>
+
+                    <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:paddingLeft="20dp"
+                            android:paddingVertical="12dp"
+                            android:background="@color/white">
+                        <TextView
+                                android:id="@+id/fragment_home_today_rank_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="2019.06.26 17:42:00"
+                                android:textSize="10sp"
+                                android:textColor="@color/brownish_grey"/>
+                        <TextView
+                                android:layout_toRightOf="@+id/fragment_home_today_rank_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text=" 검색 트래픽 기준"
+                                android:textSize="10sp"
+                                android:textColor="@color/brownish_grey"/>
+
+                    </RelativeLayout>
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/pinkish_grey"/>
+
                 </LinearLayout>
-            </FrameLayout>
-        </RelativeLayout>
 
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:paddingVertical="10dp"
-                android:paddingHorizontal="20dp"
-                android:orientation="horizontal"
-                android:background="@color/white">
-            <TextView
-                    android:id="@+id/fragment_home_txt_today_hot_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="실시간 크리에이터"
-                    android:textSize="14sp"
-                    android:lineHeight="20dp"
-                    android:textColor="@color/violet_pink"/>
-
-            <RelativeLayout
-                    android:id="@+id/fragment_home_today_hot_creator_container"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="60dp"
-                    android:layout_toLeftOf="@id/fragment_home_iv_today_hot_btn"
-                    android:layout_toRightOf="@+id/fragment_home_txt_today_hot_label"
-            >
-                <TextView
-                        android:id="@+id/fragment_home_txt_today_hot_creator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="3 백종원의 요리비책호로롤로롤"
-                        android:textSize="14sp"
-                        android:lineHeight="20dp"
-                        android:singleLine="true"
-                        android:layout_marginRight="15dp"
-                        android:textColor="@color/black"/>
-
-            </RelativeLayout>
-
-
-            <ImageView
-                    android:id="@+id/fragment_home_iv_today_hot_btn"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/icn_hide_on"
-                    android:layout_alignParentRight="true"/>
-        </RelativeLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/pinkish_grey"/>
-
-        <LinearLayout
-                android:id="@+id/fragment_home_today_rank_container"
-                android:visibility="gone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/white"
-                android:layout_marginBottom="16dp">
-
-
-        <android.support.design.widget.TabLayout
-                android:id="@+id/fragment_home_tl_today_rank"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:tabIndicatorColor="@color/light_grey"
-                android:background="@color/light_grey">
-        </android.support.design.widget.TabLayout>
-        
-        <android.support.v4.view.ViewPager
-                android:id="@+id/fragment_home_vp_today_rank"
-                android:layout_width="match_parent"
-                android:layout_height="204dp"
-                android:background="@color/white">
-
-        </android.support.v4.view.ViewPager>
-
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/pinkish_grey"/>
-
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:paddingLeft="20dp"
-                android:paddingVertical="12dp"
-                android:background="@color/white">
-            <TextView
-                    android:id="@+id/fragment_home_today_rank_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2019.06.26 17:42:00"
-                    android:textSize="10sp"
-                    android:textColor="@color/brownish_grey"/>
-            <TextView
-                    android:layout_toRightOf="@+id/fragment_home_today_rank_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" 검색 트래픽 기준"
-                    android:textSize="10sp"
-                    android:textColor="@color/brownish_grey"/>
-
-        </RelativeLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/pinkish_grey"/>
-
-        </LinearLayout>
-
-        <RelativeLayout
-                android:id="@+id/fragment_home_now_vote_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/light_grey"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="23dp">
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="진행 중인 투표"
-                        android:textSize="20sp"
-                        android:lineHeight="29sp"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/noto_sans_kr_bold"
-                        android:layout_weight="1"/>
-                <TextView
-                        android:id="@+id/fragment_home_now_vote_more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="전체보기"
-                        android:fontFamily="@font/noto_sans_kr_medium"
-                        android:textColor="@color/violet_pink"
-                        android:textSize="16sp"
-                        android:lineHeight="24sp"
-
-                        android:layout_gravity="center_vertical"/>
-            </LinearLayout>
-        </RelativeLayout>
-
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingTop="23dp"
-                android:paddingBottom="32dp"
-                android:orientation="vertical">
-
-            <TextView
-                    android:id="@+id/fragment_home_last_vote_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="믿고보는 지난 투표"
-                    android:textSize="20sp"
-                    android:lineHeight="29sp"
-                    android:textColor="@color/black_two"
-                    android:fontFamily="@font/noto_sans_kr_bold"
-                    android:layout_marginLeft="20dp"/>
-            
-            <RelativeLayout
-                    android:id="@+id/fragment_home_last_vote_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp">
-                <android.support.v7.widget.RecyclerView
-                        android:id="@+id/fragment_home_last_vote_rv_box"
-                        android:layout_marginLeft="12dp"
+                <RelativeLayout
+                        android:id="@+id/fragment_home_now_vote_container"
                         android:layout_width="match_parent"
-                        android:layout_height="290dp">
-
-                </android.support.v7.widget.RecyclerView>
-
-
-            </RelativeLayout>
-
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginHorizontal="20dp"
-                    android:gravity="center"
-                    android:layout_marginTop="32dp"
-                    android:paddingTop="24dp"
-                    android:paddingBottom="19dp"
-                    android:background="@drawable/home_vote_recommendation_box_background">
-                <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="투표가 마음에 안드시나요?"
-                        android:textSize="16sp"
-                        android:textAlignment="center"
-                        android:textColor="@color/black_two"
-                        android:lineHeight="24sp"/>
-                <TextView
-                        android:layout_width="wrap_content"
+                        android:background="@color/light_grey"
+                        android:paddingHorizontal="20dp"
+                        android:paddingTop="16dp"
+                        android:paddingBottom="23dp">
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="진행 중인 투표"
+                                android:textSize="20sp"
+                                android:lineHeight="29sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/noto_sans_kr_bold"
+                                android:layout_weight="1"/>
+                        <TextView
+                                android:id="@+id/fragment_home_now_vote_more"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="전체보기"
+                                android:fontFamily="@font/noto_sans_kr_medium"
+                                android:textColor="@color/violet_pink"
+                                android:textSize="16sp"
+                                android:lineHeight="24sp"
+
+                                android:layout_gravity="center_vertical"/>
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="투표를 직접 제안할 수 있어요"
-                        android:textSize="16sp"
-                        android:textAlignment="center"
-                        android:fontFamily="@font/noto_sans_kr_medium"
-                        android:textColor="@color/black_two"
-                        android:layout_marginTop="5dp"
-                        android:lineHeight="24sp"/>
-                <Button
-                        android:id="@+id/fragment_home_vote_recommendation_btn"
-                        android:layout_width="128dp"
-                        android:layout_height="32dp"
-                        android:text="투표 제안하기"
-                        android:textSize="14sp"
-                        android:lineHeight="20sp"
-                        android:textColor="@color/white"
-                        android:fontFamily="@font/noto_sans_kr_medium"
+                        android:background="@color/white"
+                        android:paddingTop="23dp"
+                        android:paddingBottom="32dp"
+                        android:orientation="vertical">
+
+                    <TextView
+                            android:id="@+id/fragment_home_last_vote_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="믿고보는 지난 투표"
+                            android:textSize="20sp"
+                            android:lineHeight="29sp"
+                            android:textColor="@color/black_two"
+                            android:fontFamily="@font/noto_sans_kr_bold"
+                            android:layout_marginLeft="20dp"/>
+
+                    <RelativeLayout
+                            android:id="@+id/fragment_home_last_vote_container"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp">
+                        <android.support.v7.widget.RecyclerView
+                                android:id="@+id/fragment_home_last_vote_rv_box"
+                                android:layout_marginLeft="12dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="290dp">
+
+                        </android.support.v7.widget.RecyclerView>
+
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginHorizontal="20dp"
+                            android:gravity="center"
+                            android:layout_marginTop="32dp"
+                            android:paddingTop="24dp"
+                            android:paddingBottom="19dp"
+                            android:background="@drawable/home_vote_recommendation_box_background">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="투표가 마음에 안드시나요?"
+                                android:textSize="16sp"
+                                android:textAlignment="center"
+                                android:textColor="@color/black_two"
+                                android:lineHeight="24sp"/>
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="투표를 직접 제안할 수 있어요"
+                                android:textSize="16sp"
+                                android:textAlignment="center"
+                                android:fontFamily="@font/noto_sans_kr_medium"
+                                android:textColor="@color/black_two"
+                                android:layout_marginTop="5dp"
+                                android:lineHeight="24sp"/>
+                        <Button
+                                android:id="@+id/fragment_home_vote_recommendation_btn"
+                                android:layout_width="128dp"
+                                android:layout_height="32dp"
+                                android:text="투표 제안하기"
+                                android:textSize="14sp"
+                                android:lineHeight="20sp"
+                                android:textColor="@color/white"
+                                android:fontFamily="@font/noto_sans_kr_medium"
+                                android:layout_marginTop="16dp"
+                                android:layout_marginBottom="5dp"
+                                android:background="@drawable/home_vote_recommendation_btn_background"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/pinkish_grey"/>
+
+                <LinearLayout
+                        android:id="@+id/fragment_home_hot_post_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
                         android:layout_marginTop="16dp"
-                        android:layout_marginBottom="5dp"
-                        android:background="@drawable/home_vote_recommendation_btn_background"/>
-            </LinearLayout>
-        </LinearLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/pinkish_grey"/>
+                        android:orientation="vertical">
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:paddingHorizontal="20dp"
+                            android:paddingVertical="12dp"
+                            android:orientation="horizontal">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="오늘 뜨는 인기글"
+                                android:textSize="16sp"
+                                android:lineHeight="24sp"
+                                android:textColor="@color/violet_pink"
+                                android:fontFamily="@font/noto_sans_kr_bold"
+                                android:layout_weight="1"/>
+                        <TextView
+                                android:id="@+id/fragment_home_txt_today_hot_post_more"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="더보기"
+                                android:fontFamily="@font/noto_sans_kr_medium"
+                                android:textColor="@color/brownish_grey"
+                                android:textSize="16sp"
+                                android:lineHeight="24sp"/>
+                    </LinearLayout>
+                    <android.support.v7.widget.RecyclerView
+                            android:id="@+id/fragment_home_rv_today_hot_post"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
+                <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/pinkish_grey"/>
 
-        <LinearLayout
-                android:id="@+id/fragment_home_hot_post_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical">
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="12dp"
-                    android:orientation="horizontal">
-                <TextView
-                        android:layout_width="wrap_content"
+                <LinearLayout
+                        android:id="@+id/fragment_home_new_post_container"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="오늘 뜨는 인기글"
-                        android:textSize="16sp"
-                        android:lineHeight="24sp"
-                        android:textColor="@color/violet_pink"
-                        android:fontFamily="@font/noto_sans_kr_bold"
-                        android:layout_weight="1"/>
-                <TextView
-                        android:id="@+id/fragment_home_txt_today_hot_post_more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="더보기"
-                        android:fontFamily="@font/noto_sans_kr_medium"
-                        android:textColor="@color/brownish_grey"
-                        android:textSize="16sp"
-                        android:lineHeight="24sp"/>
+                        android:background="@color/white"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical">
+                    <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:paddingHorizontal="20dp"
+                            android:paddingVertical="12dp"
+                            android:orientation="horizontal">
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="방금 막 올라온 최신글"
+                                android:textSize="16sp"
+                                android:lineHeight="24sp"
+                                android:textColor="@color/black"
+                                android:fontFamily="@font/noto_sans_kr_bold"
+                                android:layout_weight="1"/>
+                        <TextView
+                                android:id="@+id/fragment_home_txt_today_new_post_more"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="더보기"
+                                android:fontFamily="@font/noto_sans_kr_medium"
+                                android:textColor="@color/brownish_grey"
+                                android:textSize="16sp"
+                                android:lineHeight="24sp"/>
+                    </LinearLayout>
+                    <android.support.v7.widget.RecyclerView
+                            android:id="@+id/fragment_home_rv_today_new_post"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                    </android.support.v7.widget.RecyclerView>
+                </LinearLayout>
             </LinearLayout>
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/fragment_home_rv_today_hot_post"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-        <View
-                android:layout_width="match_parent"
-                android:layout_height="0.5dp"
-                android:background="@color/pinkish_grey"/>
+        </android.support.v4.widget.NestedScrollView>
+    </RelativeLayout>
 
-        <LinearLayout
-                android:id="@+id/fragment_home_new_post_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical">
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="12dp"
-                    android:orientation="horizontal">
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="방금 막 올라온 최신글"
-                        android:textSize="16sp"
-                        android:lineHeight="24sp"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/noto_sans_kr_bold"
-                        android:layout_weight="1"/>
-                <TextView
-                        android:id="@+id/fragment_home_txt_today_new_post_more"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="더보기"
-                        android:fontFamily="@font/noto_sans_kr_medium"
-                        android:textColor="@color/brownish_grey"
-                        android:textSize="16sp"
-                        android:lineHeight="24sp"/>
-            </LinearLayout>
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/fragment_home_rv_today_new_post"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-            </android.support.v7.widget.RecyclerView>
-        </LinearLayout>
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
-</RelativeLayout>
