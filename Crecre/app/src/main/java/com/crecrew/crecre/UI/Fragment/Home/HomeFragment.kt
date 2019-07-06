@@ -30,6 +30,7 @@ import org.jetbrains.anko.support.v4.startActivity
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.crecrew.crecre.UI.Activity.CreatorProfileActivity
+import com.crecrew.crecre.UI.Fragment.Home.closedVote.ClosedVoteFragment
 
 class HomeFragment: Fragment() {
 
@@ -135,9 +136,16 @@ class HomeFragment: Fragment() {
         lastVoteData.add(LastVoteData("https://s-i.huffpost.com/gen/1771947/images/n-DEFAULT-628x314.jpg","https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800", "가희바희보",1,"하나빼기 일 >___<"))
         lastVoteData.add(LastVoteData("https://www.sanghafarm.co.kr/sanghafarm_Data/upload/shop/product/201803/A0000101_2018032109513585717.jpg","", "현희여신",1,"오늘은 잼을 가져오셨다."))
 
-        lastVoteOverviewRecyclerViewAdapter = LastVoteOverviewRecyclerView(activity!!, lastVoteData)
-        fragment_home_last_vote_rv_box.adapter = lastVoteOverviewRecyclerViewAdapter
-        fragment_home_last_vote_rv_box.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        frag_home_vp_clsd.run {
+            adapter = BasePagerAdapter(fragmentManager!!).apply {
+                for (i in lastVoteData.indices)
+                    addFragment(ClosedVoteFragment.newInstance(lastVoteData[i]))
+            }
+        }
+
+//        lastVoteOverviewRecyclerViewAdapter = LastVoteOverviewRecyclerView(activity!!, lastVoteData)
+//        fragment_home_last_vote_rv_box.adapter = lastVoteOverviewRecyclerViewAdapter
+//        fragment_home_last_vote_rv_box.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
         // hot post
         var todayHotDataList: ArrayList<TodayPost> = ArrayList()
