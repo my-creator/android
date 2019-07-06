@@ -23,21 +23,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
         >
 
-            <RelativeLayout
-                    android:layout_width="57dp"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentRight="true"
-            >
                 <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         app:srcCompat="@drawable/check_btn"
                         android:id="@+id/imageView_vote_suggest_check"
                         android:layout_centerVertical="true"
-                        android:layout_marginStart="0dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginEnd="17dp"
                 />
-            </RelativeLayout>
-
             <RelativeLayout
                     android:layout_width="57dp"
                     android:layout_height="match_parent"
@@ -55,16 +49,13 @@
 
 
             <TextView
-                    android:layout_width="66dp"
-                    android:layout_height="27dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="투표제안"
                     android:textColor="@color/white"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginEnd="140dp"
-                    android:layout_marginStart="153dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_centerVertical="true"
                     app:lineHeight="27sp"
             />
 
@@ -77,9 +68,9 @@
 
         >
             <EditText
-                    android:layout_width="312dp"
+                    android:layout_width="match_parent"
                     android:layout_height="48dp"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginHorizontal="24dp"
                     android:inputType="textPersonName"
                     android:text="투표 내용을 입력해주세요"
                     android:ems="10"
@@ -95,13 +86,13 @@
                     android:gravity="center_vertical"/>
         </RelativeLayout>
         <EditText
-                android:layout_width="312dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:inputType="textPersonName"
                 android:text="항목을 입력해주세요"
                 android:ems="10"
                 android:id="@+id/vote_suggest_typing_item1"
-                android:layout_marginStart="24dp"
+                android:layout_marginHorizontal="24dp"
                 android:textColor="@color/greyish"
                 android:selectAllOnFocus="true"
                 android:textSize="16sp"
@@ -113,13 +104,13 @@
                 android:textColorHighlight="#ff90fc"
         />
         <EditText
-                android:layout_width="312dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:inputType="textPersonName"
                 android:text="항목을 입력해주세요"
                 android:ems="10"
                 android:id="@+id/vote_suggest_typing_item2"
-                android:layout_marginStart="24dp"
+                android:layout_marginHorizontal="24dp"
                 android:textColor="@color/greyish"
                 android:selectAllOnFocus="true"
                 android:textSize="16sp"
@@ -131,13 +122,13 @@
                 android:textColorHighlight="#ff90fc"
         />
         <EditText
-                android:layout_width="312dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:inputType="textPersonName"
                 android:text="항목을 입력해주세요"
                 android:ems="10"
                 android:id="@+id/vote_suggest_typing_item3"
-                android:layout_marginStart="24dp"
+                android:layout_marginHorizontal="24dp"
                 android:textColor="@color/greyish"
                 android:selectAllOnFocus="true"
                 android:textSize="16sp"
@@ -149,13 +140,13 @@
                 android:textColorHighlight="#ff90fc"
         />
         <EditText
-                android:layout_width="312dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:inputType="textPersonName"
                 android:text="항목을 입력해주세요"
                 android:ems="10"
                 android:id="@+id/vote_suggest_typing_item4"
-                android:layout_marginStart="24dp"
+                android:layout_marginHorizontal="24dp"
                 android:textColor="@color/greyish"
                 android:selectAllOnFocus="true"
                 android:textSize="16sp"
@@ -167,13 +158,13 @@
                 android:textColorHighlight="#ff90fc"
         />
         <EditText
-                android:layout_width="312dp"
+                android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:inputType="textPersonName"
                 android:text="항목을 입력해주세요"
                 android:ems="10"
                 android:id="@+id/vote_suggest_typing_item5"
-                android:layout_marginStart="24dp"
+                android:layout_marginHorizontal="24dp"
                 android:textColor="@color/greyish"
                 android:selectAllOnFocus="true"
                 android:textSize="16sp"
@@ -184,17 +175,16 @@
                 android:layout_marginTop="16dp"
                 android:textColorHighlight="#ff90fc"
         />
-        <TextView
+        <Button
                 android:id="@+id/vote_suggest_additem"
-                android:layout_width="288dp"
+                android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:layout_marginStart="36dp"
+                android:layout_marginHorizontal="36dp"
                 android:background="@drawable/vote_suggest_additem_pink"
                 android:text="항목추가"
                 android:textColor="#ffffff" android:textSize="16sp"
                 android:layout_marginTop="16dp"
-                android:paddingTop="8dp" android:paddingBottom="8dp"
-                android:paddingStart="115dp" android:paddingEnd="115dp"
+                android:textAlignment="center"
         />
     </LinearLayout>
 

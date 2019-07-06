@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="40dp"
+>
+    <RelativeLayout
+            android:id="@+id/VoteBarcontinue"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+    >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="진행중인 투표"
+                android:textSize="14sp"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:textColor="@color/violet_pink"
+                android:lineSpacingExtra="6sp"
+                android:gravity="center_horizontal"
+        />
+    </RelativeLayout>
+    <RelativeLayout
+            android:id="@+id/VoteBarPast"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+    >
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:text="지난 투표"
+                android:textSize="14sp"
+                android:textColor="#a4a4a4"
+                android:lineSpacingExtra="6sp"
+                android:gravity="center_horizontal"
+        />
+    </RelativeLayout>
+</LinearLayout>
