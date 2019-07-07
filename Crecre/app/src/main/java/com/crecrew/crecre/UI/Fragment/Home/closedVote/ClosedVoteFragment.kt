@@ -27,7 +27,7 @@ class ClosedVoteFragment : Fragment() {
                 .into(frag_clsd_vote_iv_img)
             Glide.with(this@ClosedVoteFragment)
                 .load(lastVoteData.profile)
-                .error(R.drawable.img_profile)
+                //.error(R.drawable.img_profile)
                 .apply(RequestOptions().circleCrop())
                 .into(frag_clsd_vote_iv_profile)
             frag_clsd_vote_tv_name.text = lastVoteData.creator

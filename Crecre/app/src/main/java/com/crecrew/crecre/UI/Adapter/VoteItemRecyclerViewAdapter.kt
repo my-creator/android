@@ -9,20 +9,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.crecrew.crecre.Data.VoteItemData
 import com.crecrew.crecre.R
 
-/*class VoteItemRecyclerViewAdapter(val ctx:Context, val dataList: ArrayList<vote_itemdata>):RecyclerView.Adapter<VoteItemRecyclerViewAdapter.Holder>(){
+class VoteItemRecyclerViewAdapter(val ctx:Context, val dataList: ArrayList<VoteItemData>):RecyclerView.Adapter<VoteItemRecyclerViewAdapter.Holder>(){
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-        holder.item_name.text = dataList[position].item_name;
+        Glide.with(ctx)
+            .load(dataList[position].ImageURL)
+            .into(holder.img_thumnail)
 
-        holder.img_isCheck.setOnClickListener{
-            if (holder.isCheck == false) holder.isCheck = true;
-        }
+        holder.item_name.text = dataList[position].item_name;
     }
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         return dataList.size
     }
 
@@ -30,10 +29,10 @@ import com.crecrew.crecre.R
         var img_thumnail = itemView.findViewById(R.id.item_img) as ImageView
         var item_name = itemView.findViewById(R.id.item_name) as TextView
         var img_isCheck = itemView.findViewById(R.id.item_ischeckimg) as ImageView
-        var isCheck: Boolean = false;
     }
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int ) :Holder{
-        val view: View = LayoutInflater.from(ctx)
+        val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_invote_choice, viewGroup, false)
+        return Holder(view)
     }
-}*/
+}
