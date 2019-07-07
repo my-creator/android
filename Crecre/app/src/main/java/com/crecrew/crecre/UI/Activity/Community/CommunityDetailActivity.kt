@@ -108,7 +108,6 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
 
-
             //키보드 down
             rl_commu_detail_act -> {
                 downKeyboard(rl_commu_detail_act)
@@ -130,29 +129,30 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
         btn_unlike_community_detail_act.setOnClickListener(this)
         btn_back_community_detail_act.setOnClickListener(this)
         btn_anonymous_detail_com_act.setOnClickListener(this)
+        rl_commu_detail_act.setOnClickListener(this)
     }
 
     //recyclerView
     private fun configureRecyclerView() {
         var dataList: ArrayList<CommentData> = ArrayList()
         dataList.add(
-            CommentData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","양시연영상",
-                "18초전",  "시연이는 시연시연시연")
+            CommentData("http://www.figurepresso.com/web/product/big/201708/7531_shop1_593433.jpg","양시연영상",
+                "18초전",  "시연이는 알린을 좋아해,,")
         )
         dataList.add(
-            CommentData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",
+            CommentData("https://duckyworld.co.kr/web/product/big/201710/523_shop1_327628.jpg",
                 "안녀안알ㄴ여ㅏㄴ여낭", "14:27","내가 무슨 부귀영화를 누리려고 이 글에 들어왔니?")
         )
         dataList.add(
-            CommentData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","유가희",
+            CommentData("http://ecx.images-amazon.com/images/I/41oIsVytUOL.jpg","유가희",
                 "1분전",  "명망먀여망며아명마염")
         )
         dataList.add(
-            CommentData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","양희찬",
+            CommentData("https://scontent-lga3-1.cdninstagram.com/vp/f899f4cda10d8ac144041dbb4bb1240c/5DB1453F/t51.2885-15/e35/65610653_125382465361781_2677424777804115689_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com","양희찬",
                 "1시간전",  "김!애!용!!")
         )
         dataList.add(
-            CommentData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","김애용",
+            CommentData("http://stimg.afreecatv.com/NORMAL_BBS/7/16469567/16505c6f9f85df905.jpeg","김애용",
                 "18초전",  "나는 김!애!용!!")
         )
 

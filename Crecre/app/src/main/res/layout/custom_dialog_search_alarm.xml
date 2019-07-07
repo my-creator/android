@@ -10,13 +10,14 @@
             android:layout_height="208dp"
             android:background="@drawable/custom_dialog_box"
             android:layout_centerInParent="true"
+
     >
 
         <RelativeLayout
                 android:id="@+id/rl_request_response_compelte"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="#f3f3f3"
+                android:background="@drawable/custom_dialog_box"
         >
             <TextView
                     android:id="@+id/tv_search_alarm_title_dialog"
@@ -30,26 +31,30 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/rl_request_response_compelte"
-                android:background="@color/violet_pink"
-        >
 
-        </RelativeLayout>
 
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/rl_request_response_compelte"
                 android:layout_above="@+id/btn_bottom_box_search_custom_dialog"
+                android:background="@color/white"
         >
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/violet_pink"
+            >
+
+            </RelativeLayout>
 
                 <TextView
                         android:id="@+id/tv_des_seasrchAlarm_custom_dialog"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
                         android:text="검색어가 너무 짧습니다."
                         android:textSize="16sp"
                         android:textColor="@color/black"
@@ -64,7 +69,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_alignParentBottom="true"
-                android:background="#f3f3f3">
+                android:background="@drawable/custom_dialog_box"
+        >
 
             <TextView
                     android:id="@+id/tv_complete_search_custom_dialog"
