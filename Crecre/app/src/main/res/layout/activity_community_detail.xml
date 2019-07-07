@@ -44,6 +44,7 @@
                 android:id="@+id/tv_category_community_detail_act"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_bold"
                 android:text="자유게시판"
                 android:textSize="18sp"
                 android:textColor="@color/white"
@@ -95,9 +96,11 @@
     </RelativeLayout>
 
     <android.support.v4.widget.NestedScrollView
+            android:id="@+id/sv_content_community_detail_act"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/rl_toolbar_community_detail_act"
+            android:layout_above="@+id/rl_comment_container_community_search_act"
             android:focusable="false"
     >
         <LinearLayout
@@ -109,6 +112,7 @@
                     android:id="@+id/tv_title_community_detail_act"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_kr_medium"
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:layout_marginTop="18dp"
@@ -142,6 +146,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="10sp"
+                            android:fontFamily="@font/noto_sans_kr_medium"
                             android:textColor="@color/black"
                             android:text="익명"
                     />
@@ -154,6 +159,7 @@
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/noto_sans_kr_medium"
                                 android:textColor="#a4a4a4"
                                 android:textSize="10sp"
                                 android:text="18초 전"
@@ -162,6 +168,7 @@
                         <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/noto_sans_kr_medium"
                                 android:textColor="#a4a4a4"
                                 android:textSize="10sp"
                                 android:text="조회수 21"
@@ -208,6 +215,7 @@
                         android:layout_alignLeft="@+id/img_main_community_detail"
                         android:layout_below="@+id/img_main_community_detail"
                         android:layout_marginTop="14dp"
+                        android:fontFamily="@font/noto_sans_kr_medium"
                         android:textSize="20sp"
                         android:textColor="@color/black"
                         android:text="ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
@@ -225,7 +233,7 @@
                     <!--추천-->
                     <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:orientation="vertical"
                     >
 
@@ -237,12 +245,16 @@
                         />
 
                         <TextView
+                                android:id="@+id/tv_recommend_number_detail_act"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
                                 android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/noto_sans_kr_medium"
+                                android:textSize="10sp"
+                                android:textColor="#a4a4a4"
                                 android:text="추천 1"
                         />
-
 
                     </LinearLayout>
 
@@ -262,9 +274,14 @@
                         />
 
                         <TextView
+                                android:id="@+id/tv_unlike_community_detail_act"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
                                 android:layout_gravity="center_horizontal"
+                                android:fontFamily="@font/noto_sans_kr_medium"
+                                android:textSize="10sp"
+                                android:textColor="#a4a4a4"
                                 android:text="비추천 1"
                         />
 
@@ -297,6 +314,7 @@
 
     <!--댓글창-->
     <RelativeLayout
+            android:id="@+id/rl_comment_container_community_search_act"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:background="#f3f3f3"
@@ -333,10 +351,11 @@
             >
 
                 <EditText
-                        android:layout_width="379dp"
+                        android:layout_width="376dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:paddingLeft="12dp"
+                        android:fontFamily="@font/noto_sans_kr_medium"
                         android:hint="댓글을 입력하세요."
                         android:background="@null"
                 />
@@ -366,6 +385,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/violet_pink"
                         android:layout_marginHorizontal="18dp"
+                        android:fontFamily="@font/noto_sans_kr_medium"
                         android:textSize="10sp"
                         android:text="등록"
                         android:layout_gravity="center_vertical"

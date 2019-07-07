@@ -1,8 +1,15 @@
 package scom.crecrew.crecre.UI.Fragment
 
+import android.accessibilityservice.AccessibilityService
+import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
+import android.graphics.Rect
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.support.v4.app.Fragment
+import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
@@ -30,6 +37,7 @@ import org.jetbrains.anko.support.v4.startActivity
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.crecrew.crecre.UI.Activity.CreatorProfileActivity
+import com.crecrew.crecre.UI.Fragment.Home.closedVote.ClosedVoteFragment
 
 class HomeFragment: Fragment() {
 
@@ -39,14 +47,12 @@ class HomeFragment: Fragment() {
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
     lateinit var lastVoteOverviewRecyclerViewAdapter: LastVoteOverviewRecyclerView
 
-    lateinit var imm : InputMethodManager
-    lateinit var et : EditText
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // today rank ViewPager
+
         rootView.let {
+            // today rank ViewPager
             it.fragment_home_vp_today_rank.run {
                 adapter = BasePagerAdapter(fragmentManager!!).apply {
                     addFragment(HomeTodayRankTopFragment())
@@ -83,10 +89,9 @@ class HomeFragment: Fragment() {
             fragment_home_edit_search.setOnEditorActionListener { v, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
-                    if(fragment_home_edit_search.text.length == 0){
-                        Toast.makeText(activity,"크리에이터를 입력해주세요!",Toast.LENGTH_LONG).show()
-                    }
-                    else {
+                    if (fragment_home_edit_search.text.length == 0) {
+                        Toast.makeText(activity, "크리에이터를 입력해주세요!", Toast.LENGTH_LONG).show()
+                    } else {
                         // TODO: 검색결과가 없을 때는 화면이 다름!-> 처리
                         val intent = Intent(activity, CreatorProfileActivity::class.java)
                         intent.putExtra("creator_name", fragment_home_edit_search.text.toString())
@@ -96,6 +101,10 @@ class HomeFragment: Fragment() {
                 } else {
                     false
                 }
+            }
+
+            fragment_home_container.setOnClickListener {
+                downKeyboard(fragment_home_container)
             }
         }
 
@@ -107,6 +116,13 @@ class HomeFragment: Fragment() {
 
         configureRecyclerView()
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        fragment_home_edit_search.setText(null)
+        fragment_home_edit_search.clearFocus();
 
     }
 
@@ -135,16 +151,23 @@ class HomeFragment: Fragment() {
         lastVoteData.add(LastVoteData("https://s-i.huffpost.com/gen/1771947/images/n-DEFAULT-628x314.jpg","https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800", "가희바희보",1,"하나빼기 일 >___<"))
         lastVoteData.add(LastVoteData("https://www.sanghafarm.co.kr/sanghafarm_Data/upload/shop/product/201803/A0000101_2018032109513585717.jpg","", "현희여신",1,"오늘은 잼을 가져오셨다."))
 
-        lastVoteOverviewRecyclerViewAdapter = LastVoteOverviewRecyclerView(activity!!, lastVoteData)
-        fragment_home_last_vote_rv_box.adapter = lastVoteOverviewRecyclerViewAdapter
-        fragment_home_last_vote_rv_box.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
+        frag_home_vp_clsd.run {
+            adapter = BasePagerAdapter(fragmentManager!!).apply {
+                for (i in lastVoteData.indices)
+                    addFragment(ClosedVoteFragment.newInstance(lastVoteData[i]))
+            }
+        }
+
+//        lastVoteOverviewRecyclerViewAdapter = LastVoteOverviewRecyclerView(activity!!, lastVoteData)
+//        fragment_home_last_vote_rv_box.adapter = lastVoteOverviewRecyclerViewAdapter
+//        fragment_home_last_vote_rv_box.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
         // hot post
         var todayHotDataList: ArrayList<TodayPost> = ArrayList()
 
-        todayHotDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","딕헌터와 영알남 커플, 현실에서의 만남 더 심쿵! 하라락후루룩 호로록 줄이넘어간다링 안넘어간다", "먹방",89,32,30))
-        todayHotDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","2019년 7월 3일 현재 나는 배가 고프다. 어깨도 아픔", "개발",1004,52,50))
-        todayHotDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","지금 정호,예원,다연,민정,가희,신우,혁표,현희랑 같이 있음 크리크리짱", "솝트",999,14,80))
+        todayHotDataList.add(TodayPost("http://mblogthumb4.phinf.naver.net/MjAxODA1MTJfMTMx/MDAxNTI2MTMxOTAwMDQw.nYJ52P9m33uVBVaA4D9Y8aEpngi2BhTwZhlmPi11xnwg.jl2N0ZuJDxZDdTZZsNbrQTpGemFNgLS342YMnUcYeKMg.JPEG.jini2877/12.jpg?type=w800","딕헌터와 영알남 커플, 현실에서의 만남 더 심쿵! 하라락후루룩 호로록 줄이넘어간다링 안넘어간다", "먹방",89,32,30))
+        todayHotDataList.add(TodayPost("http://www.mrtt.news/news/photo/201810/1093_4186_485.jpg","2019년 7월 3일 현재 나는 배가 고프다. 어깨도 아픔", "개발",1004,52,50))
+        todayHotDataList.add(TodayPost("https://byline.network/wp-content/uploads/2018/12/tiye.png","지금 정호,예원,다연,민정,가희,신우,혁표,현희랑 같이 있음 크리크리짱", "솝트",999,14,80))
 
         todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayHotDataList)
         fragment_home_rv_today_hot_post.adapter = todayPostRecyclerViewAdapter
@@ -154,9 +177,9 @@ class HomeFragment: Fragment() {
         // new post
         var todayNewDataList: ArrayList<TodayPost> = ArrayList()
 
-        todayNewDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","왼쪽 어깨 너무 아프당. 내일 알바가기 시르다", "건강",89,32,30))
-        todayNewDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","와 좀있으면 홈화면 끝난다", "개발",1004,52,50))
-        todayNewDataList.add(TodayPost("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","헐 1일 1커밋해야하는데, 이제 커밋해야지", "개발",999,14,80))
+        todayNewDataList.add(TodayPost("https://i.ytimg.com/vi/SzJo9QfhZg8/maxresdefault.jpg","왼쪽 어깨 너무 아프당. 내일 알바가기 시르다", "건강",89,32,30))
+        todayNewDataList.add(TodayPost("https://scontent-bru2-1.cdninstagram.com/vp/8689f4c9fc508fd674d2f60a5c23b2a0/5DC25F71/t51.2885-15/e35/56184620_383987605521824_7189641354343536955_n.jpg?_nc_ht=scontent-bru2-1.cdninstagram.com","와 좀있으면 홈화면 끝난다", "개발",1004,52,50))
+        todayNewDataList.add(TodayPost("http://static.hubzum.zumst.com/hubzum/2017/10/19/10/09828761654d4f02af8ba6cf86bc4cc3.png","헐 1일 1커밋해야하는데, 이제 커밋해야지", "개발",999,14,80))
 
         todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayNewDataList)
         fragment_home_rv_today_new_post.adapter = todayPostRecyclerViewAdapter
@@ -165,5 +188,13 @@ class HomeFragment: Fragment() {
 
     }
 
-}
+    private fun downKeyboard(view: View) {
 
+        val imm: InputMethodManager =
+            activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+
+        fragment_home_edit_search.clearFocus()
+    }
+
+}

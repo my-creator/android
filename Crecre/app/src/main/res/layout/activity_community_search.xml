@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-        android:id="@+id/rl_search_comm_act"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/rl_search_comm_act"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#f3f3f3"
@@ -35,6 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:fontFamily="@font/noto_sans_kr_bold"
                 android:text="검색"
                 android:textSize="18sp"
                 android:textColor="#ff57f7"
@@ -63,8 +64,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:fontFamily="@font/noto_sans_kr_medium"
+                    android:textColorHint="#a4a4a4"
+                    android:textSize="16sp"
                     android:paddingLeft="16dp"
-                    android:hint="글 제목, 내용, 게시판 검색"
+                    android:hint="게시판 검색"
                     android:background="@null"
 
             />
@@ -95,17 +99,18 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/violet_pink"
                     android:layout_marginHorizontal="18dp"
+                    android:fontFamily="@font/noto_sans_kr_medium"
                     android:textSize="10sp"
                     android:text="검색"
                     android:layout_gravity="center_vertical"
                     android:layout_alignParentEnd="true"
-                    />
+            />
 
         </LinearLayout>
 
     </RelativeLayout>
 
-    <!--basic search view-->
+    <!--basic search view //초기 설정값 보이게 해야함-->
     <LinearLayout
             android:id="@+id/ll_first_search_view_com_act"
             android:layout_width="wrap_content"
@@ -127,14 +132,109 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
-                android:text="전체 게시판의 글을 검색해보세요"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:text="찾으시는 게시판이 있나요?"
                 android:textSize="14sp"
                 android:textColor="#a4a4a4"
         />
 
     </LinearLayout>
 
-    <!--RecyclerView & hide view-->
+    <!--검색결과가 안나왔을경우 view-->
+    <RelativeLayout
+            android:id="@+id/ll_no_resul_com_search_act"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+    >
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="vertical"
+        >
+
+            <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/question_mark"
+            />
+
+            <TextView
+                    android:id="@+id/tv_no_result_com_search_act"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="6dp"
+                    android:fontFamily="@font/noto_sans_kr_medium"
+                    android:text="검색 결과가 없습니다."
+                    android:textSize="14sp"
+                    android:textColor="#a4a4a4"
+            />
+
+            <TextView
+                    android:id="@+id/tv2_no_result_com_search_act"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="찾으시는 내용을 확인하고 다시 검색해보세요."
+                    android:textSize="12sp"
+                    android:textColor="#a4a4a4"
+            />
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="56dp"
+                android:orientation="vertical"
+        >
+
+            <TextView
+                    android:id="@+id/tv_areyoufind_search_com_act"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/noto_sans_kr_medium"
+                    android:textSize="16sp"
+                    android:textColor="#a4a4a4a4"
+                    android:text="찾으시는 유투버의 게시판이 없나요?"
+
+            />
+
+            <RelativeLayout
+                    android:id="@+id/btn1_search_request_community_act"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_gravity="center_horizontal"
+            >
+
+                <ImageView
+                        android:layout_width="160dp"
+                        android:layout_height="36dp"
+                        android:src="@drawable/community_request_btn_box"
+                />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="@font/noto_sans_kr_medium"
+                        android:textSize="14sp"
+                        android:textColor="@color/white"
+                        android:text="게시판 요청하기"
+                />
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <!--결과가 나왔을 경우 RecyclerView & hide view-->
     <RelativeLayout
             android:id="@+id/rl_after_search_view"
             android:layout_width="match_parent"

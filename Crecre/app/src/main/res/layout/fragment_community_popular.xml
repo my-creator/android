@@ -33,6 +33,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:textColor="#a4a4a4"
+                    android:fontFamily="@font/noto_sans_kr_medium"
                     android:text="더보기 "
             />
 

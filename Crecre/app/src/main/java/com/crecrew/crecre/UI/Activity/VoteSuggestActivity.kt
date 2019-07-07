@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.activity_vote_suggest5.*
-var stopClick: Int = 2;
+
 class VoteSuggestActivity :AppCompatActivity() {
 
     var item_list = ArrayList<String>()
-
+    var stopClick: Int = 2;
     fun changePinkGray(v: View){
         v.setOnFocusChangeListener(){v,hasFocus->
             if (hasFocus) v.setBackgroundResource(R.drawable.vote_suggest_pink_back);

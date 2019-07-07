@@ -13,6 +13,7 @@
             android:layout_width="88dp"
             android:layout_height="72dp"
             android:background="@drawable/today_post_thumnail_rounding"
+            android:scaleType="centerCrop"
             android:layout_marginRight="10dp"/>
 
     <com.crecrew.crecre.utils.CharacterWrapTextView

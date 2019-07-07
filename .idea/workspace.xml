@@ -2,119 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2fefc8f9-ff57-426b-9f30-de4ffa395b73" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/Data/CommunityHotPostData.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Activity/CommunityHotPostActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Adapter/CommunityHotPostRecyclerViewAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Adapter/CommunityPostFragmentAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/ic_hot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_back_white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_camera.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_find_p.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_find_w.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_img_x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_like_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_like_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_look_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_look_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_profile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_unlike_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_unlike_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/icn_writing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-hdpi/img_imagebox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/ic_hot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_camera.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_find_p.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_find_w.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_like_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_like_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_look_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_look_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_profile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_unlike_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_unlike_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/icn_writing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-mdpi/img_imagebox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/ic_hot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_camera.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_find_p.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_find_w.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_like_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_like_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_look_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_look_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_profile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_unlike_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_unlike_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/icn_writing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xhdpi/img_imagebox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/ic_hot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_camera.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_find_p.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_find_w.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_like_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_like_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_look_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_look_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_profile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_unlike_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_unlike_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/icn_writing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxhdpi/img_imagebox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/ic_hot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_camera.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_find_p.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_find_w.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_like_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_like_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_look_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_look_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_profile.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_unlike_off.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_unlike_on.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/icn_writing.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable-xxxhdpi/img_imagebox.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable/community_favorite_heart_btn.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable/vote_corner_rounding.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable/vote_round_gray_rect.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable/vote_round_mint_rect.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/drawable/vote_round_pink_rect.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/activity_community_hot_post.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/drawable-hdpi/icn_back_white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/drawable-hdpi/icn_img_x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/drawable-mdpi/icn_back_white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/drawable-mdpi/icn_img_x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/drawable-xhdpi/icn_back_white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/drawable-xhdpi/icn_img_x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/drawable-xxhdpi/icn_back_white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/drawable-xxhdpi/icn_img_x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/drawable-xxxhdpi/icn_back_white.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/drawable-xxxhdpi/icn_img_x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/fragment_vote_pastvote.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/rv_item_hotpost_community_act.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/mipmap-xxhdpi/drawable-hdpi/icn_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/mipmap-xxhdpi/drawable-hdpi/icn_img_x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/mipmap-xxhdpi/drawable-mdpi/icn_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/mipmap-xxhdpi/drawable-mdpi/icn_img_x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/mipmap-xxhdpi/drawable-xhdpi/icn_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/mipmap-xxhdpi/drawable-xhdpi/icn_img_x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/mipmap-xxhdpi/drawable-xxhdpi/icn_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/mipmap-xxhdpi/drawable-xxhdpi/icn_img_x.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/mipmap-xxhdpi/drawable-xxxhdpi/icn_back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/mipmap-xxhdpi/drawable-xxxhdpi/icn_img_x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crecre/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/Crecre/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crecre/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Crecre/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Activity/Community/CommunityRequestActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Activity/Community/CommunityRequestActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Crecre/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Crecre/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Activity/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Activity/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/CommunityFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/CommunityFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/fragment_community.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/fragment_community.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/fragment_community_navi.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/fragment_community_navi.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/fragment_community_popular.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/fragment_community_popular.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/fragment_vote.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Crecre/app/src/main/res/layout/fragment_vote.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -124,16 +16,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+<<<<<<< HEAD
+        <entry file="file://$PROJECT_DIR$/my-creator-android.iml">
+          <provider selected="true" editor-type-id="text-editor" />
+=======
         <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Activity/MainActivity.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+            <state relative-caret-position="300">
+              <caret line="49" column="9" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -147,28 +43,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Crecre/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="29" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
+            <state relative-caret-position="240">
+              <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
             </state>
           </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/CommunityFragment.kt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-            </state>
-          </provider>
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/MypageFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
+            <state relative-caret-position="228">
               <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
               <folding>
                 <element signature="e#39#220#0" expanded="true" />
@@ -180,7 +68,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/RankFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
+            <state relative-caret-position="76">
               <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
             </state>
           </provider>
@@ -189,7 +77,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/VoteFragment.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
+            <state relative-caret-position="76">
               <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
             </state>
           </provider>
@@ -206,13 +94,20 @@
         <option value="$PROJECT_DIR$/Crecre/build.gradle" />
         <option value="$PROJECT_DIR$/Crecre/app/build.gradle" />
         <option value="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/MypageFragment.kt" />
+        <option value="$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Activity/MainActivity.kt" />
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="951" />
     <option name="width" value="978" />
-    <option name="height" value="1039" />
+=======
+  <component name="ProjectFrameBounds">
+    <option name="x" value="950" />
+    <option name="width" value="980" />
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
+    <option name="height" value="1040" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -222,9 +117,30 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Crecre-android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Crecre-android" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Crecre-android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Crecre-android" type="462c0819:PsiDirectoryNode" />
+              <item name="Crecre" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Crecre-android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Crecre-android" type="462c0819:PsiDirectoryNode" />
+              <item name="Crecre" type="462c0819:PsiDirectoryNode" />
+              <item name="gradle" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -233,6 +149,7 @@
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -260,21 +177,29 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+<<<<<<< HEAD
+    <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24322538" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.24244833" />
+=======
+    <frame x="760" y="0" width="784" height="832" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Captures" order="0" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="1" visible="true" weight="0.49263722" />
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
       <window_info id="Structure" order="2" side_tool="true" />
       <window_info id="Image Layers" order="3" />
       <window_info id="Designer" order="4" />
       <window_info id="Resources Explorer" order="5" />
       <window_info id="Capture Tool" order="6" />
       <window_info id="Favorites" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Version Control" order="0" sideWeight="0.49799198" visible="true" weight="0.3319027" />
       <window_info anchor="bottom" id="TODO" order="1" />
       <window_info anchor="bottom" id="Terminal" order="2" />
-      <window_info anchor="bottom" id="Event Log" order="3" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="3" sideWeight="0.502008" side_tool="true" visible="true" weight="0.3319027" />
       <window_info anchor="right" id="Capture Analysis" order="0" />
       <window_info anchor="right" id="Theme Preview" order="1" />
       <window_info anchor="right" id="Palette&#9;" order="2" />
@@ -282,16 +207,38 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/HomeFragment.kt" />
+    <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/CommunityFragment.kt" />
+<<<<<<< HEAD
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/RankFragment.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        </state>
+      </provider>
+=======
+=======
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
     <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor" />
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
     </entry>
-    <entry file="file://$PROJECT_DIR$/Crecre/app/build.gradle">
+    <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/VoteFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
+        <state relative-caret-position="76">
+          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Activity/MainActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="27" column="43" selection-start-line="27" selection-start-column="43" selection-end-line="27" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/Crecre/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="315">
@@ -299,16 +246,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/CommunityFragment.kt">
+    <entry file="file://$PROJECT_DIR$/Crecre/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
+        <state relative-caret-position="893">
+          <caret line="47" column="1" selection-start-line="47" selection-start-column="1" selection-end-line="47" selection-end-column="1" />
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
+=======
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
     <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/MypageFragment.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
+        <state relative-caret-position="228">
           <caret line="12" column="35" selection-start-line="12" selection-start-column="35" selection-end-line="12" selection-end-column="35" />
           <folding>
             <element signature="e#39#220#0" expanded="true" />
@@ -316,26 +267,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/RankFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/my-creator-android.iml">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Fragment/VoteFragment.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+=======
     <entry file="file://$PROJECT_DIR$/Crecre/app/src/main/java/com/crecrew/crecre/UI/Activity/MainActivity.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="16" column="39" selection-start-line="16" selection-start-column="39" selection-end-line="16" selection-end-column="39" />
+        <state relative-caret-position="300">
+          <caret line="49" column="9" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Crecre/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
+=======
+        <state relative-caret-position="300">
+          <caret line="49" column="9" lean-forward="true" selection-start-line="49" selection-start-column="9" selection-end-line="49" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Crecre/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
+        <state relative-caret-position="240">
+          <caret line="24" column="5" lean-forward="true" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+        </state>
+      </provider>
+>>>>>>> 61007288914e3248bc599a42bdf69e8d6b18c740
     </entry>
   </component>
   <component name="masterDetails">

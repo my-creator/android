@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        android:id="@+id/rv_item_invote_choice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="16dp"
+    >
+        <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/logo"
+                android:id="@+id/item_img"
+        />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:text="딕헌터"
+                android:textSize="14sp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:textColor="#000000"
+                android:id="@+id/item_name"
+        />
+        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"></View>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="false"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                app:srcCompat="@drawable/btn_uncheck"
+                android:id="@+id/item_ischeckimg"
+        />
+    </LinearLayout>
+</RelativeLayout>

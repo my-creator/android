@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
                 addFragment(CommunityFragment())
                 addFragment(MypageFragment())
             }
-
             offscreenPageLimit = 4
         }
 
