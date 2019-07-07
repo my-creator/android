@@ -1,4 +1,4 @@
-package com.crecrew.crecre.UI.Fragment.Home.closedVote
+package com.crecrew.crecre.UI.Fragment.Home
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

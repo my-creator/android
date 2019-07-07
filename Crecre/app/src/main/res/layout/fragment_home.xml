@@ -47,18 +47,15 @@
                                 android:background="@color/pinkish_grey"
                                 android:layout_marginHorizontal="10dp"/>
 
-                        <EditText
-                                android:id="@+id/fragment_home_edit_search"
+                        <TextView
+                                android:id="@+id/fragment_home_txt_search"
                                 android:layout_width="match_parent"
-                                android:layout_height="24dp"
-                                android:windowSoftInputMode="adjustResize"
-                                android:hint="크리에이터 검색"
-                                android:textColor="@color/black"
+                                android:layout_height="wrap_content"
+                                android:text="크리에이터 검색"
+                                android:textColor="@color/pinkish_grey"
                                 android:lineSpacingExtra="8sp"
                                 android:singleLine="true"
-                                android:textSize="16sp"
-                                android:imeOptions="actionSearch"
-                                android:background="@null"/>
+                                android:textSize="16sp"/>
                     </LinearLayout>
                 </FrameLayout>
             </RelativeLayout>

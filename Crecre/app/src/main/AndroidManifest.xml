@@ -35,6 +35,7 @@
         <activity android:name=".UI.Activity.CreatorProfileActivity"/>
         <activity android:name=".UI.Activity.Community.CommunitySearchActivity"/>
         <activity android:name=".UI.Activity.VoteSuggestActivity"/>
+        <activity android:name=".UI.Activity.CreatorSearchActivity"/>
     </application>
 
 </manifest>

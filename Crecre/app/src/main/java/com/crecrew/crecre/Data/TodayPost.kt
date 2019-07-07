@@ -6,5 +6,5 @@ data class TodayPost(
     var category: String,
     var recommend: Int,
     var comment: Int,
-    var time: Int
+    var time: String
 )
