@@ -5,6 +5,7 @@
     <color name="colorPrimaryDark">#ff56f6</color>
     <color name="colorAccent">#ff56f6</color>
 
+
     <color name="white">#ffffff</color>
     <color name="pale_grey">#f0f3f4</color>
     <color name="white_two">#f0f0f0</color>
@@ -22,5 +23,6 @@
     <color name="black_60">#99000000</color>
     <color name="bright_light_blue_two">#2aefef</color>
     <color name="white_four">#f3f3f3</color>
-    
+
+
 </resources>

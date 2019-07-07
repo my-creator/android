@@ -1,12 +1,518 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-    <TextView
-            android:id="@+id/activity_creator_profile_tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="크리에이터 프로필 페이지 입니당"/>
+            <!--<TextView-->
+                    <!--android:id="@+id/activity_creator_profile_tv_name"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="크리에이터 프로필 페이지 입니당"/>-->
 
-</RelativeLayout>
+            <RelativeLayout
+                    android:id="@+id/activity_creator_profile_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp">
+
+                <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="19dp"
+                        android:src="@drawable/icn_back"/>
+
+                <ImageView
+                        android:id="@+id/profile_creator_all_class"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_centerHorizontal="true"
+                        android:src="@drawable/icn_allclass6"/>
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true">
+
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="16dp"
+                            android:layout_centerHorizontal="true"
+                            android:orientation="horizontal">
+
+                        <ImageView
+                                android:id="@+id/profile_creator_rank"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:src="@drawable/icn_rank6"/>
+
+                        <TextView
+
+                                android:id="@+id/profile_creator_channel"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="백종원의 요리교실"
+                                android:textSize="20sp"
+                                android:fontFamily="@font/noto_sans_kr_bold"
+                                android:layout_gravity="center"
+                                android:textColor="@color/black"
+                                android:layout_marginLeft="8dp"/>
+
+                    </LinearLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp">
+
+                    <Button
+                            android:layout_width="320dp"
+                            android:layout_height="40dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/profile_go_community"
+                    />
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:textColor="@color/white"
+                            android:letterSpacing="-0.03"
+                            android:layout_centerInParent="true"
+                            android:text="팬 게시판으로"
+                            android:fontFamily="@font/noto_sans_kr_medium"
+                            />
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:orientation="horizontal">
+                <RelativeLayout
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                    <TextView
+                            android:text="카테고리"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/brownish_grey"/>
+                    <TextView
+                            android:text="먹방 2위"
+                            android:textSize="16sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/violet_pink"
+                            android:layout_marginTop="28dp"
+                            android:fontFamily="@font/noto_sans_kr_medium"/>
+                </RelativeLayout>
+                <RelativeLayout
+                        android:layout_width="2dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.01">
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#dddddd"
+                            android:layout_marginTop="10dp"/>
+                </RelativeLayout>
+                <RelativeLayout
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <TextView
+                                android:text="즐겨찾는 유저"
+                                android:textSize="14sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:textColor="@color/brownish_grey"/>
+                        <TextView
+                                android:text="302명"
+                                android:textSize="16sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:textColor="@color/violet_pink"
+                                android:layout_marginTop="28dp"
+                                android:fontFamily="@font/noto_sans_kr_medium"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:orientation="horizontal">
+                <RelativeLayout
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                    <TextView
+                            android:text="구독자"
+                            android:textSize="14sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/brownish_grey"/>
+                    <TextView
+                            android:text="1,999,131명"
+                            android:textSize="16sp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:textColor="@color/black_two"
+                            android:layout_marginTop="28dp"
+                            android:fontFamily="@font/noto_sans_kr_medium"/>
+                </RelativeLayout>
+                <RelativeLayout
+                        android:layout_width="2dp"
+                        android:layout_height="50dp"
+                        android:layout_weight="0.01">
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#dddddd"
+                            android:layout_marginTop="10dp"/>
+                </RelativeLayout>
+                <RelativeLayout
+                        android:layout_width="180dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+                        <TextView
+                                android:text="누적조회수"
+                                android:textSize="14sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:textColor="@color/brownish_grey"/>
+                        <TextView
+                                android:text="30,635,258명"
+                                android:textSize="16sp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerHorizontal="true"
+                                android:textColor="@color/black_two"
+                                android:layout_marginTop="28dp"
+                                android:fontFamily="@font/noto_sans_kr_medium"/>
+                </RelativeLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp">
+                    <RelativeLayout
+                            android:layout_width="320dp"
+                            android:layout_height="64dp"
+                            android:background="#f7f7f7"
+                            android:layout_marginTop="20dp"
+                            android:layout_centerHorizontal="true">
+
+                        <TextView
+                                android:text="안녕하세유~ 백종원이에유! 우리 더본 코리아 많이 사랑 해쥬야쥬? 텍스트 소개가 길어진다면..."
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                        />
+                    </RelativeLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="340dp"
+                    android:background="#eaeaea">
+                    <RelativeLayout
+                            android:layout_width="320dp"
+                            android:layout_height="144dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/profile_box"
+                            >
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                            android:layout_width="320dp"
+                            android:layout_height="144dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/profile_box">
+                            <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
+                            </RelativeLayout>
+                            <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="136dp">
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="랭크"
+                                            android:textSize="14sp"
+                                            android:textColor="@color/brownish_grey"
+                                            android:layout_marginTop="26dp"
+                                            android:fontFamily="@font/noto_sans_kr_medium"/>
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="마스터 5"
+                                            android:textSize="16sp"
+                                            android:layout_marginTop="45dp"
+                                            android:textColor="@color/black"
+                                            android:fontFamily="@font/noto_sans_kr_bold"/>
+
+                                    <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:orientation="horizontal"
+                                            android:layout_marginTop="76dp">
+
+                                        <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:text="73%"
+                                                android:fontFamily="@font/noto_sans_kr_bold"
+                                                android:textColor="@color/black_two"
+                                                android:textSize="14sp"/>
+
+                                        <TextView
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_marginRight="104dp"
+                                                android:text=" 경험치"
+                                                android:textColor="@color/brownish_grey"
+                                        />
+                                    </LinearLayout>
+
+                                    <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:text="(4889/6000)"
+                                            android:textColor="@color/greyish"
+                                            android:layout_marginTop="96dp"/>
+
+                                    <ImageView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_alignParentRight="true"
+                                            android:src="@drawable/icn_question"
+                                            android:layout_marginTop="8dp"
+                                            android:layout_marginRight="8dp"/>
+                            </RelativeLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                            android:layout_width="320dp"
+                            android:layout_height="144dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="172dp"
+                            android:background="@drawable/profile_box">
+                        <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+                        </RelativeLayout>
+                        <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="136dp">
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="업적"
+                                    android:textSize="14sp"
+                                    android:textColor="@color/brownish_grey"
+                                    android:layout_marginTop="26dp"
+                                    android:fontFamily="@font/noto_sans_kr_medium"/>
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="클래스 S"
+                                    android:textSize="16sp"
+                                    android:layout_marginTop="45dp"
+                                    android:textColor="@color/black"
+                                    android:fontFamily="@font/noto_sans_kr_bold"/>
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="76dp">
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="73%"
+                                        android:fontFamily="@font/noto_sans_kr_bold"
+                                        android:textColor="@color/black_two"
+                                        android:textSize="14sp"/>
+
+                                <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginRight="104dp"
+                                        android:text=" 경험치"
+                                        android:textColor="@color/brownish_grey"
+                                />
+                            </LinearLayout>
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="(4889/6000)"
+                                    android:textColor="@color/greyish"
+                                    android:layout_marginTop="96dp"/>
+
+                            <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentRight="true"
+                                    android:src="@drawable/icn_question"
+                                    android:layout_marginTop="8dp"
+                                    android:layout_marginRight="8dp"/>
+                        </RelativeLayout>
+                    </RelativeLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginLeft="40dp"
+                            >
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="크리에이터 스탯"
+                                    android:fontFamily="@font/noto_sans_kr_bold"
+                                    android:textSize="16sp"
+                                    android:textColor="@color/violet_pink"/>
+
+                            <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="154dp"
+                                    android:text="참여하기"
+                                    android:textColor="@color/brownish_grey"
+                                    android:textSize="16sp"
+                                    android:fontFamily="@font/noto_sans_kr_medium"/>
+                    </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="352dp">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="토탈 3.6점"
+                            android:textSize="24sp"
+                            android:fontFamily="@font/noto_sans_kr_bold"
+                            android:textColor="@color/black_two"
+                            android:layout_marginTop="8dp"
+                            android:layout_centerHorizontal="true"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="(192명 참여)"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/noto_sans_kr_bold"
+                            android:textColor="#127cc5"
+                            android:layout_marginTop="42dp"
+                            android:layout_centerHorizontal="true"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:background="@color/pale_grey">
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="40dp">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="대표 영상"
+                            android:fontFamily="@font/noto_sans_kr_bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/violet_pink"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="154dp"
+                            android:text="더보기"
+                            android:textColor="@color/brownish_grey"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/noto_sans_kr_medium"/>
+                </LinearLayout>
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/profile_creator_popular_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="16dp"
+                    android:background="@color/pale_grey">
+            </RelativeLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:orientation="horizontal">
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginLeft="40dp">
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="최신 영상"
+                            android:fontFamily="@font/noto_sans_kr_bold"
+                            android:textSize="16sp"
+                            android:textColor="@color/black"/>
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="154dp"
+                            android:text="더보기"
+                            android:textColor="@color/brownish_grey"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/noto_sans_kr_medium"/>
+                </LinearLayout>
+            </LinearLayout>
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/profile_creator_new_video"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+</ScrollView>

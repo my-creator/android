@@ -13,7 +13,7 @@ class CreatorProfileActivity : AppCompatActivity() {
         val intent = intent
         val creator_name = intent.getStringExtra("creator_name")
 
-        activity_creator_profile_tv_name.setText(creator_name)
+        // activity_creator_profile_tv_name.setText(creator_name)
 
     }
 

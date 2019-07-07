@@ -1,6 +1,8 @@
 package com.crecrew.crecre.UI.Adapter
 
 import android.content.Context
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.OvalShape
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.CommentData
 import com.crecrew.crecre.R
+import de.hdodenhof.circleimageview.CircleImageView
 
 class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<CommentData>) :
     RecyclerView.Adapter<CommunityDetailCommentRecyclerViewAdapter.Holder>() {
@@ -28,7 +31,11 @@ class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: 
         if(dataList[position].user_profile_url == "")
             Glide.with(ctx).load(R.drawable.img_profile).into(holder.profile)
         else
+        {
             Glide.with(ctx).load(dataList[position].user_profile_url).into(holder.profile)
+            holder.profile.setBackground(ShapeDrawable(OvalShape()))
+            holder.profile.setClipToOutline(true)
+        }
 
         //user name
         holder.user_name.text = dataList[position].user_name

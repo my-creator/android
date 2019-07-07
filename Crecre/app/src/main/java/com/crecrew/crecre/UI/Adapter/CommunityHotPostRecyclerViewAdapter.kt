@@ -1,6 +1,8 @@
 package com.crecrew.crecre.UI.Adapter
 
 import android.content.Context
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.OvalShape
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,7 +31,12 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         if(dataList[position].thumbnail == "")
             Glide.with(ctx).load(R.drawable.icn_img_x).into(holder.thumbnail)
         else
+        {
             Glide.with(ctx).load(dataList[position].thumbnail).into(holder.thumbnail)
+            //holder.thumbnail.setBackground(ShapeDrawable())
+            holder.thumbnail.setClipToOutline(true)
+        }
+
 
         //hot이미지
         if(dataList[position].hot_img == 0){
@@ -44,7 +51,7 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         holder.recommendation.text = "추천 " + dataList[position].recommendation.toString() + " | "
 
         //댓글수
-        holder.comment.text = "댓글" + dataList[position].comment.toString() + " | "
+        holder.comment.text = "댓글 " + dataList[position].comment.toString() + " | "
 
         //작성시간
         holder.time.text = dataList[position].time.toString()
@@ -53,7 +60,7 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         if(dataList[position].category.toString() == "")
             holder.category.text = ""
         else
-            holder.category.text = dataList[position].category.toString()
+            holder.category.text = " | " + dataList[position].category.toString()
 
      /*   //더보기 눌렀을 때
         holder.more_btn.setOnClickListener {

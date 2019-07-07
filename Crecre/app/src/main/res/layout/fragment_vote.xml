@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" android:background="#F8FAF9">
-    <FrameLayout
+            android:layout_height="match_parent" android:background="#F8FAF9"
+>
+    <LinearLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+    >
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+        >
+
 
             <RelativeLayout
                     android:id="@+id/rl_toolbar_vote_frag"
@@ -34,6 +38,7 @@
                         app:lineHeight="27sp"
                 />
                 <TextView
+                        android:id="@+id/btn_frag_vote_suggest"
                         android:layout_width="52dp"
                         android:layout_height="20dp"
                         android:textSize="14sp"
@@ -47,44 +52,22 @@
                         app:lineHeight="20sp"
                 />
             </RelativeLayout>
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:orientation="horizontal"
-                    android:background="#f8faf9"
-            >
-                <TextView
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:layout_width="wrap_content"
-                        android:text="진행중인 투표"
-                        android:gravity="center"
-                        android:lineSpacingExtra="6sp"
-                        android:textSize="14sp"
-                        android:textColor="@color/violet_pink"
-                />
-                <TextView
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:layout_width="wrap_content"
-                        android:text="지난 투표"
-                        android:gravity="center"
-                        android:lineSpacingExtra="6sp"
-                        android:textSize="14sp"
-                        android:textColor="#a4a4a4"
-                />
 
-
-            </LinearLayout>
             <android.support.design.widget.TabLayout
-                    android:id="@+id/tl_community_post_frag"
+                    android:id="@+id/vote_tab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:tabSelectedTextColor="@color/violet_pink"
                     app:tabIndicatorColor="@color/violet_pink"
             />
 
+            <android.support.v4.view.ViewPager
+                    android:id="@+id/vote_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+            >
+            </android.support.v4.view.ViewPager>
 
         </LinearLayout>
-    </FrameLayout>
-</ScrollView>
+    </LinearLayout>
+</RelativeLayout>
