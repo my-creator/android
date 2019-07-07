@@ -38,6 +38,7 @@
                         app:lineHeight="27sp"
                 />
                 <TextView
+                        android:id="@+id/btn_frag_vote_suggest"
                         android:layout_width="52dp"
                         android:layout_height="20dp"
                         android:textSize="14sp"

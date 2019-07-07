@@ -9,10 +9,12 @@ import com.crecrew.crecre.Data.VoteCurrentOverViewData
 import com.crecrew.crecre.Data.VoteItemData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
+import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
 import com.crecrew.crecre.UI.Adapter.VoteCurrentRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.VoteItemRecyclerViewAdapter
 import kotlinx.android.synthetic.main.rv_item_invote_choice.*
 import kotlinx.android.synthetic.main.fragment_community_popular.view.*
+import kotlinx.android.synthetic.main.fragment_vote.*
 import kotlinx.android.synthetic.main.fragment_vote_current.view.*
 import kotlinx.android.synthetic.main.rv_item_currentvote_card.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -34,6 +36,7 @@ class VoteCurrentFragment : Fragment() {
         arguments?.let {
         }*/
 
+
         var dataList : ArrayList<VoteCurrentOverViewData> = ArrayList()
         dataList.add(VoteCurrentOverViewData("https://ichef.bbci.co.uk/news/660/cpsprodpb/7624/production/_104444203_d03fb5eb-685c-42c3-8fa2-eea0ee2dac26.jpg",2, "절 대 투 표 해^0^", "o"))
         dataList.add(VoteCurrentOverViewData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhrktf6ORs6WsmFEnxiB2KIdZe26_QhkqQTJqJFuOQoMrhuW9x",1, "@==(^0^@)", "선풍적 인기!"))
@@ -46,6 +49,7 @@ class VoteCurrentFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+
         rootView = inflater.inflate(R.layout.fragment_vote_current, container, false)
         return rootView
     }
