@@ -18,6 +18,7 @@ import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.RankChartRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankBottomFragment
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankTopFragment
+import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.fragment_rank.*
 import kotlinx.android.synthetic.main.fragment_rank.view.*
@@ -97,7 +98,7 @@ class RankFragment: Fragment(), View.OnClickListener{
         rankChartRecyclerViewAdapter = RankChartRecyclerViewAdapter(activity!!, rankData)
         fragment_rank_rv_chart.adapter = rankChartRecyclerViewAdapter
         fragment_rank_rv_chart.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        fragment_rank_rv_chart.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
+        fragment_rank_rv_chart.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
 
     }
 

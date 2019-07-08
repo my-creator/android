@@ -6,6 +6,8 @@
                 android:paddingVertical="16dp"
                 android:id="@+id/rv_item_rank_creator_container">
     <RelativeLayout
+            android:id="@+id/rv_item_rank_creator_rl_ranking_container"
+            android:visibility="gone"
             android:layout_width="51dp"
             android:layout_height="match_parent">
 
