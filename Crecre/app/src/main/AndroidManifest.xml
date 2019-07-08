@@ -16,6 +16,10 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
 
+        <activity
+                android:name=".UI.Activity.ProfileJoinStatActivity">
+        </activity>
+
         <activity android:name=".UI.Activity.Community.CommunityWriteActivity">
         </activity>
         <activity android:name=".UI.Activity.Community.CommunityRequestActivity">
