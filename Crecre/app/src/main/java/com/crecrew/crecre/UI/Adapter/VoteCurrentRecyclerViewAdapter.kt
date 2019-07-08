@@ -46,10 +46,7 @@ class VoteCurrentRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<V
         holder.title.text = dataList[position].title
         holder.explain.text = "#" + dataList[position].explain
 
-
-
     }
-
 
    /* private fun recyclerView() {
         var dataList : ArrayList<VoteItemData> = ArrayList()

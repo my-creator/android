@@ -8,6 +8,7 @@
         android:layout_height="match_parent"
         tools:context=".UI.Activity.Community.CommunityDetailActivity"
         android:fitsSystemWindows="true"
+        android:background="@color/white"
 >
     <LinearLayout
             android:id="@+id/linearLayout_focus"
@@ -52,46 +53,23 @@
         />
 
         <!--btn alter, delete-->
-        <LinearLayout
+        <RelativeLayout
+                android:id="@+id/btn_delete_detail_community_act"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:orientation="horizontal"
         >
 
-            <TextView
+            <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="12dp"
-                    android:text="수정"
-                    android:textSize="12sp"
-                    android:textColor="@color/white"
-                    android:layout_gravity="center_vertical"
-            />
-
-            <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
                     android:layout_marginVertical="20dp"
-                    android:background="@color/white"
-            >
+                    android:src="@drawable/btn_delete"/>
 
-
-            </LinearLayout>
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="삭제"
-                    android:textSize="12sp"
-                    android:textColor="@color/white"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginRight="24dp"
-                    android:layout_gravity="center_vertical"
-            />
-
-        </LinearLayout>
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -241,7 +219,7 @@
                         <ImageView
                                 android:id="@+id/btn_like_community_detail_act"
                                 android:layout_width="48dp"
-                                android:layout_height="48dp"
+                                android:layout_height="wrap_content"
                                 android:background="@drawable/community_detail_like_btn"
                         />
 
@@ -262,7 +240,7 @@
                     <!--비추천-->
                     <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:orientation="vertical"
                             android:layout_marginLeft="36dp"
                     >
@@ -293,17 +271,24 @@
 
             </RelativeLayout>
 
-            <!--댓글창-->
+            <!--댓글들...-->
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
             >
+                <View
+                        android:id="@+id/view_comments_commu_detail_act"
+                        android:layout_width="match_parent"
+                        android:layout_height="16dp"
+                        android:background="#e8eef0"
+                        />
+
                 <android.support.v7.widget.RecyclerView
                         android:id="@+id/rv_comment_commu_detail_act"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@color/white_four"
+                        android:layout_below="@+id/view_comments_commu_detail_act"
                 >
                 </android.support.v7.widget.RecyclerView>
 
@@ -347,12 +332,13 @@
                     android:id="@+id/et_community_search"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
+                    android:layout_marginRight="12dp"
                     android:background="#FFFFFF"
                     android:layout_toRightOf="@+id/btn_anonymous_detail_com_act"
             >
 
                 <EditText
-                        android:layout_width="376dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:paddingLeft="12dp"
