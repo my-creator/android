@@ -22,7 +22,7 @@
                 android:fontFamily="@font/noto_sans_kr_medium"
                 android:text="최신글"
                 android:textSize="14sp"
-                android:textColor="@drawable/navigation_text_selector"/>
+                android:textColor="@drawable/navigation_main_text_selector"/>
 
     </RelativeLayout>
     
@@ -51,7 +51,7 @@
                 android:fontFamily="@font/noto_sans_kr_medium"
                 android:text="인기글"
                 android:textSize="14sp"
-                android:textColor="@drawable/navigation_text_selector"/>
+                android:textColor="@drawable/navigation_main_text_selector"/>
 
     </RelativeLayout>
 
