@@ -25,13 +25,12 @@
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:textColor="@color/violet_pink"
+                    android:fontFamily="@font/noto_sans_kr_medium"
                     android:textSize="16sp"
                     android:text="알림"
             />
 
         </RelativeLayout>
-
-
 
         <RelativeLayout
                 android:layout_width="match_parent"
@@ -58,6 +57,7 @@
                         android:text="검색어가 너무 짧습니다."
                         android:textSize="16sp"
                         android:textColor="@color/black"
+                        android:fontFamily="@font/noto_sans_kr_medium"
                         android:layout_centerInParent="true"
                 />
 
@@ -67,7 +67,7 @@
         <RelativeLayout
                 android:id="@+id/btn_bottom_box_search_custom_dialog"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/custom_dialog_box"
         >
@@ -77,6 +77,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="확인"
+                    android:fontFamily="@font/noto_sans_kr_medium"
                     android:layout_centerInParent="true"
                     android:textColor="#707070"
                     android:textSize="14sp"/>
