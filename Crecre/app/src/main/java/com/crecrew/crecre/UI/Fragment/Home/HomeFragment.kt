@@ -1,15 +1,9 @@
 package scom.crecrew.crecre.UI.Fragment
 
-import android.accessibilityservice.AccessibilityService
 import android.content.Context
-import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.Intent
-import android.graphics.Rect
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat.getSystemService
 import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +12,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import android.widget.RelativeLayout
 import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -37,7 +30,9 @@ import org.jetbrains.anko.support.v4.startActivity
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
 import com.crecrew.crecre.UI.Activity.CreatorProfileActivity
-import com.crecrew.crecre.UI.Fragment.Home.closedVote.ClosedVoteFragment
+import com.crecrew.crecre.UI.Activity.CreatorSearchActivity
+import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
+
 
 class HomeFragment: Fragment() {
 
@@ -86,6 +81,15 @@ class HomeFragment: Fragment() {
             fragment_home_txt_today_new_post_more.setOnClickListener {
                 startActivity<CommunityHotPostActivity>()
             }
+
+            // search bar 누르면 검색 화면으로 넘어가기
+            fragment_home_txt_search.setOnClickListener {
+                val intent = Intent(activity, CreatorSearchActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+                startActivity(intent)
+
+            }
+            /*
             fragment_home_edit_search.setOnEditorActionListener { v, actionId, event ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
@@ -101,7 +105,7 @@ class HomeFragment: Fragment() {
                 } else {
                     false
                 }
-            }
+            }*/
 
             fragment_home_container.setOnClickListener {
                 downKeyboard(fragment_home_container)
@@ -121,9 +125,14 @@ class HomeFragment: Fragment() {
     override fun onResume() {
         super.onResume()
 
+        /*
         fragment_home_edit_search.setText(null)
         fragment_home_edit_search.clearFocus();
+*/
+    }
 
+    override fun onPause() {
+        super.onPause()
     }
 
     // 실시간 크리에이터 차트 열고 닫기
@@ -165,9 +174,9 @@ class HomeFragment: Fragment() {
         // hot post
         var todayHotDataList: ArrayList<TodayPost> = ArrayList()
 
-        todayHotDataList.add(TodayPost("http://mblogthumb4.phinf.naver.net/MjAxODA1MTJfMTMx/MDAxNTI2MTMxOTAwMDQw.nYJ52P9m33uVBVaA4D9Y8aEpngi2BhTwZhlmPi11xnwg.jl2N0ZuJDxZDdTZZsNbrQTpGemFNgLS342YMnUcYeKMg.JPEG.jini2877/12.jpg?type=w800","딕헌터와 영알남 커플, 현실에서의 만남 더 심쿵! 하라락후루룩 호로록 줄이넘어간다링 안넘어간다", "먹방",89,32,30))
-        todayHotDataList.add(TodayPost("http://www.mrtt.news/news/photo/201810/1093_4186_485.jpg","2019년 7월 3일 현재 나는 배가 고프다. 어깨도 아픔", "개발",1004,52,50))
-        todayHotDataList.add(TodayPost("https://byline.network/wp-content/uploads/2018/12/tiye.png","지금 정호,예원,다연,민정,가희,신우,혁표,현희랑 같이 있음 크리크리짱", "솝트",999,14,80))
+        todayHotDataList.add(TodayPost("http://mblogthumb4.phinf.naver.net/MjAxODA1MTJfMTMx/MDAxNTI2MTMxOTAwMDQw.nYJ52P9m33uVBVaA4D9Y8aEpngi2BhTwZhlmPi11xnwg.jl2N0ZuJDxZDdTZZsNbrQTpGemFNgLS342YMnUcYeKMg.JPEG.jini2877/12.jpg?type=w800","딕헌터와 영알남 커플, 현실에서의 만남 더 심쿵! 하라락후루룩 호로록 줄이넘어간다링 안넘어간다", "먹방",89,32,"2019-07-07 15:12"))
+        todayHotDataList.add(TodayPost("http://www.mrtt.news/news/photo/201810/1093_4186_485.jpg","2019년 7월 3일 현재 나는 배가 고프다. 어깨도 아픔", "개발",1004,52,"2019-07-07 04:51"))
+        todayHotDataList.add(TodayPost("https://byline.network/wp-content/uploads/2018/12/tiye.png","지금 정호,예원,다연,민정,가희,신우,혁표,현희랑 같이 있음 크리크리짱", "솝트",999,14,"2019-07-07 23:12"))
 
         todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayHotDataList)
         fragment_home_rv_today_hot_post.adapter = todayPostRecyclerViewAdapter
@@ -177,9 +186,9 @@ class HomeFragment: Fragment() {
         // new post
         var todayNewDataList: ArrayList<TodayPost> = ArrayList()
 
-        todayNewDataList.add(TodayPost("https://i.ytimg.com/vi/SzJo9QfhZg8/maxresdefault.jpg","왼쪽 어깨 너무 아프당. 내일 알바가기 시르다", "건강",89,32,30))
-        todayNewDataList.add(TodayPost("https://scontent-bru2-1.cdninstagram.com/vp/8689f4c9fc508fd674d2f60a5c23b2a0/5DC25F71/t51.2885-15/e35/56184620_383987605521824_7189641354343536955_n.jpg?_nc_ht=scontent-bru2-1.cdninstagram.com","와 좀있으면 홈화면 끝난다", "개발",1004,52,50))
-        todayNewDataList.add(TodayPost("http://static.hubzum.zumst.com/hubzum/2017/10/19/10/09828761654d4f02af8ba6cf86bc4cc3.png","헐 1일 1커밋해야하는데, 이제 커밋해야지", "개발",999,14,80))
+        todayNewDataList.add(TodayPost("https://i.ytimg.com/vi/SzJo9QfhZg8/maxresdefault.jpg","왼쪽 어깨 너무 아프당. 내일 알바가기 시르다", "건강",89,32,"2019-07-07 23:50"))
+        todayNewDataList.add(TodayPost("https://scontent-bru2-1.cdninstagram.com/vp/8689f4c9fc508fd674d2f60a5c23b2a0/5DC25F71/t51.2885-15/e35/56184620_383987605521824_7189641354343536955_n.jpg?_nc_ht=scontent-bru2-1.cdninstagram.com","와 좀있으면 홈화면 끝난다", "개발",1004,52,"2019-07-07 23:40"))
+        todayNewDataList.add(TodayPost("http://static.hubzum.zumst.com/hubzum/2017/10/19/10/09828761654d4f02af8ba6cf86bc4cc3.png","헐 1일 1커밋해야하는데, 이제 커밋해야지", "개발",999,14,"2019-07-07 23:32"))
 
         todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayNewDataList)
         fragment_home_rv_today_new_post.adapter = todayPostRecyclerViewAdapter
@@ -194,7 +203,7 @@ class HomeFragment: Fragment() {
             activity!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
 
-        fragment_home_edit_search.clearFocus()
+        // fragment_home_edit_search.clearFocus()
     }
 
 }

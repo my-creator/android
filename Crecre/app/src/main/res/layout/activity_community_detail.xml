@@ -128,7 +128,7 @@
                     android:layout_marginBottom="13dp"
             >
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:src="@drawable/img_profile"
@@ -169,6 +169,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/noto_sans_kr_medium"
+                                android:layout_marginLeft="4dp"
                                 android:textColor="#a4a4a4"
                                 android:textSize="10sp"
                                 android:text="조회수 21"
@@ -216,7 +217,7 @@
                         android:layout_below="@+id/img_main_community_detail"
                         android:layout_marginTop="14dp"
                         android:fontFamily="@font/noto_sans_kr_medium"
-                        android:textSize="20sp"
+                        android:textSize="14sp"
                         android:textColor="@color/black"
                         android:text="ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
                 />
@@ -328,7 +329,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:layout_below="@+id/rl_toolbar_community_search_act"
-                android:background="#FFFFFF"
+                android:background="@drawable/community_search_edittext_box"
         >
 
             <!--익명버튼-->
@@ -369,12 +370,13 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
+                    android:layout_below="@+id/rl_toolbar_community_search_act"
                     android:orientation="horizontal"
             >
 
                 <LinearLayout
                         android:layout_width="1dp"
-                        android:layout_height="34dp"
+                        android:layout_height="32dp"
                         android:background="@color/violet_pink"
                 >
 
