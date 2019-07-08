@@ -27,6 +27,7 @@
                     android:textColor="@color/violet_pink"
                     android:textSize="16sp"
                     android:text="알림"
+                    android:fontFamily="@font/noto_sans_kr_medium"
             />
 
         </RelativeLayout>
@@ -59,6 +60,7 @@
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:layout_centerInParent="true"
+                        android:fontFamily="@font/noto_sans_kr_medium"
                 />
 
         </RelativeLayout>
@@ -79,7 +81,9 @@
                     android:text="확인"
                     android:layout_centerInParent="true"
                     android:textColor="#707070"
-                    android:textSize="14sp"/>
+                    android:textSize="14sp"
+                    android:fontFamily="@font/noto_sans_kr_medium"
+            />
 
         </RelativeLayout>
 

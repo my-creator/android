@@ -52,32 +52,14 @@ class VoteSuggestActivity :AppCompatActivity() {
         changePinkGray(vote_suggest_typing_item5);
 
         imageView_vote_suggest_check.setOnClickListener {
-            if (vote_suggest_typing_subj.text.length!=0) {
-                if (vote_suggest_typing_item1.text.length != 0) {
-                    if (vote_suggest_typing_item2.text.length != 0) {
-                        if (stopClick >= 3) {
-                            if (vote_suggest_typing_item3.text.length == 0) requestfailDialog.show();
-                            else {
-                                if (stopClick >= 4) {
-                                    if (vote_suggest_typing_item4.text.length == 0) requestfailDialog.show();
-                                    else {
-                                        if (stopClick >= 5) {
-                                            if (vote_suggest_typing_item5.text.length == 0) requestfailDialog.show();
-                                            else requestDialog.show();
-                                        } else requestDialog.show()
-                                    }
-                                } else requestDialog.show()
-                            }
-                        } else requestDialog.show();
-                    } else requestfailDialog.show();
-                } else requestfailDialog.show();
-            }else requestfailDialog.show();
+            if (vote_suggest_typing_subj.text.length==0 || vote_suggest_typing_item1.text.length == 0){
+                requestfailDialog.show();
+            } else requestDialog.show();
         }
 
         imageView_vote_suggest_back.setOnClickListener{
             finish()
         }
-
 
     }
 

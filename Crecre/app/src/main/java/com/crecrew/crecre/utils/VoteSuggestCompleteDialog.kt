@@ -26,7 +26,7 @@ class VoteSuggestCompleteDialog(context : Context,
         // window에 환경적용
         window!!.attributes = lpWindow
 
-        setContentView(R.layout.custom_dialog_response_complete)
+        setContentView(R.layout.custom_dialog_votesuggest_complete)
 
         tv_requestcompelte_title_dialog.text = completeContext
         tv_description_custom_dialog.text = mContext
