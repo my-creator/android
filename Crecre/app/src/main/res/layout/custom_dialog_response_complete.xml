@@ -16,13 +16,14 @@
                 android:id="@+id/rl_request_response_compelte"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:background="#f3f3f3"
+                android:background="@drawable/custom_dialog_box"
         >
             <TextView
                     android:id="@+id/tv_requestcompelte_title_dialog"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:fontFamily="@font/noto_sans_kr_medium"
                     android:textColor="@color/violet_pink"
                     android:textSize="16sp"
                     android:text="요청완료"
@@ -30,27 +31,31 @@
 
         </RelativeLayout>
 
-        <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_below="@+id/rl_request_response_compelte"
-                android:background="@color/violet_pink"
-        >
 
-        </RelativeLayout>
 
         <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/rl_request_response_compelte"
                 android:layout_above="@+id/btn_bottom_box_custom_dialog"
+                android:background="@color/white"
         >
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/violet_pink"
+            >
+
+            </RelativeLayout>
+
             <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:orientation="vertical"
-            >
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="0dp">
 
                 <TextView
                         android:id="@+id/tv_description_custom_dialog"
@@ -59,6 +64,7 @@
                         android:text="현재 이 유튜버의 개인 게시판을 요청했어요!"
                         android:textSize="17sp"
                         android:textColor="#434343"
+                        android:fontFamily="@font/noto_sans_kr_medium"
                         android:paddingHorizontal="72dp"
                 />
 
@@ -81,9 +87,9 @@
         <RelativeLayout
                 android:id="@+id/btn_bottom_box_custom_dialog"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_alignParentBottom="true"
-                android:background="#f3f3f3">
+                android:background="@drawable/custom_dialog_box">
 
             <TextView
                     android:id="@+id/tv_complete_custom_dialog"
@@ -91,8 +97,9 @@
                     android:layout_height="wrap_content"
                     android:text="확인"
                     android:layout_centerInParent="true"
+                    android:fontFamily="@font/noto_sans_kr_medium"
                     android:textColor="#707070"
-                    android:textSize="17sp"/>
+                    android:textSize="14sp"/>
 
         </RelativeLayout>
 

@@ -29,7 +29,6 @@ class CommunityFragment: Fragment() {
         }
 
         return rootView
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -78,7 +77,8 @@ class CommunityFragment: Fragment() {
 
             getTabAt(0)!!.setText("최신글")
             getTabAt(1)!!.setText("인기글")
-        }*/
+        }
+        */
 
         tl_community_post_frag.setupWithViewPager(vp_community_post_frag)
         val topTabLayout: View = activity!!.layoutInflater.inflate(R.layout.fragment_community_navi, null, false)

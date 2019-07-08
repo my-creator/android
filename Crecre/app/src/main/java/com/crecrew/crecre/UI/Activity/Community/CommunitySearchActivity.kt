@@ -22,7 +22,6 @@ class CommunitySearchActivity : AppCompatActivity() {
 
     lateinit var communitysearchRecyclerViewAdapter: CoummunitySearchRecyclerViewAdapter
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community_search)

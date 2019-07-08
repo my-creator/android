@@ -38,22 +38,22 @@ class CommunityPopularFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setRecyclerView()
+        //setRecyclerView()
     }
-
+/*
     //인기글 RecyclerView
     private fun setRecyclerView() {
 
         var dataList: ArrayList<CommunityHotPostData> = ArrayList()
-        dataList.add(CommunityHotPostData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",1,
+        dataList.add(CommunityHotPostData("https://t1.daumcdn.net/cfile/tistory/9903764A5B5D46D621",1,
             "햇님이 먹었던 과자 브랜드 이게 맞나?", 10, 10, "18:47","인기게시판",0,0))
         dataList.add(CommunityHotPostData("", 1,"안녀안알ㄴ여ㅏㄴ여낭",
             1, 8, "14:27","입짧은 햇님",0,0))
         dataList.add(CommunityHotPostData("",1,
             "입짧은햇님보세여", 19, 19, "12:35","온도",0,0))
-        dataList.add(CommunityHotPostData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",0,
+        dataList.add(CommunityHotPostData("https://dispatch.cdnser.be/wp-content/uploads/2018/01/1f0678395e9cb7d356680889415c5b2c.png",0,
             "먹방요정", 4, 8, "11:20","인기게시판",0,0))
-        dataList.add(CommunityHotPostData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",0,
+        dataList.add(CommunityHotPostData("https://pbs.twimg.com/profile_images/520547323894456320/e028GhkV_400x400.jpeg",0,
             "바부야", 2, 7, "04:30","감성",0,0))
 
 
@@ -61,6 +61,6 @@ class CommunityPopularFragment : Fragment() {
         rv_popular_community_fg.adapter = communityPopularRecyclerViewAdapter
         rv_popular_community_fg.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
-    }
+    }*/
 
 }

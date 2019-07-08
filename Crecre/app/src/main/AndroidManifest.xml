@@ -8,22 +8,18 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
 
     <application
+            android:name=".Network.ApplicationController"
             android:allowBackup="true"
-            android:icon="@drawable/icn_logo"
+            android:icon="@mipmap/ic_launcher_custom"
             android:label="@string/app_name"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+
         <activity
-                android:name=".UI.Activity.ProfileJoinStatActivity"
-                android:label="@string/title_activity_profile_join_stat"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:name=".UI.Activity.ProfileJoinStatActivity">
         </activity>
-        <activity
-                android:name=".UI.Activity.ProfileJoin"
-                android:label="@string/title_activity_profile_join"
-                android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+
         <activity android:name=".UI.Activity.Community.CommunityWriteActivity">
         </activity>
         <activity android:name=".UI.Activity.Community.CommunityRequestActivity">
@@ -45,6 +41,7 @@
         <activity android:name=".UI.Activity.CreatorProfileActivity"/>
         <activity android:name=".UI.Activity.Community.CommunitySearchActivity"/>
         <activity android:name=".UI.Activity.VoteSuggestActivity"/>
+        <activity android:name=".UI.Activity.CreatorSearchActivity"/>
     </application>
 
 </manifest>

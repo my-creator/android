@@ -56,13 +56,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="20dp"
-                android:background="#FFFFFF"
+                android:background="@drawable/community_search_edittext_box"
         >
 
             <EditText
                     android:id="@+id/et_searchword_search_act"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:fontFamily="@font/noto_sans_kr_medium"
                     android:textColorHint="#a4a4a4"
@@ -200,10 +200,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/noto_sans_kr_medium"
-                    android:textSize="16sp"
-                    android:textColor="#a4a4a4a4"
+                    android:textSize="14sp"
+                    android:textColor="#a4a4a4"
                     android:text="찾으시는 유투버의 게시판이 없나요?"
-
             />
 
             <RelativeLayout
@@ -262,7 +261,6 @@
 
         </android.support.v7.widget.RecyclerView>
 
-
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -275,10 +273,9 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="#a4a4a4a4"
+                    android:textSize="14sp"
+                    android:textColor="#a4a4a4"
                     android:text="찾으시는 유투버의 게시판이 없나요?"
-
             />
 
             <RelativeLayout
@@ -306,9 +303,7 @@
 
             </RelativeLayout>
 
-
         </LinearLayout>
-
 
     </RelativeLayout>
 

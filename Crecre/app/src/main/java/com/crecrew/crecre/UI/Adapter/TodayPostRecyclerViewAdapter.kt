@@ -14,6 +14,10 @@ import com.crecrew.crecre.Data.TodayPost
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityDetailActivity
 import org.jetbrains.anko.startActivity
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<TodayPost>) : RecyclerView.Adapter<TodayPostRecyclerViewAdapter.Holder>() {
@@ -35,10 +39,7 @@ class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataLi
         holder.category.text = dataList[position].category
         holder.recommend.text = "추천" + dataList[position].recommend.toString()
         holder.comment.text = "댓글" + dataList[position].comment.toString()
-        if(dataList[position].time < 60)
-            holder.time.text = dataList[position].time.toString() + "분 전"
-        else
-            holder.time.text = (dataList[position].time/60).toString() + "시간 전"
+        holder.time.text = calculatePostTime(dataList[position].time.toString())
 
         holder.container.setOnClickListener {
             ctx.startActivity<CommunityDetailActivity>(
@@ -58,5 +59,35 @@ class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataLi
         var time = itemView.findViewById(R.id.rv_item_today_post_time) as TextView
 
 
+    }
+
+    fun calculatePostTime(time : String) : String{
+
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
+        val write_time : Date =  sdf.parse(time)
+        val cur_time = Date()
+
+        val diff : Long = cur_time.time - write_time.time
+        var minute = diff / (1000 * 60)
+
+        var result : String
+        if(minute >= 0 && minute < 60)
+            result = "$minute" + "분 전"
+        else if(minute >= 60 && minute < 60*24) {
+            minute /= 60
+            result = "$minute" + "시간 전"
+        }
+        else if(minute >=60*24 && minute <60*24*30){
+            minute /= (60 * 24)
+            result = "$minute" + "일 전"
+        }
+        else if(minute >=60*24*30 && minute <60*24*365){
+            minute /= (60 * 24*30)
+            result = "$minute" + "달 전"
+        }else{
+            minute /= (60*24*365)
+            result = "$minute" + "년 전"
+        }
+        return result
     }
 }

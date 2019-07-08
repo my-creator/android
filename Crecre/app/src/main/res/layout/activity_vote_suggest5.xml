@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                             xmlns:app="http://schemas.android.com/apk/res-auto"
-                                             xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-                                             android:layout_height="match_parent">
-
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+>
 
     <LinearLayout
             android:layout_width="match_parent"
@@ -23,15 +26,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
         >
 
-                <ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        app:srcCompat="@drawable/check_btn"
-                        android:id="@+id/imageView_vote_suggest_check"
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginEnd="17dp"
-                />
+            <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    app:srcCompat="@drawable/check_btn"
+                    android:id="@+id/imageView_vote_suggest_check"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginEnd="17dp"
+            />
             <RelativeLayout
                     android:layout_width="57dp"
                     android:layout_height="match_parent"
@@ -57,6 +60,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     app:lineHeight="27sp"
+                    android:fontFamily="@font/noto_sans_kr_bold"
             />
 
         </RelativeLayout>
@@ -72,29 +76,29 @@
                     android:layout_height="48dp"
                     android:layout_marginHorizontal="24dp"
                     android:inputType="textPersonName"
-                    android:text="투표 내용을 입력해주세요"
+                    android:hint="투표 내용을 입력해주세요"
                     android:ems="10"
                     android:id="@+id/vote_suggest_typing_subj"
                     android:textColor="@color/greyish"
-                    android:selectAllOnFocus="true"
                     android:textSize="16sp"
                     android:background="@drawable/vote_suggest_gray_back"
                     android:paddingLeft="20dp"
                     android:paddingTop="12dp"
                     android:paddingBottom="12dp"
+                    android:fontFamily="@font/noto_sans_kr_medium"
                     android:layout_marginBottom="16dp"
-                    android:gravity="center_vertical"/>
+                    android:gravity="center_vertical"
+            />
         </RelativeLayout>
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:inputType="textPersonName"
-                android:text="항목을 입력해주세요"
+                android:hint="항목을 입력해주세요"
                 android:ems="10"
                 android:id="@+id/vote_suggest_typing_item1"
                 android:layout_marginHorizontal="24dp"
                 android:textColor="@color/greyish"
-                android:selectAllOnFocus="true"
                 android:textSize="16sp"
                 android:background="@drawable/vote_suggest_gray_back"
                 android:paddingLeft="20dp"
@@ -102,17 +106,17 @@
                 android:paddingBottom="12dp"
                 android:layout_marginTop="16dp"
                 android:textColorHighlight="#ff90fc"
+                android:fontFamily="@font/noto_sans_kr_medium"
         />
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:inputType="textPersonName"
-                android:text="항목을 입력해주세요"
+                android:hint="항목을 입력해주세요"
                 android:ems="10"
                 android:id="@+id/vote_suggest_typing_item2"
                 android:layout_marginHorizontal="24dp"
                 android:textColor="@color/greyish"
-                android:selectAllOnFocus="true"
                 android:textSize="16sp"
                 android:background="@drawable/vote_suggest_gray_back"
                 android:paddingLeft="20dp"
@@ -120,17 +124,17 @@
                 android:paddingBottom="12dp"
                 android:layout_marginTop="16dp"
                 android:textColorHighlight="#ff90fc"
+                android:fontFamily="@font/noto_sans_kr_medium"
         />
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:inputType="textPersonName"
-                android:text="항목을 입력해주세요"
+                android:hint="항목을 입력해주세요"
                 android:ems="10"
                 android:id="@+id/vote_suggest_typing_item3"
                 android:layout_marginHorizontal="24dp"
                 android:textColor="@color/greyish"
-                android:selectAllOnFocus="true"
                 android:textSize="16sp"
                 android:background="@drawable/vote_suggest_gray_back"
                 android:paddingLeft="20dp"
@@ -138,17 +142,17 @@
                 android:paddingBottom="12dp"
                 android:layout_marginTop="16dp"
                 android:textColorHighlight="#ff90fc"
+                android:fontFamily="@font/noto_sans_kr_medium"
         />
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:inputType="textPersonName"
-                android:text="항목을 입력해주세요"
+                android:hint="항목을 입력해주세요"
                 android:ems="10"
                 android:id="@+id/vote_suggest_typing_item4"
                 android:layout_marginHorizontal="24dp"
                 android:textColor="@color/greyish"
-                android:selectAllOnFocus="true"
                 android:textSize="16sp"
                 android:background="@drawable/vote_suggest_gray_back"
                 android:paddingLeft="20dp"
@@ -156,17 +160,17 @@
                 android:paddingBottom="12dp"
                 android:layout_marginTop="16dp"
                 android:textColorHighlight="#ff90fc"
+                android:fontFamily="@font/noto_sans_kr_medium"
         />
         <EditText
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:inputType="textPersonName"
-                android:text="항목을 입력해주세요"
+                android:hint="항목을 입력해주세요"
                 android:ems="10"
                 android:id="@+id/vote_suggest_typing_item5"
                 android:layout_marginHorizontal="24dp"
                 android:textColor="@color/greyish"
-                android:selectAllOnFocus="true"
                 android:textSize="16sp"
                 android:background="@drawable/vote_suggest_gray_back"
                 android:paddingLeft="20dp"
@@ -174,6 +178,7 @@
                 android:paddingBottom="12dp"
                 android:layout_marginTop="16dp"
                 android:textColorHighlight="#ff90fc"
+                android:fontFamily="@font/noto_sans_kr_medium"
         />
         <Button
                 android:id="@+id/vote_suggest_additem"
@@ -182,10 +187,12 @@
                 android:layout_marginHorizontal="36dp"
                 android:background="@drawable/vote_suggest_additem_pink"
                 android:text="항목추가"
-                android:textColor="#ffffff" android:textSize="16sp"
+                android:textColor="#ffffff"
+                android:textSize="16sp"
+                android:fontFamily="@font/noto_sans_kr_medium"
                 android:layout_marginTop="16dp"
                 android:textAlignment="center"
         />
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

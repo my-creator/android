@@ -32,7 +32,6 @@ class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : Arr
                 "idx" to dataList[position].user_id
             )
         }
-
         var img_like = 0
 
         holder.img_like.setOnClickListener {

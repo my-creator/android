@@ -1,6 +1,8 @@
 package com.crecrew.crecre.UI.Adapter
 
 import android.content.Context
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.OvalShape
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,11 +13,12 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.CommunityHotPostData
+import com.crecrew.crecre.Network.Get.CommunitySmallNewGetData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityDetailActivity
 import org.jetbrains.anko.startActivity
 
-class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : ArrayList<CommunityHotPostData>) : RecyclerView.Adapter<CommunityHotPostRecyclerViewAdapter.Holder>() {
+class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : ArrayList<CommunitySmallNewGetData>, val flag : Int) : RecyclerView.Adapter<CommunityHotPostRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_hotpost_community_act, viewGroup, false)
         return Holder(view)
@@ -26,13 +29,16 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
         // thumbnail 이미지
-        if(dataList[position].thumbnail == "")
+        if(dataList[position].thumbnail_url == "")
             Glide.with(ctx).load(R.drawable.icn_img_x).into(holder.thumbnail)
         else
-            Glide.with(ctx).load(dataList[position].thumbnail).into(holder.thumbnail)
+        {
+            Glide.with(ctx).load(dataList[position].thumbnail_url).into(holder.thumbnail)
+            //holder.thumbnail.setBackground(ShapeDrawable())
+            holder.thumbnail.setClipToOutline(true)
+        }
 
-        //hot이미지
-        if(dataList[position].hot_img == 0){
+        if(flag == 0){
             holder.hot_img.visibility = View.GONE
             Log.v("asdf","사진 없음")
         }
@@ -41,19 +47,19 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         holder.title.text = dataList[position].title
 
         //추천수
-        holder.recommendation.text = "추천 " + dataList[position].recommendation.toString() + " | "
+        holder.recommendation.text = "추천 " + dataList[position].like_cnt.toString() + " | "
 
-        //댓글수
-        holder.comment.text = "댓글" + dataList[position].comment.toString() + " | "
+        //댓글수 ##고쳐야함
+        holder.comment.text = "댓글 " + dataList[position].like_cnt.toString() + " | "
 
         //작성시간
-        holder.time.text = dataList[position].time.toString()
+        holder.time.text = dataList[position].update_time.toString()
 
-        //게시판카테고리
-        if(dataList[position].category.toString() == "")
+        //게시판카테고리 ##
+        if(dataList[position].contents.toString() == "")
             holder.category.text = ""
         else
-            holder.category.text = dataList[position].category.toString()
+            holder.category.text = " | " + dataList[position].contents.toString()
 
      /*   //더보기 눌렀을 때
         holder.more_btn.setOnClickListener {
@@ -67,8 +73,8 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         holder.container.setOnClickListener {
             ctx.startActivity<CommunityDetailActivity>(
                 "title" to dataList[position].title,
-                "idx" to dataList[position].user_id,
-                "post_idx" to dataList[position].post_id
+                "idx" to dataList[position].user_idx,
+                "post_idx" to dataList[position].board_idx
             )
         }
     }

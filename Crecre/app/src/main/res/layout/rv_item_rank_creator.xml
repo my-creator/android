@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingVertical="16dp"
+                android:id="@+id/rv_item_rank_creator_container">
+    <RelativeLayout
+            android:layout_width="51dp"
+            android:layout_height="match_parent">
+
+        <TextView
+                android:id="@+id/rv_item_rank_creator_ranking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1"
+                android:textSize="20sp"
+                android:lineHeight="29sp"
+                android:textColor="@color/greyish"
+                android:layout_centerInParent="true"
+                android:textAlignment="center"/>
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="-5dp"
+                android:layout_marginBottom="-12dp"
+                android:layout_toRightOf="@+id/rv_item_rank_creator_ranking"
+                android:layout_alignBottom="@id/rv_item_rank_creator_ranking">
+            <ImageView
+                    android:id="@+id/rv_item_rank_creator_arrow"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@drawable/icn_up"/>
+
+            <TextView
+                    android:id="@+id/rv_item_rank_creator_gap"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="12sp"
+                    android:layout_marginTop="-2dp"
+                    android:lineHeight="18sp"
+                    android:textColor="@color/violet_pink"
+                    android:layout_gravity="center_horizontal"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <ImageView
+            android:id="@+id/rv_item_rank_creator_img"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="4dp"
+            android:layout_gravity="center_vertical"/>
+
+    <LinearLayout
+            android:layout_marginLeft="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <TextView
+                    android:id="@+id/rv_item_rank_creator_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="카테고리"
+                    android:textColor="@color/greyish"
+                    android:textSize="14sp"
+                    android:lineHeight="20sp"/>
+            <TextView
+                    android:id="@+id/rv_item_rank_creator_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="김수한무거북이와두루미삼천갑자동방삭그다음뭐였지"
+                    android:singleLine="true"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:lineHeight="20sp"
+                    android:fontFamily="@font/noto_sans_kr_medium"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_marginTop="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:orientation="horizontal">
+            <ImageView
+                    android:id="@+id/rv_item_rank_creator_rank_img"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:background="@drawable/icn_rank3"/>
+            <TextView
+                    android:id="@+id/rv_item_rank_creator_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:text="44,254,012,203"
+                    android:singleLine="true"
+                    android:textColor="@color/brownish_grey"
+                    android:textSize="14sp"
+                    android:lineHeight="20sp"
+                    android:layout_gravity="center_vertical"
+            />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

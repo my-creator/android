@@ -5,16 +5,19 @@ import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.PopupMenu
 import com.crecrew.crecre.Data.CommentData
-import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.CommunityDetailCommentRecyclerViewAdapter
-import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_community_detail.*
-import kotlinx.android.synthetic.main.activity_community_hot_post.*
-import kotlinx.android.synthetic.main.activity_community_write.*
-import org.jetbrains.anko.textColor
+import android.widget.Toast
+import com.crecrew.crecre.R
+import com.crecrew.crecre.utils.ContentsDeleteDialog
+import com.crecrew.crecre.utils.CustomRequestCompleteDialog
+
 
 class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -22,6 +25,12 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
     var btn_unlike = 0
     var btn_anonymous =0
     lateinit var communityDetailCommentRecyclerViewAdapter:CommunityDetailCommentRecyclerViewAdapter
+
+    val requestDialog : ContentsDeleteDialog by lazy {
+        ContentsDeleteDialog(this@CommunityDetailActivity, "알림","게시물을 정말 삭제하시겠어요?", "네"
+            ,"아니요", completeConfirmListener, completeNoListener)
+    }
+
 
     //click
     override fun onClick(v: View?) {
@@ -97,8 +106,8 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
 
+            //익명버튼
             btn_anonymous_detail_com_act -> {
-                //익명버튼
                 if (btn_anonymous == 0) {
                     btn_anonymous_detail_com_act.isSelected = true
                     btn_anonymous = 1
@@ -108,11 +117,15 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
 
-
             //키보드 down
             rl_commu_detail_act -> {
                 downKeyboard(rl_commu_detail_act)
             }
+
+            btn_delete_detail_community_act -> {
+
+            }
+
         }
     }
 
@@ -125,34 +138,58 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
         configureRecyclerView()
     }
 
+    //팝업 클릭리스너
+    val clickListener = View.OnClickListener { view ->
+        when (view.id) {
+            R.id.btn_delete_detail_community_act -> {
+                showPopup(view)
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        val myMenuInflater = menuInflater
+        myMenuInflater.inflate(R.menu.menu_main, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        return true
+    }
+
     private fun init() {
         btn_like_community_detail_act.setOnClickListener(this)
         btn_unlike_community_detail_act.setOnClickListener(this)
         btn_back_community_detail_act.setOnClickListener(this)
         btn_anonymous_detail_com_act.setOnClickListener(this)
+        rl_commu_detail_act.setOnClickListener(this)
+        btn_delete_detail_community_act.setOnClickListener(clickListener)
     }
 
     //recyclerView
     private fun configureRecyclerView() {
         var dataList: ArrayList<CommentData> = ArrayList()
         dataList.add(
-            CommentData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","양시연영상",
-                "18초전",  "시연이는 시연시연시연")
+            CommentData("http://www.figurepresso.com/web/product/big/201708/7531_shop1_593433.jpg","양시연영상",
+                "18초전",  "시연이는 알린을 좋아해,,")
         )
         dataList.add(
-            CommentData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",
+            CommentData("https://duckyworld.co.kr/web/product/big/201710/523_shop1_327628.jpg",
                 "안녀안알ㄴ여ㅏㄴ여낭", "14:27","내가 무슨 부귀영화를 누리려고 이 글에 들어왔니?")
         )
         dataList.add(
-            CommentData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","유가희",
+            CommentData("http://ecx.images-amazon.com/images/I/41oIsVytUOL.jpg","유가희",
                 "1분전",  "명망먀여망며아명마염")
         )
         dataList.add(
-            CommentData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","양희찬",
+            CommentData("https://scontent-lga3-1.cdninstagram.com/vp/f899f4cda10d8ac144041dbb4bb1240c/5DB1453F/t51.2885-15/e35/65610653_125382465361781_2677424777804115689_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com","양희찬",
                 "1시간전",  "김!애!용!!")
         )
         dataList.add(
-            CommentData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png","김애용",
+            CommentData("http://stimg.afreecatv.com/NORMAL_BBS/7/16469567/16505c6f9f85df905.jpeg","김애용",
                 "18초전",  "나는 김!애!용!!")
         )
 
@@ -168,6 +205,40 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
             applicationContext!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
+    //팝업창
+    private fun showPopup(view : View) {
+        var popup = PopupMenu(this, view)
+        popup.inflate(R.menu.menu_main)
+
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+
+            when (item!!.itemId) {
+                R.id.menu_modified -> {
+                    Toast.makeText(this@CommunityDetailActivity, item.title, Toast.LENGTH_SHORT).show();
+                }
+                R.id.menu_delete -> {
+                    requestDialog.show()
+                }
+            }
+
+            true
+        })
+
+        popup.show()
+    }
+
+    //다이얼로그->네
+    private val completeConfirmListener = View.OnClickListener {
+        requestDialog!!.dismiss()
+        finish()
+        //##글 삭제하는 서버통신
+    }
+    //다이얼로그 -> 아니요
+    private val completeNoListener = View.OnClickListener {
+        requestDialog!!.dismiss()
+    }
+
 
 
 }

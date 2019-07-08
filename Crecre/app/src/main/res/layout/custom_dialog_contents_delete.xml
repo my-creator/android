@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_60">
+
+    <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="208dp"
+            android:background="@drawable/custom_dialog_box"
+            android:layout_centerInParent="true"
+    >
+
+        <RelativeLayout
+                android:id="@+id/rl_request_response_compelte"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/custom_dialog_box"
+        >
+            <TextView
+                    android:id="@+id/tv_contents_title_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/violet_pink"
+                    android:fontFamily="@font/noto_sans_kr_medium"
+                    android:textSize="16sp"
+                    android:text="알림"
+            />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_request_response_compelte"
+                android:layout_above="@+id/ll_bottom_box_search_custom_dialog"
+                android:background="@color/white"
+        >
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/violet_pink"
+            >
+
+            </RelativeLayout>
+
+            <TextView
+                    android:id="@+id/tv_contents_delete_custom_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="게시물을 정말 삭제하시겠어요?"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/noto_sans_kr_medium"
+                    android:layout_centerInParent="true"
+            />
+
+        </RelativeLayout>
+
+        <!--확인, 취소 버튼-->
+        <LinearLayout
+                android:id="@+id/ll_bottom_box_search_custom_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:background="@drawable/custom_dialog_box">
+
+            <RelativeLayout
+                    android:id="@+id/btn_left_custom_dialog_community_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                <TextView
+                        android:id="@+id/tv_left_custom_dialog_community_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="네"
+                        android:layout_centerInParent="true"
+                        android:textColor="#707070"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/noto_sans_kr_medium"/>
+
+            </RelativeLayout>
+
+            <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/white"/>
+
+            <RelativeLayout
+                    android:id="@+id/btn_right_custom_dialog_community_detail"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    >
+
+                <TextView
+                        android:id="@+id/tv_right_custom_dialog_community_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="아니요"
+                        android:layout_centerInParent="true"
+                        android:textColor="#707070"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/noto_sans_kr_medium"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -42,7 +42,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_community_hot_post)
 
         init()
-        configureRecyclerView()
+        //configureRecyclerView()
 
     }
 
@@ -65,7 +65,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
     }
     */
 
-    //recyclerView
+  /*  //recyclerView
     private fun configureRecyclerView() {
         var dataList: ArrayList<CommunityHotPostData> = ArrayList()
         dataList.add(CommunityHotPostData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",1,
@@ -84,7 +84,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         rv_community_hotpost_act_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
     }
-
+*/
     private fun init(){
         btn_back_hotpost_community_act.setOnClickListener(this)
         btn_search_community_hotpost_act.setOnClickListener(this)
