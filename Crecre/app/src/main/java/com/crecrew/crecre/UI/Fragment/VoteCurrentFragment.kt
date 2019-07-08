@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.crecrew.crecre.Data.VoteCurrentOverViewData
 import com.crecrew.crecre.Data.VoteItemData
+import com.crecrew.crecre.Data.VoteTestData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
 import com.crecrew.crecre.UI.Adapter.VoteCurrentRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.VoteItemRecyclerViewAdapter
+import com.crecrew.crecre.UI.Adapter.VoteTestAdapter
 import kotlinx.android.synthetic.main.rv_item_invote_choice.*
 import kotlinx.android.synthetic.main.fragment_community_popular.view.*
 import kotlinx.android.synthetic.main.fragment_vote.*
@@ -37,12 +39,35 @@ class VoteCurrentFragment : Fragment() {
         }*/
 
 
-        var dataList : ArrayList<VoteCurrentOverViewData> = ArrayList()
+        /*var dataList : ArrayList<VoteCurrentOverViewData> = ArrayList()
         dataList.add(VoteCurrentOverViewData("https://ichef.bbci.co.uk/news/660/cpsprodpb/7624/production/_104444203_d03fb5eb-685c-42c3-8fa2-eea0ee2dac26.jpg",2, "절 대 투 표 해^0^", "o"))
         dataList.add(VoteCurrentOverViewData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhrktf6ORs6WsmFEnxiB2KIdZe26_QhkqQTJqJFuOQoMrhuW9x",1, "@==(^0^@)", "선풍적 인기!"))
+        */
 
-        var voteCurrentRecyclerViewAdapter = VoteCurrentRecyclerViewAdapter(context!!, dataList)
+        //this is for test
+        var dataList : ArrayList<VoteTestData> = ArrayList()
+        dataList.add(VoteTestData("https://ichef.bbci.co.uk/news/660/cpsprodpb/7624/production/_104444203_d03fb5eb-685c-42c3-8fa2-eea0ee2dac26.jpg", false, 2, "다음 중 가장 맛있는 라면은?", "컵라면 포함",
+            "진라면", "육개장", "참깨라면", "짜파게티","안성탕면",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJYBWWSb_aRjnJ3wCdWQfddr8guktDwhMhItH5JJx4ziO6KKuF", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ__opO3mmxb-XiTNQi8sHVPeRcMgQCtfQC4QivTH32JHtN7c5b"
+        , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPopgm75mGeWIhsaRKVFg1wGmrYXTjV0R4g1cFnn_TNvYffrdw", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaZy-oN8sO58qr0xuGDI0383LMo6nfHk-13E1JVPTcBTrWVX6L", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv2BDLe72_Sd3C0c6Vhdkxl_f2KhEpVlconT4X5NZfJ_qG47KP",
+            5,4,3,2,1))
+
+        dataList.add(VoteTestData("https://ichef.bbci.co.uk/news/660/cpsprodpb/7624/production/_104444203_d03fb5eb-685c-42c3-8fa2-eea0ee2dac26.jpg", true, 2, "다음 중 가장 맛있는 라면은?", "컵라면 포함",
+            "진라면", "육개장", "참깨라면", "짜파게티","안성탕면",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJYBWWSb_aRjnJ3wCdWQfddr8guktDwhMhItH5JJx4ziO6KKuF", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ__opO3mmxb-XiTNQi8sHVPeRcMgQCtfQC4QivTH32JHtN7c5b"
+            , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPopgm75mGeWIhsaRKVFg1wGmrYXTjV0R4g1cFnn_TNvYffrdw", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaZy-oN8sO58qr0xuGDI0383LMo6nfHk-13E1JVPTcBTrWVX6L", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv2BDLe72_Sd3C0c6Vhdkxl_f2KhEpVlconT4X5NZfJ_qG47KP",
+            5,4,3,2,1))
+
+
+        /*var voteCurrentRecyclerViewAdapter = VoteCurrentRecyclerViewAdapter(context!!, dataList)
         rootView.rv_fragment_vote_current.adapter = voteCurrentRecyclerViewAdapter
+        arguments?.let {
+        }*/
+
+
+        //this is for test
+        var voteTestAdapter = VoteTestAdapter(context!!, dataList)
+        rootView.rv_fragment_vote_current.adapter = voteTestAdapter
         arguments?.let {
         }
     }

@@ -7,27 +7,36 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.crecrew.crecre.R
+import com.crecrew.crecre.UI.Activity.Community.CommunitySearchActivity
 import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
 import com.crecrew.crecre.UI.Adapter.CommunityPostFragmentAdapter
 import com.crecrew.crecre.UI.Adapter.VoteMainPagerAdapter
 import kotlinx.android.synthetic.main.fragment_community.*
+import kotlinx.android.synthetic.main.fragment_community.view.*
 import kotlinx.android.synthetic.main.fragment_vote.*
+import kotlinx.android.synthetic.main.fragment_vote.view.*
 import kotlinx.android.synthetic.main.fragment_vote_navigation.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
 
 class VoteFragment: Fragment(){
 
+    private lateinit var rootView: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_vote, container, false)
+        rootView = inflater.inflate(R.layout.fragment_vote, container, false)
 
-        //왜안되죠?????????
-        btn_frag_vote_suggest.setOnClickListener{
+        rootView.btn_fragment_vote_suggest.setOnClickListener() {
             startActivity<VoteSuggestActivity>()
         }
+
+        return rootView
+
+        return inflater.inflate(R.layout.fragment_vote, container, false)
+
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

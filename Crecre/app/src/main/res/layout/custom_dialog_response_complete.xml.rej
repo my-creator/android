@@ -1,0 +1,9 @@
+diff a/Crecre/app/src/main/res/layout/custom_dialog_response_complete.xml b/Crecre/app/src/main/res/layout/custom_dialog_response_complete.xml	(rejected hunks)
+@@ -67,6 +67,7 @@
+                          android:textColor="#434343"
+ +                        android:fontFamily="@font/noto_sans_kr_medium"
+                          android:paddingHorizontal="72dp"
++                         android:fontFamily="@font/noto_sans_kr_medium"
+                  />
+  
+                  <TextView
