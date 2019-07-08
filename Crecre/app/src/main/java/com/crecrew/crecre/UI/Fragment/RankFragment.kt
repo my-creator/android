@@ -190,7 +190,7 @@ class RankFragment: Fragment(), View.OnClickListener{
                     fragment_rank_rl_all_navi.isSelected = false
                     fragment_rank_rl_hot_navi.isSelected = true
 
-                    fragment_rank_txt_filter_term.text = "월간 핫"
+                    fragment_rank_txt_filter_term.text = "급상승"
                     // 통신 (flag?)
                 }
             }
