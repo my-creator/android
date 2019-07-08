@@ -45,7 +45,7 @@
             android:layout_height="48dp"
             android:orientation="horizontal"
             android:paddingVertical="10dp"
-            android:paddingHorizontal="15dp"
+            android:paddingHorizontal="13dp"
             android:background="#f2f7f8">
         <RelativeLayout
                 android:id="@+id/fragment_rank_rl_all_navi"
@@ -77,7 +77,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="월간 핫"
+                    android:text="급상승"
                     android:textSize="14sp"
                     android:textColor="@drawable/rank_navi_text_selector"
                     android:lineHeight="20sp"
@@ -144,16 +144,18 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:paddingHorizontal="2dp"
     android:orientation="vertical">
         <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginTop="16dp">
+                android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="7dp">
             <TextView
                     android:id="@+id/fragment_rank_txt_filter_term"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="일간 핫"
+                    android:text="급상승"
                     android:textColor="@color/black_two"
                     android:textSize="12sp"
                     android:lineHeight="18sp"
@@ -193,11 +195,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="8dp"
-                android:layout_marginHorizontal="2dp"
                 android:background="@drawable/rank_chart_background"
-                android:elevation="2dp"
+                android:elevation="5dp"
                 android:paddingHorizontal="16dp"
-                android:layout_marginBottom="85dp"></android.support.v7.widget.RecyclerView>
+                android:layout_marginBottom="85dp"
+                android:layout_marginHorizontal="5dp"></android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
