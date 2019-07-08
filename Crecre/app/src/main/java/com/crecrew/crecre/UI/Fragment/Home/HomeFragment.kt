@@ -27,9 +27,6 @@ import com.crecrew.crecre.UI.Adapter.TodayPostRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankBottomFragment
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankTopFragment
 import org.jetbrains.anko.support.v4.startActivity
-import android.view.inputmethod.EditorInfo
-import android.widget.Toast
-import com.crecrew.crecre.UI.Activity.CreatorProfileActivity
 import com.crecrew.crecre.UI.Activity.CreatorSearchActivity
 import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
 
@@ -89,23 +86,7 @@ class HomeFragment: Fragment() {
                 startActivity(intent)
 
             }
-            /*
-            fragment_home_edit_search.setOnEditorActionListener { v, actionId, event ->
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
 
-                    if (fragment_home_edit_search.text.length == 0) {
-                        Toast.makeText(activity, "크리에이터를 입력해주세요!", Toast.LENGTH_LONG).show()
-                    } else {
-                        // TODO: 검색결과가 없을 때는 화면이 다름!-> 처리
-                        val intent = Intent(activity, CreatorProfileActivity::class.java)
-                        intent.putExtra("creator_name", fragment_home_edit_search.text.toString())
-                        startActivity(intent)
-                    }
-                    true
-                } else {
-                    false
-                }
-            }*/
 
             fragment_home_container.setOnClickListener {
                 downKeyboard(fragment_home_container)
@@ -166,10 +147,6 @@ class HomeFragment: Fragment() {
                     addFragment(ClosedVoteFragment.newInstance(lastVoteData[i]))
             }
         }
-
-//        lastVoteOverviewRecyclerViewAdapter = LastVoteOverviewRecyclerView(activity!!, lastVoteData)
-//        fragment_home_last_vote_rv_box.adapter = lastVoteOverviewRecyclerViewAdapter
-//        fragment_home_last_vote_rv_box.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
         // hot post
         var todayHotDataList: ArrayList<TodayPost> = ArrayList()
