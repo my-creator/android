@@ -517,7 +517,23 @@
                         android:text="이 크리에이터를 설명하는 대표 해시태그"
                         android:fontFamily="@font/noto_sans_kr_medium"
                         android:textColor="@color/violet_pink"
-                        android:textSize="16sp"/>
+                        android:textSize="16sp"
+                        android:layout_marginTop="24dp"/>
+
+                <EditText
+                        android:layout_width="320dp"
+                        android:layout_height="wrap_content"
+                        android:text="# 딕헌터파트너"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="56dp"
+                        android:background="@drawable/activity_profile_join_stat_edittext_hashtag"/>
+
+
+                <Button
+                        android:layout_width="300dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="100dp"/>
         </RelativeLayout>
 
     </LinearLayout>
