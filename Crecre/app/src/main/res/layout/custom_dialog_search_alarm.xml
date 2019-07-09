@@ -27,12 +27,9 @@
                     android:textColor="@color/violet_pink"
                     android:textSize="16sp"
                     android:text="알림"
-                    android:fontFamily="@font/noto_sans_kr_medium"
             />
 
         </RelativeLayout>
-
-
 
         <RelativeLayout
                 android:layout_width="match_parent"
@@ -60,7 +57,6 @@
                         android:textSize="16sp"
                         android:textColor="@color/black"
                         android:layout_centerInParent="true"
-                        android:fontFamily="@font/noto_sans_kr_medium"
                 />
 
         </RelativeLayout>
@@ -69,7 +65,7 @@
         <RelativeLayout
                 android:id="@+id/btn_bottom_box_search_custom_dialog"
                 android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="48dp"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/custom_dialog_box"
         >
@@ -82,7 +78,6 @@
                     android:layout_centerInParent="true"
                     android:textColor="#707070"
                     android:textSize="14sp"
-                    android:fontFamily="@font/noto_sans_kr_medium"
             />
 
         </RelativeLayout>

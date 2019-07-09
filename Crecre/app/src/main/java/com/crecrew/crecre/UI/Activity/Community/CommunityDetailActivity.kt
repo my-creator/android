@@ -5,16 +5,19 @@ import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import android.widget.PopupMenu
 import com.crecrew.crecre.Data.CommentData
-import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.CommunityDetailCommentRecyclerViewAdapter
-import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_community_detail.*
-import kotlinx.android.synthetic.main.activity_community_hot_post.*
-import kotlinx.android.synthetic.main.activity_community_write.*
-import org.jetbrains.anko.textColor
+import android.widget.Toast
+import com.crecrew.crecre.R
+import com.crecrew.crecre.utils.ContentsDeleteDialog
+import com.crecrew.crecre.utils.CustomRequestCompleteDialog
+
 
 class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -22,6 +25,12 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
     var btn_unlike = 0
     var btn_anonymous =0
     lateinit var communityDetailCommentRecyclerViewAdapter:CommunityDetailCommentRecyclerViewAdapter
+
+    val requestDialog : ContentsDeleteDialog by lazy {
+        ContentsDeleteDialog(this@CommunityDetailActivity, "알림","게시물을 정말 삭제하시겠어요?", "네"
+            ,"아니요", completeConfirmListener, completeNoListener)
+    }
+
 
     //click
     override fun onClick(v: View?) {
@@ -97,8 +106,8 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                 finish()
             }
 
+            //익명버튼
             btn_anonymous_detail_com_act -> {
-                //익명버튼
                 if (btn_anonymous == 0) {
                     btn_anonymous_detail_com_act.isSelected = true
                     btn_anonymous = 1
@@ -112,6 +121,11 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
             rl_commu_detail_act -> {
                 downKeyboard(rl_commu_detail_act)
             }
+
+            btn_delete_detail_community_act -> {
+
+            }
+
         }
     }
 
@@ -124,12 +138,35 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
         configureRecyclerView()
     }
 
+    //팝업 클릭리스너
+    val clickListener = View.OnClickListener { view ->
+        when (view.id) {
+            R.id.btn_delete_detail_community_act -> {
+                showPopup(view)
+            }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        val myMenuInflater = menuInflater
+        myMenuInflater.inflate(R.menu.menu_main, menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        return true
+    }
+
     private fun init() {
         btn_like_community_detail_act.setOnClickListener(this)
         btn_unlike_community_detail_act.setOnClickListener(this)
         btn_back_community_detail_act.setOnClickListener(this)
         btn_anonymous_detail_com_act.setOnClickListener(this)
         rl_commu_detail_act.setOnClickListener(this)
+        btn_delete_detail_community_act.setOnClickListener(clickListener)
     }
 
     //recyclerView
@@ -168,6 +205,40 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
             applicationContext!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
+    //팝업창
+    private fun showPopup(view : View) {
+        var popup = PopupMenu(this, view)
+        popup.inflate(R.menu.menu_main)
+
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+
+            when (item!!.itemId) {
+                R.id.menu_modified -> {
+                    Toast.makeText(this@CommunityDetailActivity, item.title, Toast.LENGTH_SHORT).show();
+                }
+                R.id.menu_delete -> {
+                    requestDialog.show()
+                }
+            }
+
+            true
+        })
+
+        popup.show()
+    }
+
+    //다이얼로그->네
+    private val completeConfirmListener = View.OnClickListener {
+        requestDialog!!.dismiss()
+        finish()
+        //##글 삭제하는 서버통신
+    }
+    //다이얼로그 -> 아니요
+    private val completeNoListener = View.OnClickListener {
+        requestDialog!!.dismiss()
+    }
+
 
 
 }

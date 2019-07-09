@@ -38,9 +38,9 @@ class CommunityPopularFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setRecyclerView()
+        //setRecyclerView()
     }
-
+/*
     //인기글 RecyclerView
     private fun setRecyclerView() {
 
@@ -61,6 +61,6 @@ class CommunityPopularFragment : Fragment() {
         rv_popular_community_fg.adapter = communityPopularRecyclerViewAdapter
         rv_popular_community_fg.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
-    }
+    }*/
 
 }
