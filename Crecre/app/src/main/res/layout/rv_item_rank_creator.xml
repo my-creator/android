@@ -6,6 +6,7 @@
                 android:paddingVertical="16dp"
                 android:id="@+id/rv_item_rank_creator_container">
     <RelativeLayout
+            android:id="@+id/rv_item_rank_creator_rl_ranking_container"
             android:layout_width="51dp"
             android:layout_height="match_parent">
 
@@ -30,14 +31,12 @@
             <ImageView
                     android:id="@+id/rv_item_rank_creator_arrow"
                     android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:src="@drawable/icn_up"/>
+                    android:layout_height="10dp"/>
 
             <TextView
                     android:id="@+id/rv_item_rank_creator_gap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
                     android:textSize="12sp"
                     android:layout_marginTop="-2dp"
                     android:lineHeight="18sp"

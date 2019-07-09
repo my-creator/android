@@ -8,9 +8,10 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.crecrew.crecre.Data.SearchResultData
+import com.crecrew.crecre.Network.Get.CommunityBoardData
 import com.crecrew.crecre.R
 
-class CoummunitySearchRecyclerViewAdapter (val ctx : Context, val dataList : ArrayList<SearchResultData>) : RecyclerView.Adapter<CoummunitySearchRecyclerViewAdapter.Holder>() {
+class CoummunitySearchRecyclerViewAdapter (val ctx : Context, val dataList : ArrayList<CommunityBoardData>) : RecyclerView.Adapter<CoummunitySearchRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_search_result_community_act, viewGroup, false)
         return Holder(view)
@@ -22,13 +23,14 @@ class CoummunitySearchRecyclerViewAdapter (val ctx : Context, val dataList : Arr
 
 
         var img_like = 0
-        holder.category.text = dataList[position].category
+        holder.category.text = dataList[position].name
 
-        //그냥 받아왔을 때
+        //그냥 받아왔을 때 ##서버 추가
+/*
         if(dataList[position].like_on == 1)
         {
             holder.like_on.setImageResource(R.drawable.icn_look_on)
-            /*dataList[position].*/img_like = 1
+            img_like = 1
         }
         else
         {
@@ -49,6 +51,7 @@ class CoummunitySearchRecyclerViewAdapter (val ctx : Context, val dataList : Arr
                 img_like = 0
             }
         }
+*/
 
     }
 

@@ -1,5 +1,6 @@
 package com.crecrew.crecre.UI.Activity
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -7,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.crecrew.crecre.Data.ProfileHotVideoData
 import com.crecrew.crecre.Data.TodayPost
+import android.view.inputmethod.InputMethodManager
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Adapter.ProfileHotVideoRecyclerViewAdapter

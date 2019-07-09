@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
+        android:id="@+id/activity_creator_search_container"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white">
 
     <FrameLayout
+            android:id="@+id/activity_creator_search_box"
                 android:layout_width="match_parent" android:layout_height="50dp"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="16dp"
@@ -32,7 +34,7 @@
 
                 <EditText
                         android:id="@+id/activity_creator_search_et"
-                        android:layout_width="match_parent"
+                        android:layout_width="275dp"
                         android:layout_height="24dp"
                         android:windowSoftInputMode="adjustResize"
                         android:hint="크리에이터 검색"
@@ -43,20 +45,61 @@
                         android:textSize="16sp"
                         android:imeOptions="actionSearch"
                         android:background="@null"
+                        android:layout_marginTop="-2dp"
                         android:textColorHint="@color/pinkish_grey">
                 </EditText>
+
+                <ImageView
+                        android:id="@+id/activity_creator_search_iv_erase"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/icn_close"
+                        android:layout_gravity="right"
+                        android:visibility="gone"/>
             </LinearLayout>
         </FrameLayout>
 
+    <LinearLayout
+            android:id="@+id/activity_creator_search_result_container"
+            android:visibility="gone"
+            android:layout_below="@+id/activity_creator_search_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical">
+        <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:gravity="center_vertical">
+            <TextView
+                    android:id="@+id/activity_creator_search_result_num"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="중복 크리에이터 2명"
+                    android:textSize="12sp"
+                    android:lineHeight="18sp"
+                    android:textColor="@color/black_two"/>
+        </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+                android:id="@+id/activity_creator_rv_search_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+
+    </LinearLayout>
         <TextView
                 android:id="@+id/activity_creator_search_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="좋아하는 크리에이터를 검색해보세요!"
                 android:fontFamily="@font/noto_sans_kr_medium"
-                android:textColor="@color/greyish"
+                android:textColor="@color/black_two"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:lineHeight="24sp"
                 android:layout_centerHorizontal="true"
-                android:layout_marginTop="120dp"/>
+                android:layout_marginTop="120dp"
+                android:visibility="gone"/>
 
 
 </RelativeLayout>

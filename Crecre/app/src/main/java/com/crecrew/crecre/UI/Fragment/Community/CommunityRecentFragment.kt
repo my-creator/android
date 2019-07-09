@@ -7,21 +7,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.crecrew.crecre.Data.CommunityHotPostData
 import com.crecrew.crecre.Network.ApplicationController
-import com.crecrew.crecre.Network.Get.CommunitySmallNewGetData
+import com.crecrew.crecre.Data.CommunitySmallNewGetData
 import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
-import com.crecrew.crecre.Network.NetworkService
+import com.crecrew.crecre.Network.CommunityNetworkService
 
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.fragment_community_popular.*
 import kotlinx.android.synthetic.main.fragment_community_popular.view.*
 import org.jetbrains.anko.support.v4.startActivity
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,8 +26,8 @@ class CommunityRecentFragment : Fragment() {
 
     lateinit var communityPopularRecyclerViewAdapter: CommunityHotPostRecyclerViewAdapter
 
-    val networkService: NetworkService by lazy {
-        ApplicationController.instance.networkService
+    val communityNetworkService: CommunityNetworkService by lazy {
+        ApplicationController.instance.communityNetworkService
     }
 
     private lateinit var rootView: View
@@ -39,16 +35,16 @@ class CommunityRecentFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         rootView = inflater.inflate(R.layout.fragment_community_popular, container, false)
 
-
+        //더보기 버튼
         rootView.btn_more_community_popular_fg.setOnClickListener {
-            startActivity<CommunityHotPostActivity>()
+            startActivity<CommunityHotPostActivity>("flag" to 0 )
+
         }
 
         return rootView
@@ -77,7 +73,7 @@ class CommunityRecentFragment : Fragment() {
 
     //최신글 5개 보여주기
     private fun getCommunityRecentResponse() {
-        val getCommunitySmallNewPosts : Call<GetCommunitySmallNewPostResponse> = networkService.getCommunitySmallNewPosts()
+        val getCommunitySmallNewPosts : Call<GetCommunitySmallNewPostResponse> = communityNetworkService.getCommunitySmallNewPosts()
 
         getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
 

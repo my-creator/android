@@ -7,16 +7,14 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.VoteTestData
 import com.crecrew.crecre.R
 import android.graphics.drawable.shapes.OvalShape
 import android.graphics.drawable.ShapeDrawable
-
+import android.widget.*
+import com.bumptech.glide.request.RequestOptions
+import org.jetbrains.anko.image
 
 
 class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
@@ -73,24 +71,25 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
+        val RGroup :RadioGroup
         Glide.with(ctx)
             .load(dataList[position].ImageURL)
             .into(holder.img_thumnail)
         Glide.with(ctx)
             .load(dataList[position].itemimg1)
-            .into(holder.img_item1)
+            .apply(RequestOptions().circleCrop()).into(holder.img_item1)
         Glide.with(ctx)
             .load(dataList[position].itemimg2)
-            .into(holder.img_item2)
+            .apply(RequestOptions().circleCrop()).into(holder.img_item2)
         Glide.with(ctx)
             .load(dataList[position].itemimg3)
-            .into(holder.img_item3)
+            .apply(RequestOptions().circleCrop()).into(holder.img_item3)
         Glide.with(ctx)
             .load(dataList[position].itemimg4)
-            .into(holder.img_item4)
+            .apply(RequestOptions().circleCrop()).into(holder.img_item4)
         Glide.with(ctx)
             .load(dataList[position].itemimg5)
-            .into(holder.img_item5)
+            .apply(RequestOptions().circleCrop()).into(holder.img_item5)
 
         holder.title.text = dataList[position].title
         holder.explain.text = "# " + dataList[position].explain
@@ -99,16 +98,19 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
         holder.txt_itemname3.text = dataList[position].itemname3
         holder.txt_itemname4.text = dataList[position].itemname4
         holder.txt_itemname5.text = dataList[position].itemname5
-        holder.imageView1.setBackground(ShapeDrawable(OvalShape()))
-        holder.imageView2.setBackground(ShapeDrawable(OvalShape()))
-        holder.imageView3.setBackground(ShapeDrawable(OvalShape()))
-        holder.imageView4.setBackground(ShapeDrawable(OvalShape()))
-        holder.imageView5.setBackground(ShapeDrawable(OvalShape()))
+        holder.img_thumnail.scaleType = ImageView.ScaleType.CENTER_CROP
+        holder.imageView1.setOnClickListener{
+            holder.imageView1.setImageResource(R.drawable.btn_check)
+            holder.imageView2.setImageResource(R.drawable.btn_uncheck)
+            holder.imageView3.setImageResource(R.drawable.btn_uncheck)
+            holder.imageView4.setImageResource(R.drawable.btn_uncheck)
+            holder.imageView5.setImageResource(R.drawable.btn_uncheck)
+        }
 
         if (dataList[position].isVotefinish == false ) //진행 중이면
         {
             holder.txt_ongoing.setVisibility(View.GONE)
-            holder.txt_dayleft.text = "${dataList[position].date} 일 후 개표"
+            holder.txt_dayleft.text = "${dataList[position].date}일 후 개표"
             holder.txt_rank1.setVisibility(View.GONE)
             holder.txt_rank2.setVisibility(View.GONE)
             holder.txt_rank3.setVisibility(View.GONE)
@@ -121,8 +123,22 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
             holder.txt_votenum5.setVisibility(View.GONE)
             holder.letsVote.text = "투표하기"
             holder.stamp.setVisibility(View.GONE)
+            if (dataList[position].itemname5.isEmpty()) {
+                holder.line5.setVisibility(View.GONE)
+                if (dataList[position].itemname4.isEmpty()){
+                    holder.line4.setVisibility(View.GONE)
+                    if (dataList[position].itemname5.isEmpty()){
+                        holder.line5.setVisibility(View.GONE)
+                    }
+                }
+            }
+            else{
+
+            }
+
         }else {
-            holder.txt_dayleft.text = "${dataList[position].date} 일 후 마강"
+            //여기 수정해야 합니다
+            holder.txt_dayleft.text = "${dataList[position].date}일 후 마감"
             holder.letsVote.text = "투표완료"
             holder.txt_rank1.text = "1등"
             holder.txt_rank2.text = "2등"
@@ -134,9 +150,9 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
             holder.txt_votenum3.text = "${dataList[position].votenum3}표"
             holder.txt_votenum4.text = "${dataList[position].votenum4}표"
             holder.txt_votenum5.text = "${dataList[position].votenum5}표"
-            if (dataList[position].itemname5.length==0) holder.line5.setVisibility(View.GONE)
-            if (dataList[position].itemname4.length==0) holder.line4.setVisibility(View.GONE)
-            if (dataList[position].itemname3.length==0) holder.line3.setVisibility(View.GONE)
+            if (dataList[position].itemname5.isEmpty()) holder.line5.setVisibility(View.GONE)
+            if (dataList[position].itemname4.isEmpty()) holder.line4.setVisibility(View.GONE)
+            if (dataList[position].itemname3.isEmpty()) holder.line3.setVisibility(View.GONE)
             holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"));
         }
 

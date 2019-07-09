@@ -3,8 +3,10 @@ package com.crecrew.crecre.UI.Adapter
 import android.content.Context
 import android.graphics.Color
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -15,13 +17,35 @@ import com.bumptech.glide.request.RequestOptions
 import com.crecrew.crecre.Data.RankData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.CreatorProfileActivity
+import kotlinx.android.synthetic.main.rv_item_rank_creator.view.*
 import org.jetbrains.anko.startActivity
 
 
-class RankChartRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<RankData>) : RecyclerView.Adapter<RankChartRecyclerViewAdapter.Holder>() {
+class RankChartRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<RankData>, private val flag: Int) : RecyclerView.Adapter<RankChartRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx)!!.inflate(R.layout.rv_item_rank_creator, viewGroup, false)
+
+        init(view)
+
         return Holder(view)
+    }
+
+    fun init(v: View){
+
+        var container = v.findViewById(R.id.rv_item_rank_creator_container) as LinearLayout
+        var raking_container = v.findViewById(R.id.rv_item_rank_creator_rl_ranking_container) as RelativeLayout
+
+        // Todo: flag를 Int가 아니라 context로 넘겨주는 방법!
+        // 랭킹
+        if(flag == 0) {
+            container.setBackgroundColor(Color.parseColor("#f9fafa"))
+            raking_container.visibility = VISIBLE
+        }
+        // 크리에이터 검색결과
+        else{
+            container.setBackgroundColor(Color.parseColor("#ffffff"))
+            raking_container.visibility = GONE
+        }
     }
 
     override fun getItemCount(): Int = dataList.size
@@ -41,12 +65,13 @@ class RankChartRecyclerViewAdapter(private val ctx : Context, private val dataLi
             Glide.with(ctx).load(R.drawable.icn_down).into(holder.arrow)
             holder.gap.setTextColor(Color.parseColor("#2befef"))
         }
-        else {
-            // Todo: 아무것도 안오르면 어떻게 처리할지 고민
-        }
 
         holder.ranking.text = (position+1).toString()
-        holder.gap.text = Math.abs(dataList[position].gap).toString()
+        if(dataList[position].gap != 0) {
+            holder.gap.text = Math.abs(dataList[position].gap).toString()
+        }else{
+            holder.gap.text = ""
+        }
         holder.category.text = dataList[position].category
         holder.name.text = dataList[position].name
         Glide.with(ctx).load(dataList[position].rank_img).into(holder.rank_img)

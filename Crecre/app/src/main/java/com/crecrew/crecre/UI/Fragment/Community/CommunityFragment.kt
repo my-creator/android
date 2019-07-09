@@ -3,11 +3,15 @@ package com.crecrew.crecre.UI.Fragment.Community
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import com.crecrew.crecre.Data.CommunityFavoriteData
+import com.crecrew.crecre.Network.ApplicationController
+import com.crecrew.crecre.Network.Get.CommunityBoardData
+import com.crecrew.crecre.Network.Get.GetCommunityUnlikeBoardsResponse
+import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunitySearchActivity
 import com.crecrew.crecre.UI.Adapter.CommunityFavoriteRecyclerViewAdapter
@@ -15,17 +19,27 @@ import com.crecrew.crecre.UI.Adapter.CommunityPostFragmentAdapter
 import kotlinx.android.synthetic.main.fragment_community.*
 import kotlinx.android.synthetic.main.fragment_community.view.*
 import org.jetbrains.anko.support.v4.startActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CommunityFragment: Fragment() {
 
     private lateinit var rootView: View
-    //private val communityfavoriteDataList = ArrayList<CommunityFavoriteData>()
+    lateinit var communityfavoriteRecyclerViewAdapter: CommunityFavoriteRecyclerViewAdapter
+    lateinit var communityPostListRecyclerViewAdapter : CommunityFavoriteRecyclerViewAdapter
+
+    val communityNetworkService: CommunityNetworkService by lazy {
+        ApplicationController.instance.communityNetworkService
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_community, container, false)
 
+        //검색버튼을 눌렀을때
         rootView.btn_search_community_frag.setOnClickListener() {
-            startActivity<CommunitySearchActivity>()
+            //게시판
+            startActivity<CommunitySearchActivity>("board_flag" to 0)
         }
 
         return rootView
@@ -35,6 +49,7 @@ class CommunityFragment: Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         configureMainTab()
+
 
 //        tablayoutTextColor()
     }
@@ -48,20 +63,17 @@ class CommunityFragment: Fragment() {
     //RecyclerView
     private fun setRecyclerView() {
 
-        var dataList: ArrayList<CommunityFavoriteData> = ArrayList()
-        dataList.add(CommunityFavoriteData("자유게시판", 0,1))
-        dataList.add(CommunityFavoriteData("온도Ondo", 1,1))
-        dataList.add(CommunityFavoriteData("입짧은 햇님", 1,1))
-        dataList.add(CommunityFavoriteData("입짧은 햇미니인", 1,0))
-        dataList.add(CommunityFavoriteData("바보바보", 1,0))
+        var dataList: ArrayList<CommunityBoardData> = ArrayList()
 
         //즐겨찾기 rv
-        val communityfavoriteRecyclerViewAdapter = CommunityFavoriteRecyclerViewAdapter(activity!!, dataList)
+        getCommunityRecentResponse(communityNetworkService.getCommunityLikeBoards("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"))
+        communityfavoriteRecyclerViewAdapter = CommunityFavoriteRecyclerViewAdapter(activity!!, dataList)
         rv_favorite_community_frag.adapter = communityfavoriteRecyclerViewAdapter
         rv_favorite_community_frag.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
         //일반 게시글 rv
-        val communityPostListRecyclerViewAdapter = CommunityFavoriteRecyclerViewAdapter(activity!!, dataList)
+        getCommunityRecentResponse(communityNetworkService.getCommunityUnlikeBoards("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"))
+        communityPostListRecyclerViewAdapter = CommunityFavoriteRecyclerViewAdapter(activity!!, dataList)
         rv_postlist_community_fg.adapter = communityPostListRecyclerViewAdapter
         rv_postlist_community_fg.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
     }
@@ -89,55 +101,29 @@ class CommunityFragment: Fragment() {
 
     }
 
-/*
-    // 처음 프래그먼트 추가
-    private fun addFragment(fragment : Fragment){
-        val fm = childFragmentManager
-        val transaction = fm.beginTransaction()
-        val myIntroFragment = MypageIntroFragment()
-        val bundle = Bundle()
+    //좋아요안누른 게시글 보여주기
+    private fun getCommunityRecentResponse(networkFunction : Call<GetCommunityUnlikeBoardsResponse>) {
+        val getCommunityUnlikeBoards : Call<GetCommunityUnlikeBoardsResponse> = networkFunction
 
-        transaction.add(R.id.mypage_content_layout, myIntroFragment)
-        transaction.commit()
+        getCommunityUnlikeBoards.enqueue(object : Callback<GetCommunityUnlikeBoardsResponse> {
+
+            override fun onFailure(call: Call<GetCommunityUnlikeBoardsResponse>, t: Throwable) {
+                Log.e("즐겨찾기나 아닌거나 list fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetCommunityUnlikeBoardsResponse>, response: Response<GetCommunityUnlikeBoardsResponse>) {
+
+                if (response.isSuccessful) {
+                    val temp : ArrayList<CommunityBoardData> = response.body()!!.data
+
+                    if (temp.size > 0) {
+
+                        val position = communityPostListRecyclerViewAdapter.itemCount
+                        communityPostListRecyclerViewAdapter.dataList.addAll(temp)
+                        communityPostListRecyclerViewAdapter.notifyItemInserted(position)
+                    }
+                }
+            }
+        })
     }
-
-    // 프래그먼트 교체
-    private fun replaceFragment(fragment: Fragment, checkFlag : Int) {
-        val fm = childFragmentManager
-        val transaction = fm.beginTransaction()
-
-        if(checkFlag == 0){
-            val myIntroFragment = MypageIntroFragment()
-            val bundle = Bundle()
-            bundle.putString("name", name)
-            bundle.putString("job", job)
-            bundle.putString("company", company)
-            bundle.putString("image", image)
-            bundle.putString("field", field)
-            bundle.putInt("my_or_other_flag", my_or_other_flag)
-            bundle.putInt("userID", userID)
-            Log.v("asdf", "보내는필드 = " + field)
-            bundle.putString("status", status)
-            bundle.putInt("coworkingEnabled", coworkingEnabled)
-            myIntroFragment.setArguments(bundle)
-            transaction.replace(R.id.mypage_content_layout, myIntroFragment)
-            transaction.commit()
-        }
-        else{
-            val myactFragment = MypageActFragment()
-            val bundle = Bundle()
-            bundle.putString("name", name)
-            bundle.putInt("my_or_other_flag", my_or_other_flag)
-            bundle.putInt("userID", userID)
-            myactFragment.setArguments(bundle)
-            transaction.replace(R.id.mypage_content_layout, myactFragment)
-            transaction.commit()
-        }
-
-
-    }
-
-*/
-
-
 }
