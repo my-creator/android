@@ -67,6 +67,8 @@ class VoteFragment: Fragment(){
         vote_tab.getTabAt(1)!!.customView = topTabLayout.
             findViewById(R.id.VoteBarPast) as RelativeLayout
 
+        //색깔 바뀌는거 해야함ㅇㅇ
+
     }
 
 

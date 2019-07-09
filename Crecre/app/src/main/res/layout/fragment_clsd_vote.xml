@@ -14,7 +14,8 @@
             app:cardElevation="3dp"
             app:cardPreventCornerOverlap="true"
             app:cardBackgroundColor="@color/white"
-            android:layout_margin="6dp">
+            android:layout_margin="6dp"
+    >
 
         <LinearLayout
                 android:layout_width="match_parent"

@@ -37,7 +37,6 @@ class HomeFragment: Fragment() {
     private var isChartOpen = false
 
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
-    lateinit var lastVoteOverviewRecyclerViewAdapter: LastVoteOverviewRecyclerView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
@@ -52,6 +51,7 @@ class HomeFragment: Fragment() {
                 }
             }
 
+            // tab설정
             it.fragment_home_tl_today_rank.run {
                 val navigationLayout: View =
                     LayoutInflater.from(activity!!).inflate(R.layout.fragment_home_today_rank_navi, null, false)
@@ -61,13 +61,15 @@ class HomeFragment: Fragment() {
                 getTabAt(1)!!.customView =
                     navigationLayout.findViewById(R.id.fragment_home_today_rank_navi_bottom) as RelativeLayout
             }
-            it.fragment_home_iv_today_hot_btn.setOnClickListener() {
-                openTodayHotChart()
-            }
         }
 
         // 화면 전환
         rootView.run {
+
+            fragment_home_iv_today_hot_btn.setOnClickListener() {
+                openTodayHotChart()
+            }
+
             fragment_home_vote_recommendation_btn.setOnClickListener {
                 startActivity<VoteSuggestActivity>()
             }
@@ -87,7 +89,7 @@ class HomeFragment: Fragment() {
 
             }
 
-
+            // 다른 화면 누르면 키보드 내리고 edittext focus 삭제
             fragment_home_container.setOnClickListener {
                 downKeyboard(fragment_home_container)
             }
@@ -110,10 +112,6 @@ class HomeFragment: Fragment() {
         fragment_home_edit_search.setText(null)
         fragment_home_edit_search.clearFocus();
 */
-    }
-
-    override fun onPause() {
-        super.onPause()
     }
 
     // 실시간 크리에이터 차트 열고 닫기

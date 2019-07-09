@@ -22,7 +22,7 @@
                     android:layout_height="300dp">
 
                 <ImageView
-                        android:id="@+id/back"
+                        android:id="@+id/activity_creator_profile_btn_back"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentLeft="true"
@@ -77,6 +77,7 @@
                     android:layout_height="64dp">
 
                     <Button
+                            android:id="@+id/activity_creator_profile_btn_go_fanpage"
                             android:layout_width="320dp"
                             android:layout_height="40dp"
                             android:layout_centerInParent="true"
@@ -393,8 +394,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="12dp"
-                            android:layout_marginLeft="40dp"
-                            >
+                            android:layout_marginLeft="20dp">
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -404,6 +404,7 @@
                                     android:textColor="@color/violet_pink"/>
 
                             <TextView
+                                    android:id="@+id/activity_creator_profile_btn_join_stat"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="154dp"
@@ -451,7 +452,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:layout_marginLeft="40dp">
+                        android:layout_marginLeft="20dp">
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -490,7 +491,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:layout_marginLeft="40dp">
+                        android:layout_marginLeft="20dp">
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
