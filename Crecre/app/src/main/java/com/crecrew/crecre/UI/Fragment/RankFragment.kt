@@ -99,10 +99,10 @@ class RankFragment: Fragment(), View.OnClickListener{
         rankData.add(RankData(1,99, "http://cfile7.uf.tistory.com/image/241C4A33597796CB224B67","브이로그","토슬토실",R.drawable.icn_rank1.toString(),754))
 
 
-        rankChartRecyclerViewAdapter = RankChartRecyclerViewAdapter(activity!!, rankData,0)
-        fragment_rank_rv_chart.adapter = rankChartRecyclerViewAdapter
-        fragment_rank_rv_chart.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        fragment_rank_rv_chart.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
+        //rankChartRecyclerViewAdapter = RankChartRecyclerViewAdapter(activity!!, rankData,0)
+        //fragment_rank_rv_chart.adapter = rankChartRecyclerViewAdapter
+        //fragment_rank_rv_chart.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+        //fragment_rank_rv_chart.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
 
     }
 
