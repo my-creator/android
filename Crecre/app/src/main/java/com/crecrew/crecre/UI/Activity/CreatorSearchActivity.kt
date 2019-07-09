@@ -12,14 +12,20 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.RelativeSizeSpan
 import android.util.Log
 import android.util.Size
+import android.view.View
+import android.view.View.GONE
 import android.view.View.VISIBLE
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
+import android.widget.RelativeLayout
 import com.crecrew.crecre.Data.RankData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.RankChartRecyclerViewAdapter
 import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
 import kotlinx.android.synthetic.main.activity_creator_search.*
 import kotlinx.android.synthetic.main.fragment_rank.*
+import kotlinx.android.synthetic.main.rv_item_rank_creator.*
+
 
 class CreatorSearchActivity : AppCompatActivity() {
 
@@ -33,22 +39,37 @@ class CreatorSearchActivity : AppCompatActivity() {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
-        // 검색 전 : configureBeforeSearch()
+        // 검색 전
+        configureBeforeSearch()
 
+        activity_creator_search_et.setOnEditorActionListener { v, actionId, event ->
+            if(actionId == EditorInfo.IME_ACTION_SEARCH){
+                // 결과가 없을 때
+                if(activity_creator_search_et.text.toString().equals(""))
+                    configureNoResult()
+                // 결과가 있을 떄
+                else
+                    configureResult()
+                true
+            }
+           false
+        }
 
-        // 검색 결과 없음: configureNoResult()
-
-        // 검색 결과
-        configureRecyclerView()
 
         activity_creator_search_iv_erase.setOnClickListener {
             activity_creator_search_et.setText(null)
+        }
+        activity_creator_search_container.setOnClickListener {
+            downKeyboard(activity_creator_search_container)
         }
 
 
     }
 
     fun configureBeforeSearch(){
+
+        activity_creator_search_txt.visibility = VISIBLE
+
         // 숫자는 크리에이터의 수
         var creator_num = String.format("%,d",213965)
 
@@ -62,11 +83,17 @@ class CreatorSearchActivity : AppCompatActivity() {
 
     fun configureNoResult(){
         activity_creator_search_iv_erase.visibility = VISIBLE
+        activity_creator_search_result_container.visibility = GONE
+        activity_creator_search_txt.visibility = VISIBLE
+
         activity_creator_search_txt.setText("검색 결과가 없습니다")
     }
 
-    private fun configureRecyclerView(){
+    private fun configureResult(){
 
+        activity_creator_search_iv_erase.visibility = VISIBLE
+        activity_creator_search_result_container.visibility = VISIBLE
+        activity_creator_search_txt.visibility = GONE
         // rank data
         var rankData: ArrayList<RankData> = ArrayList()
 
@@ -74,15 +101,25 @@ class CreatorSearchActivity : AppCompatActivity() {
         rankData.add(RankData(1,10, "https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800","브이로그","가희바위보슬보슬개미똥꼬멍멍이가노래를한다",R.drawable.icn_rank1.toString(),453215))
 
 
-        rankChartRecyclerViewAdapter = RankChartRecyclerViewAdapter(this, rankData)
+
+        rankChartRecyclerViewAdapter = RankChartRecyclerViewAdapter(this, rankData, 1)
         activity_creator_rv_search_result.adapter = rankChartRecyclerViewAdapter
         activity_creator_rv_search_result.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         activity_creator_rv_search_result.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
 
-        var str = "중복 크리에이터" + rankData.size + "명"
+        var str = "중복 크리에이터 " + rankData.size + "명"
         activity_creator_search_result_num.setText(str)
 
 
+
+    }
+
+    private fun downKeyboard(view: View) {
+
+        val imm: InputMethodManager =
+            this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+        activity_creator_search_et.clearFocus()
 
     }
 
