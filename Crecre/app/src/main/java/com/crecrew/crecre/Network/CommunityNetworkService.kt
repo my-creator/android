@@ -1,5 +1,7 @@
 package com.crecrew.crecre.Network
 
+import com.crecrew.crecre.Network.Get.CommunityRequestCntData
+import com.crecrew.crecre.Network.Get.GetBoardRequestNumResponse
 import com.crecrew.crecre.Network.Get.GetCommunityUnlikeBoardsResponse
 import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
 import com.crecrew.crecre.Network.Post.PostCommunityFavoriteLikeResponse
@@ -48,6 +50,7 @@ interface CommunityNetworkService {
     //게시판 검색했을 경우
     @GET("boards/search")
     fun getBoardsSearch(
+        @Header("token") token: String,
         @Query("type") type: String,
         @Query("name") name: String
 
@@ -66,5 +69,10 @@ interface CommunityNetworkService {
         @Body() body : JsonObject
     ): Call<PostCommunityFavoriteLikeResponse>
 
+    @GET("boards/request/{boardRequestIdx}")
+    fun getBoeardsRequestIdx(
+        @Header("token") token : String,
+        @Path("boardRequestIdx") boardRequestIdx : Int
+    ): Call<GetBoardRequestNumResponse>
 
 }

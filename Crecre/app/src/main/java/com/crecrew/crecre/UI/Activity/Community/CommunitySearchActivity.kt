@@ -24,15 +24,17 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var communitysearchRecyclerViewAdapter: CoummunitySearchRecyclerViewAdapter
     var board_flag = -1
-    var search_tv : String = ""
+    var search_tv: String = ""
 
     val communityNetworkService: CommunityNetworkService by lazy {
         ApplicationController.instance.communityNetworkService
     }
 
-    val requestEnterDialog : SearchAlarmDialog by lazy {
-        SearchAlarmDialog(this@CommunitySearchActivity, "알림","검색어가 너무 짧습니다.",
-            completefailConfirmListener,"확인")
+    val requestEnterDialog: SearchAlarmDialog by lazy {
+        SearchAlarmDialog(
+            this@CommunitySearchActivity, "알림", "검색어가 너무 짧습니다.",
+            completefailConfirmListener, "확인"
+        )
     }
 
     //click
@@ -54,25 +56,22 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
 
                 search_tv = et_searchword_search_act.text.toString()
 
-                if(search_tv == "")
-                {
+                if (search_tv == "") {
                     requestEnterDialog.show()
-                }
-                else
-                {
+                } else {
                     //제대로 검색이 되었을 경우
                     getCommunitySearchResultResponse()
+
                     rl_after_search_view.visibility = View.VISIBLE
                     ll_no_resul_com_search_act.visibility = View.GONE
                     ll_first_search_view_com_act.visibility = View.GONE
                 }
-                /*
-                //검색한 결과가 없다면 나오는 뷰
-                //##추후 통신
+
+/*
+                //검색했는데 결과가 안나왔어
                 ll_no_resul_com_search_act.visibility = View.VISIBLE
                 rl_after_search_view.visibility = View.GONE
-                ll_first_search_view_com_act.visibility = View.GONE
-                */
+                ll_first_search_view_com_act.visibility = View.GONE*/
 
             }
 
@@ -141,7 +140,8 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
 
     //검색버튼 누른 후 통신
     private fun getCommunitySearchResultResponse() {
-        val getCommunitySmallNewPosts: Call<GetCommunityUnlikeBoardsResponse> = communityNetworkService.getBoardsSearch("",search_tv)
+        val getCommunitySmallNewPosts: Call<GetCommunityUnlikeBoardsResponse> =
+            communityNetworkService.getBoardsSearch("", "", search_tv)
 
         getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunityUnlikeBoardsResponse> {
 
@@ -153,7 +153,6 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
                 call: Call<GetCommunityUnlikeBoardsResponse>,
                 response: Response<GetCommunityUnlikeBoardsResponse>
             ) {
-
                 if (response.isSuccessful) {
                     val temp: ArrayList<CommunityBoardData> = response.body()!!.data
                     if (temp.size > 0) {
@@ -161,14 +160,42 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
                         val position = communitysearchRecyclerViewAdapter.itemCount
                         communitysearchRecyclerViewAdapter.dataList.addAll(temp)
                         communitysearchRecyclerViewAdapter.notifyItemInserted(position)
+                        response?.takeIf { it.isSuccessful }
+                            ?.body()
+                            ?.let {
+                                if (it.status == 200) {
+                                    rl_after_search_view.visibility = View.VISIBLE
+                                    ll_no_resul_com_search_act.visibility = View.GONE
+                                    ll_first_search_view_com_act.visibility = View.GONE
+                                } else if (it.status == 500) {
+                                    ll_no_resul_com_search_act.visibility = View.VISIBLE
+                                    rl_after_search_view.visibility = View.GONE
+                                    ll_first_search_view_com_act.visibility = View.GONE
+                                }
+                            }
+
+
+                    } else {
                     }
-                    else
+
+                    /*if(it.status == 200)
                     {
+                        rl_after_search_view.visibility = View.VISIBLE
+                        ll_no_resul_com_search_act.visibility = View.GONE
+                        ll_first_search_view_com_act.visibility = View.GONE
                     }
+                    else if(it.status == 500)
+                    {
+                        ll_no_resul_com_search_act.visibility = View.VISIBLE
+                        rl_after_search_view.visibility = View.GONE
+                        ll_first_search_view_com_act.visibility = View.GONE
+                    }*/
+
                 }
             }
         })
     }
+
 
     private val completefailConfirmListener = View.OnClickListener {
         requestEnterDialog!!.dismiss()

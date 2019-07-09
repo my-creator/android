@@ -3,6 +3,7 @@ package com.crecrew.crecre.utils
 import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
+import android.text.SpannableStringBuilder
 import android.view.View
 import android.view.WindowManager
 import com.crecrew.crecre.R
@@ -10,7 +11,7 @@ import kotlinx.android.synthetic.main.custom_dialog_response_complete.*
 
 class CustomRequestCompleteDialog(context : Context,
                                   private val completeContext : String,
-                                  private val mContext : String,
+                                  private val mContext : SpannableStringBuilder,
                                   private val eContext : String,
                                   private val mResponseClickListener: View.OnClickListener?,
                                   private val responseText: String) : Dialog(context, android.R.style.Theme_Translucent_NoTitleBar) {

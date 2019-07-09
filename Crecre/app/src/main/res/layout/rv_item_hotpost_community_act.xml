@@ -50,6 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginRight="4dp"
                         android:src="@drawable/ic_hot"
                 />
 
@@ -57,7 +58,6 @@
                         android:id="@+id/tv_title_community_hot_act"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
                         android:fontFamily="@font/noto_sans_kr_medium"
                         android:textSize="14sp"
                         android:textColor="@color/black"
