@@ -1,4 +1,4 @@
-package com.crecrew.crecre.Network.Get
+package com.crecrew.crecre.Data
 
 data class CommunitySmallNewGetData(
     val board_idx: Int,
@@ -14,5 +14,10 @@ data class CommunitySmallNewGetData(
     val update_time: String,
     val user_idx: Int,
     val video_cnt: Int,
-    val view_cnt: Int
+    val view_cnt: Int,
+    val reply_cnt : Int,
+    val name : String,
+    val type : String,
+    val creator_idx : Int
+
 )

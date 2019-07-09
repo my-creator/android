@@ -8,14 +8,25 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
-import com.crecrew.crecre.Data.CommunityFavoriteData
+import com.crecrew.crecre.Network.ApplicationController
+import com.crecrew.crecre.Network.Get.CommunityBoardData
+import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import org.jetbrains.anko.startActivity
 
-class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : ArrayList<CommunityFavoriteData>) : RecyclerView.Adapter<CommunityFavoriteRecyclerViewAdapter.Holder>() {
+class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : ArrayList<CommunityBoardData>) : RecyclerView.Adapter<CommunityFavoriteRecyclerViewAdapter.Holder>() {
+
+    val communityNetworkService: CommunityNetworkService by lazy {
+        ApplicationController.instance.communityNetworkService
+    }
+
+
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_favorite_community_frag, viewGroup, false)
+
+
         return Holder(view)
     }
 
@@ -23,13 +34,13 @@ class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : Arr
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         //게시판제목
-        holder.title.text = dataList[position].title
+        holder.title.text = dataList[position].name
 
         //container클릭시
         holder.container.setOnClickListener {
             ctx.startActivity<CommunityHotPostActivity>(
-                "title" to dataList[position].title,
-                "idx" to dataList[position].user_id
+                "title" to dataList[position].name,
+                "idx" to dataList[position].idx
             )
         }
         var img_like = 0
@@ -45,6 +56,26 @@ class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : Arr
                 img_like = 0
             }
         }
+
+/*
+        //좋아요 누르기 보여주기 통신
+         fun postCommunityRecentResponse() {
+            val postBoardsFavoriteLike : Call<PostCommunityFavoriteLikeResponse> = CommunityNetworkService.postBoardsFavoriteLike()
+
+            postBoardsFavoriteLike.enqueue(object : Callback<PostCommunityFavoriteLikeResponse> {
+
+                override fun onFailure(call: Call<PostCommunityFavoriteLikeResponse>, t: Throwable) {
+                    Log.e("즐겨찾기 누르기 fail", t.toString())
+                }
+
+                override fun onResponse(call: Call<GetCommunityUnlikeBoardsResponse>, response: Response<GetCommunityUnlikeBoardsResponse>) {
+
+                    if (response.isSuccessful) {
+
+                    }
+                }
+            })
+        }*/
 
     }
 

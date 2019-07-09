@@ -3,20 +3,33 @@ package com.crecrew.crecre.UI.Activity.Community
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View
-import com.crecrew.crecre.Data.CommunityHotPostData
+import com.crecrew.crecre.Data.CommunitySmallNewGetData
+import com.crecrew.crecre.Network.ApplicationController
+import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
+import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.R
-import com.crecrew.crecre.UI.Adapter.CommunityFavoriteRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
-import com.crecrew.crecre.UI.Adapter.CommunityPostFragmentAdapter
 import kotlinx.android.synthetic.main.activity_community_hot_post.*
-import kotlinx.android.synthetic.main.activity_community_search.*
-import kotlinx.android.synthetic.main.activity_community_write.*
 import org.jetbrains.anko.startActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var communityHotPostRecyclerViewAdapter:CommunityHotPostRecyclerViewAdapter
+
+    val communityNetworkService: CommunityNetworkService by lazy {
+        ApplicationController.instance.communityNetworkService
+    }
+
+    var post_idx = -1
+    var user_idx = -1
+    var flag = -1
+
+
 
     override fun onClick(v : View?) {
         when(v!!) {
@@ -42,49 +55,79 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_community_hot_post)
 
         init()
-        //configureRecyclerView()
+        configureTitleBar()
+        configureRecyclerView()
+
+
 
     }
 
-    //추가해야할 부분 ##서버통신
-    /*
     private fun configureTitleBar(){
-        title = intent.getStringExtra("title")
-        product_id = intent.getIntExtra("idx", -1)
-        if(product_id == -1) finish()
 
-        txt_toolbar_product_title.text = title
+        flag = intent.getIntExtra("flag",-1)
+        user_idx = intent.getIntExtra("user_idx", -1)
 
-        btn_toolbar_product_like.setOnClickListener {
-            btn_toolbar_product_like.isSelected = !btn_toolbar_product_like.isSelected
+        //첫 타이틀바 이름
+        if(flag == 0)
+        {
+            tv_title_bar_hotpost_commu_act.text = "최신글"
+
+            getCommunityRecentAllResponse(communityNetworkService.getCommunityAllNewPosts())
+
         }
+        else if(flag == 1)
+        {
+            tv_title_bar_hotpost_commu_act.text = "인기글"
 
-        btn_toolbar_product_back.setOnClickListener {
+            getCommunityRecentAllResponse(communityNetworkService.getCommunityAllHotPosts())
+
+        }
+        else if(flag == -1)
             finish()
-        }
+
     }
-    */
 
-  /*  //recyclerView
+
+   //recyclerView
     private fun configureRecyclerView() {
-        var dataList: ArrayList<CommunityHotPostData> = ArrayList()
-        dataList.add(CommunityHotPostData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",1,
-                "햇님이 먹었던 과자 브랜드 이게 맞나?", 10, 10, "18:47","",0,0))
-        dataList.add(CommunityHotPostData("", 1,
-            "안녀안알ㄴ여ㅏㄴ여낭", 1, 8, "14:27","",0,0))
-        dataList.add(CommunityHotPostData("",1,
-            "입짧은햇님보세여", 19, 19, "12:35","",0,0))
-        dataList.add(CommunityHotPostData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",0,
-            "먹방요정", 4, 8, "11:20","",0,0))
-        dataList.add(CommunityHotPostData("http://sopt.org/wp/wp-content/uploads/2014/01/24_SOPT-LOGO_COLOR-1.png",0,
-            "바부야", 2, 7, "04:30","",0,0))
+        var dataList: ArrayList<CommunitySmallNewGetData> = ArrayList()
 
-        communityHotPostRecyclerViewAdapter = CommunityHotPostRecyclerViewAdapter(this, dataList)
+        communityHotPostRecyclerViewAdapter = CommunityHotPostRecyclerViewAdapter(this, dataList,flag)
         rv_community_hotpost_act_list.adapter = communityHotPostRecyclerViewAdapter
         rv_community_hotpost_act_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+    }
+
+
+    //통신 전체 보여주기
+    private fun getCommunityRecentAllResponse(networkfunction: Call<GetCommunitySmallNewPostResponse>) {
+        val getCommunitySmallNewPosts : Call<GetCommunitySmallNewPostResponse> =networkfunction
+
+        getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
+
+            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+                Log.e("최신글 전체 list fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetCommunitySmallNewPostResponse>, response: Response<GetCommunitySmallNewPostResponse>) {
+
+                if (response.isSuccessful) {
+                    val temp : ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                    if (temp.size > 0) {
+
+                        val position = communityHotPostRecyclerViewAdapter.itemCount
+                        communityHotPostRecyclerViewAdapter.dataList.addAll(temp)
+                        communityHotPostRecyclerViewAdapter.notifyItemInserted(position)
+                    }
+
+                }
+
+            }
+
+        })
 
     }
-*/
+
+
     private fun init(){
         btn_back_hotpost_community_act.setOnClickListener(this)
         btn_search_community_hotpost_act.setOnClickListener(this)

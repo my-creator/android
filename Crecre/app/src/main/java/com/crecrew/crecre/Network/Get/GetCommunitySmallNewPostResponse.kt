@@ -1,6 +1,6 @@
 package com.crecrew.crecre.Network.Get
 
-import com.crecrew.crecre.Network.Get.CommunitySmallNewGetData
+import com.crecrew.crecre.Data.CommunitySmallNewGetData
 
 data class GetCommunitySmallNewPostResponse(
     val data: ArrayList<CommunitySmallNewGetData>,
