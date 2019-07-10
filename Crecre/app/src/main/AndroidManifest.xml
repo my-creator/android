@@ -15,11 +15,11 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
+        <activity android:name=".UI.Activity.LoginActivity">
 
-        <activity
-                android:name=".UI.Activity.ProfileJoinStatActivity">
         </activity>
-
+        <activity android:name=".UI.Activity.ProfileJoinStatActivity">
+        </activity>
         <activity android:name=".UI.Activity.Community.CommunityWriteActivity">
         </activity>
         <activity android:name=".UI.Activity.Community.CommunityRequestActivity">
@@ -28,9 +28,7 @@
         </activity>
         <activity android:name=".UI.Activity.Community.CommunityHotPostActivity">
         </activity>
-        <activity
-                android:name=".UI.Activity.MainActivity">
-
+        <activity android:name=".UI.Activity.MainActivity">
         </activity>
         <activity android:name=".UI.Activity.CreatorProfileActivity"/>
         <activity android:name=".UI.Activity.Community.CommunitySearchActivity"/>
@@ -43,7 +41,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
         </activity>
+        <activity android:name=".UI.Activity.SignupActivity"/>
+        <activity android:name=".UI.Activity.SignupCompleteActivity"/>
     </application>
 
 </manifest>
