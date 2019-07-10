@@ -17,8 +17,6 @@ import com.crecrew.crecre.Base.BasePagerAdapter
 import com.crecrew.crecre.Data.RankData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.RankChartRecyclerViewAdapter
-import com.crecrew.crecre.UI.Fragment.HomeTodayRankBottomFragment
-import com.crecrew.crecre.UI.Fragment.HomeTodayRankTopFragment
 import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import kotlinx.android.synthetic.main.fragment_rank.*

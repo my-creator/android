@@ -2,6 +2,7 @@ package scom.crecrew.crecre.UI.Fragment
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
@@ -18,17 +20,27 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.util.*
 import com.crecrew.crecre.Base.BasePagerAdapter
+import com.crecrew.crecre.Data.CreatorData
 import com.crecrew.crecre.Data.LastVoteData
 import com.crecrew.crecre.Data.TodayPost
+import com.crecrew.crecre.Data.TodayRankData
+import com.crecrew.crecre.Network.ApplicationController
+import com.crecrew.crecre.Network.CreatorNetworkService
+import com.crecrew.crecre.Network.Get.GetCreatorTodayHotRank
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
-import com.crecrew.crecre.UI.Adapter.LastVoteOverviewRecyclerView
 import com.crecrew.crecre.UI.Adapter.TodayPostRecyclerViewAdapter
-import com.crecrew.crecre.UI.Fragment.HomeTodayRankBottomFragment
-import com.crecrew.crecre.UI.Fragment.HomeTodayRankTopFragment
 import org.jetbrains.anko.support.v4.startActivity
 import com.crecrew.crecre.UI.Activity.CreatorSearchActivity
+import com.crecrew.crecre.UI.Adapter.TodayRankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
+import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
+import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
+import kotlinx.android.synthetic.main.fragment_home_today_rank.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import kotlin.collections.ArrayList
 
 
 class HomeFragment: Fragment() {
@@ -37,31 +49,20 @@ class HomeFragment: Fragment() {
     private var isChartOpen = false
 
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
+    var todayCreatorRankData : ArrayList<CreatorData> = ArrayList()
+
+    val creatorNetworkService: CreatorNetworkService by lazy{
+        ApplicationController.instance.creatorNetworkService
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
+        // 통신
+        getCreatorTodayHotRank()
 
-        rootView.let {
-            // today rank ViewPager
-            it.fragment_home_vp_today_rank.run {
-                adapter = BasePagerAdapter(fragmentManager!!).apply {
-                    addFragment(HomeTodayRankTopFragment())
-                    addFragment(HomeTodayRankBottomFragment())
-                }
-            }
 
-            // tab설정
-            it.fragment_home_tl_today_rank.run {
-                val navigationLayout: View =
-                    LayoutInflater.from(activity!!).inflate(R.layout.fragment_home_today_rank_navi, null, false)
-                setupWithViewPager(it.fragment_home_vp_today_rank)
-                getTabAt(0)!!.customView =
-                    navigationLayout.findViewById(R.id.fragment_home_today_rank_navi_top) as RelativeLayout
-                getTabAt(1)!!.customView =
-                    navigationLayout.findViewById(R.id.fragment_home_today_rank_navi_bottom) as RelativeLayout
-            }
-        }
+
 
         // 화면 전환
         rootView.run {
@@ -179,6 +180,82 @@ class HomeFragment: Fragment() {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
 
         // fragment_home_edit_search.clearFocus()
+    }
+
+
+
+    // creator ranking networking
+    private fun getCreatorTodayHotRank(){
+
+        val getCreatorTodayHotRank = creatorNetworkService.getCreatorTodayHotRank()
+        getCreatorTodayHotRank.enqueue(object: Callback<GetCreatorTodayHotRank> {
+            override fun onFailure(call: Call<GetCreatorTodayHotRank>, t: Throwable) {
+                Log.e("creator search fail",t.toString())
+            }
+
+            override fun onResponse(call: Call<GetCreatorTodayHotRank>, response: Response<GetCreatorTodayHotRank>) {
+                if(response.isSuccessful){
+                    if(response.body()!!.status == 200){
+                        todayCreatorRankData = response.body()!!.data!!
+
+                        var todayCreatorRankTopData : ArrayList<CreatorData> = ArrayList(5)
+                        var todayCreatorRankBottomData: ArrayList<CreatorData> = ArrayList(5)
+
+                        var index = 0
+                        for(i in 0 ..4)
+                            todayCreatorRankTopData.add(todayCreatorRankData[index++])
+                        for(i in 0 ..2)
+                            todayCreatorRankBottomData.add(todayCreatorRankData[index++])
+
+                        rootView.fragment_home_vp_today_rank.run {
+                            adapter = BasePagerAdapter(fragmentManager!!).apply {
+
+                                var homeTodayRankTopFragment: HomeTodayRankFragment = HomeTodayRankFragment()
+                                homeTodayRankTopFragment.setList(todayCreatorRankTopData)
+
+                                var homeTodayRankBottomFragment: HomeTodayRankFragment = HomeTodayRankFragment()
+                                homeTodayRankBottomFragment.setList(todayCreatorRankBottomData)
+
+                                addFragment(homeTodayRankTopFragment)
+                                addFragment(homeTodayRankBottomFragment)
+                            }
+                        }
+
+                        rootView.let {
+
+                            // tab설정
+                            it.fragment_home_tl_today_rank.run {
+                                val navigationLayout: View =
+                                    LayoutInflater.from(activity!!).inflate(R.layout.fragment_home_today_rank_navi, null, false)
+                                setupWithViewPager(it.fragment_home_vp_today_rank)
+                                getTabAt(0)!!.customView =
+                                    navigationLayout.findViewById(R.id.fragment_home_today_rank_navi_top) as RelativeLayout
+                                getTabAt(1)!!.customView =
+                                    navigationLayout.findViewById(R.id.fragment_home_today_rank_navi_bottom) as RelativeLayout
+                            }
+                        }
+
+
+                        /*
+                        val topList: ArrayList<CreatorData> = ArrayList()
+                        val bottomList: ArrayList<CreatorData> = ArrayList()
+
+                        // tmp를 반으로 쪼개기
+                        for(i in tmp.indices){
+                            if(tmp[i].ranking <6){
+                                topList[i] = tmp[i]
+                            }
+                            else{
+                                bottomList[i-4] = tmp[i]
+                            }
+                        }
+*/
+
+
+                    }
+                }
+            }
+        })
     }
 
 }
