@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/transparent_black">
+
+    <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:background="@drawable/custom_dialog_box"
+            android:layout_centerInParent="true">
+
+        <RelativeLayout
+                android:id="@+id/rl_request_response_compelte"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/custom_dialog_box">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:textColor="#f4d627"
+                    android:textSize="18sp"
+                    android:text="누적 조회수에 의해 부여된 등급"
+                    android:fontFamily="@font/noto_sans_kr_bold"/>
+
+            <ImageView
+                    android:id="@+id/custom_dialog_profile_class_question_btn_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icn_close"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="16dp"/>
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_request_response_compelte"
+                android:layout_above="@+id/ll_bottom_box_search_custom_dialog"
+                android:background="@color/white"
+                android:orientation="vertical">
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/violet_pink">
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="16dp">
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icn_class1"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="클래스 F"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="44dp"
+                        android:textColor="#888888"
+                        android:textSize="16sp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0 ~ 10만"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dp"/>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="16dp">
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icn_class2"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="클래스 E"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="44dp"
+                        android:textColor="#888888"
+                        android:textSize="16sp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10만 ~  100만"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="16dp">
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icn_class3"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="클래스 D"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="44dp"
+                        android:textColor="#888888"
+                        android:textSize="16sp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="100만 ~ 1000만"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="16dp">
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icn_class4"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="클래스 C"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="44dp"
+                        android:textColor="#888888"
+                        android:textSize="16sp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1000만 ~ 1억"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="16dp">
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icn_class5"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="클래스 B"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="44dp"
+                        android:textColor="#888888"
+                        android:textSize="16sp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1억 ~ 10억"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginHorizontal="16dp">
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icn_class6"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="클래스 A"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="44dp"
+                        android:textColor="#888888"
+                        android:textSize="16sp"/>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10억 ~ "
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="8dp"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

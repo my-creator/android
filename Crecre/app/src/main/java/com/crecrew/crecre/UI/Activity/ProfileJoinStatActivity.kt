@@ -16,6 +16,10 @@ class ProfileJoinStatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_join_stat)
 
+        activity_profile_join_stat_btn_back.setOnClickListener{
+            finish()
+        }
 
     }
+
 }
