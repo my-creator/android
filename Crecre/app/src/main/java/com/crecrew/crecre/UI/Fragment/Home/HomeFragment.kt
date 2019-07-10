@@ -20,12 +20,11 @@ import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import java.util.*
 import com.crecrew.crecre.Base.BasePagerAdapter
-import com.crecrew.crecre.Data.CreatorData
-import com.crecrew.crecre.Data.LastVoteData
-import com.crecrew.crecre.Data.TodayPost
-import com.crecrew.crecre.Data.TodayRankData
+import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
+import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.Network.CreatorNetworkService
+import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
 import com.crecrew.crecre.Network.Get.GetCreatorTodayHotRank
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
@@ -49,20 +48,23 @@ class HomeFragment: Fragment() {
     private var isChartOpen = false
 
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
+
+
     var todayCreatorRankData : ArrayList<CreatorData> = ArrayList()
 
     val creatorNetworkService: CreatorNetworkService by lazy{
         ApplicationController.instance.creatorNetworkService
+    }
+    val communityNetworkService: CommunityNetworkService by lazy{
+        ApplicationController.instance.communityNetworkService
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
         // 통신
-        getCreatorTodayHotRank()
-
-
-
+        //getCreatorTodayHotRank()
+        getCommunityResponse()
 
         // 화면 전환
         rootView.run {
@@ -75,6 +77,7 @@ class HomeFragment: Fragment() {
                 startActivity<VoteSuggestActivity>()
             }
             fragment_home_txt_today_hot_post_more.setOnClickListener {
+                Log.e("click","click more btn")
                 startActivity<CommunityHotPostActivity>()
                 // TODO: hot과 new 구분하기!
             }
@@ -147,29 +150,7 @@ class HomeFragment: Fragment() {
             }
         }
 
-        // hot post
-        var todayHotDataList: ArrayList<TodayPost> = ArrayList()
 
-        todayHotDataList.add(TodayPost("http://mblogthumb4.phinf.naver.net/MjAxODA1MTJfMTMx/MDAxNTI2MTMxOTAwMDQw.nYJ52P9m33uVBVaA4D9Y8aEpngi2BhTwZhlmPi11xnwg.jl2N0ZuJDxZDdTZZsNbrQTpGemFNgLS342YMnUcYeKMg.JPEG.jini2877/12.jpg?type=w800","딕헌터와 영알남 커플, 현실에서의 만남 더 심쿵! 하라락후루룩 호로록 줄이넘어간다링 안넘어간다", "먹방",89,32,"2019-07-07 15:12"))
-        todayHotDataList.add(TodayPost("http://www.mrtt.news/news/photo/201810/1093_4186_485.jpg","2019년 7월 3일 현재 나는 배가 고프다. 어깨도 아픔", "개발",1004,52,"2019-07-07 04:51"))
-        todayHotDataList.add(TodayPost("https://byline.network/wp-content/uploads/2018/12/tiye.png","지금 정호,예원,다연,민정,가희,신우,혁표,현희랑 같이 있음 크리크리짱", "솝트",999,14,"2019-07-07 23:12"))
-
-        todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayHotDataList)
-        fragment_home_rv_today_hot_post.adapter = todayPostRecyclerViewAdapter
-        fragment_home_rv_today_hot_post.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        fragment_home_rv_today_hot_post.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
-
-        // new post
-        var todayNewDataList: ArrayList<TodayPost> = ArrayList()
-
-        todayNewDataList.add(TodayPost("https://i.ytimg.com/vi/SzJo9QfhZg8/maxresdefault.jpg","왼쪽 어깨 너무 아프당. 내일 알바가기 시르다", "건강",89,32,"2019-07-07 23:50"))
-        todayNewDataList.add(TodayPost("https://scontent-bru2-1.cdninstagram.com/vp/8689f4c9fc508fd674d2f60a5c23b2a0/5DC25F71/t51.2885-15/e35/56184620_383987605521824_7189641354343536955_n.jpg?_nc_ht=scontent-bru2-1.cdninstagram.com","와 좀있으면 홈화면 끝난다", "개발",1004,52,"2019-07-07 23:40"))
-        todayNewDataList.add(TodayPost("http://static.hubzum.zumst.com/hubzum/2017/10/19/10/09828761654d4f02af8ba6cf86bc4cc3.png","헐 1일 1커밋해야하는데, 이제 커밋해야지", "개발",999,14,"2019-07-07 23:32"))
-
-        todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayNewDataList)
-        fragment_home_rv_today_new_post.adapter = todayPostRecyclerViewAdapter
-        fragment_home_rv_today_new_post.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        fragment_home_rv_today_new_post.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
 
     }
 
@@ -192,11 +173,10 @@ class HomeFragment: Fragment() {
             override fun onFailure(call: Call<GetCreatorTodayHotRank>, t: Throwable) {
                 Log.e("creator search fail",t.toString())
             }
-
             override fun onResponse(call: Call<GetCreatorTodayHotRank>, response: Response<GetCreatorTodayHotRank>) {
                 if(response.isSuccessful){
                     if(response.body()!!.status == 200){
-                        todayCreatorRankData = response.body()!!.data!!
+                        todayCreatorRankData = response.body()!!.data
 
                         var todayCreatorRankTopData : ArrayList<CreatorData> = ArrayList(5)
                         var todayCreatorRankBottomData: ArrayList<CreatorData> = ArrayList(5)
@@ -234,28 +214,80 @@ class HomeFragment: Fragment() {
                                     navigationLayout.findViewById(R.id.fragment_home_today_rank_navi_bottom) as RelativeLayout
                             }
                         }
-
-
-                        /*
-                        val topList: ArrayList<CreatorData> = ArrayList()
-                        val bottomList: ArrayList<CreatorData> = ArrayList()
-
-                        // tmp를 반으로 쪼개기
-                        for(i in tmp.indices){
-                            if(tmp[i].ranking <6){
-                                topList[i] = tmp[i]
-                            }
-                            else{
-                                bottomList[i-4] = tmp[i]
-                            }
-                        }
-*/
-
-
                     }
                 }
             }
         })
     }
+
+    // post networking
+    private fun getCommunityResponse() {
+
+        // TODO: 가희한테 말해서 getCommunitySmallPosts로 이름 바꾸기 (new나 hot이 들어가지 않도록)
+        val getCommunitySmallHotPosts : Call<GetCommunitySmallNewPostResponse> = communityNetworkService.getCommunitySmallHotPosts()
+        getCommunitySmallHotPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
+
+            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+                Log.e("hot post list fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetCommunitySmallNewPostResponse>, response: Response<GetCommunitySmallNewPostResponse>) {
+                if (response.isSuccessful) {
+                    if(response.body()!!.status == 200) {
+                        val tmp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                        if (tmp.size > 0) {
+                            var todayDataList : ArrayList<CommunitySmallNewGetData> = ArrayList(3)
+
+                            for(i in 0..2) {
+                                todayDataList.add(tmp[i])
+                            }
+                            todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayDataList)
+                            fragment_home_rv_today_hot_post.adapter = todayPostRecyclerViewAdapter
+                            fragment_home_rv_today_hot_post.layoutManager =
+                                LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                            fragment_home_rv_today_hot_post.addItemDecoration(
+                                DividerItemDecoration(
+                                    context!!,
+                                    DividerItemDecoration.VERTICAL
+                                )
+                            )
+                        }
+                    }
+                }
+
+            }
+
+        })
+
+        val getCommunitySmallNewPosts : Call<GetCommunitySmallNewPostResponse> = communityNetworkService.getCommunitySmallNewPosts()
+        getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
+
+            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+                Log.e("new post list fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetCommunitySmallNewPostResponse>, response: Response<GetCommunitySmallNewPostResponse>) {
+                if (response.isSuccessful) {
+                    if(response.body()!!.status == 200) {
+                        val tmp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                        if (tmp.size > 0) {
+                            var todayDataList : ArrayList<CommunitySmallNewGetData> = ArrayList(3)
+
+                            for(i in 0..2) {
+                                todayDataList.add(tmp[i])
+                            }
+
+                            todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayDataList)
+                            fragment_home_rv_today_new_post.adapter = todayPostRecyclerViewAdapter
+                            fragment_home_rv_today_new_post.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                            fragment_home_rv_today_new_post.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
+                        }
+                    }
+                }
+
+            }
+        })
+    }
+
 
 }

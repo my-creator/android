@@ -23,7 +23,7 @@ class SplashActivity :AppCompatActivity(){
         handler.postDelayed({
             startActivity(Intent(applicationContext, MainActivity::class.java))
             finish()
-        }, 1000)
+        }, 2000)
 
         // splash 불러오는 동안 background에서 미리 작업하는 방법?
     }

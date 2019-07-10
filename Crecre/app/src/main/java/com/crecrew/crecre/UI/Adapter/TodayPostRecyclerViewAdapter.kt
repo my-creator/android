@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.crecrew.crecre.Data.CommunitySmallNewGetData
 import com.crecrew.crecre.Data.TodayPost
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityDetailActivity
@@ -22,7 +23,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<TodayPost>) : RecyclerView.Adapter<TodayPostRecyclerViewAdapter.Holder>() {
+class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<CommunitySmallNewGetData>) : RecyclerView.Adapter<TodayPostRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx)!!.inflate(R.layout.rv_item_today_post, viewGroup, false)
         return Holder(view)
@@ -32,24 +33,24 @@ class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataLi
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
+            if (dataList[position].thumbnail_url == "")
+                Glide.with(ctx).load(R.drawable.icn_img_x).into(holder.thumbnail)
+            else
+                Glide.with(ctx).load(dataList[position].thumbnail_url).into(holder.thumbnail)
+            holder.title.text = dataList[position].title
+            holder.category.text = dataList[position].name
+            holder.recommend.text = "추천" + dataList[position].like_cnt.toString()
+            holder.comment.text = "댓글" + dataList[position].reply_cnt.toString()
 
-        if(dataList[position].thumbnail == "")
-            Glide.with(ctx).load(R.drawable.icn_img_x).into(holder.thumbnail)
-        else
-            Glide.with(ctx).load(dataList[position].thumbnail).into(holder.thumbnail)
-        holder.title.text = dataList[position].title
-        holder.category.text = dataList[position].category
-        holder.recommend.text = "추천" + dataList[position].recommend.toString()
-        holder.comment.text = "댓글" + dataList[position].comment.toString()
+            var cpt = CalculatePostTime().calculatePostTime(dataList[position].create_time)
+            holder.time.text = cpt
 
-        var cpt = CalculatePostTime().calculatePostTime(dataList[position].time)
-        holder.time.text = cpt
+            holder.container.setOnClickListener {
+                ctx.startActivity<CommunityDetailActivity>(
+                    // TODO: 정보 넣기
+                )
+            }
 
-        holder.container.setOnClickListener {
-            ctx.startActivity<CommunityDetailActivity>(
-               // TODO: 정보 넣기
-            )
-        }
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {

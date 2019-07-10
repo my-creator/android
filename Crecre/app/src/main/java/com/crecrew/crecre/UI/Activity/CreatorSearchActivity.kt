@@ -20,11 +20,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.RelativeLayout
 import com.crecrew.crecre.Data.CreatorNumData
 import com.crecrew.crecre.Data.CreatorSearchData
-import com.crecrew.crecre.Data.RankData
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CreatorNetworkService
 import com.crecrew.crecre.Network.Get.GetCreatorNum
 import com.crecrew.crecre.Network.Get.GetCreatorSearch
+import com.crecrew.crecre.Network.Get.RankData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.RankChartRecyclerViewAdapter
 import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
@@ -41,7 +41,7 @@ class CreatorSearchActivity : AppCompatActivity() {
 
     lateinit var rankChartRecyclerViewAdapter: RankChartRecyclerViewAdapter
 
-    var rankData: ArrayList<CreatorSearchData> = ArrayList()
+    var rankData: ArrayList<RankData> = ArrayList()
 
     val creatorNetworkService: CreatorNetworkService by lazy{
         ApplicationController.instance.creatorNetworkService
@@ -113,7 +113,7 @@ class CreatorSearchActivity : AppCompatActivity() {
         activity_creator_search_result_container.visibility = VISIBLE
         activity_creator_search_txt.visibility = GONE
 
-        rankChartRecyclerViewAdapter = RankChartRecyclerViewAdapter(this@CreatorSearchActivity, rankData, 1)
+        rankChartRecyclerViewAdapter = RankChartRecyclerViewAdapter(this@CreatorSearchActivity, rankData, 0)
         activity_creator_rv_search_result.adapter = rankChartRecyclerViewAdapter
         activity_creator_rv_search_result.layoutManager = LinearLayoutManager(this@CreatorSearchActivity, LinearLayoutManager.VERTICAL, false)
         activity_creator_rv_search_result.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
@@ -162,7 +162,7 @@ class CreatorSearchActivity : AppCompatActivity() {
             override fun onResponse(call: Call<GetCreatorSearch>, response: Response<GetCreatorSearch>) {
                 if(response.isSuccessful){
                     if(response.body()!!.status == 200){
-                        val tmp :ArrayList<CreatorSearchData> = response.body()!!.data!!
+                        val tmp :ArrayList<RankData> = response.body()!!.data!!
                         rankData = tmp
 
                         // data가 있는 경우
