@@ -53,13 +53,6 @@ interface CommunityNetworkService {
 
     ): Call<GetCommunityUnlikeBoardsResponse>
 
-    //게시판 즐겨찾기
-    @POST("boards/{boardIdx}/like")
-    fun postBoardsFavoriteLike(
-        @Header("token") token: String,
-        @Path("boardIdx") boardIdx: Int
-    ): Call<PostCommunityFavoriteLikeResponse>
-
     //게시판 정보 보내기
     @POST("boards/request")
     fun postBoardsRequest(
@@ -100,6 +93,23 @@ interface CommunityNetworkService {
         @Query("title") title: String,
         @Query("contents") contents : String
     ) : Call<GetCommunitySmallNewPostResponse>
+
+
+    //게시판 즐겨찾기
+    @POST("boards/{boardIdx}/like")
+    fun postBoardsFavoriteLike(
+        @Header("token") token: String,
+        @Path("boardIdx") boardIdx: Int
+    ): Call<PostCommunityFavoriteLikeResponse>
+
+    //게시판 즐겨찾기 취소
+    @DELETE("boards/{boardIdx}/unlike")
+    fun deleteBoardsFavoriteLike(
+        @Header("token") token: String,
+        @Path("boardIdx") boardIdx: Int
+    ): Call<PostCommunityFavoriteLikeResponse>
+
+
 
 
 }

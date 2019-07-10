@@ -38,7 +38,7 @@
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icn_find_p"
+                        android:src="@drawable/icn_search_w"
                         android:layout_centerVertical="true"
                 />
 
