@@ -26,8 +26,7 @@ class CoummunitySearchRecyclerViewAdapter (val ctx : Context, val dataList : Arr
         holder.category.text = dataList[position].name
 
         //그냥 받아왔을 때 ##서버 추가
-/*
-        if(dataList[position].like_on == 1)
+        if(dataList[position].is_love == 1)
         {
             holder.like_on.setImageResource(R.drawable.icn_look_on)
             img_like = 1
@@ -51,7 +50,7 @@ class CoummunitySearchRecyclerViewAdapter (val ctx : Context, val dataList : Arr
                 img_like = 0
             }
         }
-*/
+
 
     }
 

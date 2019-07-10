@@ -11,12 +11,12 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.crecrew.crecre.Data.CreatorData
 import com.crecrew.crecre.Data.TodayRankData
 import com.crecrew.crecre.R
-import com.crecrew.crecre.UI.Fragment.HomeTodayRankTopFragment
 
 
-class TodayRankRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<TodayRankData>, private val tab : Int) : RecyclerView.Adapter<TodayRankRecyclerViewAdapter.Holder>() {
+class TodayRankRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<CreatorData>) : RecyclerView.Adapter<TodayRankRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx)!!.inflate(R.layout.rv_item_today_rank, viewGroup, false)
         return Holder(view)
@@ -26,32 +26,19 @@ class TodayRankRecyclerViewAdapter(private val ctx : Context, private val dataLi
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
-        // 범위내로 안뜸
-        if(tab == 1) {
-            if(dataList[position].number >= 1 && dataList[position].number <=5) {
-                if(dataList[position].number >= 1 && dataList[position].number <=3){
+
+                if(dataList[position].ranking >= 1 && dataList[position].ranking <=3){
                     holder.number.setTextColor(Color.parseColor("#ff57f7"))
                 }
-                holder.number.text = dataList[position].number.toString()
-                holder.creator.text = dataList[position].creator
-                if (dataList[position].gap > 0)
-                    Glide.with(ctx).load(R.drawable.icn_up).into(holder.arrow)
-                else
-                    Glide.with(ctx).load(R.drawable.icn_down).into(holder.arrow)
-                holder.gap.text = Math.abs(dataList[position].gap).toString()
-            }
 
-        }else{
-            if (dataList[position].number >= 6 && dataList[position].number <= 10) {
-                holder.number.text = dataList[position].number.toString()
-                holder.creator.text = dataList[position].creator
-                if (dataList[position].gap > 0)
+                holder.number.text = dataList[position].ranking.toString()
+                holder.creator.text = dataList[position].creator_name
+                if (dataList[position].searchCnt > 0)
                     Glide.with(ctx).load(R.drawable.icn_up).into(holder.arrow)
                 else
                     Glide.with(ctx).load(R.drawable.icn_down).into(holder.arrow)
-                holder.gap.text = Math.abs(dataList[position].gap).toString()
-            }
-        }
+                holder.gap.text = Math.abs(dataList[position].searchCnt).toString()
+
 
             holder.container.setOnClickListener {
 

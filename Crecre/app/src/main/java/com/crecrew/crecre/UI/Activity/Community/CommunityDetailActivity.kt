@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -14,23 +15,47 @@ import com.crecrew.crecre.Data.CommentData
 import com.crecrew.crecre.UI.Adapter.CommunityDetailCommentRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_community_detail.*
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.crecrew.crecre.Data.CommunitySmallNewGetData
+import com.crecrew.crecre.Network.ApplicationController
+import com.crecrew.crecre.Network.CommunityNetworkService
+import com.crecrew.crecre.Network.Get.CommunityDetailData
+import com.crecrew.crecre.Network.Get.CommunityRequestCntData
+import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
+import com.crecrew.crecre.Network.Get.GetPostDetailResponse
 import com.crecrew.crecre.R
 import com.crecrew.crecre.utils.ContentsDeleteDialog
 import com.crecrew.crecre.utils.CustomRequestCompleteDialog
+import kotlinx.android.synthetic.main.activity_community_detail.view.*
+import org.jetbrains.anko.ctx
+import org.jetbrains.anko.networkStatsManager
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     var btn_like = 0
     var btn_unlike = 0
-    var btn_anonymous =0
-    lateinit var communityDetailCommentRecyclerViewAdapter:CommunityDetailCommentRecyclerViewAdapter
+    var btn_anonymous = 0
 
-    val requestDialog : ContentsDeleteDialog by lazy {
-        ContentsDeleteDialog(this@CommunityDetailActivity, "알림","게시물을 정말 삭제하시겠어요?", "네"
-            ,"아니요", completeConfirmListener, completeNoListener)
+    var title: String? = ""
+    var postidx = -1
+    var category_title: String? = ""
+
+    lateinit var communityDetailCommentRecyclerViewAdapter: CommunityDetailCommentRecyclerViewAdapter
+
+    val requestDialog: ContentsDeleteDialog by lazy {
+        ContentsDeleteDialog(
+            this@CommunityDetailActivity, "알림", "게시물을 정말 삭제하시겠어요?", "네"
+            , "아니요", completeConfirmListener, completeNoListener
+        )
     }
 
+    val communityNetworkService: CommunityNetworkService by lazy {
+        ApplicationController.instance.communityNetworkService
+    }
 
     //click
     override fun onClick(v: View?) {
@@ -39,14 +64,14 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
             //추천 누르기
             btn_like_community_detail_act -> {
 
-                if(btn_unlike == 1){
+                if (btn_unlike == 1) {
                     btn_unlike_community_detail_act.isSelected = false
                     tv_unlike_community_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
                     btn_unlike = 0
 
                     if (btn_like == 0) {
                         btn_like_community_detail_act.isSelected = true
-                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#ff57f7"))
+                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#ff4343"))
                         btn_like = 1
                     } else {
                         btn_like_community_detail_act.isSelected = false
@@ -54,11 +79,10 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         btn_like = 0
                     }
 
-                }
-                else {
+                } else {
                     if (btn_like == 0) {
                         btn_like_community_detail_act.isSelected = true
-                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#ff57f7"))
+                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#ff4343"))
                         btn_like = 1
                     } else {
                         btn_like_community_detail_act.isSelected = false
@@ -71,27 +95,24 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
             //비추천 누르기
             btn_unlike_community_detail_act -> {
 
-                if(btn_like == 1)
-                {
+                if (btn_like == 1) {
                     btn_like_community_detail_act.isSelected = false
                     tv_recommend_number_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
                     btn_like = 0
 
                     if (btn_unlike == 0) {
                         btn_unlike_community_detail_act.isSelected = true
-                        tv_unlike_community_detail_act.setTextColor(Color.parseColor("#36ebf0"))
+                        tv_unlike_community_detail_act.setTextColor(Color.parseColor("#367fff"))
                         btn_unlike = 1
                     } else {
                         btn_unlike_community_detail_act.isSelected = false
                         tv_unlike_community_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
                         btn_unlike = 0
                     }
-                }
-                else
-                {
+                } else {
                     if (btn_unlike == 0) {
                         btn_unlike_community_detail_act.isSelected = true
-                        tv_unlike_community_detail_act.setTextColor(Color.parseColor("#36ebf0"))
+                        tv_unlike_community_detail_act.setTextColor(Color.parseColor("#367fff"))
                         btn_unlike = 1
                     } else {
                         btn_unlike_community_detail_act.isSelected = false
@@ -122,8 +143,9 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                 downKeyboard(rl_commu_detail_act)
             }
 
+            //글 삭제버튼(본인이 작성한 경우에만 해당됨)
             btn_delete_detail_community_act -> {
-
+                showPopup(btn_delete_detail_community_act)
             }
 
         }
@@ -135,7 +157,11 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
 
         init()
 
-        configureRecyclerView()
+        //configureRecyclerView()
+
+        configurebasicSetting()
+        getCommunityRecentAllResponse()
+
     }
 
     //팝업 클릭리스너
@@ -146,6 +172,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
 
@@ -166,37 +193,25 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
         btn_back_community_detail_act.setOnClickListener(this)
         btn_anonymous_detail_com_act.setOnClickListener(this)
         rl_commu_detail_act.setOnClickListener(this)
-        btn_delete_detail_community_act.setOnClickListener(clickListener)
+        btn_delete_detail_community_act.setOnClickListener(this)
     }
 
-    //recyclerView
+/*
+    //댓글 recyclerView
     private fun configureRecyclerView() {
-        var dataList: ArrayList<CommentData> = ArrayList()
-        dataList.add(
-            CommentData("http://www.figurepresso.com/web/product/big/201708/7531_shop1_593433.jpg","양시연영상",
-                "18초전",  "시연이는 알린을 좋아해,,")
-        )
-        dataList.add(
-            CommentData("https://duckyworld.co.kr/web/product/big/201710/523_shop1_327628.jpg",
-                "안녀안알ㄴ여ㅏㄴ여낭", "14:27","내가 무슨 부귀영화를 누리려고 이 글에 들어왔니?")
-        )
-        dataList.add(
-            CommentData("http://ecx.images-amazon.com/images/I/41oIsVytUOL.jpg","유가희",
-                "1분전",  "명망먀여망며아명마염")
-        )
-        dataList.add(
-            CommentData("https://scontent-lga3-1.cdninstagram.com/vp/f899f4cda10d8ac144041dbb4bb1240c/5DB1453F/t51.2885-15/e35/65610653_125382465361781_2677424777804115689_n.jpg?_nc_ht=scontent-lga3-1.cdninstagram.com","양희찬",
-                "1시간전",  "김!애!용!!")
-        )
-        dataList.add(
-            CommentData("http://stimg.afreecatv.com/NORMAL_BBS/7/16469567/16505c6f9f85df905.jpeg","김애용",
-                "18초전",  "나는 김!애!용!!")
-        )
+        var dataList: ArrayList<CommunityDetailData> = ArrayList()
 
         communityDetailCommentRecyclerViewAdapter = CommunityDetailCommentRecyclerViewAdapter(this, dataList)
         rv_comment_commu_detail_act.adapter = communityDetailCommentRecyclerViewAdapter
         rv_comment_commu_detail_act.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
+    }
+    */
+
+    private fun configurebasicSetting() {
+        category_title = intent.getStringExtra("category_title")
+        title = intent.getStringExtra("title")
+        postidx = intent.getIntExtra("postidx", -1)
     }
 
     //키보드 다운
@@ -207,7 +222,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     //팝업창
-    private fun showPopup(view : View) {
+    private fun showPopup(view: View) {
         var popup = PopupMenu(this, view)
         popup.inflate(R.menu.menu_main)
 
@@ -228,17 +243,72 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
         popup.show()
     }
 
-    //다이얼로그->네
+    //다이얼로그 -> 네
     private val completeConfirmListener = View.OnClickListener {
         requestDialog!!.dismiss()
         finish()
         //##글 삭제하는 서버통신
     }
+
     //다이얼로그 -> 아니요
     private val completeNoListener = View.OnClickListener {
         requestDialog!!.dismiss()
     }
 
+    //통신 전체 보여주기
+    private fun getCommunityRecentAllResponse() {
 
+        val getCommunityDetail: Call<GetPostDetailResponse> = communityNetworkService.getPostDetailPostIdx(
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw",
+            postidx
+        )
+        getCommunityDetail.enqueue(object : Callback<GetPostDetailResponse> {
+            override fun onFailure(call: Call<GetPostDetailResponse>, t: Throwable) {
+                Log.e("Community detail fail", t.toString())
+            }
+            override fun onResponse(call: Call<GetPostDetailResponse>, response: Response<GetPostDetailResponse>) {
+                Log.e("is Successful",response.isSuccessful.toString())
+                if(response.isSuccessful) {
+                   // response.message()
+                    //if(response.status == 200) {
+                    val temp: ArrayList<CommunityDetailData> = response.body()!!.data
+                    if(temp.size >= 0)
+                        makeView(temp)
+                    //}
+                }
+            }
+        })
+    }
+
+    private fun makeView(dataList : ArrayList<CommunityDetailData>){
+        //toolbar title
+        tv_category_community_detail_act.text = dataList[0].board_name
+        //contents title
+        tv_title_community_detail_act.text = dataList[0].title
+
+        //user_porfile
+        if (dataList[0].profile_url == "")
+            Glide.with(ctx).load(R.drawable.icn_profile).into(img_user_profile_circleImageView)
+        else
+            Glide.with(ctx).load(dataList[0].profile_url).into(img_user_profile_circleImageView)
+
+        //nickname
+        tv_user_nickname_detail_act.setText(dataList[0].nickname)
+
+        //create_time
+        tv_createtime_commu_detail_act.setText(dataList[0].create_time)
+
+        //조회수
+        tv_viewcnt_commu_detail_act.setText("조회수 " + dataList[0].view_cnt)
+
+        //사진
+        if (dataList[0].media_url == "")
+            img_main_community_detail.visibility = View.INVISIBLE
+        else
+            Glide.with(ctx).load(dataList[0].media_url).into(img_main_community_detail)
+
+        //글 내용
+        tv_main_context_community_detail.text = "조회수 " + dataList[0].contents
+    }
 
 }

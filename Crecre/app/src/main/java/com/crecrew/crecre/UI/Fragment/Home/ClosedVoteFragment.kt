@@ -2,6 +2,7 @@ package com.crecrew.crecre.UI.Fragment.Home
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,11 +26,19 @@ class ClosedVoteFragment : Fragment() {
             Glide.with(this@ClosedVoteFragment)
                 .load(lastVoteData.image)
                 .into(frag_clsd_vote_iv_img)
-            Glide.with(this@ClosedVoteFragment)
-                .load(lastVoteData.profile)
-                //.error(R.drawable.img_profile)
-                .apply(RequestOptions().circleCrop())
-                .into(frag_clsd_vote_iv_profile)
+
+            Log.e("profile",lastVoteData.profile)
+
+            if(lastVoteData.profile == ""){
+                Glide.with(this@ClosedVoteFragment)
+                    .load(R.drawable.icn_profile)
+                    .into(frag_clsd_vote_iv_profile)
+            }else {
+                Glide.with(this@ClosedVoteFragment)
+                    .load(lastVoteData.profile)
+                    .apply(RequestOptions().circleCrop())
+                    .into(frag_clsd_vote_iv_profile)
+            }
             frag_clsd_vote_tv_name.text = lastVoteData.creator
             frag_clsd_vote_tv_rank.text = "${lastVoteData.ranking}등"
             frag_clsd_vote_tv_title.text = lastVoteData.content

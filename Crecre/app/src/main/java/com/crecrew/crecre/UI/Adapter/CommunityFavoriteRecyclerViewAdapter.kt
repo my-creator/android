@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.crecrew.crecre.Network.ApplicationController
@@ -15,17 +16,16 @@ import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import org.jetbrains.anko.startActivity
 
-class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : ArrayList<CommunityBoardData>) : RecyclerView.Adapter<CommunityFavoriteRecyclerViewAdapter.Holder>() {
+class CommunityFavoriteRecyclerViewAdapter(val ctx : Context,
+                                           val dataList : ArrayList<CommunityBoardData>,
+                                           val flag : Int) : RecyclerView.Adapter<CommunityFavoriteRecyclerViewAdapter.Holder>() {
 
     val communityNetworkService: CommunityNetworkService by lazy {
         ApplicationController.instance.communityNetworkService
     }
 
-
-
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_favorite_community_frag, viewGroup, false)
-
 
         return Holder(view)
     }
@@ -40,6 +40,7 @@ class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : Arr
         holder.container.setOnClickListener {
             ctx.startActivity<CommunityHotPostActivity>(
                 "title" to dataList[position].name,
+                //board_idx
                 "idx" to dataList[position].idx
             )
         }
@@ -55,6 +56,13 @@ class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : Arr
                 holder.img_like.isSelected = false
                 img_like = 0
             }
+        }
+
+        if(flag ==1)
+        {
+            //마지막 아이템의 line은 삭제
+            if (position == 0)
+                holder.line.visibility = View.INVISIBLE
         }
 
 /*
@@ -83,6 +91,7 @@ class CommunityFavoriteRecyclerViewAdapter(val ctx : Context, val dataList : Arr
         var container = itemView.findViewById(R.id.rl_item_favorite_container) as RelativeLayout
         var title = itemView.findViewById(R.id.tv_rv_title_community_frag) as TextView
         var img_like = itemView.findViewById(R.id.btn_favorite_heart_community_frag) as ImageView
+        var line = itemView.findViewById(R.id.rl_line_favorite_commu_frag) as RelativeLayout
     }
 
 }

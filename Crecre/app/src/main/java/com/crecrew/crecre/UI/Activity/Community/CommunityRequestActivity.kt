@@ -1,16 +1,21 @@
 package com.crecrew.crecre.UI.Activity.Community
 
 import android.content.Context
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
+import android.text.style.RelativeSizeSpan
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.crecrew.crecre.Data.CommunitySmallNewGetData
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CommunityNetworkService
-import com.crecrew.crecre.Network.Get.CommunityBoardData
-import com.crecrew.crecre.Network.Get.GetCommunityUnlikeBoardsResponse
+import com.crecrew.crecre.Network.Get.*
 import com.crecrew.crecre.Network.Post.PostCommunityFavoriteLikeResponse
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Fragment.Community.CommunityFragment
@@ -19,20 +24,21 @@ import com.crecrew.crecre.utils.SearchAlarmDialog
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_community_request.*
+import kotlinx.android.synthetic.main.activity_creator_search.*
 import kotlinx.android.synthetic.main.custom_dialog_response_complete.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.*
+import kotlin.collections.ArrayList
 
 class CommunityRequestActivity : AppCompatActivity(), View.OnClickListener {
 
-
+    var request_num = 0
     val requestDialog: CustomRequestCompleteDialog by lazy {
         CustomRequestCompleteDialog(
-            this@CommunityRequestActivity, "요청완료", "현재 85명이 이 유튜버의\n" +
-                    "개인 게시판을 요청했어요!", "팬 100명이 모이면 유튜버의\n" +
+            this@CommunityRequestActivity, "요청완료", configureBeforeSearch(), "팬 100명이 모이면 유튜버의\n" +
                     "개인 게시판이 만들어져요.", completeConfirmListener, "확인"
         )
     }
@@ -48,6 +54,7 @@ class CommunityRequestActivity : AppCompatActivity(), View.OnClickListener {
     val communityNetworkService: CommunityNetworkService by lazy {
         ApplicationController.instance.communityNetworkService
     }
+
 
     override fun onClick(v: View?) {
         when (v!!) {
@@ -81,7 +88,8 @@ class CommunityRequestActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_community_request)
 
         init()
-
+        //configureBeforeSearch()
+        getRequestCnt()
     }
 
     private fun init() {
@@ -109,7 +117,7 @@ class CommunityRequestActivity : AppCompatActivity(), View.OnClickListener {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
-    //editText값 보내기
+    //통신 editText값 보내기
     private fun postCommunityRequest() {
 
         val boardsname: String = et_enter_youtuber_name_request_act.text.toString()
@@ -153,6 +161,47 @@ class CommunityRequestActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         })
+    }
+
+    fun configureBeforeSearch() : SpannableStringBuilder {
+
+        //85자리에 통신해서 가져온 숫자를 넣어라! text로 바꿔서
+        var creator_num = request_num.toString() + "명"
+        Log.v("TAGG", creator_num.toString())
+
+        var str = "현재 " + creator_num +"이 이 유튜버의" +'\n'+"개인 게시판을 요청했어요!"
+
+        var ssb = SpannableStringBuilder(str)
+        ssb.setSpan(ForegroundColorSpan(Color.parseColor("#ff57f7")),3, 3 + creator_num.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        ssb.setSpan(RelativeSizeSpan(1.1f) ,3, 3 + creator_num.length, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        return ssb
+
+    }
+
+    //통신 전체 보여주기
+    private fun getRequestCnt() {
+        val getrequestCnt : Call<GetBoardRequestNumResponse> = communityNetworkService.getBoeardsRequestIdx("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw",
+            5)
+
+        getrequestCnt.enqueue(object : Callback<GetBoardRequestNumResponse> {
+
+            override fun onFailure(call: Call<GetBoardRequestNumResponse>, t: Throwable) {
+                Log.e("최신글 전체 list fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetBoardRequestNumResponse>, response: Response<GetBoardRequestNumResponse>) {
+
+                if (response.isSuccessful) {
+                    val temp : ArrayList<CommunityRequestCntData> = response.body()!!.data
+                    request_num = temp[0].request_cnt
+
+                }
+
+            }
+
+        })
+
     }
 
 }

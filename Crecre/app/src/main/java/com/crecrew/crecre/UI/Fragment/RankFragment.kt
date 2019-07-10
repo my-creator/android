@@ -1,46 +1,55 @@
 package com.crecrew.crecreUI.Fragment
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.RelativeLayout
-import android.widget.Toast
-import com.crecrew.crecre.Base.BasePagerAdapter
-import com.crecrew.crecre.Data.RankData
+import android.view.animation.AnimationUtils
+import com.crecrew.crecre.Network.ApplicationController
+import com.crecrew.crecre.Network.Get.GetRankResponse
+import com.crecrew.crecre.Network.Get.RankData
+import com.crecrew.crecre.Network.RankNetworkService
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.RankChartRecyclerViewAdapter
-import com.crecrew.crecre.UI.Fragment.HomeTodayRankBottomFragment
-import com.crecrew.crecre.UI.Fragment.HomeTodayRankTopFragment
 import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
-import kotlinx.android.synthetic.main.fragment_home.view.*
+import kotlinx.android.synthetic.main.fragment_home_today_rank.*
 import kotlinx.android.synthetic.main.fragment_rank.*
 import kotlinx.android.synthetic.main.fragment_rank.view.*
 import kotlinx.android.synthetic.main.fragment_rank_category_navi.*
 import kotlinx.android.synthetic.main.fragment_rank_category_navi.view.*
-import kotlinx.android.synthetic.main.rv_item_rank_creator.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class RankFragment: Fragment(), View.OnClickListener{
     private lateinit var rootView: View
     lateinit var rankChartRecyclerViewAdapter: RankChartRecyclerViewAdapter
 
+    val rankNetworkService: RankNetworkService by lazy{
+        ApplicationController.instance.rankNetworkService
+    }
+
+    var networkCategoryFlag = 0
+    var networkTermFlag = 0
+    var networkNumberFlag = 1
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_rank, container, false)
 
-
+        // 처음 선택 값
         rootView.fragment_rank_rl_hot_navi.isSelected = true
         rootView.fragment_rank_rl_subscriber_navi.isSelected = true
+        rootView.fragment_rank_category_navi_all.isSelected = true
 
         init()
-        rootView.fragment_rank_category_navi_all.isSelected = true
+
+        getRankReponse(rankNetworkService.getAllAllSubscriber(),networkNumberFlag)
+
 
         return rootView
     }
@@ -48,7 +57,7 @@ class RankFragment: Fragment(), View.OnClickListener{
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        configureRecyclerView()
+        //getRankReponse(rankNetworkService.getAllHotSubscriber(),1)
 
     }
 
@@ -75,111 +84,88 @@ class RankFragment: Fragment(), View.OnClickListener{
         rootView.fragment_rank_rl_subscriber_navi.setOnClickListener(this)
         rootView.fragment_rank_rl_views_navi.setOnClickListener(this)
 
-
-
-
-    }
-
-    private fun configureRecyclerView(){
-
-        // rank data
-        var rankData: ArrayList<RankData> = ArrayList()
-
-        rankData.add(RankData(1,3, "https://news.imaeil.com/inc/photos/2019/04/29/2019042900310562698_l.jpg","먹방","시연조교",R.drawable.icn_rank1.toString(),13575321548))
-        rankData.add(RankData(1,10, "https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800","브이로그","가희바위보슬보슬개미똥꼬멍멍이가노래를한다",R.drawable.icn_rank1.toString(),453215))
-        rankData.add(RankData(1,-1, "http://image.chosun.com/sitedata/image/201709/22/2017092201233_0.jpg","댄스","예오닝",R.drawable.icn_rank1.toString(),32483215))
-        rankData.add(RankData(1,0, "https://pbs.twimg.com/profile_images/1057608035760132096/JwBKke8l_400x400.jpg","게임","유성동그리동동",R.drawable.icn_rank1.toString(),1234))
-        rankData.add(RankData(1,-5, "","코믹","Door Jung",R.drawable.icn_rank1.toString(),2248))
-        rankData.add(RankData(1,99, "http://cfile7.uf.tistory.com/image/241C4A33597796CB224B67","브이로그","토슬토실",R.drawable.icn_rank1.toString(),754))
-        rankData.add(RankData(1,3, "https://news.imaeil.com/inc/photos/2019/04/29/2019042900310562698_l.jpg","먹방","시연조교",R.drawable.icn_rank1.toString(),13575321548))
-        rankData.add(RankData(1,0, "https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800","브이로그","가희바위보슬보슬개미똥꼬멍멍이가노래를한다",R.drawable.icn_rank1.toString(),453215))
-        rankData.add(RankData(1,-1, "http://image.chosun.com/sitedata/image/201709/22/2017092201233_0.jpg","댄스","예오닝",R.drawable.icn_rank1.toString(),32483215))
-        rankData.add(RankData(1,2, "https://pbs.twimg.com/profile_images/1057608035760132096/JwBKke8l_400x400.jpg","게임","유성동그리동동",R.drawable.icn_rank1.toString(),1234))
-        rankData.add(RankData(1,-5, "","코믹","Door Jung",R.drawable.icn_rank1.toString(),2248))
-        rankData.add(RankData(1,99, "http://cfile7.uf.tistory.com/image/241C4A33597796CB224B67","브이로그","토슬토실",R.drawable.icn_rank1.toString(),754))
-
-
-        rankChartRecyclerViewAdapter = RankChartRecyclerViewAdapter(activity!!, rankData,0)
-        fragment_rank_rv_chart.adapter = rankChartRecyclerViewAdapter
-        fragment_rank_rv_chart.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-        fragment_rank_rv_chart.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
-
     }
 
     override fun onClick(v: View?){
         when(v!!){
 
             fragment_rank_category_navi_all->{
+                // view 용
                 clearSelect()
                 fragment_rank_category_navi_all.isSelected = true
-
-                Log.e("location", "eatingshow")
+                networkCategoryFlag = 0
+                networking()
             }
 
             fragment_rank_category_navi_eatingshow->{
                 clearSelect()
                 fragment_rank_category_navi_eatingshow.isSelected = true
+                networkCategoryFlag = 1
+                networking()
 
-                Log.e("location", "eatingshow")
-                // 통신
             }
 
             fragment_rank_category_navi_beauty->{
                 clearSelect()
                 fragment_rank_category_navi_beauty.isSelected = true
+                networkCategoryFlag = 2
+                networking()
 
-                Log.e("location", "beauty")
+            }
+            fragment_rank_category_navi_game->{
+                clearSelect()
+                fragment_rank_category_navi_game.isSelected = true
+                networkCategoryFlag = 3
+                networking()
                 // 통신
             }
             fragment_rank_category_navi_vlog->{
                 clearSelect()
                 fragment_rank_category_navi_vlog.isSelected = true
-
+                networkCategoryFlag = 4
+                networking()
                 // 통신
             }
             fragment_rank_category_navi_music->{
                 clearSelect()
                 fragment_rank_category_navi_music.isSelected = true
-
-                // 통신
+                networkCategoryFlag = 5
+                networking()
             }
             fragment_rank_category_navi_comic->{
                 clearSelect()
                 fragment_rank_category_navi_comic.isSelected = true
-
-                // 통신
+                networkCategoryFlag = 6
+                networking()
             }
             fragment_rank_category_navi_dance->{
                 clearSelect()
                 fragment_rank_category_navi_dance.isSelected = true
-
-                // 통신
+                networkCategoryFlag = 7
+                networking()
             }
             fragment_rank_category_navi_cook->{
                 clearSelect()
                 fragment_rank_category_navi_cook.isSelected = true
-
-                // 통신
+                networkCategoryFlag = 8
+                networking()
             }
             fragment_rank_category_navi_talk->{
                 clearSelect()
                 fragment_rank_category_navi_talk.isSelected = true
-
-                // 통신
+                networkCategoryFlag = 9
+                networking()
             }
             fragment_rank_category_navi_asmr->{
                 clearSelect()
                 fragment_rank_category_navi_asmr.isSelected = true
-
-                // 통신
-            }
-            fragment_rank_category_navi_game->{
-                clearSelect()
-                fragment_rank_category_navi_game.isSelected = true
-
-                // 통신
+                networkCategoryFlag = 10
+                networking()
             }
 
+
+
+            /*********************** 기간 ****************************/
             fragment_rank_rl_all_navi->{
                 if(!fragment_rank_rl_all_navi.isSelected) {
                     fragment_rank_rl_all_navi.isSelected = true
@@ -187,7 +173,8 @@ class RankFragment: Fragment(), View.OnClickListener{
 
                     fragment_rank_txt_filter_term.text = "전체"
 
-                    // 통신
+                    networkTermFlag = 0
+                    networking()
                 }
             }
             fragment_rank_rl_hot_navi->{
@@ -196,16 +183,21 @@ class RankFragment: Fragment(), View.OnClickListener{
                     fragment_rank_rl_hot_navi.isSelected = true
 
                     fragment_rank_txt_filter_term.text = "급상승"
-                    // 통신 (flag?)
+                    networkTermFlag = 1
+                    networking()
                 }
             }
+
+            /*********************** 수 ****************************/
+
             fragment_rank_rl_subscriber_navi->{
                 if(!fragment_rank_rl_subscriber_navi.isSelected) {
                     fragment_rank_rl_subscriber_navi.isSelected = true
                     fragment_rank_rl_views_navi.isSelected = false
 
                     fragment_rank_txt_filter_number.text ="구독자수"
-                    // 통신 (flag?)
+                    networkNumberFlag = 1
+                    networking()
                 }
             }
             fragment_rank_rl_views_navi->{
@@ -214,9 +206,39 @@ class RankFragment: Fragment(), View.OnClickListener{
                     fragment_rank_rl_subscriber_navi.isSelected = false
 
                     fragment_rank_txt_filter_number.text ="조회수"
-                    // 통신 (flag?)
+                    networkNumberFlag = 2
+                    networking()
                 }
             }
+        }
+
+
+    }
+
+    private fun networking(){
+        // (전체, -, -)
+        if(networkCategoryFlag == 0){
+            if(networkTermFlag == 0) {
+                if(networkNumberFlag == 1) {
+                    getRankReponse(rankNetworkService.getAllAllSubscriber(), networkNumberFlag)
+                }
+                else if(networkNumberFlag ==2){
+                    getRankReponse(rankNetworkService.getAllAllView(), networkNumberFlag)
+                }
+            }else if(networkTermFlag == 1){
+                if(networkNumberFlag == 1) {
+                    getRankReponse(rankNetworkService.getAllHotSubscriber(), networkNumberFlag)
+                }
+                else if(networkNumberFlag ==2){
+                    getRankReponse(rankNetworkService.getAllHotView(), networkNumberFlag)
+                }
+            }
+        }else{
+            if(networkNumberFlag == 1) {
+                getRankReponse(rankNetworkService.getCateAllSubscriber(networkCategoryFlag), networkNumberFlag)
+            }
+            else
+                getRankReponse(rankNetworkService.getCateAllView(networkCategoryFlag), networkNumberFlag)
         }
     }
 
@@ -232,5 +254,46 @@ class RankFragment: Fragment(), View.OnClickListener{
         fragment_rank_category_navi_talk.isSelected = false
         fragment_rank_category_navi_asmr.isSelected = false
         fragment_rank_category_navi_game.isSelected = false
+    }
+
+    private fun getRankReponse(call : Call<GetRankResponse>, flag : Int) {
+
+        call.enqueue(object : Callback<GetRankResponse> {
+
+            override fun onFailure(call: Call<GetRankResponse>, t: Throwable) {
+                Log.e("load rank fail", t.toString())
+            }
+
+            override fun onResponse(call: Call<GetRankResponse>, response: Response<GetRankResponse>) {
+                if (response.isSuccessful) {
+                    if(response.body()!!.status == 200) {
+                        val tmp: ArrayList<RankData> = response.body()!!.data
+                        if(tmp.size >0){
+                        val dataList: ArrayList<RankData> = tmp
+
+                        rankChartRecyclerViewAdapter = RankChartRecyclerViewAdapter(activity!!, dataList,flag)
+                        fragment_rank_rv_chart.adapter = rankChartRecyclerViewAdapter
+                        fragment_rank_rv_chart.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                        fragment_rank_rv_chart.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
+
+                            animateRV()
+                        }
+
+                        // 없는 경우는 없음ㅋㅜㅠ
+                    }
+                }
+
+            }
+
+        })
+
+    }
+
+    private fun animateRV(){
+        val controller = AnimationUtils.loadLayoutAnimation(activity!!, R.anim.fade_in_anim)
+
+        fragment_rank_rv_chart.setLayoutAnimation(controller)
+        // rankChartRecyclerViewAdapter.notifyDataSetChanged()
+        fragment_rank_rv_chart.scheduleLayoutAnimation()
     }
 }

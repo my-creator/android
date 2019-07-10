@@ -38,7 +38,7 @@
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/btn_search"
+                        android:src="@drawable/icn_find_p"
                         android:layout_centerVertical="true"
                 />
 
@@ -88,7 +88,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="16dp"
                         android:layout_below="@+id/ll_community_post_frag"
-                        android:background="#e8eef0"
+                        android:background="#F0F3F4"
                 >
 
                 </RelativeLayout>
@@ -128,7 +128,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="16dp"
                         android:layout_below="@+id/ll_community_post_frag"
-                        android:background="#e8eef0"
+                        android:background="#F0F3F4"
                 >
                 </RelativeLayout>
 
