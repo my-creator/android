@@ -43,7 +43,7 @@ class CommunityRecentFragment : Fragment() {
 
         //더보기 버튼
         rootView.btn_more_community_popular_fg.setOnClickListener {
-            startActivity<CommunityHotPostActivity>("flag" to 0 )
+            startActivity<CommunityHotPostActivity>("flag" to 0, "title" to "최신글" )
 
         }
 

@@ -11,10 +11,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.CommentData
+import com.crecrew.crecre.Network.Get.CommunityDetailData
 import com.crecrew.crecre.R
 import de.hdodenhof.circleimageview.CircleImageView
 
-class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<CommentData>) :
+class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<CommunityDetailData>) :
     RecyclerView.Adapter<CommunityDetailCommentRecyclerViewAdapter.Holder>() {
 
 
@@ -28,29 +29,25 @@ class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: 
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
         // profile 이미지
-        if(dataList[position].user_profile_url == "")
+        if(dataList[position].profile_url == "")
             Glide.with(ctx).load(R.drawable.img_profile).into(holder.profile)
         else
         {
-            Glide.with(ctx).load(dataList[position].user_profile_url).into(holder.profile)
+            Glide.with(ctx).load(dataList[position].profile_url).into(holder.profile)
             holder.profile.setBackground(ShapeDrawable(OvalShape()))
             holder.profile.setClipToOutline(true)
         }
 
         //user name
-        holder.user_name.text = dataList[position].user_name
+        holder.user_name.text = dataList[position].id
 
         //time
         holder.time.text = dataList[position].create_time
 
         //comment
-        holder.content.text = dataList[position].content
-
+        holder.content.text = dataList[position].contents
 
     }
-
-
-
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var profile = itemView.findViewById(R.id.img_profile_detail_act_rv) as ImageView

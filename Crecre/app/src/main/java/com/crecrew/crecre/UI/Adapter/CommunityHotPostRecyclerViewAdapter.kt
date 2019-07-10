@@ -16,7 +16,11 @@ import com.crecrew.crecre.UI.Activity.Community.CommunityDetailActivity
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import org.jetbrains.anko.startActivity
 
-class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : ArrayList<CommunitySmallNewGetData>, val flag : Int) : RecyclerView.Adapter<CommunityHotPostRecyclerViewAdapter.Holder>() {
+class CommunityHotPostRecyclerViewAdapter(
+    val ctx: Context,
+    val dataList: ArrayList<CommunitySmallNewGetData>,
+    val flag: Int
+) : RecyclerView.Adapter<CommunityHotPostRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_hotpost_community_act, viewGroup, false)
         return Holder(view)
@@ -27,23 +31,32 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
         // thumbnail 이미지
-        if(dataList[position].thumbnail_url == "")
+        if (dataList[position].thumbnail_url == "")
             Glide.with(ctx).load(R.drawable.icn_img_x).into(holder.thumbnail)
-        else
-        {
+        else {
             Glide.with(ctx).load(dataList[position].thumbnail_url).into(holder.thumbnail)
             //holder.thumbnail.setBackground(ShapeDrawable())
             holder.thumbnail.setClipToOutline(true)
         }
 
         //flag=0이면 최신글, flag=1이면 인기글
-        if(flag == 0){
+        if (flag == 0) {
             holder.hot_img.visibility = View.GONE
+            //마지막 아이템의 line은 삭제
+            if (position == dataList.size - 1)
+                holder.line.visibility = View.INVISIBLE
 
-            Log.v("asdf","사진 없음")
+
+        } else if (flag == 1) {
+            //마지막 아이템의 line은 삭제
+            if (position == dataList.size - 1)
+                holder.line.visibility = View.INVISIBLE
         }
 
-        //title
+        if (dataList[position].hot_image == 0)
+            holder.hot_img.visibility = View.GONE
+
+        //contents_title
         holder.title.text = dataList[position].title
 
         //추천수
@@ -55,11 +68,11 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         //작성시간
         holder.time.text = dataList[position].create_time.toString()
 
-        //게시판카테고리 ###name으로 수정
-        if(dataList[position].name.toString() == "")
+        //게시판카테고리으로 수정
+        if (dataList[position].name == null)
             holder.category.text = ""
         else
-            holder.category.text = " | " + dataList[position].name.toString()
+            holder.category.text = " | " + dataList[position].name
 
         /*
         //더보기 눌렀을 때
@@ -75,14 +88,16 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         //container 눌렀을 시
         holder.container.setOnClickListener {
             ctx.startActivity<CommunityDetailActivity>(
+                "category_title" to dataList[position].name,
                 "title" to dataList[position].title,
                 "idx" to dataList[position].user_idx,
-                "post_idx" to dataList[position].board_idx
+                "postidx" to dataList[position].post_idx,
+                "thumbnail_url" to dataList[position].thumbnail_url
             )
         }
     }
 
-    inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView){
+    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         var container = itemView.findViewById(R.id.ll_container_community_act) as LinearLayout
         var thumbnail = itemView.findViewById(R.id.img_thumbnail_hotpost_community_act) as ImageView
@@ -92,6 +107,10 @@ class CommunityHotPostRecyclerViewAdapter(val ctx : Context, val dataList : Arra
         var comment = itemView!!.findViewById(R.id.tv_comment_hotpost_com_act) as TextView
         var time = itemView!!.findViewById(R.id.tv_posttime_hotpost_com_act) as TextView
         var category = itemView!!.findViewById(R.id.tv_postcategory_hotpost_com_act) as TextView
+
+        var line = itemView.findViewById(R.id.ll_lastline_rv_hotpost_commu_act) as LinearLayout
+
+
         //var more_btn = itemView!!.findViewById(R.id.btn_more_community_popular_fg) as LinearLayout
 
     }

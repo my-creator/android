@@ -107,9 +107,10 @@
             >
 
                 <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img_user_profile_circleImageView"
                         android:layout_width="32dp"
                         android:layout_height="32dp"
-                        android:src="@drawable/img_profile"
+                        android:src="@drawable/icn_profile"
                 />
 
                 <LinearLayout
@@ -121,6 +122,7 @@
                 >
 
                     <TextView
+                            android:id="@+id/tv_user_nickname_detail_act"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="10sp"
@@ -135,6 +137,7 @@
 
 
                         <TextView
+                                android:id="@+id/tv_createtime_commu_detail_act"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/noto_sans_kr_medium"
@@ -144,6 +147,7 @@
                         />
 
                         <TextView
+                                android:id="@+id/tv_viewcnt_commu_detail_act"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/noto_sans_kr_medium"
@@ -227,7 +231,6 @@
                                 android:id="@+id/tv_recommend_number_detail_act"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
                                 android:layout_gravity="center_horizontal"
                                 android:fontFamily="@font/noto_sans_kr_medium"
                                 android:textSize="10sp"
@@ -256,7 +259,6 @@
                                 android:id="@+id/tv_unlike_community_detail_act"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="2dp"
                                 android:layout_gravity="center_horizontal"
                                 android:fontFamily="@font/noto_sans_kr_medium"
                                 android:textSize="10sp"
@@ -281,7 +283,7 @@
                         android:id="@+id/view_comments_commu_detail_act"
                         android:layout_width="match_parent"
                         android:layout_height="16dp"
-                        android:background="#e8eef0"
+                        android:background="#F0F3F4"
                         />
 
                 <android.support.v7.widget.RecyclerView
@@ -341,6 +343,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:textSize="12sp"
+                        android:textColorHint="#a4a4a4"
                         android:paddingLeft="12dp"
                         android:fontFamily="@font/noto_sans_kr_medium"
                         android:hint="댓글을 입력하세요."
@@ -359,25 +363,13 @@
                     android:layout_below="@+id/rl_toolbar_community_search_act"
                     android:orientation="horizontal"
             >
-
-                <LinearLayout
-                        android:layout_width="1dp"
-                        android:layout_height="32dp"
-                        android:background="@color/violet_pink"
-                >
-
-                </LinearLayout>
-
-                <TextView
+                <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/violet_pink"
                         android:layout_marginHorizontal="18dp"
-                        android:fontFamily="@font/noto_sans_kr_medium"
-                        android:textSize="10sp"
-                        android:text="등록"
                         android:layout_gravity="center_vertical"
                         android:layout_alignParentEnd="true"
+                        android:src="@drawable/icn_go"
                 />
 
             </LinearLayout>
