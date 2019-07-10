@@ -223,11 +223,21 @@
                             android:layout_centerHorizontal="true">
 
                         <TextView
-                                android:text="안녕하세유~ 백종원이에유! 우리 더본 코리아 많이 사랑 해쥬야쥬? 텍스트 소개가 길어진다면..."
+                                android:text="안녕하세유~ 백종원이에유! 우리 더본 코리아 많이 사랑 해쥬야쥬? 텍스트 소개가 길어진다면 더보기가 떠야 하는데 뜰까요 안뜰까요 정말 궁금하죠 만약 버튼을 눌러서 이글을 끝까지 보고 계신다면 전 성공한겁니다."
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"
-                        />
+                                android:layout_marginTop="8dp"/>
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="더보기"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginTop="40dp"
+                                android:layout_marginRight="20dp"
+                                android:textSize="12sp"
+                                android:textColor="#127cc5"/>
+
                     </RelativeLayout>
             </RelativeLayout>
 
@@ -251,8 +261,8 @@
                             android:layout_marginTop="20dp"
                             android:background="@drawable/profile_box">
                             <RelativeLayout
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content">
+                                    android:layout_width="144dp"
+                                    android:layout_height="144dp">
                                     <ProgressBar
                                             android:layout_width="100dp"
                                             android:layout_height="100dp"
@@ -310,6 +320,7 @@
                                             android:layout_marginTop="96dp"/>
 
                                     <ImageView
+                                            android:id="@+id/activity_creator_profile_btn_rank_question"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_alignParentRight="true"
@@ -325,8 +336,8 @@
                             android:layout_marginTop="172dp"
                             android:background="@drawable/profile_box">
                         <RelativeLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content">
+                                android:layout_width="144dp"
+                                android:layout_height="144dp">
                                 <ProgressBar
                                     android:layout_width="100dp"
                                     android:layout_height="100dp"
@@ -384,6 +395,7 @@
                                     android:layout_marginTop="96dp"/>
 
                             <ImageView
+                                    android:id="@+id/activity_creator_profile_btn_class_question"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_alignParentRight="true"
@@ -398,29 +410,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:orientation="horizontal">
-                    <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginLeft="20dp">
+                    <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
                             <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="크리에이터 스탯"
                                     android:fontFamily="@font/noto_sans_kr_bold"
                                     android:textSize="16sp"
-                                    android:textColor="@color/violet_pink"/>
+                                    android:layout_centerVertical="true"
+                                    android:layout_alignParentLeft="true"
+                                    android:textColor="@color/violet_pink"
+                                    android:layout_marginLeft="20dp"/>
 
                             <TextView
                                     android:id="@+id/activity_creator_profile_btn_join_stat"
                                     android:layout_width="wrap_content"
+                                    android:layout_centerVertical="true"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="154dp"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_marginRight="20dp"
                                     android:text="참여하기"
                                     android:textColor="@color/brownish_grey"
                                     android:textSize="16sp"
                                     android:fontFamily="@font/noto_sans_kr_medium"/>
-                    </LinearLayout>
+                    </RelativeLayout>
             </LinearLayout>
 
             <RelativeLayout
@@ -452,33 +467,33 @@
                     android:background="@color/pale_grey">
             </RelativeLayout>
 
-            <LinearLayout
+            <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:orientation="horizontal">
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginLeft="20dp">
+
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="대표영상"
+                            android:layout_marginLeft="20dp"
                             android:fontFamily="@font/noto_sans_kr_bold"
                             android:textSize="16sp"
+                            android:layout_centerVertical="true"
                             android:textColor="@color/violet_pink"/>
 
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginRight="20dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_alignParentRight="true"
                             android:text="더보기"
+                            android:layout_centerVertical="true"
                             android:textColor="@color/brownish_grey"
                             android:textSize="16sp"
                             android:fontFamily="@font/noto_sans_kr_medium"/>
-                </LinearLayout>
-            </LinearLayout>
+                </RelativeLayout>
+
             <android.support.v7.widget.RecyclerView
                     android:id="@+id/activity_creator_profile_rv_hot_video"
                     android:layout_width="match_parent"
@@ -491,33 +506,32 @@
                     android:background="@color/pale_grey">
             </RelativeLayout>
 
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:orientation="horizontal">
-                <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:layout_marginLeft="20dp">
+
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
                     <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:text="최신영상"
                             android:fontFamily="@font/noto_sans_kr_bold"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="20dp"
+                            android:layout_centerVertical="true"
                             android:textSize="16sp"
-                            android:textColor="@color/violet_pink"/>
-
+                            android:textColor="@color/black"/>
                     <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="154dp"
+                            android:layout_marginRight="25dp"
+                            android:layout_alignParentRight="true"
                             android:text="더보기"
+                            android:layout_centerVertical="true"
                             android:textColor="@color/brownish_grey"
                             android:textSize="16sp"
                             android:fontFamily="@font/noto_sans_kr_medium"/>
-                </LinearLayout>
-            </LinearLayout>
+                </RelativeLayout>
+
             <android.support.v7.widget.RecyclerView
                     android:id="@+id/activity_creator_profile_rv_new_video"
                     android:layout_width="match_parent"

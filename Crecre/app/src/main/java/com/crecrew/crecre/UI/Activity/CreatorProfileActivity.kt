@@ -14,6 +14,8 @@ import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Adapter.ProfileHotVideoRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.TodayPostRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_creator_profile.*
+import kotlinx.android.synthetic.main.custom_dialog_profile_class_question.*
+import kotlinx.android.synthetic.main.custom_dialog_profile_rank_question.*
 import kotlinx.android.synthetic.main.fragment_home.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
@@ -38,7 +40,19 @@ class CreatorProfileActivity : AppCompatActivity() {
         activity_creator_profile_btn_join_stat.setOnClickListener{
             startActivity<ProfileJoinStatActivity>()
         }
+
+        activity_creator_profile_btn_back.setOnClickListener{
+            finish()
+        }
         // activity_creator_profile_tv_name.setText(creator_name)
+        activity_creator_profile_btn_rank_question.setOnClickListener{
+            startActivity<ProfileRankQuestionActivity>()
+        }
+
+        activity_creator_profile_btn_class_question.setOnClickListener{
+            startActivity<ProfileClassQuestionActivity>()
+        }
+
 
     }
 
@@ -67,5 +81,6 @@ class CreatorProfileActivity : AppCompatActivity() {
         activity_creator_profile_rv_new_video.addItemDecoration(DividerItemDecoration(this!!, DividerItemDecoration.VERTICAL))
 
     }
+
 
 }

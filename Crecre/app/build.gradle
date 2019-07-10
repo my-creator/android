@@ -46,4 +46,7 @@ dependencies {
 
     // data visualization
     implementation 'com.github.AnyChart:AnyChart-Android:1.1.2'
+
+    // read more
+    implementation 'com.borjabravo:readmoretextview:2.1.0'
 }
