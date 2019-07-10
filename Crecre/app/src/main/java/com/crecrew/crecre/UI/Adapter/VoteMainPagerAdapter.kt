@@ -11,6 +11,7 @@ import com.crecrew.crecre.UI.Fragment.VoteEndFragment
 class VoteMainPagerAdapter (fm:FragmentManager, private val num_fragment: Int): FragmentStatePagerAdapter(fm){
 
 
+
     companion object {
         private var voteCurrentFragment: VoteCurrentFragment? = null
         private var voteEndFragment: VoteEndFragment? = null
