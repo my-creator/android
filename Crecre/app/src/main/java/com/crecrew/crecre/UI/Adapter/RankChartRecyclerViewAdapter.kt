@@ -14,14 +14,13 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.crecrew.crecre.Data.CreatorSearchData
-import com.crecrew.crecre.Data.RankData
+import com.crecrew.crecre.Network.Get.RankData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.CreatorProfileActivity
 import org.jetbrains.anko.startActivity
 
 
-class RankChartRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<CreatorSearchData>, private val flag: Int) : RecyclerView.Adapter<RankChartRecyclerViewAdapter.Holder>() {
+class RankChartRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<RankData>, private val flag: Int) : RecyclerView.Adapter<RankChartRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx)!!.inflate(R.layout.rv_item_rank_creator, viewGroup, false)
 
@@ -36,15 +35,17 @@ class RankChartRecyclerViewAdapter(private val ctx : Context, private val dataLi
         var raking_container = v.findViewById(R.id.rv_item_rank_creator_rl_ranking_container) as RelativeLayout
 
         // Todo: flag를 Int가 아니라 context로 넘겨주는 방법!
-        // 랭킹
-        if(flag == 0) {
-            container.setBackgroundColor(Color.parseColor("#f9fafa"))
-            raking_container.visibility = VISIBLE
-        }
+
         // 크리에이터 검색결과
-        else{
+        if(flag == 0) {
             container.setBackgroundColor(Color.parseColor("#ffffff"))
             raking_container.visibility = GONE
+        }
+        // 랭킹
+        else{
+            container.setBackgroundColor(Color.parseColor("#f9fafa"))
+            raking_container.visibility = VISIBLE
+
         }
     }
 
@@ -73,12 +74,21 @@ class RankChartRecyclerViewAdapter(private val ctx : Context, private val dataLi
             holder.gap.text = ""
         }
         */
+        holder.ranking.text = dataList[position].ranking.toString()
         holder.category.text = dataList[position].categoryName
         holder.name.text = dataList[position].creatorName
         Glide.with(ctx).load(dataList[position].img_url).into(holder.rank_img)
 
-        var str = String.format("%,d",dataList[position].youtube_subscriber_cnt)
-        holder.number.text = str
+        if(flag == 1) {
+            var str = String.format("%,d", dataList[position].youtube_subscriber_cnt)
+            holder.number.text = str
+        }
+        else if(flag == 2){
+            Log.e("view count", dataList[position].youtube_view_cnt.toString())
+            var str = String.format("%,d", dataList[position].youtube_view_cnt)
+            holder.number.text = str
+        }
+
 
         holder.container.setOnClickListener {
             ctx.startActivity<CreatorProfileActivity>(

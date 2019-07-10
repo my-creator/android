@@ -93,8 +93,7 @@
             <ImageView
                     android:id="@+id/rv_item_rank_creator_rank_img"
                     android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:background="@drawable/icn_rank3"/>
+                    android:layout_height="24dp"/>
             <TextView
                     android:id="@+id/rv_item_rank_creator_number"
                     android:layout_width="wrap_content"
