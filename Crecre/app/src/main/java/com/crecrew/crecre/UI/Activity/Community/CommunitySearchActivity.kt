@@ -7,11 +7,14 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.crecrew.crecre.Data.CommunitySmallNewGetData
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.Get.CommunityBoardData
 import com.crecrew.crecre.Network.Get.GetCommunityUnlikeBoardsResponse
 import com.crecrew.crecre.Network.CommunityNetworkService
+import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
 import com.crecrew.crecre.R
+import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.CoummunitySearchRecyclerViewAdapter
 import com.crecrew.crecre.utils.SearchAlarmDialog
 import kotlinx.android.synthetic.main.activity_community_search.*
@@ -23,6 +26,7 @@ import retrofit2.Response
 class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
 
     lateinit var communitysearchRecyclerViewAdapter: CoummunitySearchRecyclerViewAdapter
+    lateinit var communitycontentsearchRecyclerViewAdapter: CommunityHotPostRecyclerViewAdapter
     var board_flag = -1
     var search_tv: String = ""
 
@@ -58,13 +62,22 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
 
                 if (search_tv == "") {
                     requestEnterDialog.show()
-                } else {
-                    //제대로 검색이 되었을 경우
-                    getCommunitySearchResultResponse()
+                }
+                else {
+                    if (board_flag == 0) {
+                        //제대로 검색이 되었을 경우
+                        getCommunitySearchResultResponse()
+                        configureboardRecyclerView()
+                    }
+                    else{
+                        configurecontensRecyclerView()
+                        getContentsSearchResultResponse()
+                    }
 
                     rl_after_search_view.visibility = View.VISIBLE
                     ll_no_resul_com_search_act.visibility = View.GONE
                     ll_first_search_view_com_act.visibility = View.GONE
+
                 }
 
 /*
@@ -94,7 +107,6 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_community_search)
 
         init()
-        configureRecyclerView()
         configureEditText()
 
     }
@@ -110,11 +122,20 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     //recyclerView
-    private fun configureRecyclerView() {
+    private fun configureboardRecyclerView() {
         var dataList: ArrayList<CommunityBoardData> = ArrayList()
 
         communitysearchRecyclerViewAdapter = CoummunitySearchRecyclerViewAdapter(this, dataList)
         rv_search_result_com_sear_act.adapter = communitysearchRecyclerViewAdapter
+        rv_search_result_com_sear_act.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+    }
+
+    private fun configurecontensRecyclerView(){
+        var dataList2 : ArrayList<CommunitySmallNewGetData> = ArrayList()
+
+        communitycontentsearchRecyclerViewAdapter = CommunityHotPostRecyclerViewAdapter(this, dataList2, 3)
+        rv_search_result_com_sear_act.adapter = communitycontentsearchRecyclerViewAdapter
         rv_search_result_com_sear_act.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
@@ -138,7 +159,7 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
             et_searchword_search_act.setHint("글 제목,내용 검색")
     }
 
-    //검색버튼 누른 후 통신
+    //검색버튼 누른 후 게시판 통신
     private fun getCommunitySearchResultResponse() {
         val getCommunitySmallNewPosts: Call<GetCommunityUnlikeBoardsResponse> =
             communityNetworkService.getBoardsSearch("", "", search_tv)
@@ -146,7 +167,7 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
         getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunityUnlikeBoardsResponse> {
 
             override fun onFailure(call: Call<GetCommunityUnlikeBoardsResponse>, t: Throwable) {
-                Log.e("검색 list fail", t.toString())
+                Log.e("검색 게시판 fail", t.toString())
             }
 
             override fun onResponse(
@@ -178,19 +199,52 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
                     } else {
                     }
 
-                    /*if(it.status == 200)
-                    {
-                        rl_after_search_view.visibility = View.VISIBLE
-                        ll_no_resul_com_search_act.visibility = View.GONE
-                        ll_first_search_view_com_act.visibility = View.GONE
-                    }
-                    else if(it.status == 500)
-                    {
-                        ll_no_resul_com_search_act.visibility = View.VISIBLE
-                        rl_after_search_view.visibility = View.GONE
-                        ll_first_search_view_com_act.visibility = View.GONE
-                    }*/
 
+                }
+            }
+        })
+    }
+
+
+
+    //검색버튼 누른 후 글 제목, 내용 검색 통신
+    private fun getContentsSearchResultResponse() {
+        val getPostSearchTitle: Call<GetCommunitySmallNewPostResponse> =
+            communityNetworkService.getPostSearchTitle("", "", search_tv)
+
+        getPostSearchTitle.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
+
+            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+                Log.e("검색 게시글 fail", t.toString())
+            }
+
+            override fun onResponse(
+                call: Call<GetCommunitySmallNewPostResponse>,
+                response: Response<GetCommunitySmallNewPostResponse>
+            ) {
+                if (response.isSuccessful) {
+                    val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                    if (temp.size > 0) {
+
+                        val position = communitycontentsearchRecyclerViewAdapter.itemCount
+                        communitycontentsearchRecyclerViewAdapter.dataList.addAll(temp)
+                        communitycontentsearchRecyclerViewAdapter.notifyItemInserted(position)
+                        response?.takeIf { it.isSuccessful }
+                            ?.body()
+                            ?.let {
+                                if (it.status == 200) {
+                                    rl_after_search_view.visibility = View.VISIBLE
+                                    ll_no_resul_com_search_act.visibility = View.GONE
+                                    ll_first_search_view_com_act.visibility = View.GONE
+                                } else if (it.status == 500) {
+                                    ll_no_resul_com_search_act.visibility = View.VISIBLE
+                                    rl_after_search_view.visibility = View.GONE
+                                    ll_first_search_view_com_act.visibility = View.GONE
+                                }
+                            }
+
+                    } else {
+                    }
                 }
             }
         })

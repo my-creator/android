@@ -67,13 +67,13 @@ class CommunityFragment: Fragment() {
 
         //즐겨찾기 rv
         getCommunityRecentResponse(communityNetworkService.getCommunityLikeBoards("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"))
-        communityfavoriteRecyclerViewAdapter = CommunityFavoriteRecyclerViewAdapter(activity!!, dataList)
+        communityfavoriteRecyclerViewAdapter = CommunityFavoriteRecyclerViewAdapter(activity!!, dataList,0)
         rv_favorite_community_frag.adapter = communityfavoriteRecyclerViewAdapter
         rv_favorite_community_frag.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
         //일반 게시글 rv
         getCommunityRecentResponse(communityNetworkService.getCommunityUnlikeBoards("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"))
-        communityPostListRecyclerViewAdapter = CommunityFavoriteRecyclerViewAdapter(activity!!, dataList)
+        communityPostListRecyclerViewAdapter = CommunityFavoriteRecyclerViewAdapter(activity!!, dataList,1)
         rv_postlist_community_fg.adapter = communityPostListRecyclerViewAdapter
         rv_postlist_community_fg.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
     }

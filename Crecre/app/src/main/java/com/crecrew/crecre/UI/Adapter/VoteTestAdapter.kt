@@ -10,16 +10,12 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.VoteTestData
 import com.crecrew.crecre.R
-import android.graphics.drawable.shapes.OvalShape
-import android.graphics.drawable.ShapeDrawable
 import android.widget.*
 import com.bumptech.glide.request.RequestOptions
-import org.jetbrains.anko.image
-
 
 class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
     RecyclerView.Adapter<VoteTestAdapter.Holder>() {
-
+    var check1:Int = 0; var check2:Int = 0; var check3:Int = 0; var check4:Int = 0; var check5:Int = 0;
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var img_thumnail = itemView.findViewById(R.id.card_main_image_test) as ImageView
         var txt_dayleft = itemView.findViewById(R.id.rv_item_current_card_dayleft_test) as TextView
@@ -71,7 +67,7 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        val RGroup :RadioGroup
+
         Glide.with(ctx)
             .load(dataList[position].ImageURL)
             .into(holder.img_thumnail)
@@ -99,15 +95,8 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
         holder.txt_itemname4.text = dataList[position].itemname4
         holder.txt_itemname5.text = dataList[position].itemname5
         holder.img_thumnail.scaleType = ImageView.ScaleType.CENTER_CROP
-        holder.imageView1.setOnClickListener{
-            holder.imageView1.setImageResource(R.drawable.btn_check)
-            holder.imageView2.setImageResource(R.drawable.btn_uncheck)
-            holder.imageView3.setImageResource(R.drawable.btn_uncheck)
-            holder.imageView4.setImageResource(R.drawable.btn_uncheck)
-            holder.imageView5.setImageResource(R.drawable.btn_uncheck)
-        }
 
-        if (dataList[position].isVotefinish == false ) //진행 중이면
+        if (dataList[position].isVotefinish == false ) //투표완료 안했으면
         {
             holder.txt_ongoing.setVisibility(View.GONE)
             holder.txt_dayleft.text = "${dataList[position].date}일 후 개표"
@@ -123,6 +112,7 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
             holder.txt_votenum5.setVisibility(View.GONE)
             holder.letsVote.text = "투표하기"
             holder.stamp.setVisibility(View.GONE)
+
             if (dataList[position].itemname5.isEmpty()) {
                 holder.line5.setVisibility(View.GONE)
                 if (dataList[position].itemname4.isEmpty()){
@@ -132,11 +122,88 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
                     }
                 }
             }
-            else{
 
+            holder.imageView1.setOnClickListener{
+                check1 = 1 - check1;
+                if (check1 == 1) {
+                    holder.imageView1.setImageResource(R.drawable.btn_check)
+                    holder.letsVote.setTextColor(Color.parseColor("#ff57f7"));
+                }
+                else {
+                    holder.imageView1.setImageResource(R.drawable.btn_uncheck)
+                    holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"));
+                }
+                holder.imageView2.setImageResource(R.drawable.btn_uncheck); check2 = 0;
+                holder.imageView3.setImageResource(R.drawable.btn_uncheck); check3 = 0;
+                holder.imageView4.setImageResource(R.drawable.btn_uncheck); check4 = 0;
+                holder.imageView5.setImageResource(R.drawable.btn_uncheck); check5 = 0;
             }
-
-        }else {
+            holder.imageView2.setOnClickListener{
+                check2 = 2 - check2;
+                if (check2 == 2) {
+                    holder.imageView2.setImageResource(R.drawable.btn_check)
+                    holder.letsVote.setTextColor(Color.parseColor("#ff57f7"));
+                }
+                else {
+                    holder.imageView2.setImageResource(R.drawable.btn_uncheck)
+                    holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"));
+                }
+                holder.imageView1.setImageResource(R.drawable.btn_uncheck); check1 = 0;
+                holder.imageView3.setImageResource(R.drawable.btn_uncheck); check3 = 0;
+                holder.imageView4.setImageResource(R.drawable.btn_uncheck); check4 = 0;
+                holder.imageView5.setImageResource(R.drawable.btn_uncheck); check5 = 0;
+            }
+            holder.imageView3.setOnClickListener{
+                check3 = 3 - check3;
+                if (check3 == 3) {
+                    holder.imageView3.setImageResource(R.drawable.btn_check)
+                    holder.letsVote.setTextColor(Color.parseColor("#ff57f7"));
+                }
+                else {
+                    holder.imageView3.setImageResource(R.drawable.btn_uncheck)
+                    holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"));
+                }
+                holder.imageView1.setImageResource(R.drawable.btn_uncheck); check1 = 0;
+                holder.imageView2.setImageResource(R.drawable.btn_uncheck); check2 = 0;
+                holder.imageView4.setImageResource(R.drawable.btn_uncheck); check4 = 0;
+                holder.imageView5.setImageResource(R.drawable.btn_uncheck); check5 = 0;
+            }
+            holder.imageView4.setOnClickListener{
+                check4 = 4 - check4;
+                if (check4 == 4) {
+                    holder.imageView4.setImageResource(R.drawable.btn_check)
+                    holder.letsVote.setTextColor(Color.parseColor("#ff57f7"));
+                }
+                else {
+                    holder.imageView4.setImageResource(R.drawable.btn_uncheck)
+                    holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"));
+                }
+                holder.imageView1.setImageResource(R.drawable.btn_uncheck); check1 = 0;
+                holder.imageView2.setImageResource(R.drawable.btn_uncheck); check2 = 0;
+                holder.imageView3.setImageResource(R.drawable.btn_uncheck); check3 = 0;
+                holder.imageView5.setImageResource(R.drawable.btn_uncheck); check5 = 0;
+            }
+            holder.imageView5.setOnClickListener{
+                check5 = 5 - check5;
+                if (check5 == 5) {
+                    holder.imageView5.setImageResource(R.drawable.btn_check)
+                    holder.letsVote.setTextColor(Color.parseColor("#ff57f7"));
+                }
+                else {
+                    holder.imageView5.setImageResource(R.drawable.btn_uncheck)
+                    holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"));
+                }
+                holder.imageView1.setImageResource(R.drawable.btn_uncheck); check1 = 0;
+                holder.imageView2.setImageResource(R.drawable.btn_uncheck); check2 = 0;
+                holder.imageView4.setImageResource(R.drawable.btn_uncheck); check4 = 0;
+                holder.imageView3.setImageResource(R.drawable.btn_uncheck); check3 = 0;
+            }
+            /*if ( check1 == 0 && check2 == 0 && check3 == 0 && check4 == 0 && check5 == 0 ){
+                holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"));
+            }else{
+                holder.letsVote.setTextColor(Color.parseColor("#ff57f7"));
+            }*/
+        }else { //투표한 투표
             //여기 수정해야 합니다
             holder.txt_dayleft.text = "${dataList[position].date}일 후 마감"
             holder.letsVote.text = "투표완료"
@@ -153,12 +220,11 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
             if (dataList[position].itemname5.isEmpty()) holder.line5.setVisibility(View.GONE)
             if (dataList[position].itemname4.isEmpty()) holder.line4.setVisibility(View.GONE)
             if (dataList[position].itemname3.isEmpty()) holder.line3.setVisibility(View.GONE)
-            holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"));
+            //holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"));
         }
 
     }
-
-
+    
 }
 
 

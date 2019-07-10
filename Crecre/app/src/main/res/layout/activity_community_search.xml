@@ -86,24 +86,13 @@
                 android:orientation="horizontal"
         >
 
-            <LinearLayout
-                    android:layout_width="1dp"
-                    android:layout_height="34dp"
-                    android:background="@color/violet_pink"
-            >
-
-            </LinearLayout>
-
-            <TextView
+            <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/violet_pink"
                     android:layout_marginHorizontal="18dp"
-                    android:fontFamily="@font/noto_sans_kr_medium"
-                    android:textSize="10sp"
-                    android:text="검색"
                     android:layout_gravity="center_vertical"
                     android:layout_alignParentEnd="true"
+                    android:src="@drawable/icn_go"
             />
 
         </LinearLayout>
