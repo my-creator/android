@@ -223,12 +223,14 @@
                             android:layout_centerHorizontal="true">
 
                         <TextView
+                                android:id="@+id/activity_creator_profile_description"
                                 android:text="안녕하세유~ 백종원이에유! 우리 더본 코리아 많이 사랑 해쥬야쥬? 텍스트 소개가 길어진다면 더보기가 떠야 하는데 뜰까요 안뜰까요 정말 궁금하죠 만약 버튼을 눌러서 이글을 끝까지 보고 계신다면 전 성공한겁니다."
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"/>
 
                         <TextView
+                                android:id="@+id/activity_creator_profile_btn_read_more"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="더보기"
@@ -441,25 +443,38 @@
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="352dp">
-                    <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="토탈 3.6점"
-                            android:textSize="24sp"
-                            android:fontFamily="@font/noto_sans_kr_bold"
-                            android:textColor="@color/black_two"
-                            android:layout_marginTop="8dp"
-                            android:layout_centerHorizontal="true"/>
+                <LinearLayout
+                              android:layout_width="match_parent"
+                              android:layout_height="match_parent"
+                              android:background="#F7F7F7"
+                              android:orientation="vertical">
 
                     <TextView
-                            android:layout_width="wrap_content"
+                            tools:text="토탈 몇 점"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="(192명 참여)"
-                            android:textSize="16sp"
+                            android:textSize="24sp"
+                            android:gravity="center"
+                            android:textColor="#333333"
                             android:fontFamily="@font/noto_sans_kr_bold"
+                            android:id="@+id/activity_creator_profile_total"/>
+
+                    <TextView
+                            tools:text="(몇명 리뷰)"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:gravity="center"
                             android:textColor="#127cc5"
-                            android:layout_marginTop="42dp"
-                            android:layout_centerHorizontal="true"/>
+                            android:fontFamily="@font/noto_sans_kr_regular"
+                            android:id="@+id/activity_creator_profile_review_number"/>
+
+                    <com.github.mikephil.charting.charts.RadarChart
+                            android:id="@+id/activity_creator_profile_rc_chart"
+                            android:layout_width="match_parent"
+                            android:layout_height="352dp" />
+
+                </LinearLayout>
             </RelativeLayout>
             <RelativeLayout
                     android:layout_width="match_parent"
