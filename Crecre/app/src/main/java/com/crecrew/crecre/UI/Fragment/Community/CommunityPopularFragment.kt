@@ -41,8 +41,9 @@ class CommunityPopularFragment : Fragment() {
         // Inflate the layout for this fragment
         rootView =  inflater.inflate(R.layout.fragment_community_popular, container, false)
 
+        //더보기
         rootView.btn_more_community_popular_fg.setOnClickListener {
-            startActivity<CommunityHotPostActivity>("flag" to 1)
+            startActivity<CommunityHotPostActivity>("flag" to 1, "title" to "인기글")
         }
 
         return rootView

@@ -13,26 +13,27 @@ import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_community_hot_post.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
 
-    lateinit var communityHotPostRecyclerViewAdapter:CommunityHotPostRecyclerViewAdapter
+    lateinit var communityHotPostRecyclerViewAdapter: CommunityHotPostRecyclerViewAdapter
 
     val communityNetworkService: CommunityNetworkService by lazy {
         ApplicationController.instance.communityNetworkService
     }
 
-    var post_idx = -1
+    var board_idx = -1
     var user_idx = -1
     var flag = -1
+    var title = ""
 
 
-
-    override fun onClick(v : View?) {
-        when(v!!) {
+    override fun onClick(v: View?) {
+        when (v!!) {
             //뒤로가기버튼
             btn_back_hotpost_community_act -> {
                 finish()
@@ -58,41 +59,71 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         configureTitleBar()
         configureRecyclerView()
 
-
-
     }
 
-    private fun configureTitleBar(){
+    private fun configureTitleBar() {
 
-        flag = intent.getIntExtra("flag",-1)
+        flag = intent.getIntExtra("flag", -1)
         user_idx = intent.getIntExtra("user_idx", -1)
+        board_idx = intent.getIntExtra("idx", -1)
+        Log.v("TAGG", board_idx.toString())
+        title = intent.getStringExtra("title")
+
+        tv_title_bar_hotpost_commu_act.text = title
 
         //첫 타이틀바 이름
-        if(flag == 0)
-        {
+        if (flag == 0) {
             tv_title_bar_hotpost_commu_act.text = "최신글"
-
             getCommunityRecentAllResponse(communityNetworkService.getCommunityAllNewPosts())
 
-        }
-        else if(flag == 1)
-        {
+        } else if (flag == 1) {
             tv_title_bar_hotpost_commu_act.text = "인기글"
 
             getCommunityRecentAllResponse(communityNetworkService.getCommunityAllHotPosts())
 
-        }
-        else if(flag == -1)
-            finish()
+        } else {
+            //##hot인기글 3개가 먼저 나오도록 해야함 --> 통신 속도?때문에 그런가 먼저 나올때도 있고 아닐때도 있음...
+            getCommunityRecentAllResponse(communityNetworkService.getPostListBoards(board_idx))
+            getCommunityRecentAllResponse(communityNetworkService.getPostListAllBoards(board_idx))
 
+        }
+
+        /*
+        if(title == "")
+        {
+            //첫 타이틀바 이름
+            if(flag == 0)
+            {
+                tv_title_bar_hotpost_commu_act.text = "최신글"
+                getCommunityRecentAllResponse(communityNetworkService.getCommunityAllNewPosts())
+
+            }
+            else if(flag == 1)
+            {
+                tv_title_bar_hotpost_commu_act.text = "인기글"
+
+                getCommunityRecentAllResponse(communityNetworkService.getCommunityAllHotPosts())
+
+            }
+            else if(flag == -1)
+                finish()
+        }
+        else
+        {
+            tv_title_bar_hotpost_commu_act.text = title
+            //##hot인기글 3개가 먼저 나오도록 해야함 --> 통신 속도?때문에 그런가 먼저 나올때도 있고 아닐때도 있음...
+            getCommunityRecentAllResponse(communityNetworkService.getPostListBoards(board_idx))
+            getCommunityRecentAllResponse(communityNetworkService.getPostListAllBoards(board_idx))
+        }
+*/
     }
 
 
-   //recyclerView
+    //recyclerView
     private fun configureRecyclerView() {
         var dataList: ArrayList<CommunitySmallNewGetData> = ArrayList()
 
-        communityHotPostRecyclerViewAdapter = CommunityHotPostRecyclerViewAdapter(this, dataList,flag)
+        communityHotPostRecyclerViewAdapter = CommunityHotPostRecyclerViewAdapter(this, dataList, flag)
         rv_community_hotpost_act_list.adapter = communityHotPostRecyclerViewAdapter
         rv_community_hotpost_act_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
@@ -100,7 +131,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
 
     //통신 전체 보여주기
     private fun getCommunityRecentAllResponse(networkfunction: Call<GetCommunitySmallNewPostResponse>) {
-        val getCommunitySmallNewPosts : Call<GetCommunitySmallNewPostResponse> =networkfunction
+        val getCommunitySmallNewPosts: Call<GetCommunitySmallNewPostResponse> = networkfunction
 
         getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
 
@@ -108,15 +139,22 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
                 Log.e("최신글 전체 list fail", t.toString())
             }
 
-            override fun onResponse(call: Call<GetCommunitySmallNewPostResponse>, response: Response<GetCommunitySmallNewPostResponse>) {
+            override fun onResponse(
+                call: Call<GetCommunitySmallNewPostResponse>,
+                response: Response<GetCommunitySmallNewPostResponse>
+            ) {
 
                 if (response.isSuccessful) {
-                    val temp : ArrayList<CommunitySmallNewGetData> = response.body()!!.data
-                    if (temp.size > 0) {
+                    val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
 
+                    if (temp.size > 0) {
                         val position = communityHotPostRecyclerViewAdapter.itemCount
                         communityHotPostRecyclerViewAdapter.dataList.addAll(temp)
                         communityHotPostRecyclerViewAdapter.notifyItemInserted(position)
+                    }
+                    //##만약, temp.size에 데이터가 하나도 없을 경우 예외처리를 해야함
+                    else {
+
                     }
 
                 }
@@ -128,7 +166,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    private fun init(){
+    private fun init() {
         btn_back_hotpost_community_act.setOnClickListener(this)
         btn_search_community_hotpost_act.setOnClickListener(this)
         writing_btn_hotpost_community_act.setOnClickListener(this)
