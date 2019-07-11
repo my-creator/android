@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
         <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -266,9 +266,17 @@
                                     android:layout_width="144dp"
                                     android:layout_height="144dp">
                                     <ProgressBar
-                                            android:layout_width="100dp"
-                                            android:layout_height="100dp"
-                                            android:layout_centerInParent="true"/>
+                                            android:id="@+id/activity_creator_profile_rank_bar"
+                                            style="?android:attr/progressBarStyle"
+                                            android:layout_width="120dp"
+                                            android:layout_height="120dp"
+                                            android:progress="20"
+                                            android:layout_centerInParent="true"
+                                            android:progressDrawable="@drawable/activity_creator_profile_progressbar"
+                                            app:layout_constraintEnd_toEndOf="parent"
+                                            app:layout_constraintStart_toStartOf="parent"
+                                            app:layout_constraintTop_toTopOf="parent"/>
+
                             </RelativeLayout>
                             <RelativeLayout
                                     android:layout_width="wrap_content"
@@ -341,9 +349,12 @@
                                 android:layout_width="144dp"
                                 android:layout_height="144dp">
                                 <ProgressBar
-                                    android:layout_width="100dp"
-                                    android:layout_height="100dp"
-                                    android:layout_centerInParent="true"/>
+                                    android:id="@+id/activity_creator_profile_class_bar"
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:progress="30"
+                                    android:layout_centerInParent="true"
+                                    android:progressDrawable="@drawable/activity_creator_profile_progressbar"/>
                         </RelativeLayout>
                         <RelativeLayout
                                 android:layout_width="wrap_content"

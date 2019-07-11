@@ -222,9 +222,7 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
             if (dataList[position].itemname3.isEmpty()) holder.line3.setVisibility(View.GONE)
             //holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"));
         }
-
     }
-    
 }
 
 

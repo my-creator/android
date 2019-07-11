@@ -2,7 +2,6 @@ package scom.crecrew.crecre.UI.Fragment
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
@@ -18,7 +17,6 @@ import android.widget.RelativeLayout
 import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
-import java.util.*
 import com.crecrew.crecre.Base.BasePagerAdapter
 import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
@@ -31,11 +29,9 @@ import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
 import com.crecrew.crecre.UI.Adapter.TodayPostRecyclerViewAdapter
 import org.jetbrains.anko.support.v4.startActivity
 import com.crecrew.crecre.UI.Activity.CreatorSearchActivity
-import com.crecrew.crecre.UI.Adapter.TodayRankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
+import com.crecrew.crecre.UI.Fragment.Home.RankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
-import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
-import kotlinx.android.synthetic.main.fragment_home_today_rank.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -106,7 +102,7 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         configureRecyclerView()
-
+        initVScrollLayout()
     }
 
     override fun onResume() {
@@ -161,6 +157,22 @@ class HomeFragment: Fragment() {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
 
         // fragment_home_edit_search.clearFocus()
+    }
+
+    private fun initVScrollLayout() {
+        val vScrollLayout = rootView.fragment_home_txt_today_hot_creator
+        val items = ArrayList<CurrentRankData>()
+
+//        for (i in todayCreatorRankData.indices) {
+//            val item = CurrentRankData("$i + 1", "${todayCreatorRankData[i].creator_name}")
+//            items.add(item)
+//        }
+        for (i in 1..10) {
+            val item = CurrentRankData("$i", "항목$i")
+            items.add(item)
+        }
+        val adapter = RankRecyclerViewAdapter(items)
+        vScrollLayout.setAdapter(adapter)
     }
 
 

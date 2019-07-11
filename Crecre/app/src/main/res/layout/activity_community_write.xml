@@ -88,8 +88,9 @@
         </LinearLayout>
 
         <LinearLayout
+                android:id="@+id/btn_et_focus_commu_write_act"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="500dp">
 
             <EditText
                     android:id="@+id/et_context_commu_write_act"
@@ -105,7 +106,6 @@
             />
 
         </LinearLayout>
-
 
     </LinearLayout>
 
@@ -131,9 +131,9 @@
                 android:id="@+id/btn_cam_write_com_act"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="24dp"
+                android:paddingHorizontal="24dp"
                 android:layout_centerVertical="true"
-                android:layout_marginVertical="12dp"
+                android:paddingVertical="12dp"
         >
 
             <ImageView
@@ -141,16 +141,6 @@
                     android:layout_height="32dp"
                     android:src="@drawable/icn_camera"
 
-            />
-
-            <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_kr_medium"
-                    android:text="cam"
-                    android:textSize="10sp"
-                    android:textColor="#a4a4a4"
-                    android:layout_centerInParent="true"
             />
         </RelativeLayout>
 
