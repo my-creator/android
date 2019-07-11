@@ -26,7 +26,9 @@ import retrofit2.Response
 class CommunityFragment: Fragment() {
 
     private lateinit var rootView: View
+    //즐겨찾기 Adapter
     lateinit var communityfavoriteRecyclerViewAdapter: CommunityFavoriteRecyclerViewAdapter
+
     lateinit var communityPostListRecyclerViewAdapter : CommunityFavoriteRecyclerViewAdapter
 
     val communityNetworkService: CommunityNetworkService by lazy {
@@ -66,13 +68,15 @@ class CommunityFragment: Fragment() {
         var dataList: ArrayList<CommunityBoardData> = ArrayList()
 
         //즐겨찾기 rv
-        getCommunityRecentResponse(communityNetworkService.getCommunityLikeBoards("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"))
+        getCommunityRecentResponse(communityNetworkService.getCommunityLikeBoards(
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"))
         communityfavoriteRecyclerViewAdapter = CommunityFavoriteRecyclerViewAdapter(activity!!, dataList,0)
         rv_favorite_community_frag.adapter = communityfavoriteRecyclerViewAdapter
         rv_favorite_community_frag.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
         //일반 게시글 rv
-        getCommunityRecentResponse(communityNetworkService.getCommunityUnlikeBoards("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"))
+        getCommunityRecentResponse(communityNetworkService.getCommunityUnlikeBoards(
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"))
         communityPostListRecyclerViewAdapter = CommunityFavoriteRecyclerViewAdapter(activity!!, dataList,1)
         rv_postlist_community_fg.adapter = communityPostListRecyclerViewAdapter
         rv_postlist_community_fg.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
@@ -101,7 +105,7 @@ class CommunityFragment: Fragment() {
 
     }
 
-    //좋아요안누른 게시글 보여주기
+    //즐겨찾기 누른, 안누른 게시글 보여주기
     private fun getCommunityRecentResponse(networkFunction : Call<GetCommunityUnlikeBoardsResponse>) {
         val getCommunityUnlikeBoards : Call<GetCommunityUnlikeBoardsResponse> = networkFunction
 
@@ -115,6 +119,10 @@ class CommunityFragment: Fragment() {
 
                 if (response.isSuccessful) {
                     val temp : ArrayList<CommunityBoardData> = response.body()!!.data
+                    Log.v("TAGG", temp.size.toString())
+
+                   /* for(i in 0..temp.size-1)
+                        Log.v("click!",  temp[i].name)*/
 
                     if (temp.size > 0) {
 

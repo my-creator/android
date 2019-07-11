@@ -63,7 +63,6 @@ class CommunityFavoriteRecyclerViewAdapter(
             img_like = 1
         }
 
-
         //즐겨찾기 버튼 눌렀을 경우
         holder.img_like.setOnClickListener {
             if (img_like == 0) {
@@ -140,7 +139,7 @@ class CommunityFavoriteRecyclerViewAdapter(
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var container = itemView.findViewById(R.id.rl_item_favorite_container) as RelativeLayout
         var title = itemView.findViewById(R.id.tv_rv_title_community_frag) as TextView
-        var img_like = itemView.findViewById(R.id.btn_favorite_heart_community_frag) as ImageView
+        var img_like = itemView.findViewById(R.id.img_favorite_heart_community_frag) as ImageView
         var line = itemView.findViewById(R.id.rl_line_favorite_commu_frag) as RelativeLayout
     }
 

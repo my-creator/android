@@ -17,7 +17,7 @@
                 android:id="@+id/img_profile_detail_act_rv"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/img_profile"
+                android:src="@drawable/icn_profile"
                 android:scaleType="fitXY"
         />
 
