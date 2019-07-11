@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_clsd_vote.view.*
 
 class ClosedVoteFragment : Fragment() {
     lateinit var rootView: View
-    var lastVoteData:LastVoteData? = null
+    var lastVoteData: LastVoteData? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_clsd_vote, container, false)
         return rootView
@@ -25,44 +25,40 @@ class ClosedVoteFragment : Fragment() {
 
         lastVoteData?.let {
             rootView.run {
-                rootView.run {
+                Glide.with(this@ClosedVoteFragment)
+                    .load(it.image)
+                    .into(frag_clsd_vote_iv_img)
+
+                //Log.e("profile",lastVoteData.profile)
+
+                if (it.profile == "") {
+                    Glide.with(this@ClosedVoteFragment)
+                        .load(R.drawable.icn_profile)
+                        .into(frag_clsd_vote_iv_profile)
+                } else {
                     Glide.with(this@ClosedVoteFragment)
                         .load(it.image)
                         .into(frag_clsd_vote_iv_img)
-
-                    //Log.e("profile",lastVoteData.profile)
-
-                    if (it.profile == "") {
-                        Glide.with(this@ClosedVoteFragment)
-                            .load(R.drawable.icn_profile)
-                            .into(frag_clsd_vote_iv_profile)
-                    } else {
-                        Glide.with(this@ClosedVoteFragment)
-                            .load(it.image)
-                            .into(frag_clsd_vote_iv_img)
-
-                        Log.e("profile", it.profile)
-
-                        if (it.profile == "") {
-                            Glide.with(this@ClosedVoteFragment)
-                                .load(R.drawable.icn_profile)
-                                .into(frag_clsd_vote_iv_profile)
-                        } else {
-                            Glide.with(this@ClosedVoteFragment)
-                                .load(it.profile)
-                                .apply(RequestOptions().circleCrop())
-                                .into(frag_clsd_vote_iv_profile)
-                        }
-                        frag_clsd_vote_tv_name.text = it.creator
-                        frag_clsd_vote_tv_rank.text = "${it.ranking}등"
-                        frag_clsd_vote_tv_title.text = it.content
-                    }
                 }
+                Log.e("profile", it.profile)
 
-
+                if (it.profile == "") {
+                    Glide.with(this@ClosedVoteFragment)
+                        .load(R.drawable.icn_profile)
+                        .into(frag_clsd_vote_iv_profile)
+                } else {
+                    Glide.with(this@ClosedVoteFragment)
+                        .load(it.profile)
+                        .apply(RequestOptions().circleCrop())
+                        .into(frag_clsd_vote_iv_profile)
+                }
+                frag_clsd_vote_tv_name.text = it.creator
+                frag_clsd_vote_tv_rank.text = "${it.ranking}등"
+                frag_clsd_vote_tv_title.text = it.content
             }
         }
     }
+
     companion object {
         private val TAG = "ClosedVoteFragment"
 
