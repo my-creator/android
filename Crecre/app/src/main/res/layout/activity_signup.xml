@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/community_header">
+
+            <ImageView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:src="@drawable/btn_back_white"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="20dp"
+            />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="회원가입"
+                    android:fontFamily="@font/noto_sans_kr_bold"
+                    android:textSize="18sp"
+                    android:lineHeight="27sp"
+                    android:textColor="@color/white"
+                    android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="38dp"
+                android:paddingTop="23dp"
+                android:orientation="vertical">
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:id="@+id/activity_signup_id_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="아이디"
+                        android:fontFamily="@font/noto_sans_kr_bold"
+                        android:textSize="16sp"
+                        android:lineHeight="24sp"
+                        android:textColor="#ff90fc"
+                    />
+                <EditText
+                        android:id="@+id/activity_signup_et_id"
+                        android:layout_width="2250dp"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@+id/activity_signup_id_label"
+                        android:background="@null"
+                        android:hint="아이디를 입력해주세요."
+                        android:textColorHint="#aaaaaa"
+                        android:textSize="12sp"
+                        android:lineHeight="18sp"
+                />
+                <View
+                        android:id="@+id/activity_signup_id_line"
+                        android:layout_below="@+id/activity_signup_et_id"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/greyish"/>
+
+                <RelativeLayout
+                        android:id="@+id/activity_signup_double_check"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/signup_check_background_selector"
+                        android:paddingVertical="5dp"
+                        android:paddingHorizontal="17dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignBottom="@+id/activity_signup_et_id"
+                        android:layout_marginBottom="5dp">
+                    <TextView
+                            android:id="@+id/activity_signup_double_check_txt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="중복확인"
+                            android:layout_centerInParent="true"
+                            android:textSize="12sp"
+                            android:textColor="#ff90fc"/>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_marginTop="34dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:id="@+id/activity_signup_pw_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="비밀번호"
+                        android:fontFamily="@font/noto_sans_kr_bold"
+                        android:textSize="16sp"
+                        android:lineHeight="24sp"
+                        android:textColor="#ff90fc"
+                />
+                <EditText
+                        android:id="@+id/activity_signup_et_pw"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@+id/activity_signup_pw_label"
+                        android:background="@null"
+                        android:hint="비밀번호를 입력해주세요."
+                        android:textColorHint="#aaaaaa"
+                        android:textSize="12sp"
+                        android:lineHeight="18sp"
+                />
+                <View
+                        android:id="@+id/activity_signup_pw_line"
+                        android:layout_below="@+id/activity_signup_et_pw"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/greyish"/>
+                <EditText
+                        android:id="@+id/activity_signup_et_pw_check"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="18dp"
+                        android:layout_below="@+id/activity_signup_et_pw"
+                        android:background="@null"
+                        android:hint="비밀번호를 한번 더 입력해주세요."
+                        android:textColorHint="#aaaaaa"
+                        android:textSize="12sp"
+                        android:lineHeight="18sp"
+                />
+                <View
+                        android:id="@+id/activity_signup_pw_check_line"
+                        android:layout_below="@+id/activity_signup_et_pw_check"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/greyish"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_marginTop="34dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+            <TextView
+                    android:id="@+id/activity_signup_nick_name_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="닉네임"
+                    android:fontFamily="@font/noto_sans_kr_bold"
+                    android:textSize="16sp"
+                    android:lineHeight="24sp"
+                    android:textColor="#ff90fc"
+            />
+            <EditText
+                    android:id="@+id/activity_signup_et_nick_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="6dp"
+                    android:layout_below="@+id/activity_signup_nick_name_label"
+                    android:background="@null"
+                    android:hint="닉네임을 입력해주세요."
+                    android:textColorHint="#aaaaaa"
+                    android:textSize="12sp"
+                    android:lineHeight="18sp"
+            />
+
+            <View
+                    android:id="@+id/activity_signup_nick_name_line"
+                    android:layout_below="@+id/activity_signup_et_nick_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/greyish"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+
+                    android:layout_marginTop="34dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                <RelativeLayout
+                        android:layout_toLeftOf="@+id/activity_signup_sex_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="24dp">
+                    <TextView
+                            android:id="@+id/activity_signup_name_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="이름"
+                            android:fontFamily="@font/noto_sans_kr_bold"
+                            android:textSize="16sp"
+                            android:lineHeight="24sp"
+                            android:textColor="#ff90fc"
+                    />
+                    <EditText
+                            android:id="@+id/activity_signup_et_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_below="@+id/activity_signup_name_label"
+                            android:background="@null"
+                            android:hint="이름을 입력해주세요."
+                            android:textColorHint="#aaaaaa"
+                            android:textSize="12sp"
+                            android:lineHeight="18sp"
+                    />
+
+                    <View
+                            android:id="@+id/activity_signup_name_line"
+                            android:layout_below="@+id/activity_signup_et_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:background="@color/greyish"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                        android:id="@+id/activity_signup_sex_container"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true">
+                    <TextView
+                            android:id="@+id/activity_signup_sex_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="성별"
+                            android:fontFamily="@font/noto_sans_kr_bold"
+                            android:textSize="16sp"
+                            android:lineHeight="24sp"
+                            android:textColor="#ff90fc"/>
+                    <LinearLayout
+                            android:layout_below="@+id/activity_signup_sex_label"
+                            android:layout_marginTop="6dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                        <TextView
+                                android:id="@+id/activity_signup_txt_male"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/login_male_background_selector"
+                                android:text="남자"
+                                android:textSize="12dp"
+                                android:textColor="@drawable/login_sex_text_selector"
+                                android:lineHeight="18sp"
+                                android:paddingVertical="8dp"
+                                android:textAlignment="center"/>
+                        <TextView
+                                android:id="@+id/activity_signup_txt_female"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/login_female_background_selector"
+                                android:text="여자"
+                                android:textSize="12dp"
+                                android:textColor="@drawable/login_sex_text_selector"
+                                android:lineHeight="18sp"
+                                android:paddingVertical="8dp"
+                                android:layout_marginLeft="-1dp"
+                                android:textAlignment="center"/>
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                    android:layout_marginTop="34dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                <TextView
+                        android:id="@+id/activity_signup_nick_birth_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="생년월일"
+                        android:fontFamily="@font/noto_sans_kr_bold"
+                        android:textSize="16sp"
+                        android:lineHeight="24sp"
+                        android:textColor="#ff90fc"
+                />
+                <EditText
+                        android:id="@+id/activity_signup_et_birth"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:layout_marginTop="6dp"
+                        android:layout_below="@+id/activity_signup_nick_birth_label"
+                        android:background="@null"
+                        android:hint="생년월일을 입력해주세요. ex ) 980501"
+                        android:textColorHint="#aaaaaa"
+                        android:textSize="12sp"
+                        android:lineHeight="18sp"
+                />
+
+                <View
+                        android:id="@+id/activity_signup_birth_line"
+                        android:layout_below="@+id/activity_signup_et_birth"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="@color/greyish"/>
+            </RelativeLayout>
+
+        <Button
+                android:id="@+id/activity_signup_btn_submit"
+                android:layout_marginTop="35dp"
+                android:layout_width="wrap_content"
+                android:layout_height="36dp"
+                android:background="@drawable/signup_btn_background_selector"
+                android:layout_gravity="center"
+                android:text="가입하기"
+                android:textSize="14sp"
+                android:lineHeight="20sp"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:textColor="@drawable/login_btn_text_selector"/>
+
+        </LinearLayout>
+
+        
+    </LinearLayout>
+
+</RelativeLayout>
