@@ -5,16 +5,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import com.crecrew.crecre.Data.RankData
+import com.crecrew.crecre.Data.CurrentRankData
 import com.crecrew.crecre.R
 
-class RankRecyclerViewAdapter(val list: List<RankData>) : BaseAdapter() {
+class RankRecyclerViewAdapter(val list: List<CurrentRankData>) : BaseAdapter() {
 
     override fun getCount(): Int {
         return list.size
     }
 
-    override fun getItem(position: Int): RankData {
+    override fun getItem(position: Int): CurrentRankData {
         return list[position]
     }
 
@@ -37,9 +37,8 @@ class RankRecyclerViewAdapter(val list: List<RankData>) : BaseAdapter() {
         holder.text.setText(item.name)
         return convertView
     }
-}
-
-private class ViewHolder(view: View) {
-    val title: TextView = view.findViewById(R.id.title) as TextView
-    val text: TextView = view.findViewById(R.id.text) as TextView
+    inner class ViewHolder(view: View) {
+        val title: TextView = view.findViewById(R.id.title) as TextView
+        val text: TextView = view.findViewById(R.id.text) as TextView
+    }
 }
