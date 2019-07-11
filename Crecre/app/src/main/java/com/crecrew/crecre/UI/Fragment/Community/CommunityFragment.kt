@@ -179,7 +179,7 @@ class CommunityFragment : Fragment(), CommunityFavoriteRecyclerViewAdapter.OnIte
                         communityfavoriteRecyclerViewAdapter.setOnItemClickListener(this@CommunityFragment)
                         rv_favorite_community_frag.adapter = communityfavoriteRecyclerViewAdapter
                     }
-                } 
+                }
             })
 
         } else {

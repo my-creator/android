@@ -74,6 +74,11 @@ class CommunityWriteActivity : AppCompatActivity(), View.OnClickListener {
                 requestReadExternalStoragePermission()
             }
 
+            //et로 focus가도록
+            btn_et_focus_commu_write_act -> {
+
+            }
+
         }
     }
 
@@ -91,6 +96,7 @@ class CommunityWriteActivity : AppCompatActivity(), View.OnClickListener {
         btn_complete_community_write_act.setOnClickListener(this)
         rl_community_write_act.setOnClickListener(this)
         btn_cam_write_com_act.setOnClickListener(this)
+        btn_et_focus_commu_write_act.setOnClickListener(this)
     }
 
     //키보드 다운

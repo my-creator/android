@@ -73,11 +73,12 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         //첫 타이틀바 이름
         if (flag == 0) {
             tv_title_bar_hotpost_commu_act.text = "최신글"
+            writing_btn_hotpost_community_act.visibility = View.GONE
             getCommunityRecentAllResponse(communityNetworkService.getCommunityAllNewPosts())
 
         } else if (flag == 1) {
             tv_title_bar_hotpost_commu_act.text = "인기글"
-
+            writing_btn_hotpost_community_act.visibility = View.GONE
             getCommunityRecentAllResponse(communityNetworkService.getCommunityAllHotPosts())
 
         } else {
@@ -127,6 +128,11 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
                         communityHotPostRecyclerViewAdapter.dataList.addAll(temp)
                         communityHotPostRecyclerViewAdapter.notifyItemInserted(position)
                         
+                    }
+                    //temp.size가 0일때,,, 예외처리
+                    else{
+
+
                     }
                 }
             }
