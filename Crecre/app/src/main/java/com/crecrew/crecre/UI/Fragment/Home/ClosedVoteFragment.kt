@@ -27,7 +27,7 @@ class ClosedVoteFragment : Fragment() {
                 .load(lastVoteData.image)
                 .into(frag_clsd_vote_iv_img)
 
-            Log.e("profile",lastVoteData.profile)
+            //Log.e("profile",lastVoteData.profile)
 
             if(lastVoteData.profile == ""){
                 Glide.with(this@ClosedVoteFragment)

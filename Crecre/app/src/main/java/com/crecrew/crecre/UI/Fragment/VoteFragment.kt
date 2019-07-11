@@ -1,6 +1,8 @@
 package com.crecrew.crecre.UI.Fragment
 
+import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -68,6 +70,14 @@ class VoteFragment: Fragment(){
             findViewById(R.id.VoteBarPast) as RelativeLayout
 
         //색깔 바뀌는거 해야함ㅇㅇ
+        /*VoteBarcontinue.setOnClickListener{
+
+        }
+        VoteBarPast.setOnClickListener{
+            VoteBarPastLetter.setTextColor(Color.parseColor("ff57f7"))
+            VoteBarcontinueLetter.setTextColor(Color.parseColor("aaaaaa"))
+        }*/
+
 
     }
 

@@ -21,6 +21,7 @@
                 android:textColor="@color/violet_pink"
                 android:lineSpacingExtra="6sp"
                 android:gravity="center_horizontal"
+                android:id="@+id/VoteBarcontinueLetter"
         />
     </RelativeLayout>
     <View
@@ -44,6 +45,7 @@
                 android:textColor="#a4a4a4"
                 android:lineSpacingExtra="6sp"
                 android:gravity="center_horizontal"
+                android:id="@+id/VoteBarPastLetter"
         />
     </RelativeLayout>
 </LinearLayout>

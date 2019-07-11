@@ -1,9 +1,13 @@
 package com.crecrew.crecre.UI.Activity
 
 import android.content.Intent
+import android.opengl.ETC1.isValid
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import com.crecrew.crecre.Network.ApplicationController
+import com.crecrew.crecre.Network.Post.PostVoteSuggestData
+import com.crecrew.crecre.Network.VoteNetworkService
 import com.crecrew.crecre.R
 import com.crecrew.crecre.utils.CustomRequestCompleteDialog
 import com.crecrew.crecre.utils.SearchAlarmDialog
@@ -13,6 +17,12 @@ import kotlinx.android.synthetic.main.fragment_vote.*
 import org.jetbrains.anko.startActivity
 
 class VoteSuggestActivity :AppCompatActivity() {
+
+    val REQUEST_CODE_AC = 1000;
+
+    val networkservice: VoteNetworkService by lazy {
+        ApplicationController.instance.voteNetworkService
+    }
 
     var stopClick: Int = 2;
     var item_list = ArrayList<String>()
@@ -24,6 +34,8 @@ class VoteSuggestActivity :AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        var itemarray= mutableListOf<String>("","","","","")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_vote_suggest5)
         vote_suggest_typing_item5.setVisibility(View.GONE);
@@ -54,7 +66,17 @@ class VoteSuggestActivity :AppCompatActivity() {
         imageView_vote_suggest_check.setOnClickListener {
             if (vote_suggest_typing_subj.text.length==0 || vote_suggest_typing_item1.text.length == 0){
                 requestfailDialog.show();
-            } else requestDialog.show();
+            } else {
+                var votetitle = vote_suggest_typing_subj.text.toString()
+                itemarray[0] = vote_suggest_typing_item1.text.toString()
+                itemarray[1] = vote_suggest_typing_item2.text.toString()
+                if (vote_suggest_typing_item3.text.length!=0) itemarray[2] = vote_suggest_typing_item3.text.toString()
+                if (vote_suggest_typing_item4.text.length!=0) itemarray[3] = vote_suggest_typing_item4.text.toString()
+                if (vote_suggest_typing_item5.text.length!=0) itemarray[4] = vote_suggest_typing_item5.text.toString()
+
+                //PostVoteSuggestResponse(votetitle, itemarray) //수정하기
+                requestDialog.show()
+            }
         }
 
         imageView_vote_suggest_back.setOnClickListener{
@@ -81,6 +103,5 @@ class VoteSuggestActivity :AppCompatActivity() {
     private val completefailConfirmListener = View.OnClickListener {
         requestfailDialog!!.dismiss()
     }
-
 
 }
