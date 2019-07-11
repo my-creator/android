@@ -55,6 +55,6 @@ dependencies {
     // read more
     implementation 'com.borjabravo:readmoretextview:2.1.0'
 
-    compile(name:'MPChartLib-release', ext:'aar')
+    implementation(name:'MPChartLib-release', ext:'aar')
 
 }
