@@ -59,6 +59,7 @@ class CreatorProfileActivity : FragmentActivity() {
             startActivity<ProfileClassQuestionActivity>()
         }
 
+        
         review = activity_creator_profile_review_number
         total = activity_creator_profile_total
 
