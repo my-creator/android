@@ -109,7 +109,45 @@ interface CommunityNetworkService {
         @Path("boardIdx") boardIdx: Int
     ): Call<PostCommunityFavoriteLikeResponse>
 
+    //좋아요 누르기
+    @POST("posts/{postIdx}/like")
+    fun postPostLikeOn(
+        @Header("token") token : String,
+        @Path("postIdx") postIdx : Int
+    ) : Call<PostCommunityFavoriteLikeResponse>
 
+    //좋아요 삭제
+    @DELETE("posts/{postIdx}/unlike")
+    fun deletePostLikeOff(
+        @Header("token") token : String,
+        @Path("postIdx") postIdx : Int
+    ):Call<PostCommunityFavoriteLikeResponse>
 
+    //비추천 누르기
+    @POST("posts/{postIdx}/hate")
+    fun postPosthateOn(
+        @Header("token") token : String,
+        @Path("postIdx") postIdx : Int
+    ) : Call<PostCommunityFavoriteLikeResponse>
+
+    //비추천 취소
+    @DELETE("posts/{postIdx}/unhate")
+    fun deletePostunhateOff(
+        @Header("token") token : String,
+        @Path("postIdx") postIdx : Int
+    ):Call<PostCommunityFavoriteLikeResponse>
+
+    //댓글 조회
+    @GET("replies/{postIdx}")
+    fun getPostReply(
+        @Header("token") token : String,
+        @Path("postIdx") postIdx : Int
+    ) : Call<GetPostReplyResponse>
+
+    @POST("replies/")
+    fun postCommentReply(
+        @Header("token") token : String,
+        @Body() body : JsonObject
+    ) : Call<PostCommunityFavoriteLikeResponse>
 
 }

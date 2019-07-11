@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.OvalShape
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,11 +13,12 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.CommentData
 import com.crecrew.crecre.Network.Get.CommunityDetailData
+import com.crecrew.crecre.Network.Get.CommunityReplyData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.utils.calculatePostTime
 import de.hdodenhof.circleimageview.CircleImageView
 
-class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<CommunityDetailData>) :
+class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<CommunityReplyData>) :
     RecyclerView.Adapter<CommunityDetailCommentRecyclerViewAdapter.Holder>() {
 
 
@@ -30,24 +32,32 @@ class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: 
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
         // profile 이미지
-        if(dataList[position].profile_url == "")
-            Glide.with(ctx).load(R.drawable.img_profile).into(holder.profile)
+        if(dataList[position].profile_url == "" || dataList[position].is_anonymous == 1)
+            Glide.with(ctx).load(R.drawable.icn_profile).into(holder.profile)
         else
         {
             Glide.with(ctx).load(dataList[position].profile_url).into(holder.profile)
             holder.profile.setBackground(ShapeDrawable(OvalShape()))
             holder.profile.setClipToOutline(true)
         }
+        Log.v("TAGG",position.toString())
 
-        //user name
-        holder.user_name.text = dataList[position].id
+        if(dataList[position].is_anonymous == 1)
+        {
+            holder.user_name.text = "익명"
+        }
+        else
+            //user name
+            holder.user_name.text = dataList[position].name
 
         //time
-        var cpt = calculatePostTime(dataList[position].create_time)
-        holder.time.text = dataList[position].create_time
+
+        var cpt = calculatePostTime(dataList[position].reply_create_time)
+        holder.time.text = dataList[position].reply_create_time
+
 
         //comment
-        holder.content.text = dataList[position].contents
+        holder.content.text = dataList[position].content
 
     }
 

@@ -33,6 +33,12 @@ class CommunityFavoriteRecyclerViewAdapter(
         ApplicationController.instance.communityNetworkService
     }
 
+    private var listener: OnItemClickListener? = null
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+
     val boardIdx = -1
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
@@ -63,18 +69,18 @@ class CommunityFavoriteRecyclerViewAdapter(
             img_like = 1
         }
 
-
         //즐겨찾기 버튼 눌렀을 경우
         holder.img_like.setOnClickListener {
             if (img_like == 0) {
-                holder.img_like.isSelected = true
-                img_like = 1
+                //holder.img_like.isSelected = true
+                //img_like = 1
                 //여기서 idx는 board_idx를 말함
-                postLikeOnClickResponse(dataList[position].idx)
+                postLikeOnClickResponse(dataList[position].idx, position)
             } else {
-                holder.img_like.isSelected = false
-                img_like = 0
-                deleteLikeoffClickResponse(dataList[position].idx)
+                //holder.img_like.isSelected = false
+                //img_like = 0
+                deleteLikeoffClickResponse(dataList[position].idx, position)
+
             }
         }
 
@@ -86,7 +92,7 @@ class CommunityFavoriteRecyclerViewAdapter(
     }
 
     //좋아요 누르기 보여주기 통신
-    fun postLikeOnClickResponse(boardIdx: Int) {
+    fun postLikeOnClickResponse(boardIdx: Int, position: Int) {
         val postBoardsFavoriteLike: Call<PostCommunityFavoriteLikeResponse> =
             communityNetworkService.postBoardsFavoriteLike(
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
@@ -105,14 +111,14 @@ class CommunityFavoriteRecyclerViewAdapter(
             ) {
 
                 if (response.isSuccessful) {
-
+                    listener?.onItemClicked(position)
                 }
             }
         })
     }
 
     //좋아요 누르기 취소 통신
-    fun deleteLikeoffClickResponse(boardIdx: Int){
+    fun deleteLikeoffClickResponse(boardIdx: Int, position: Int) {
         val postBoardsFavoriteLike: Call<PostCommunityFavoriteLikeResponse> =
             communityNetworkService.deleteBoardsFavoriteLike(
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
@@ -131,7 +137,7 @@ class CommunityFavoriteRecyclerViewAdapter(
             ) {
 
                 if (response.isSuccessful) {
-
+                    listener?.onItemClicked(position)
                 }
             }
         })
@@ -140,8 +146,12 @@ class CommunityFavoriteRecyclerViewAdapter(
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var container = itemView.findViewById(R.id.rl_item_favorite_container) as RelativeLayout
         var title = itemView.findViewById(R.id.tv_rv_title_community_frag) as TextView
-        var img_like = itemView.findViewById(R.id.btn_favorite_heart_community_frag) as ImageView
+        var img_like = itemView.findViewById(R.id.img_favorite_heart_community_frag) as ImageView
         var line = itemView.findViewById(R.id.rl_line_favorite_commu_frag) as RelativeLayout
+    }
+
+    interface OnItemClickListener {
+        fun onItemClicked(position: Int)
     }
 
 }

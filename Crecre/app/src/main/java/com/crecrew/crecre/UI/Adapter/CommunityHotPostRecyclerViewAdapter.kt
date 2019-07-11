@@ -17,10 +17,7 @@ import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.utils.calculatePostTime
 import org.jetbrains.anko.startActivity
 
-class CommunityHotPostRecyclerViewAdapter(
-    val ctx: Context,
-    val dataList: ArrayList<CommunitySmallNewGetData>,
-    val flag: Int
+class CommunityHotPostRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<CommunitySmallNewGetData>, val flag: Int
 ) : RecyclerView.Adapter<CommunityHotPostRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_hotpost_community_act, viewGroup, false)

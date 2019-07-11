@@ -20,9 +20,7 @@
     <RelativeLayout
             android:id="@+id/rl_item_favorite_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="8dp"
-            android:paddingHorizontal="10dp"
+            android:layout_height="match_parent"
     >
 
         <RelativeLayout
@@ -35,26 +33,35 @@
                     android:id="@+id/tv_rv_title_community_frag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
                     android:text="자유게시판"
                     android:layout_centerVertical="true"
                     android:fontFamily="@font/noto_sans_kr_medium"
                     android:textSize="16sp"
                     android:textColor="@color/black"
-            />
+                    android:layout_alignParentStart="true" android:layout_marginStart="0dp"/>
 
-            <ImageView
+            <RelativeLayout
                     android:id="@+id/btn_favorite_heart_community_frag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="8dp"
                     android:layout_alignParentRight="true"
+            >
+
+
+            <ImageView
+                    android:id="@+id/img_favorite_heart_community_frag"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/community_favorite_heart_btn"
 
             />
+            </RelativeLayout>
 
         </RelativeLayout>
 
     </RelativeLayout>
-
-
 
 </LinearLayout>

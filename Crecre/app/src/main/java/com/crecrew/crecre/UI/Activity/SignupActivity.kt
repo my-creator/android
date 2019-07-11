@@ -36,7 +36,7 @@ class SignupActivity :AppCompatActivity(){
 
         activity_signup_double_check.setOnClickListener {
 
-            
+
             getIdDuplicateResponse(activity_signup_double_check_txt.text.toString())
             // Todo
 
