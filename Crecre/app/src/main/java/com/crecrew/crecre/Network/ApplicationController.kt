@@ -11,6 +11,7 @@ class ApplicationController : Application() {
     lateinit var creatorNetworkService: CreatorNetworkService
     lateinit var rankNetworkService: RankNetworkService
     lateinit var voteNetworkService: VoteNetworkService
+    lateinit var userNetworkService: UserNetworkService
 
     companion object{
         lateinit var instance : ApplicationController
@@ -32,6 +33,7 @@ class ApplicationController : Application() {
         creatorNetworkService = retrofit.create(CreatorNetworkService::class.java)
         rankNetworkService = retrofit.create(RankNetworkService::class.java)
         voteNetworkService = retrofit.create(VoteNetworkService::class.java)
+        userNetworkService = retrofit.create(UserNetworkService::class.java)
     }
 
 

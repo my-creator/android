@@ -55,12 +55,12 @@ class VoteEndFragment : Fragment() {
 
                 if (response.isSuccessful){
 
-                    Log.e("status",response.body()!!.status.toString())
+                    //Log.e("status",response.body()!!.status.toString())
                     if ( response.body()!!.status == 200 ){
                         //var dataList: ArrayList<GetVoteEndData> = ArrayList()
                         val tmp: ArrayList<GetVoteEndData> = response.body()!!.data!!
 
-                        Log.e("contents",tmp[0].contents)
+                        //Log.e("contents",tmp[0].contents)
 
                         voteEndAdapter = VoteEndAdapter(activity!!, tmp)
                         rv_fragment_vote_last.adapter = voteEndAdapter
