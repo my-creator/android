@@ -38,7 +38,7 @@
                 <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/icn_find_p"
+                        android:src="@drawable/icn_search_w"
                         android:layout_centerVertical="true"
                 />
 
@@ -117,7 +117,9 @@
                             android:id="@+id/rv_favorite_community_frag"
                             android:layout_marginTop="16dp"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+
+                            app:layoutManager="android.support.v7.widget.LinearLayoutManager">
 
                     </android.support.v7.widget.RecyclerView>
 
@@ -138,6 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="24dp"
                         android:layout_marginTop="12dp"
+                        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
                 >
                 </android.support.v7.widget.RecyclerView>
 

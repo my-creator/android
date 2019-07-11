@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+         android:layout_width="match_parent"
+         android:layout_height="match_parent">
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_centerInParent="true">
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/crecre_icon"/>
+        <TextView
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="회원가입이 완료되었습니다"
+                android:textSize="16sp"
+                android:textColor="@color/greyish"
+                android:lineHeight="24sp"
+                android:layout_marginTop="18dp"
+                android:fontFamily="@font/noto_sans_kr_medium"
+        />
+        <TextView
+                android:layout_marginTop="9dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="크리크리의 가족이 되신 것을 \n 진심으로 환영합니다!"
+                android:textColor="@color/greyish"
+                android:textSize="12sp"
+                android:textAlignment="center"/>
+        <Button
+                android:id="@+id/activity_signup_complete_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/btn_vote"
+                android:text="크리크리 홈 바로가기"
+                android:textSize="16sp"
+                android:layout_marginTop="50dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:lineHeight="24sp"
+
+        />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
