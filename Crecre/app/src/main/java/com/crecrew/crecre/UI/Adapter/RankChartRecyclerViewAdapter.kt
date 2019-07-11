@@ -59,21 +59,24 @@ class RankChartRecyclerViewAdapter(private val ctx : Context, private val dataLi
         else
             Glide.with(ctx).load(dataList[position].profile_url)
                 .apply(RequestOptions().circleCrop()).into(holder.image)
-/*
-        if (dataList[position].gap > 0)
+
+
+        Log.e("updown", dataList[position].upDown.toString())
+
+        if (dataList[position].upDown > 0)
             Glide.with(ctx).load(R.drawable.icn_up).into(holder.arrow)
-        else if(dataList[position].gap < 0) {
+        else if(dataList[position].upDown < 0) {
             Glide.with(ctx).load(R.drawable.icn_down).into(holder.arrow)
             holder.gap.setTextColor(Color.parseColor("#2befef"))
         }
 
         holder.ranking.text = (position+1).toString()
-        if(dataList[position].gap != 0) {
-            holder.gap.text = Math.abs(dataList[position].gap).toString()
+        if(dataList[position].upDown != 0) {
+            holder.gap.text = Math.abs(dataList[position].upDown).toString()
         }else{
             holder.gap.text = ""
         }
-        */
+
         holder.ranking.text = dataList[position].ranking.toString()
         holder.category.text = dataList[position].categoryName
         holder.name.text = dataList[position].creatorName
@@ -84,7 +87,6 @@ class RankChartRecyclerViewAdapter(private val ctx : Context, private val dataLi
             holder.number.text = str
         }
         else if(flag == 2){
-            Log.e("view count", dataList[position].youtube_view_cnt.toString())
             var str = String.format("%,d", dataList[position].youtube_view_cnt)
             holder.number.text = str
         }

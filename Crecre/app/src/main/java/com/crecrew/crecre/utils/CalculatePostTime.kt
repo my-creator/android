@@ -3,8 +3,6 @@ package com.crecrew.crecre.utils
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CalculatePostTime{
-
     public fun calculatePostTime(time : String) : String {
 
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
@@ -32,4 +30,3 @@ class CalculatePostTime{
         }
         return result
     }
-}

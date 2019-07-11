@@ -21,6 +21,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        activity_login_btn.isClickable = false
+
         activity_login_et_id.setOnFocusChangeListener { v, hasFocus ->
             if(hasFocus) v.setBackgroundResource(R.drawable.img_id_on)
             else v.setBackgroundResource(R.drawable.img_id_off)
@@ -30,20 +32,18 @@ class LoginActivity : AppCompatActivity() {
             else v.setBackgroundResource(R.drawable.img_id_off)
         }
 
-        val login_u_id = activity_login_et_id.text.toString()
-        val login_u_pw: String = activity_login_et_pw.text.toString()
-
         activity_login_btn.setOnClickListener {
-            startActivity<MainActivity>()
-        }
-        if(login_u_id != "" && login_u_pw !="") {
-            Log.e("hi","isSelected")
-            activity_login_btn.isSelected = true
-            activity_login_btn.setBackgroundResource(R.drawable.btn_login_on)
-            activity_login_btn.setOnClickListener {
 
+            val login_u_id = activity_login_et_id.text.toString()
+            val login_u_pw= activity_login_et_pw.text.toString()
 
-                // 통신
+            if(login_u_id.length > 0 && login_u_pw.length > 0) {
+                Log.e("hi","isSelected")
+                activity_login_btn.isSelected = true
+                activity_login_btn.isClickable = true
+                activity_login_btn.setOnClickListener {
+                    startActivity<MainActivity>()
+                }
             }
         }
 

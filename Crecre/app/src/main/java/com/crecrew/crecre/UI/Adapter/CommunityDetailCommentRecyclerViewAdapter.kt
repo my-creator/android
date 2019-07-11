@@ -15,7 +15,7 @@ import com.crecrew.crecre.Data.CommentData
 import com.crecrew.crecre.Network.Get.CommunityDetailData
 import com.crecrew.crecre.Network.Get.CommunityReplyData
 import com.crecrew.crecre.R
-import com.crecrew.crecre.utils.CalculatePostTime
+import com.crecrew.crecre.utils.calculatePostTime
 import de.hdodenhof.circleimageview.CircleImageView
 
 class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<CommunityReplyData>) :
@@ -51,7 +51,10 @@ class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: 
             holder.user_name.text = dataList[position].name
 
         //time
+
+        var cpt = calculatePostTime(dataList[position].reply_create_time)
         holder.time.text = dataList[position].reply_create_time
+
 
         //comment
         holder.content.text = dataList[position].content
