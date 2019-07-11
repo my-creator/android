@@ -33,8 +33,10 @@ import org.jetbrains.anko.support.v4.startActivity
 import com.crecrew.crecre.UI.Activity.CreatorSearchActivity
 import com.crecrew.crecre.UI.Adapter.TodayRankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
+import com.crecrew.crecre.UI.Fragment.Home.RankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
 import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
+import com.icoo.autoscrolllayout.VerticalScrollLayout
 import kotlinx.android.synthetic.main.fragment_home_today_rank.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -106,7 +108,7 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         configureRecyclerView()
-
+        initVScrollLayout()
     }
 
     override fun onResume() {
@@ -161,6 +163,17 @@ class HomeFragment: Fragment() {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
 
         // fragment_home_edit_search.clearFocus()
+    }
+
+    private fun initVScrollLayout() {
+        val vScrollLayout = rootView.fragment_home_txt_today_hot_creator
+        val items = ArrayList<RankData>()
+        for (i in 0..5) {
+            val item = RankData("$i", "항목$i")
+            items.add(item)
+        }
+        val adapter = RankRecyclerViewAdapter(items)
+        vScrollLayout.setAdapter(adapter)
     }
 
 
