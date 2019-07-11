@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.CommentData
 import com.crecrew.crecre.Network.Get.CommunityDetailData
 import com.crecrew.crecre.R
-import com.crecrew.crecre.utils.CalculatePostTime
+import com.crecrew.crecre.utils.calculatePostTime
 import de.hdodenhof.circleimageview.CircleImageView
 
 class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<CommunityDetailData>) :
@@ -43,6 +43,7 @@ class CommunityDetailCommentRecyclerViewAdapter(val ctx: Context, val dataList: 
         holder.user_name.text = dataList[position].id
 
         //time
+        var cpt = calculatePostTime(dataList[position].create_time)
         holder.time.text = dataList[position].create_time
 
         //comment

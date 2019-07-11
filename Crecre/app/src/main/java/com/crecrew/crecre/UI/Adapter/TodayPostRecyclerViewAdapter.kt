@@ -15,7 +15,7 @@ import com.crecrew.crecre.Data.CommunitySmallNewGetData
 import com.crecrew.crecre.Data.TodayPost
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityDetailActivity
-import com.crecrew.crecre.utils.CalculatePostTime
+import com.crecrew.crecre.utils.calculatePostTime
 import org.jetbrains.anko.startActivity
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -42,12 +42,16 @@ class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataLi
             holder.recommend.text = "추천" + dataList[position].like_cnt.toString()
             holder.comment.text = "댓글" + dataList[position].reply_cnt.toString()
 
-            var cpt = CalculatePostTime().calculatePostTime(dataList[position].create_time)
+            var cpt = calculatePostTime(dataList[position].create_time)
             holder.time.text = cpt
 
             holder.container.setOnClickListener {
                 ctx.startActivity<CommunityDetailActivity>(
-                    // TODO: 정보 넣기
+                    "category_title" to dataList[position].name,
+                    "title" to dataList[position].title,
+                    "idx" to dataList[position].user_idx,
+                    "postidx" to dataList[position].post_idx,
+                    "thumbnail_url" to dataList[position].thumbnail_url
                 )
             }
 
