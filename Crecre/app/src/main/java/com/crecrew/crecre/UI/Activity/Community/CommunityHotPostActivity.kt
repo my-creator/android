@@ -58,7 +58,6 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         init()
         configureTitleBar()
         configureRecyclerView()
-
     }
 
     private fun configureTitleBar() {
@@ -74,11 +73,12 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         //첫 타이틀바 이름
         if (flag == 0) {
             tv_title_bar_hotpost_commu_act.text = "최신글"
+            writing_btn_hotpost_community_act.visibility = View.GONE
             getCommunityRecentAllResponse(communityNetworkService.getCommunityAllNewPosts())
 
         } else if (flag == 1) {
             tv_title_bar_hotpost_commu_act.text = "인기글"
-
+            writing_btn_hotpost_community_act.visibility = View.GONE
             getCommunityRecentAllResponse(communityNetworkService.getCommunityAllHotPosts())
 
         } else {
@@ -88,34 +88,6 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
 
         }
 
-        /*
-        if(title == "")
-        {
-            //첫 타이틀바 이름
-            if(flag == 0)
-            {
-                tv_title_bar_hotpost_commu_act.text = "최신글"
-                getCommunityRecentAllResponse(communityNetworkService.getCommunityAllNewPosts())
-
-            }
-            else if(flag == 1)
-            {
-                tv_title_bar_hotpost_commu_act.text = "인기글"
-
-                getCommunityRecentAllResponse(communityNetworkService.getCommunityAllHotPosts())
-
-            }
-            else if(flag == -1)
-                finish()
-        }
-        else
-        {
-            tv_title_bar_hotpost_commu_act.text = title
-            //##hot인기글 3개가 먼저 나오도록 해야함 --> 통신 속도?때문에 그런가 먼저 나올때도 있고 아닐때도 있음...
-            getCommunityRecentAllResponse(communityNetworkService.getPostListBoards(board_idx))
-            getCommunityRecentAllResponse(communityNetworkService.getPostListAllBoards(board_idx))
-        }
-*/
     }
 
 
@@ -147,30 +119,29 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
                 if (response.isSuccessful) {
                     val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
 
+                    Log.v("community", response.message())
+                    for (i in 0..temp.size - 1)
+                        Log.v("community", temp[i].contents)
+
                     if (temp.size > 0) {
                         val position = communityHotPostRecyclerViewAdapter.itemCount
                         communityHotPostRecyclerViewAdapter.dataList.addAll(temp)
                         communityHotPostRecyclerViewAdapter.notifyItemInserted(position)
+                        
                     }
-                    //##만약, temp.size에 데이터가 하나도 없을 경우 예외처리를 해야함
-                    else {
+                    //temp.size가 0일때,,, 예외처리
+                    else{
+
 
                     }
-
                 }
-
             }
-
         })
-
     }
-
 
     private fun init() {
         btn_back_hotpost_community_act.setOnClickListener(this)
         btn_search_community_hotpost_act.setOnClickListener(this)
         writing_btn_hotpost_community_act.setOnClickListener(this)
     }
-
-
 }

@@ -64,12 +64,17 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
                     requestEnterDialog.show()
                 }
                 else {
+                    //게시판
                     if (board_flag == 0) {
                         //제대로 검색이 되었을 경우
                         getCommunitySearchResultResponse()
                         configureboardRecyclerView()
                     }
+                    //게시글 검색
                     else{
+                        tv_result_search_act.setText("게시글 검색 결과")
+                        tv_noborad_search_commu_act.visibility= View.GONE
+                        btn_search_request_community_act.visibility = View.GONE
                         configurecontensRecyclerView()
                         getContentsSearchResultResponse()
                     }
@@ -204,8 +209,6 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
             }
         })
     }
-
-
 
     //검색버튼 누른 후 글 제목, 내용 검색 통신
     private fun getContentsSearchResultResponse() {

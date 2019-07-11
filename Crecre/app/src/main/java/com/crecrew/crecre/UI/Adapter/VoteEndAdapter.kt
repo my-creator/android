@@ -6,16 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.crecrew.crecre.Data.VoteEndData
+import com.crecrew.crecre.Data.GetVoteEndData
 import com.crecrew.crecre.R
 
-class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<VoteEndData>) :
+class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<GetVoteEndData>) :
     RecyclerView.Adapter<VoteEndAdapter.Holder>(){
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): VoteEndAdapter.Holder {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): Holder {
         val view:View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_endvote_card, p0, false)
         return Holder(view)
     }
@@ -26,40 +27,68 @@ class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<VoteEndData>) :
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         Glide.with(ctx)
-            .load(dataList[position].ImageURL)
+            .load(dataList[position].thumbnail_url)
             .into(holder.img_thumnail)
+
+        // Todo: choice의 개수에 따라 처리
+
         Glide.with(ctx)
-            .load(dataList[position].itemimage1)
+            .load(dataList[position].choices[0].creator_profile_url)
             .apply(RequestOptions().circleCrop()).into(holder.img_item1)
         Glide.with(ctx)
-            .load(dataList[position].itemimage2)
+            .load(dataList[position].choices[1].creator_profile_url)
             .apply(RequestOptions().circleCrop()).into(holder.img_item2)
-        Glide.with(ctx)
-            .load(dataList[position].itemimage3)
-            .apply(RequestOptions().circleCrop()).into(holder.img_item3)
-        Glide.with(ctx)
-            .load(dataList[position].itemimage4)
-            .apply(RequestOptions().circleCrop()).into(holder.img_item4)
-        Glide.with(ctx)
-            .load(dataList[position].itemimage5)
-            .apply(RequestOptions().circleCrop()).into(holder.img_item5)
+
+
+        if (dataList[position].choices.size >= 3 ){
+            Glide.with(ctx)
+                .load(dataList[position].choices[2].creator_profile_url)
+                .apply(RequestOptions().circleCrop()).into(holder.img_item3)
+            holder.txt_itemname3.text = dataList[position].choices[2].name
+            holder.txt_votenum3.text = "${8}표"
+            holder.txt_rank3.text = "3등"
+
+            if (dataList[position].choices.size >= 4){
+                Glide.with(ctx)
+                    .load(dataList[position].choices[3].creator_profile_url)
+                    .apply(RequestOptions().circleCrop()).into(holder.img_item4)
+                holder.txt_itemname4.text = dataList[position].choices[3].name
+                holder.txt_votenum4.text = "${11}표"
+                holder.txt_rank4.text = "4등"
+
+                if (dataList[position].choices.size >= 5){
+                    Glide.with(ctx)
+                        .load(dataList[position].choices[4].creator_profile_url)
+                        .apply(RequestOptions().circleCrop()).into(holder.img_item5)
+                    holder.txt_itemname5.text = dataList[position].choices[4].name
+                    holder.txt_votenum5.text = "${99}표"
+                    holder.txt_rank5.text = "5등"
+                }
+                else{
+                    holder.li5.setVisibility(View.GONE)
+                }
+            }
+            else{
+                holder.li5.setVisibility(View.GONE)
+                holder.li4.setVisibility(View.GONE)
+            }
+        }
+        else{
+            holder.li5.setVisibility(View.GONE)
+            holder.li4.setVisibility(View.GONE)
+            holder.li3.setVisibility(View.GONE)
+        }
         holder.title.text = dataList[position].title
-        holder.explain.text = dataList[position].explain
-        holder.txt_itemname1.text = dataList[position].itemname1
-        holder.txt_itemname2.text = dataList[position].itemname2
-        holder.txt_itemname3.text = dataList[position].itemname3
-        holder.txt_itemname4.text = dataList[position].itemname4
-        holder.txt_itemname5.text = dataList[position].itemname5
-        holder.txt_votenum1.text = "${dataList[position].votenum1}표"
-        holder.txt_votenum2.text = "${dataList[position].votenum2}표"
-        holder.txt_votenum3.text = "${dataList[position].votenum3}표"
-        holder.txt_votenum4.text = "${dataList[position].votenum4}표"
-        holder.txt_votenum5.text = "${dataList[position].votenum5}표"
+        holder.explain.text = dataList[position].contents
+        holder.txt_itemname1.text = dataList[position].choices[0].name
+        holder.txt_itemname2.text = dataList[position].choices[1].name
+
+        holder.txt_votenum1.text = "${4}표"
+        holder.txt_votenum2.text = "${5}표"
+
         holder.txt_rank1.text = "1등"
         holder.txt_rank2.text = "2등"
-        holder.txt_rank3.text = "3등"
-        holder.txt_rank4.text = "4등"
-        holder.txt_rank5.text = "5등"
+
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView)
@@ -87,5 +116,10 @@ class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<VoteEndData>) :
         var txt_rank3 = itemView.findViewById(R.id.vote_rank3_end) as TextView
         var txt_rank4 = itemView.findViewById(R.id.vote_rank4_end) as TextView
         var txt_rank5 = itemView.findViewById(R.id.vote_rank5_end) as TextView
+        var li1 = itemView.findViewById(R.id.ll1_end) as LinearLayout
+        var li2 = itemView.findViewById(R.id.ll2_end) as LinearLayout
+        var li3 = itemView.findViewById(R.id.ll3_end) as LinearLayout
+        var li4 = itemView.findViewById(R.id.ll4_end) as LinearLayout
+        var li5 = itemView.findViewById(R.id.ll5_end) as LinearLayout
     }
 }

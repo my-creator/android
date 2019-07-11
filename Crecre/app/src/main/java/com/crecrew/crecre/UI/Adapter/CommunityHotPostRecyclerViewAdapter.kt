@@ -14,12 +14,10 @@ import com.crecrew.crecre.Data.CommunitySmallNewGetData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityDetailActivity
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
+import com.crecrew.crecre.utils.calculatePostTime
 import org.jetbrains.anko.startActivity
 
-class CommunityHotPostRecyclerViewAdapter(
-    val ctx: Context,
-    val dataList: ArrayList<CommunitySmallNewGetData>,
-    val flag: Int
+class CommunityHotPostRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<CommunitySmallNewGetData>, val flag: Int
 ) : RecyclerView.Adapter<CommunityHotPostRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_hotpost_community_act, viewGroup, false)
@@ -66,7 +64,8 @@ class CommunityHotPostRecyclerViewAdapter(
         holder.comment.text = "댓글 " + dataList[position].reply_cnt.toString() + " | "
 
         //작성시간
-        holder.time.text = dataList[position].create_time.toString()
+        var cpt = calculatePostTime(dataList[position].create_time)
+        holder.time.text = cpt
 
         //게시판카테고리으로 수정
         if (dataList[position].name == null)

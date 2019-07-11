@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/black_60">
+
+    <RelativeLayout
+            android:layout_width="320dp"
+            android:layout_height="208dp"
+            android:background="@drawable/custom_dialog_box"
+            android:layout_centerInParent="true"
+    >
+
+        <RelativeLayout
+                android:id="@+id/rl_request_response_compelte"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/custom_dialog_box"
+        >
+            <TextView
+                    android:id="@+id/tv_contents_title_dialog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="@color/violet_pink"
+                    android:fontFamily="@font/noto_sans_kr_medium"
+                    android:textSize="16sp"
+                    android:text="알림"
+            />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/rl_request_response_compelte"
+                android:layout_above="@+id/ll_bottom_box_search_custom_dialog"
+                android:background="@color/white"
+        >
+
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/violet_pink"
+            >
+
+            </RelativeLayout>
+
+            <TextView
+                    android:id="@+id/custom_dialog_signup_id_check_txt_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:text="이미 사용중인 아이디입니다."
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/noto_sans_kr_medium"
+                    android:layout_centerInParent="true"
+            />
+
+        </RelativeLayout>
+
+        <!--확인, 취소 버튼-->
+        <LinearLayout
+                android:id="@+id/ll_bottom_box_search_custom_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:background="@drawable/custom_dialog_box">
+
+            <RelativeLayout
+                    android:id="@+id/btn_custom_dialog_confirm"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                <TextView
+                        android:id="@+id/tv_left_custom_dialog_community_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="확인"
+                        android:layout_centerInParent="true"
+                        android:textColor="#707070"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/noto_sans_kr_medium"/>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+    </RelativeLayout>
+
+</RelativeLayout>
