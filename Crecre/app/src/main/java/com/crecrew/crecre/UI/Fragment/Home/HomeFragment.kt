@@ -19,6 +19,7 @@ import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import com.crecrew.crecre.Base.BasePagerAdapter
+import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CommunityNetworkService
@@ -59,6 +60,9 @@ class HomeFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
+
+        Log.e("token", SharedPreferenceController.getUserToken(activity!!))
+
         // 통신
         getCreatorTodayHotRank()
         getCommunityResponse()
@@ -75,16 +79,25 @@ class HomeFragment: Fragment() {
                 openTodayHotChart()
             }
 
+            fragment_home_now_vote_more.setOnClickListener{
+                // TODO: 투표탭으로 화면전환
+            }
+
             fragment_home_vote_recommendation_btn.setOnClickListener {
                 startActivity<VoteSuggestActivity>()
             }
             fragment_home_txt_today_hot_post_more.setOnClickListener {
-                Log.e("click","click more btn")
-                startActivity<CommunityHotPostActivity>()
-                // TODO: hot과 new 구분하기!
+                val intent = Intent(activity, CommunityHotPostActivity::class.java)
+                intent.putExtra("flag",1)
+                intent.putExtra("title","인기글")
+                startActivity(intent)
+
             }
             fragment_home_txt_today_new_post_more.setOnClickListener {
-                startActivity<CommunityHotPostActivity>()
+                val intent = Intent(activity, CommunityHotPostActivity::class.java)
+                intent.putExtra("flag",0)
+                intent.putExtra("title","최신글")
+                startActivity(intent)
             }
 
             // search bar 누르면 검색 화면으로 넘어가기
@@ -108,7 +121,7 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         configureRecyclerView()
-        initVScrollLayout()
+        //initVScrollLayout()
     }
 
     override fun onResume() {
@@ -172,8 +185,8 @@ class HomeFragment: Fragment() {
 
         // TODO: todayCreatorRankData 넣기!
 
-        for (i in 1..10) {
-            val item = CurrentRankData("$i", "항목$i")
+        for (i in 0..todayCreatorRankData.size-1) {
+            val item = CurrentRankData((todayCreatorRankData[i].ranking).toString(), todayCreatorRankData[i].creatorName)
             items.add(item)
         }
         val adapter = RankRecyclerViewAdapter(items)
@@ -191,20 +204,24 @@ class HomeFragment: Fragment() {
                 Log.e("creator search fail",t.toString())
             }
             override fun onResponse(call: Call<GetCreatorTodayHotRank>, response: Response<GetCreatorTodayHotRank>) {
+
+                Log.e("home creator rank",response.body()!!.status.toString())
                 if(response.isSuccessful){
+                    Log.e("home creator rank",response.body()!!.status.toString())
+                    //Log.e("home creator rank",response.body()!!.data[0].creatorName)
+
                     if(response.body()!!.status == 200){
                         todayCreatorRankData = response.body()!!.data
-
-                        Log.e("homefragment:",todayCreatorRankData[0].creatorName)
                         var todayCreatorRankTopData : ArrayList<CreatorData> = ArrayList(5)
                         var todayCreatorRankBottomData: ArrayList<CreatorData> = ArrayList(5)
 
                         var index = 0
                         for(i in 0 ..4)
                             todayCreatorRankTopData.add(todayCreatorRankData[index++])
-                        for(i in 0 ..2)
+                        for(i in 0 ..4) {
                             todayCreatorRankBottomData.add(todayCreatorRankData[index++])
-
+                            Log.e("hi",todayCreatorRankBottomData[i].creatorName)
+                        }
                         rootView.fragment_home_vp_today_rank.run {
                             adapter = BasePagerAdapter(fragmentManager!!).apply {
 
@@ -232,6 +249,8 @@ class HomeFragment: Fragment() {
                                     navigationLayout.findViewById(R.id.fragment_home_today_rank_navi_bottom) as RelativeLayout
                             }
                         }
+
+                        initVScrollLayout()
                     }
                 }
             }

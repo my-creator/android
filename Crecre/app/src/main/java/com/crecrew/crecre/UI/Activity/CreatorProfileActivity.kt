@@ -63,14 +63,14 @@ class CreatorProfileActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator_profile)
 
+
         var creator_idx = 5123
         mTypeface = activity_creator_profile_review_number.typeface
 
 
         getProfileResponse(creator_idx)
         getProfileStatResponse(creator_idx)
-        val intent = intent
-        val creator_name = intent.getStringExtra("creator_name")
+
 
         activity_creator_profile_btn_go_fanpage.setOnClickListener {
             startActivity<CommunityHotPostActivity>()

@@ -8,5 +8,6 @@ data class RankData(
     val ranking: Int,
     val youtube_subscriber_cnt: Int,
     val youtube_view_cnt : Int,
-    val upDown: Int
+    val upDown: Int,
+    val idx : Int
 )
