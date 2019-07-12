@@ -18,9 +18,9 @@ import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CreatorNetworkService
 import com.crecrew.crecre.Network.Get.GetCreatorTodayHotRank
 import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+
+
+
 
 
 class HomeTodayRankFragment() : Fragment(){
@@ -28,7 +28,6 @@ class HomeTodayRankFragment() : Fragment(){
     lateinit var todayRankRecyclerViewAdapter: TodayRankRecyclerViewAdapter
 
     var dataList: ArrayList<CreatorData> = ArrayList()
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_home_today_rank, container, false)
@@ -51,18 +50,8 @@ class HomeTodayRankFragment() : Fragment(){
         fragment_home_today_rank_rv.adapter = todayRankRecyclerViewAdapter
         fragment_home_today_rank_rv.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         fragment_home_today_rank_rv.addItemDecoration(SimpleDividerItemDecoration(Color.parseColor("#eaeaea"), 1))
+
     }
-
-
-    private fun animateRV(){
-        val controller = AnimationUtils.loadLayoutAnimation(activity!!, R.anim.fade_in_anim)
-
-        fragment_home_today_rank_rv.setLayoutAnimation(controller)
-        todayRankRecyclerViewAdapter.notifyDataSetChanged()
-        fragment_home_today_rank_rv.scheduleLayoutAnimation()
-    }
-
-
 
 
 }

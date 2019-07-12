@@ -2,6 +2,7 @@ package com.crecrew.crecre.UI.Adapter
 
 import android.content.Context
 import android.graphics.Color
+import android.os.Handler
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -19,6 +20,10 @@ import com.crecrew.crecre.R
 
 
 class TodayRankRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<CreatorData>) : RecyclerView.Adapter<TodayRankRecyclerViewAdapter.Holder>() {
+
+    var lastPosition = -1
+    val innerHandler = Handler()
+
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx)!!.inflate(R.layout.rv_item_today_rank, viewGroup, false)
         return Holder(view)
@@ -38,12 +43,6 @@ class TodayRankRecyclerViewAdapter(private val ctx : Context, private val dataLi
         else
             Glide.with(ctx).load(R.drawable.icn_down).into(holder.arrow)
         holder.gap.text = Math.abs(dataList[position].searchCnt).toString()
-
-        /*
-        var animation : Animation
-        animation = AnimationUtils.loadAnimation(ctx, R.anim.dropdown)
-        holder.container.startAnimation(animation)
-*/
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -56,8 +55,11 @@ class TodayRankRecyclerViewAdapter(private val ctx : Context, private val dataLi
 
     }
 
-    fun addData( cdata: CreatorData, position: Int){
-        dataList[position] = cdata
-
+    private fun setAnimation(viewToAnimate: View, position: Int){
+        if(position > lastPosition){
+            var animation : Animation = AnimationUtils.loadAnimation(ctx, R.anim.dropdown)
+            viewToAnimate.startAnimation(animation)
+            lastPosition = position
+        }
     }
 }

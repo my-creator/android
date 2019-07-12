@@ -29,6 +29,7 @@ import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.Network.CreatorNetworkService
 import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
 import com.crecrew.crecre.Network.Get.GetCreatorTodayHotRank
+import com.crecrew.crecre.Network.Get.GetLastVoteHomeResponse
 import com.crecrew.crecre.Network.Get.GetVoteEndResponse
 import com.crecrew.crecre.Network.VoteNetworkService
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
@@ -40,6 +41,7 @@ import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
 import com.crecrew.crecre.UI.Fragment.Home.RankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
 import com.crecrew.crecre.UI.Fragment.VoteCurrentFragment
+import com.crecrew.crecre.UI.Fragment.VoteFragment
 import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
@@ -85,16 +87,7 @@ class HomeFragment: Fragment() {
 
                 rank_time.setText(current_time)
 
-                /*
-                val innerHandler = Handler()
 
-                var position = 0
-                val innerHandlerTask = object : Runnable{
-                    override fun run() {
-                        todayCreatorRankData[position]
-                    }
-                }
-                */
                 handler.postDelayed(this,1000*20)
             }
         }
@@ -145,6 +138,13 @@ class HomeFragment: Fragment() {
 
             }
 
+            fragment_home_now_vote_more.setOnClickListener {
+                var fm = fragmentManager!!.beginTransaction()
+                fm.replace(R.id.activity_main_vp_container, VoteFragment())
+                fm.commit()
+
+            }
+
             // 다른 화면 누르면 키보드 내리고 edittext focus 삭제
             fragment_home_container.setOnClickListener {
                 downKeyboard(fragment_home_container)
@@ -173,39 +173,26 @@ class HomeFragment: Fragment() {
 
 
     fun getLastVoteResponse(){
-        val getLastVote = voteNetworkService.getLastVote()
-        getLastVote.enqueue(object: Callback<GetVoteEndResponse> {
-            override fun onFailure(call: Call<GetVoteEndResponse>, t: Throwable) {
+        val getLastVoteHome = voteNetworkService.getLastVoteHome()
+        getLastVoteHome.enqueue(object: Callback<GetLastVoteHomeResponse> {
+            override fun onFailure(call: Call<GetLastVoteHomeResponse>, t: Throwable) {
                 Log.e("last vote fail" , t.toString())
             }
 
-            override fun onResponse(call: Call<GetVoteEndResponse>, response: Response<GetVoteEndResponse>) {
+            override fun onResponse(call: Call<GetLastVoteHomeResponse>, response: Response<GetLastVoteHomeResponse>) {
                 if(response.isSuccessful) {
+                    Log.e("status",response.body()!!.status.toString())
                     if (response.body()!!.status == 200) {
-                        var tmp: ArrayList<GetVoteEndData> = response.body()!!.data
-                        var dataList: ArrayList<LastVoteData> = ArrayList()
+                        var tmp: ArrayList<LastVoteHomeData> = response.body()!!.data
+                        Log.e("data",tmp[0].title)
 
-                        Log.e("size", tmp.size.toString())
-
-                        /*
-                        // data 넣기
-                        for (i in 0..2) {
-                            dataList[i].image = tmp[0].thumbnail_url
-                            dataList[i].content = tmp[0].title
-                            for (j in 0..tmp[i].choices.size - 1) {
-                                if (tmp[i].choices[j].rank == 1) {
-                                    dataList[i].creator = tmp[i].choices[j].name
-                                    dataList[i].profile = tmp[i].choices[j].creator_profile_url
-                                }
-                            }
-                        }
                         frag_home_vp_clsd.run {
                             adapter = BasePagerAdapter(fragmentManager!!).apply {
-                                for (i in dataList.indices)
-                                    addFragment(ClosedVoteFragment.newInstance(dataList[i]))
+                                for (i in tmp.indices)
+                                    addFragment(ClosedVoteFragment.newInstance(tmp[i]))
                             }
                         }
-                        */
+
                     }
                 }
             }
@@ -247,10 +234,7 @@ class HomeFragment: Fragment() {
             }
             override fun onResponse(call: Call<GetCreatorTodayHotRank>, response: Response<GetCreatorTodayHotRank>) {
 
-                Log.e("home creator rank",response.body()!!.status.toString())
                 if(response.isSuccessful){
-                    Log.e("home creator rank",response.body()!!.status.toString())
-                    //Log.e("home creator rank",response.body()!!.data[0].creatorName)
 
                     if(response.body()!!.status == 200){
                         todayCreatorRankData = response.body()!!.data
@@ -262,7 +246,6 @@ class HomeFragment: Fragment() {
                             todayCreatorRankTopData.add(todayCreatorRankData[index++])
                         for(i in 0 ..4) {
                             todayCreatorRankBottomData.add(todayCreatorRankData[index++])
-                            Log.e("hi",todayCreatorRankBottomData[i].creatorName)
                         }
                         rootView.fragment_home_vp_today_rank.run {
                             adapter = BasePagerAdapter(fragmentManager!!).apply {
