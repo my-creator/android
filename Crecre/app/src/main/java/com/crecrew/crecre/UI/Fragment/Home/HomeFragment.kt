@@ -154,6 +154,9 @@ class HomeFragment: Fragment() {
                         var tmp: ArrayList<GetVoteEndData> = response.body()!!.data
                         var dataList: ArrayList<LastVoteData> = ArrayList()
 
+                        Log.e("size", tmp.size.toString())
+
+                        /*
                         // data 넣기
                         for (i in 0..2) {
                             dataList[i].image = tmp[0].thumbnail_url
@@ -171,6 +174,7 @@ class HomeFragment: Fragment() {
                                     addFragment(ClosedVoteFragment.newInstance(dataList[i]))
                             }
                         }
+                        */
                     }
                 }
             }
