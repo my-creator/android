@@ -63,7 +63,6 @@
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
-                    android:paddingVertical="10dp"
                     android:paddingHorizontal="20dp"
                     android:orientation="horizontal"
                     android:background="@color/white">
@@ -71,6 +70,7 @@
                         android:id="@+id/fragment_home_txt_today_hot_label"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
                         android:text="실시간 크리에이터"
                         android:textSize="14sp"
                         android:lineHeight="20dp"
@@ -79,25 +79,22 @@
                 <RelativeLayout
                         android:id="@+id/fragment_home_today_hot_creator_container"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginLeft="60dp"
                         android:layout_toLeftOf="@id/fragment_home_iv_today_hot_btn"
                         android:layout_toRightOf="@+id/fragment_home_txt_today_hot_label"
                 >
-                    <TextView
+                    <com.icoo.autoscrolllayout.VerticalScrollLayout
+                            android:layout_centerVertical="true"
                             android:id="@+id/fragment_home_txt_today_hot_creator"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="3 백종원의 요리비책호로롤로롤"
-                            android:textSize="14sp"
-                            android:lineHeight="20dp"
-                            android:singleLine="true"
-                            android:layout_marginRight="15dp"
-                            android:textColor="@color/black"/>
+                            android:layout_marginRight="15dp"/>
 
                 </RelativeLayout>
 
                 <ImageView
+                        android:layout_centerVertical="true"
                         android:id="@+id/fragment_home_iv_today_hot_btn"
                         android:layout_width="20dp"
                         android:layout_height="20dp"
