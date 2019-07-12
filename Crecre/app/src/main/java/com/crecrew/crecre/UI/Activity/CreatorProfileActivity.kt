@@ -61,12 +61,11 @@ class CreatorProfileActivity : FragmentActivity() {
         setContentView(R.layout.activity_creator_profile)
         configureRecyclerView()
 
-
-        var creator_idx = 4366
+        val intent = intent
+        val creator_idx = intent.getIntExtra("creator_idx",4866)
 
         getProfileResponse(creator_idx)
-        val intent = intent
-        val creator_name = intent.getStringExtra("creator_name")
+
 
         activity_creator_profile_btn_go_fanpage.setOnClickListener{
             startActivity<CommunityHotPostActivity>()

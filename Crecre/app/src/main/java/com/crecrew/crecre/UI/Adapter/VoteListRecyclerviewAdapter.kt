@@ -10,25 +10,23 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.VoteData
-import com.crecrew.crecre.Data.VoteTestData
 import com.crecrew.crecre.R
-import kotlinx.android.synthetic.main.fragment_rank.*
 
 class VoteListRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<VoteData>) : RecyclerView.Adapter<VoteListRecyclerviewAdapter.Holder>() {
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var img_thumnail = itemView.findViewById(R.id.card_main_image_test) as ImageView
-        var txt_dayleft = itemView.findViewById(R.id.rv_item_current_card_dayleft_test) as TextView
-        var txt_ongoing = itemView.findViewById(R.id.rv_item_current_card_isongoing_test) as TextView
-        var stamp = itemView.findViewById(R.id.rv_item_current_card_stamp_test) as ImageView
-        var title = itemView.findViewById(R.id.rv_item_vote_title_test) as TextView
-        var explain = itemView.findViewById(R.id.rv_item_vote_explain_test) as TextView
-        var letsVote = itemView.findViewById(R.id.lets_vote_test) as TextView
+        var img_thumnail = itemView.findViewById(R.id.card_main_image) as ImageView
+        var txt_dayleft = itemView.findViewById(R.id.rv_item_current_card_dayleft) as TextView
+        var txt_ongoing = itemView.findViewById(R.id.rv_item_current_card_isongoing) as TextView
+        var stamp = itemView.findViewById(R.id.rv_item_current_card_stamp) as ImageView
+        var title = itemView.findViewById(R.id.rv_item_vote_title) as TextView
+        var explain = itemView.findViewById(R.id.rv_item_vote_explain) as TextView
+        var letsVote = itemView.findViewById(R.id.lets_vote) as TextView
         var choice_container = itemView.findViewById(R.id.rv_item_currenvote_card_test_choice_rv) as RecyclerView
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): VoteListRecyclerviewAdapter.Holder {
-        val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_currentvote_card_test, p0, false)
+        val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_currentvote_card, p0, false)
         return Holder(view)
 
     }

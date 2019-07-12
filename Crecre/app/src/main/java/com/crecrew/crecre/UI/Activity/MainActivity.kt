@@ -3,10 +3,12 @@ package com.crecrew.crecre.UI.Activity
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.view.ViewPager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import com.crecrew.crecre.Base.BasePagerAdapter
+import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Fragment.Community.CommunityFragment
 import com.crecrew.crecre.UI.Fragment.VoteFragment
@@ -19,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         // ViewPager
         activity_main_vp_container.run {

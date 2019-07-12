@@ -1,7 +1,9 @@
 package com.crecrew.crecre.UI.Adapter
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
@@ -47,6 +49,7 @@ class RankChartRecyclerViewAdapter(private val ctx : Context, private val dataLi
             raking_container.visibility = VISIBLE
 
         }
+
     }
 
     override fun getItemCount(): Int = dataList.size
@@ -91,11 +94,10 @@ class RankChartRecyclerViewAdapter(private val ctx : Context, private val dataLi
             holder.number.text = str
         }
 
-
         holder.container.setOnClickListener {
-            ctx.startActivity<CreatorProfileActivity>(
-                // TODO: 정보 넣기
-            )
+            val intent = Intent(ctx, CreatorProfileActivity::class.java)
+            intent.putExtra("creator_idx",dataList[position].idx)
+            ctx.startActivity(intent)
         }
     }
 
