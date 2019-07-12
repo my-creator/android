@@ -17,7 +17,7 @@ object SharedPreferenceController {
 
     fun getUserToken(ctx: Context): String {
         val preference: SharedPreferences = ctx.getSharedPreferences(MY_ACCOUNT, Context.MODE_PRIVATE)
-        return preference.getString("u_id", "")
+        return preference.getString("token", "")
     }
 
     fun clearUserToken(ctx: Context) {

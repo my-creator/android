@@ -12,6 +12,7 @@ import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_community_hot_post.*
+import org.jetbrains.anko.networkStatsManager
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import retrofit2.Call
@@ -92,13 +93,16 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
 
         } else {
             //##hot인기글 3개가 먼저 나오도록 해야함 --> 통신 속도?때문에 그런가 먼저 나올때도 있고 아닐때도 있음...
-            getCommunityRecentAllResponse(communityNetworkService.getPostListBoards(board_idx))
+            getCommunityCommentResponse()
             getCommunityRecentAllResponse(communityNetworkService.getPostListAllBoards(board_idx))
+
+            /*
+            getCommunityRecentAllResponse(communityNetworkService.getPostListBoards(board_idx))
+            getCommunityRecentAllResponse(communityNetworkService.getPostListAllBoards(board_idx))*/
 
         }
 
     }
-
 
     //recyclerView
     private fun configureRecyclerView() {
@@ -109,8 +113,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         rv_community_hotpost_act_list.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
-
-    //통신 전체 보여주기
+    //최신글, 인기글
     private fun getCommunityRecentAllResponse(networkfunction: Call<GetCommunitySmallNewPostResponse>) {
         val getCommunitySmallNewPosts: Call<GetCommunitySmallNewPostResponse> = networkfunction
 
@@ -130,6 +133,12 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
                 if (response.isSuccessful) {
 
                     Log.v("community", response.message())
+                    Log.v("community", temp.size.toString())
+
+                    //##확인필요
+                    if (temp.size == 0) {
+                        size = 9898
+                    }
                     for (i in 0..temp.size - 1)
                         Log.v("community", temp[i].contents)
 
@@ -145,6 +154,55 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
             }
         })
     }
+
+    //게시판별 게시글 통신
+    private fun getCommunityCommentResponse() {
+        val getCommunitySmallNewPosts: Call<GetCommunitySmallNewPostResponse> =
+            communityNetworkService.getPostListBoards(board_idx)
+
+        getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
+
+            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+                Log.e("게시판별 게시글 통신 list fail", t.toString())
+            }
+
+            override fun onResponse(
+                call: Call<GetCommunitySmallNewPostResponse>,
+                response: Response<GetCommunitySmallNewPostResponse>
+            ) {
+
+                val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+
+                if (response.isSuccessful) {
+
+                    Log.v("community", response.message())
+                    Log.v("community", temp.size.toString())
+
+                    //##확인필요
+                    if (temp.size == 0) {
+
+                        if (size == 9898)
+                        {
+                            rl_noresult_commu_hot_post_act.visibility = View.VISIBLE
+                        }
+
+                    }
+                    for (i in 0..temp.size - 1)
+                        Log.v("community", temp[i].contents)
+
+                    if (temp.size > 0) {
+                        val position = communityHotPostRecyclerViewAdapter.itemCount
+                        communityHotPostRecyclerViewAdapter.dataList.addAll(temp)
+                        communityHotPostRecyclerViewAdapter.notifyItemInserted(position)
+
+
+                    }
+                }
+
+            }
+        })
+    }
+
 
     private fun init() {
         btn_back_hotpost_community_act.setOnClickListener(this)
