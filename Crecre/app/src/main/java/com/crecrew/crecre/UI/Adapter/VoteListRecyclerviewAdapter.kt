@@ -6,21 +6,27 @@ import android.os.Build
 import android.support.annotation.RequiresApi
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Data.VoteData
-import com.crecrew.crecre.Data.VoteTestData
+import com.crecrew.crecre.Network.ApplicationController
+import com.crecrew.crecre.Network.Post.PostVoteChoiceResponse
+import com.crecrew.crecre.Network.VoteNetworkService
 import com.crecrew.crecre.R
 import com.crecrew.crecre.utils.calculateLastime
-import kotlinx.android.synthetic.main.fragment_rank.*
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.util.*
+import com.google.gson.JsonObject
+import com.google.gson.JsonParser
+import org.json.JSONObject
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import kotlin.collections.ArrayList
 
 class VoteListRecyclerviewAdapter(val ctx: Context, val dataList: ArrayList<VoteData>) :
@@ -28,6 +34,12 @@ class VoteListRecyclerviewAdapter(val ctx: Context, val dataList: ArrayList<Vote
     , VoteChoiceRecyclerviewAdapter.onItemCheckListener {
     var isCheck: Boolean = false
     lateinit var test: TextView
+    var thisisChoice: Int = 0
+    var userToken = SharedPreferenceController.getUserToken(ctx)
+
+    val voteNetworkService: VoteNetworkService by lazy {
+        ApplicationController.instance.voteNetworkService
+    }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var img_thumnail = itemView.findViewById(R.id.card_main_image) as ImageView
@@ -37,12 +49,13 @@ class VoteListRecyclerviewAdapter(val ctx: Context, val dataList: ArrayList<Vote
         var title = itemView.findViewById(R.id.rv_item_vote_title) as TextView
         var explain = itemView.findViewById(R.id.rv_item_vote_explain) as TextView
         var letsVote = itemView.findViewById(R.id.lets_vote) as TextView
+        var whitebox = itemView.findViewById(R.id.whitebox) as View
         var choice_container = itemView.findViewById(R.id.rv_item_invote_choicesList) as RecyclerView
+        var mintbox = itemView.findViewById(R.id.rv_item_current_card_isongoing) as Button
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): VoteListRecyclerviewAdapter.Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_currentvote_card, p0, false)
-
 
         return Holder(view)
 
@@ -54,16 +67,15 @@ class VoteListRecyclerviewAdapter(val ctx: Context, val dataList: ArrayList<Vote
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        var userToken = SharedPreferenceController.getUserToken(ctx)
 
         Glide.with(ctx)
             .load(dataList[position].thumbnail_url)
             .into(holder.img_thumnail)
 
         holder.title.text = dataList[position].title
-        holder.explain.text = "# " + dataList[position].contents
+        holder.explain.text = "#" + dataList[position].contents
 
-        holder.txt_ongoing.setVisibility(View.GONE)
+        //holder.txt_ongoing.setVisibility(View.GONE)
 
         test = holder.letsVote
 //        if(!isCheck) holder.letsVote.)
@@ -78,18 +90,83 @@ class VoteListRecyclerviewAdapter(val ctx: Context, val dataList: ArrayList<Vote
         holder.choice_container.adapter = voteChoiceRecyclerviewAdapter
         holder.choice_container.layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false)
 
-        if (userToken != null && dataList[position].my_choice != null) {
+        if (userToken != null && dataList[position].my_choice != null) { //투표함
+            var i: Int = dataList[position].choices.size
+            var j: Int = 0;
 
-        } else if (userToken != null && dataList[position].my_choice == null) {
+            while (j < i) {
+                if (dataList[position].choices[j].choice_idx != dataList[position].my_choice) dataList[position].choices[j].checked = false
+                else dataList[position].choices[j].checked = true
+                dataList[position].choices[j].cho = -2
+                j++
+            }
 
+            //holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"))
+        } else if (userToken != null && dataList[position].my_choice == null) { //아직 투표 안함
+            holder.stamp.setVisibility(View.GONE)
+            holder.whitebox.setVisibility(View.GONE)
+            holder.mintbox.setVisibility(View.GONE)
+            var i: Int = dataList[position].choices.size
+            var j: Int = 0;
+
+            while (j < i) {
+                dataList[position].choices[j].checked = true
+                j++
+            }
+
+            holder.letsVote.setOnClickListener {
+                if (isCheck){
+                    j=0;
+                    while (j < i) {
+                        if (dataList[position].choices[j].cho == j) {
+                            thisisChoice = j;
+                            dataList[position].choices[j].cho = -2
+                        }
+                        j++
+                    }
+                }
+                postVoteResponse(dataList[position].choices[thisisChoice].choice_idx, position)
+            }
+        } else if (userToken == null) {
+            holder.stamp.setVisibility(View.GONE)
+            holder.whitebox.setVisibility(View.GONE)
+            holder.mintbox.setVisibility(View.GONE)
         }
     }
 
     override fun onCheck(isCheck: Boolean) {
         if (isCheck) {
             test.setTextColor(Color.parseColor("#ff57f7"))
+        }else{
+            test.setTextColor(Color.parseColor("#aaaaaa"))
         }
     }
+
+    fun postVoteResponse(choice: Int, position: Int) {
+        var jsonObject = JSONObject()
+        jsonObject.put("choiceIdx", choice)
+
+        val gsonObject = JsonParser().parse(jsonObject.toString()) as JsonObject
+        val postVoteResponse: Call<PostVoteChoiceResponse> =
+            voteNetworkService.postVoteChoiceResponse(userToken, gsonObject, dataList[position].vote_idx)
+        postVoteResponse.enqueue(object : Callback<PostVoteChoiceResponse> {
+            override fun onFailure(call: Call<PostVoteChoiceResponse>, t: Throwable) {
+                Log.e("Post vote choice", t.toString())
+            }
+
+            override fun onResponse(call: Call<PostVoteChoiceResponse>, response: Response<PostVoteChoiceResponse>) {
+                if (response.isSuccessful) {
+                    if (response.body()!!.status == 201) {
+                        Log.d("Post vote choice", "success!")
+
+                    }else{
+                        Log.d("Post vote choice", "error!")
+                    }
+                }
+            }
+        })
+    }
 }
+
 
 

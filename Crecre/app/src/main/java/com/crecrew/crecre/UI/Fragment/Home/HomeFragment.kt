@@ -71,7 +71,7 @@ class HomeFragment: Fragment() {
         // 통신
         getCreatorTodayHotRank()
         getCommunityResponse()
-        getLastVoteResponse()
+        //getLastVoteResponse()
 
         var voteCurrentFragment = VoteCurrentFragment()
         voteCurrentFragment.flag = 1
