@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.crecrew.crecre.Data.VoteChoiceData
 import com.crecrew.crecre.Data.VoteData
 import com.crecrew.crecre.Data.VoteItemData
@@ -16,6 +17,14 @@ import com.crecrew.crecre.R
 
 class VoteChoiceRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<VoteChoiceData>) : RecyclerView.Adapter<VoteChoiceRecyclerviewAdapter.Holder>() {
 
+    var hangmock = dataList.size
+    var isChecked = ArrayList<Boolean>()
+
+    lateinit var listener: onItemCheckListener
+
+    fun setOnItemClickListener(listener: onItemCheckListener) {
+        this.listener = listener
+    }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): VoteChoiceRecyclerviewAdapter.Holder {
         val view:View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_invote_choice, p0, false)
@@ -29,19 +38,35 @@ class VoteChoiceRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<V
     override fun onBindViewHolder(holder: Holder, position: Int) {
         Glide.with(ctx)
             .load(dataList[position].creator_profile_url)
-            .into(holder.img_thumnail)
+            .apply(RequestOptions().circleCrop()).into(holder.img_thumnail)
 
         holder.item_name.text = dataList[position].name;
-        var check: Int = 0; var check1: Int = 0; var check2: Int = 0; var check3: Int = 0; var check4: Int = 0; var check5: Int = 0;
-        /*
-        if(dataList[position].)
-            holder.img_isCheck.setImageResource(R.drawable.btn_check)
-        else*/
-            holder.img_isCheck.setImageResource(R.drawable.btn_uncheck)
 
-        holder.img_isCheck.setOnClickListener {
 
+        holder.img_isCheck.setImageResource(R.drawable.btn_uncheck)
+        for (i in dataList.indices) isChecked.add(false)
+
+        if(!isChecked[position]) holder.img_isCheck.setImageResource(R.drawable.btn_uncheck)
+        else holder.img_isCheck.setImageResource(R.drawable.btn_check)
+
+       holder.img_isCheck.setOnClickListener {
+            isChecked[position] = true
+
+
+            for(i in 0..dataList.size-1) {
+                if (i != position) {
+                    isChecked[i] = false
+                }
+            }
+           listener.onCheck(true)
+           notifyDataSetChanged()
         }
+
+
+
+
+
+        if (dataList[position].rank == 1){}
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -50,6 +75,9 @@ class VoteChoiceRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<V
         var img_isCheck = itemView.findViewById(R.id.item_ischeckimg) as ImageView
     }
 
+    interface onItemCheckListener {
+        fun onCheck(isCheck: Boolean)
+    }
 
 }
 
