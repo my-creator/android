@@ -2,6 +2,7 @@ package com.crecrew.crecre.Network
 
 import com.crecrew.crecre.Network.Get.GetVoteResponse
 import com.crecrew.crecre.Network.Post.PostVoteChoiceResponse
+import com.crecrew.crecre.Network.Get.GetLastVoteHomeResponse
 import com.crecrew.crecre.Network.Get.GetVoteEndResponse
 import com.crecrew.crecre.Network.Get.GetVoteHomeResponse
 import com.google.gson.JsonObject
@@ -20,6 +21,10 @@ interface VoteNetworkService {
     fun getLastVote(
     ): Call<GetVoteEndResponse>
     // TODO: GetVoteEndResponse랑 GetVoteResponse 합치기!
+
+    @GET("votes/lasts/home")
+    fun getLastVoteHome(
+    ):Call<GetLastVoteHomeResponse>
 
     @GET("votes/ings/newest")
     fun getCurrentVoteHome(

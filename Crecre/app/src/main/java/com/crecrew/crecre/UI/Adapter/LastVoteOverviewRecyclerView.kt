@@ -10,13 +10,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.crecrew.crecre.Data.LastVoteData
 import com.crecrew.crecre.R
 import android.graphics.drawable.shapes.OvalShape
 import android.graphics.drawable.ShapeDrawable
 import android.widget.RelativeLayout
 
-
+/*
 class LastVoteOverviewRecyclerView(private val ctx : Context, private val dataList : ArrayList<LastVoteData>) : RecyclerView.Adapter<LastVoteOverviewRecyclerView.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx)!!.inflate(R.layout.rv_item_last_vote, viewGroup, false)
@@ -62,4 +61,4 @@ class LastVoteOverviewRecyclerView(private val ctx : Context, private val dataLi
         var content = itemView.findViewById(R.id.rv_item_last_vote_content) as TextView
 
     }
-}
+}*/
