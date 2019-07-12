@@ -1,0 +1,36 @@
+package com.crecrew.crecre.Data
+
+
+data class CreatorProfileData(
+    val back_lank2_exp: Int,
+    val back_lank_exp: Int,
+    val board_idx: Int,
+    val board_name: String,
+    val board_type: String,
+    val category_idx: Int,
+    val category_lank: Int,
+    val category_name: String,
+    val channel_id: String,
+    val contents: String,
+    val creator_create_time: String,
+    val creator_idx: Int,
+    val creator_name: String,
+    val follower_cnt: Int,
+    val follower_grade_follower_cnt: Int,
+    val follower_grade_idx: Int,
+    val follower_grade_img_url: String,
+    val follower_grade_level: Int,
+    val follower_grade_name: String,
+    val follower_grade_percent: Int,
+    val front_lank2_exp: Int,
+    val front_lank_exp: Int,
+    val profile_url: String,
+    val view_grade_idx: Int,
+    val view_grade_img_url: String,
+    val view_grade_name: String,
+    val view_grade_percent: Int,
+    val view_grade_view_cnt: Int,
+    val youtube_subscriber_cnt: Int,
+    val youtube_view_cnt: Int,
+    val profile_asset : String
+)
