@@ -27,8 +27,6 @@ import com.crecrew.crecre.UI.Adapter.CommunityWriteImageRecyclerViewAdapter
 import com.crecrew.crecre.utils.SearchAlarmDialog
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import com.yongbeam.y_photopicker.util.photopicker.PhotoPickerActivity
-import com.yongbeam.y_photopicker.util.photopicker.utils.YPhotoPickerIntent
 import kotlinx.android.synthetic.main.activity_community_request.*
 import kotlinx.android.synthetic.main.activity_community_write.*
 import okhttp3.MediaType
