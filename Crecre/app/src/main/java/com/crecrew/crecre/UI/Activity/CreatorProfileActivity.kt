@@ -53,6 +53,7 @@ class CreatorProfileActivity : FragmentActivity() {
 
     lateinit var creatorProfileData : CreatorProfileData
     lateinit var statData: StatData
+    lateinit var mTypeface: Typeface
 
     val creatorNetworkService: CreatorNetworkService by lazy{
         ApplicationController.instance.creatorNetworkService
@@ -63,6 +64,8 @@ class CreatorProfileActivity : FragmentActivity() {
         setContentView(R.layout.activity_creator_profile)
 
         var creator_idx = 5123
+        mTypeface = activity_creator_profile_review_number.typeface
+
 
         getProfileResponse(creator_idx)
         getProfileStatResponse(creator_idx)
@@ -128,7 +131,7 @@ class CreatorProfileActivity : FragmentActivity() {
 
         val data = RadarData(sets)
         data.run {
-            setValueTypeface(Typeface.DEFAULT)
+            setValueTypeface(mTypeface)
             setValueTextSize(8f)
             setDrawValues(false)
             setValueTextColor(Color.WHITE)
@@ -145,7 +148,7 @@ class CreatorProfileActivity : FragmentActivity() {
 
         mChart.run {
             xAxis.run {
-                typeface = Typeface.DEFAULT
+                typeface = mTypeface
                 textSize = 14f
                 yOffset = 0f
                 xOffset = 0f
@@ -167,7 +170,7 @@ class CreatorProfileActivity : FragmentActivity() {
             }
 
             yAxis.run {
-                //typeface = mTfLight
+                typeface = mTypeface
                 setLabelCount(6, true)
                 axisMinimum = 0f
                 axisMaximum = 5f
