@@ -101,9 +101,10 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<PostLoginResponse>, response: Response<PostLoginResponse>) {
                 if (response.isSuccessful) {
-                    var status = response.body()!!.status
+                    val status = response.body()!!.status
                     if (status == 200) {
                         SharedPreferenceController.setUserToken(applicationContext, response.body()!!.data.token.token)
+
                         startActivity<MainActivity>()
                         finish()
                     } else if(status == 400 || status == 500){

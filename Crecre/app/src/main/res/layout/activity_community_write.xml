@@ -87,7 +87,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
                 android:id="@+id/btn_et_focus_commu_write_act"
                 android:layout_width="match_parent"
                 android:layout_height="500dp">
@@ -105,7 +105,17 @@
                     android:background="@null"
             />
 
-        </LinearLayout>
+            <ImageView
+                    android:id="@+id/img_insert_commu_write_act"
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_below="@+id/et_context_commu_write_act"
+            />
+
+
+
+        </RelativeLayout>
 
     </LinearLayout>
 

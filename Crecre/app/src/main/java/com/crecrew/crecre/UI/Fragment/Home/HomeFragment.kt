@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import com.crecrew.crecre.Base.BasePagerAdapter
+import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CommunityNetworkService
@@ -32,6 +34,7 @@ import com.crecrew.crecre.UI.Activity.CreatorSearchActivity
 import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
 import com.crecrew.crecre.UI.Fragment.Home.RankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
+import com.crecrew.crecre.UI.Fragment.VoteCurrentFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,7 +48,6 @@ class HomeFragment: Fragment() {
 
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
 
-
     var todayCreatorRankData : ArrayList<CreatorData> = ArrayList()
 
     val creatorNetworkService: CreatorNetworkService by lazy{
@@ -58,9 +60,17 @@ class HomeFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
+
+        Log.e("token", SharedPreferenceController.getUserToken(activity!!))
+
         // 통신
-        //getCreatorTodayHotRank()
+        getCreatorTodayHotRank()
         getCommunityResponse()
+
+        var voteCurrentFragment = VoteCurrentFragment()
+        voteCurrentFragment.flag = 1
+
+        fragmentManager!!.beginTransaction().add(R.id.fragment_home_now_vote_rl,voteCurrentFragment).commit()
 
         // 화면 전환
         rootView.run {
@@ -69,16 +79,25 @@ class HomeFragment: Fragment() {
                 openTodayHotChart()
             }
 
+            fragment_home_now_vote_more.setOnClickListener{
+                // TODO: 투표탭으로 화면전환
+            }
+
             fragment_home_vote_recommendation_btn.setOnClickListener {
                 startActivity<VoteSuggestActivity>()
             }
             fragment_home_txt_today_hot_post_more.setOnClickListener {
-                Log.e("click","click more btn")
-                startActivity<CommunityHotPostActivity>()
-                // TODO: hot과 new 구분하기!
+                val intent = Intent(activity, CommunityHotPostActivity::class.java)
+                intent.putExtra("flag",1)
+                intent.putExtra("title","인기글")
+                startActivity(intent)
+
             }
             fragment_home_txt_today_new_post_more.setOnClickListener {
-                startActivity<CommunityHotPostActivity>()
+                val intent = Intent(activity, CommunityHotPostActivity::class.java)
+                intent.putExtra("flag",0)
+                intent.putExtra("title","최신글")
+                startActivity(intent)
             }
 
             // search bar 누르면 검색 화면으로 넘어가기
@@ -102,7 +121,7 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         configureRecyclerView()
-        initVScrollLayout()
+        //initVScrollLayout()
     }
 
     override fun onResume() {
@@ -149,8 +168,6 @@ class HomeFragment: Fragment() {
             }
         }
 
-
-
     }
 
     private fun downKeyboard(view: View) {
@@ -166,12 +183,10 @@ class HomeFragment: Fragment() {
         val vScrollLayout = rootView.fragment_home_txt_today_hot_creator
         val items = ArrayList<CurrentRankData>()
 
-//        for (i in todayCreatorRankData.indices) {
-//            val item = CurrentRankData("$i + 1", "${todayCreatorRankData[i].creator_name}")
-//            items.add(item)
-//        }
-        for (i in 1..10) {
-            val item = CurrentRankData("$i", "항목$i")
+        // TODO: todayCreatorRankData 넣기!
+
+        for (i in 0..todayCreatorRankData.size-1) {
+            val item = CurrentRankData((todayCreatorRankData[i].ranking).toString(), todayCreatorRankData[i].creatorName)
             items.add(item)
         }
         val adapter = RankRecyclerViewAdapter(items)
@@ -189,19 +204,24 @@ class HomeFragment: Fragment() {
                 Log.e("creator search fail",t.toString())
             }
             override fun onResponse(call: Call<GetCreatorTodayHotRank>, response: Response<GetCreatorTodayHotRank>) {
+
+                Log.e("home creator rank",response.body()!!.status.toString())
                 if(response.isSuccessful){
+                    Log.e("home creator rank",response.body()!!.status.toString())
+                    //Log.e("home creator rank",response.body()!!.data[0].creatorName)
+
                     if(response.body()!!.status == 200){
                         todayCreatorRankData = response.body()!!.data
-
                         var todayCreatorRankTopData : ArrayList<CreatorData> = ArrayList(5)
                         var todayCreatorRankBottomData: ArrayList<CreatorData> = ArrayList(5)
 
                         var index = 0
                         for(i in 0 ..4)
                             todayCreatorRankTopData.add(todayCreatorRankData[index++])
-                        for(i in 0 ..2)
+                        for(i in 0 ..4) {
                             todayCreatorRankBottomData.add(todayCreatorRankData[index++])
-
+                            Log.e("hi",todayCreatorRankBottomData[i].creatorName)
+                        }
                         rootView.fragment_home_vp_today_rank.run {
                             adapter = BasePagerAdapter(fragmentManager!!).apply {
 
@@ -229,6 +249,8 @@ class HomeFragment: Fragment() {
                                     navigationLayout.findViewById(R.id.fragment_home_today_rank_navi_bottom) as RelativeLayout
                             }
                         }
+
+                        initVScrollLayout()
                     }
                 }
             }
