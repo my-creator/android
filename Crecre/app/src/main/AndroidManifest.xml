@@ -34,18 +34,18 @@
         <activity android:name=".UI.Activity.Community.CommunityHotPostActivity">
         </activity>
         <activity android:name=".UI.Activity.MainActivity">
-        </activity>
-        <activity android:name=".UI.Activity.CreatorProfileActivity"/>
-
-        <activity android:name=".UI.Activity.VoteSuggestActivity"/>
-        <activity android:name=".UI.Activity.CreatorSearchActivity"/>
-        <activity android:name=".UI.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity android:name=".UI.Activity.CreatorProfileActivity"/>
+
+        <activity android:name=".UI.Activity.VoteSuggestActivity"/>
+        <activity android:name=".UI.Activity.CreatorSearchActivity"/>
+        <activity android:name=".UI.Activity.SplashActivity">
 
         </activity>
 
