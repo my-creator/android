@@ -11,6 +11,7 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.crecrew.crecre.Data.HotVideoData
 import com.crecrew.crecre.Data.ProfileHotVideoData
 import com.crecrew.crecre.Data.TodayPost
 import com.crecrew.crecre.R
@@ -21,12 +22,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ProfileHotVideoRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<ProfileHotVideoData>) : RecyclerView.Adapter<ProfileHotVideoRecyclerViewAdapter.Holder>() {
+class ProfileHotVideoRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<HotVideoData>) : RecyclerView.Adapter<ProfileHotVideoRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx)!!.inflate(R.layout.rv_item_today_post, viewGroup, false)
 
         init(view)
-
         return Holder(view)
     }
 

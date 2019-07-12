@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.Get.CommunityBoardData
 import com.crecrew.crecre.Network.CommunityNetworkService
@@ -18,6 +19,9 @@ import com.crecrew.crecre.Network.Get.GetBoardRequestNumResponse
 import com.crecrew.crecre.Network.Post.PostCommunityFavoriteLikeResponse
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
+import com.crecrew.crecre.UI.Activity.LoginActivity
+import com.crecrew.crecre.utils.ApplicationData
+import com.crecrew.crecre.utils.CustomLoginCheckDialog
 import org.jetbrains.anko.startActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -33,7 +37,25 @@ class CommunityFavoriteRecyclerViewAdapter(
         ApplicationController.instance.communityNetworkService
     }
 
+    val customLoginCheckDialog: CustomLoginCheckDialog by lazy {
+        CustomLoginCheckDialog(
+            ctx, "알림", "로그인이 필요한 서비스입니다.", "로그인 하시겠습니까?", "네"
+            , "아니요", completeConfirmListener, completeNoListener
+        )
+    }
+
     private var listener: OnItemClickListener? = null
+
+    //다이얼로그 -> 네
+    private val completeConfirmListener = View.OnClickListener {
+        ctx.startActivity<LoginActivity>()
+        customLoginCheckDialog!!.dismiss()
+    }
+
+    //다이얼로그 -> 아니요
+    private val completeNoListener = View.OnClickListener {
+        customLoginCheckDialog!!.dismiss()
+    }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {
         this.listener = listener
@@ -43,6 +65,9 @@ class CommunityFavoriteRecyclerViewAdapter(
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_favorite_community_frag, viewGroup, false)
+
+        ApplicationData.auth =SharedPreferenceController.getUserToken(ctx)
+        Log.v("login_token", ApplicationData.auth)
 
         return Holder(view)
     }
@@ -71,15 +96,20 @@ class CommunityFavoriteRecyclerViewAdapter(
 
         //즐겨찾기 버튼 눌렀을 경우
         holder.img_like.setOnClickListener {
-            if (img_like == 0) {
-                //holder.img_like.isSelected = true
-                //img_like = 1
-                //여기서 idx는 board_idx를 말함
-                postLikeOnClickResponse(dataList[position].idx, position)
+            if (ApplicationData.auth == "") {
+                customLoginCheckDialog.show()
             } else {
-                //holder.img_like.isSelected = false
-                //img_like = 0
-                deleteLikeoffClickResponse(dataList[position].idx, position)
+                if (img_like == 0) {
+                    //holder.img_like.isSelected = true
+                    //img_like = 1
+                    //여기서 idx는 board_idx를 말함
+                    postLikeOnClickResponse(dataList[position].idx, position)
+                } else {
+                    //holder.img_like.isSelected = false
+                    //img_like = 0
+                    deleteLikeoffClickResponse(dataList[position].idx, position)
+
+                }
 
             }
         }
@@ -94,10 +124,7 @@ class CommunityFavoriteRecyclerViewAdapter(
     //좋아요 누르기 보여주기 통신
     fun postLikeOnClickResponse(boardIdx: Int, position: Int) {
         val postBoardsFavoriteLike: Call<PostCommunityFavoriteLikeResponse> =
-            communityNetworkService.postBoardsFavoriteLike(
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                , boardIdx
-            )
+            communityNetworkService.postBoardsFavoriteLike(ApplicationData.auth, boardIdx)
 
         postBoardsFavoriteLike.enqueue(object : Callback<PostCommunityFavoriteLikeResponse> {
 
@@ -121,7 +148,7 @@ class CommunityFavoriteRecyclerViewAdapter(
     fun deleteLikeoffClickResponse(boardIdx: Int, position: Int) {
         val postBoardsFavoriteLike: Call<PostCommunityFavoriteLikeResponse> =
             communityNetworkService.deleteBoardsFavoriteLike(
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
+                ApplicationData.auth
                 , boardIdx
             )
 

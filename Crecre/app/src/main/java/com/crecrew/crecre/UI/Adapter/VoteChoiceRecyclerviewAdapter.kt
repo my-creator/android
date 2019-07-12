@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.VoteChoiceData
+import com.crecrew.crecre.Data.VoteData
 import com.crecrew.crecre.Data.VoteItemData
 import com.crecrew.crecre.Data.VoteTestData
 import com.crecrew.crecre.R
@@ -31,12 +32,16 @@ class VoteChoiceRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<V
             .into(holder.img_thumnail)
 
         holder.item_name.text = dataList[position].name;
-
+        var check: Int = 0; var check1: Int = 0; var check2: Int = 0; var check3: Int = 0; var check4: Int = 0; var check5: Int = 0;
         /*
         if(dataList[position].)
             holder.img_isCheck.setImageResource(R.drawable.btn_check)
         else*/
             holder.img_isCheck.setImageResource(R.drawable.btn_uncheck)
+
+        holder.img_isCheck.setOnClickListener {
+
+        }
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {

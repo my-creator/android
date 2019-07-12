@@ -16,12 +16,14 @@ import com.crecrew.crecre.UI.Adapter.CommunityDetailCommentRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_community_detail.*
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Data.CommunitySmallNewGetData
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.Network.Get.*
 import com.crecrew.crecre.Network.Post.PostCommunityFavoriteLikeResponse
 import com.crecrew.crecre.R
+import com.crecrew.crecre.utils.ApplicationData
 import com.crecrew.crecre.utils.ContentsDeleteDialog
 import com.crecrew.crecre.utils.CustomRequestCompleteDialog
 import com.crecrew.crecre.utils.SearchAlarmDialog
@@ -50,6 +52,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
     var postidx = -1
     var category_title: String? = ""
     var postIdx: Int = -1
+
 
     lateinit var communityDetailCommentRecyclerViewAdapter: CommunityDetailCommentRecyclerViewAdapter
 
@@ -86,8 +89,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                     //비추천 통신
                     postLikeOnClickResponse(
                         communityNetworkService.deletePostunhateOff(
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                            , postidx),0
+                            ApplicationData.auth, postidx),0
                     )
                     btn_unlike = 0
 
@@ -99,9 +101,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         //좋아요 통신
                         postLikeOnClickResponse(
                             communityNetworkService.postPostLikeOn(
-                                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                                , postidx),0
-                        )
+                                ApplicationData.auth, postidx),0)
                         btn_like = 1
                     } else {
                         btn_like_community_detail_act.isSelected = false
@@ -111,9 +111,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         //좋아요 취소 통신
                         postLikeOnClickResponse(
                             communityNetworkService.deletePostLikeOff(
-                                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                                , postidx),0
-                        )
+                                ApplicationData.auth, postidx),0)
                         btn_like = 0
                     }
 
@@ -127,8 +125,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         //좋아요 통신
                         postLikeOnClickResponse(
                             communityNetworkService.postPostLikeOn(
-                                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                                , postidx),0
+                                ApplicationData.auth, postidx),0
                         )
                     } else {
                         btn_like_community_detail_act.isSelected = false
@@ -137,8 +134,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         //좋아요 취소 통신
                         postLikeOnClickResponse(
                             communityNetworkService.deletePostLikeOff(
-                                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                                , postidx),0
+                                ApplicationData.auth, postidx),0
                         )
                         btn_like = 0
                     }
@@ -155,8 +151,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                     //좋아요 취소 통신
                     postLikeOnClickResponse(
                         communityNetworkService.deletePostLikeOff(
-                            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                            , postidx
+                            ApplicationData.auth, postidx
                         ),0
                     )
                     btn_like = 0
@@ -168,8 +163,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         //비추천 통신
                         postLikeOnClickResponse(
                             communityNetworkService.postPosthateOn(
-                                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                                , postidx
+                                ApplicationData.auth, postidx
                             ),0
                         )
                         btn_unlike = 1
@@ -180,9 +174,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         //비추천 삭제 통신
                         postLikeOnClickResponse(
                             communityNetworkService.deletePostunhateOff(
-                                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                                , postidx
-                            ),0
+                                ApplicationData.auth, postidx),0
                         )
                         btn_unlike = 0
                     }
@@ -194,7 +186,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         //비추천 통신
                         postLikeOnClickResponse(
                             communityNetworkService.postPosthateOn(
-                                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
+                                ApplicationData.auth
                                 , postidx
                             ),0
                         )
@@ -206,7 +198,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         //비추천 delete통신
                         postLikeOnClickResponse(
                             communityNetworkService.deletePostunhateOff(
-                                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
+                                ApplicationData.auth
                                 , postidx
                             ),0
                         )
@@ -256,6 +248,10 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community_detail)
+
+        ApplicationData.auth =SharedPreferenceController.getUserToken(this)
+        Log.v("login_token", ApplicationData.auth)
+
 
         init()
 
@@ -354,8 +350,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
         //##글 삭제하는 서버통신
         postLikeOnClickResponse(
             communityNetworkService.deletePostComments(
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                , postidx) ,1
+                ApplicationData.auth, postidx) ,1
         )
 
     }
@@ -375,9 +370,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
     private fun getCommunityRecentAllResponse() {
 
         val getCommunityDetail: Call<GetPostDetailResponse> = communityNetworkService.getPostDetailPostIdx(
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw",
-            postidx
-        )
+            ApplicationData.auth, postidx)
 
         getCommunityDetail.enqueue(object : Callback<GetPostDetailResponse> {
             override fun onFailure(call: Call<GetPostDetailResponse>, t: Throwable) {
@@ -470,8 +463,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
     //댓글 조회 get
     fun getPostReplyResponse(flag: Int) {
         val postPostLikeOn: Call<GetPostReplyResponse> = communityNetworkService.getPostReply(
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-            , postidx
+            ApplicationData.auth, postidx
         )
 
         postPostLikeOn.enqueue(object : Callback<GetPostReplyResponse> {
@@ -522,7 +514,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
         val gsonObject = JsonParser().parse(jsonObject.toString()) as JsonObject
 
         val postReplyResponse: Call<PostCommunityFavoriteLikeResponse> = communityNetworkService.postCommentReply(
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
+            ApplicationData.auth
             , gsonObject
         )
 

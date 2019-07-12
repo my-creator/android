@@ -20,6 +20,7 @@ import com.crecrew.crecre.Network.Post.PostCommunityFavoriteLikeResponse
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Fragment.Community.CommunityFragment
 import com.crecrew.crecre.utils.CustomRequestCompleteDialog
+import com.crecrew.crecre.utils.CustomRequestDialog
 import com.crecrew.crecre.utils.SearchAlarmDialog
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -43,9 +44,9 @@ class CommunityRequestActivity : AppCompatActivity(), View.OnClickListener {
         )
     }
 
-    val requestfailDialog: SearchAlarmDialog by lazy {
-        SearchAlarmDialog(
-            this@CommunityRequestActivity, "알림", "아직 입력하지 않은 항목이 있습니다.\n" +
+    val requestfailDialog: CustomRequestDialog by lazy {
+        CustomRequestDialog(
+            this@CommunityRequestActivity, "알림", "아직 입력하지 않은 항목이 있습니다.",
                     "모든 항목을 입력해주세요.",
             completefailConfirmListener, "확인"
         )
