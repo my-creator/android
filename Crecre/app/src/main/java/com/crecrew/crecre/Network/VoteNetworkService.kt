@@ -1,11 +1,10 @@
 package com.crecrew.crecre.Network
 
+import com.crecrew.crecre.Network.Get.GetVoteResponse
 import com.crecrew.crecre.Data.PostVoteChoiceResponse
-import com.crecrew.crecre.Network.Get.GetVoteCurrentResponse
 import com.crecrew.crecre.Network.Get.GetVoteEndResponse
-import com.crecrew.crecre.Network.Post.PostVoteSuggestData
+import com.crecrew.crecre.Network.Get.GetVoteHomeResponse
 import com.google.gson.JsonObject
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -19,10 +18,15 @@ interface VoteNetworkService {
     @GET("votes/lasts")
     fun getLastVote(
     ): Call<GetVoteEndResponse>
+    // TODO: GetVoteEndResponse랑 GetVoteResponse 합치기!
+
+    @GET("votes/ings/newest")
+    fun getCurrentVoteHome(
+    ): Call<GetVoteHomeResponse>
 
     @GET("votes/ings")
     fun getCurrentVote(
-    ): Call<GetVoteCurrentResponse>
+    ):Call<GetVoteResponse>
 
     @POST("votes/:voteIdx/take")
     fun postVoteResponse(

@@ -15,6 +15,6 @@ data class CreatorData(
     val searchCnt: Int,
     val view_grade_idx: Int,
     val youtube_subscriber_cnt: Int,
-    val youtube_view_cnt: Int,
-    val upDown: Int
+    val youtube_view_cnt: Int
+    //val upDown: Int
 )

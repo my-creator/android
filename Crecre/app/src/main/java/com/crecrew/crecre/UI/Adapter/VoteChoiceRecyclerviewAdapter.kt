@@ -8,11 +8,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.crecrew.crecre.Data.VoteChoiceData
 import com.crecrew.crecre.Data.VoteItemData
 import com.crecrew.crecre.Data.VoteTestData
 import com.crecrew.crecre.R
 
-class VoteChoiceRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<VoteItemData>) : RecyclerView.Adapter<VoteChoiceRecyclerviewAdapter.Holder>() {
+class VoteChoiceRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<VoteChoiceData>) : RecyclerView.Adapter<VoteChoiceRecyclerviewAdapter.Holder>() {
 
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): VoteChoiceRecyclerviewAdapter.Holder {
