@@ -1,5 +1,6 @@
 package com.crecrew.crecre.UI.Fragment.Home
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,6 +35,7 @@ class RankRecyclerViewAdapter(val list: List<CurrentRankData>) : BaseAdapter() {
         }
         val item = getItem(position)
         holder.title.setText(item.rank)
+        holder.title.setTextColor(Color.parseColor("#ff57f7"))
         holder.text.setText(item.name)
         return convertView
     }
