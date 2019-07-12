@@ -1,6 +1,8 @@
 package com.crecrew.crecre.UI.Adapter
 
 import android.content.Context
+import android.os.Build
+import android.support.annotation.RequiresApi
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -12,7 +14,12 @@ import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.VoteData
 import com.crecrew.crecre.Data.VoteTestData
 import com.crecrew.crecre.R
+import com.crecrew.crecre.utils.CalculateLastime
 import kotlinx.android.synthetic.main.fragment_rank.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
 
 class VoteListRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<VoteData>) : RecyclerView.Adapter<VoteListRecyclerviewAdapter.Holder>() {
 
@@ -37,6 +44,7 @@ class VoteListRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<Vot
         return dataList.size
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onBindViewHolder(holder: Holder, position: Int) {
         Glide.with(ctx)
             .load(dataList[position].thumbnail_url)
@@ -48,13 +56,14 @@ class VoteListRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<Vot
         holder.txt_ongoing.setVisibility(View.GONE)
 
         // TODO: 시간 계산
-        //holder.txt_dayleft.text = "${dataList[position]}일 후 개표"
-        holder.txt_dayleft.text = "0일 후 개표"
+        holder.txt_dayleft.text = "${dataList[position]}일 후 개표"
+        //이거 왜안되죠 ㅇ
+        //var cal  = CalculateLastime(dataList[position].end_time)
+        //holder.txt_dayleft.text = "${cal}일 후 개표"
 
         var voteChoiceRecyclerviewAdapter = VoteChoiceRecyclerviewAdapter(ctx, dataList[position].choices)
         holder.choice_container.adapter = voteChoiceRecyclerviewAdapter
         holder.choice_container.layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false)
-
 
     }
 }

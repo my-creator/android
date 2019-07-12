@@ -34,16 +34,16 @@ class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<GetVoteEndData>) 
 
         // Todo: choice의 개수에 따라 처리
 
-        /*if (dataList[position].choices[0].creator_profile_url!= null || dataList[position].choices[0].creator_profile_url.equals("")==false ) {
+        if (dataList[position].choices[0].creator_profile_url!= null || dataList[position].choices[0].creator_profile_url.equals("")==false ) {
             Glide.with(ctx)
                 .load(dataList[position].choices[0].creator_profile_url)
                 .apply(RequestOptions().circleCrop()).into(holder.img_item1)
-        }*/
-        /*if (dataList[position].choices[1].creator_profile_url != null){
+        }
+        if (dataList[position].choices[1].creator_profile_url != null){
             Glide.with(ctx)
                 .load(dataList[position].choices[1].creator_profile_url)
                 .apply(RequestOptions().circleCrop()).into(holder.img_item2)
-        }*/
+        }
 
 
         if (dataList[position].choices.size >= 3) {
