@@ -1,9 +1,12 @@
 package com.crecrew.crecre.UI.Activity
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -11,10 +14,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CreatorNetworkService
-import com.crecrew.crecre.Network.Get.GetProfileResponse
-import com.crecrew.crecre.Network.Get.GetProfileStatResponse
-import com.crecrew.crecre.Network.Get.StatDataTest
-import com.crecrew.crecre.Network.Get.StatDataTest2
+import com.crecrew.crecre.Network.Get.*
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Adapter.ProfileHotVideoRecyclerViewAdapter
@@ -40,6 +40,8 @@ class CreatorProfileActivity : FragmentActivity() {
     lateinit var total: TextView
     lateinit var review: TextView
     lateinit var mChart: RadarChart
+
+    var creator_idx: Int = -1
 
     //"진행능력", "소통력", "참신성", "편집력", "핫 지수"
     val testItem = arrayListOf<String>()
@@ -71,8 +73,6 @@ class CreatorProfileActivity : FragmentActivity() {
 
         mTypeface = activity_creator_profile_review_number.typeface
 
-        var creator_idx = 5123
-
         var intent = intent.getIntExtra("creator_idx", 5123)
         getProfileResponse(intent)
 
@@ -82,7 +82,10 @@ class CreatorProfileActivity : FragmentActivity() {
             for (i in it.indices)
                 entries1.add(RadarEntry(it[i].stat_score))
         }
-//        getProfileStatResponse(intent)
+
+        getProfileHotVideo(intent)
+        // getProfileNewVideo(intent)
+
 
         makeGraph(testItem, entries1)
         activity_creator_profile_total.text = "토탈 " + String.format("%.2f", statDataTest.avg_stat) + "점"
@@ -106,6 +109,14 @@ class CreatorProfileActivity : FragmentActivity() {
 
         activity_creator_profile_btn_class_question.setOnClickListener {
             startActivity<ProfileClassQuestionActivity>()
+        }
+
+        activity_creator_profile_btn_read_more.setOnClickListener {
+
+        }
+
+        activity_creator_profile_btn_go_fanpage.setOnClickListener {
+            startActivity<CommunityHotPostActivity>("creatorIdx" to creator_idx)
         }
 
     }
@@ -244,6 +255,7 @@ class CreatorProfileActivity : FragmentActivity() {
                             "/" + creatorProfileData.back_lank2_exp.toString() + ")"
                         circularProgressbar1.progress = creatorProfileData.follower_grade_percent
                         circularProgressbar2.progress = creatorProfileData.view_grade_percent
+                        creator_idx = creatorProfileData.creator_idx
                     }
                 }
             }
@@ -279,24 +291,68 @@ class CreatorProfileActivity : FragmentActivity() {
     }
 
 
-//    private fun getProfileHotVideo(creatorIdx: Int){
-//        val getProfileHotVideResponse = creatorNetworkService.getProfileHotVideoResponse(creatorIdx)
-//        getProfileHotVideResponse.enqueue(object : Callback<GetProfileHotVideoResponse> {
-//            override fun onFailure(call: Call<GetProfileHotVideoResponse>, t: Throwable) {
+    private fun getProfileHotVideo(creatorIdx: Int) {
+        var hotvideos = creatorNetworkService.getProfileHotVideoResponse(creatorIdx)
+        hotvideos.enqueue(object : Callback<GetProfileHotVideoResponse> {
+            override fun onFailure(call: Call<GetProfileHotVideoResponse>, t: Throwable) {
+                Log.e("creator search fail", t.toString())
+            }
+            override fun onResponse(
+                call: Call<GetProfileHotVideoResponse>,
+                response: Response<GetProfileHotVideoResponse>
+            ) {
+                if (response.isSuccessful) {
+                    if (response.body()!!.status == 200) {
+                        var hotvideos: ArrayList<HotVideoData> = response.body()!!.data
+                        profileHotVideoRecyclerViewAdapter =
+                            ProfileHotVideoRecyclerViewAdapter(this@CreatorProfileActivity, hotvideos)
+                        activity_creator_profile_rv_hot_video.adapter = profileHotVideoRecyclerViewAdapter
+                        activity_creator_profile_rv_hot_video.layoutManager =
+                            LinearLayoutManager(this@CreatorProfileActivity, LinearLayoutManager.VERTICAL, false)
+                        activity_creator_profile_rv_hot_video.addItemDecoration(
+                            DividerItemDecoration(
+                                this@CreatorProfileActivity,
+                                DividerItemDecoration.VERTICAL
+                            )
+                        )
+                    }
+                }
+            }
+        })
+    }
+
+
+//    private fun getProfileNewVideo(creatorIdx: Int) {
+//        var newvideos = creatorNetworkService.getProfileNewVideoResponse(creatorIdx)
+//        newvideos.enqueue(object : Callback<GetProfileNewVideoResponse> {
+//            override fun onFailure(call: Call<GetProfileNewVideoResponse>, t: Throwable) {
 //                Log.e("creator search fail", t.toString())
 //            }
-//            override fun onResponse(call: Call<GetProfileHotVideoResponse>, response: Response<GetProfileHotVideoResponse>){
-//                if(response.isSuccessful){
-//                    if(response.body()!!.status == 200){
-//                        var HotVideoDatas : ArrayList<HotVideoData> = response.body()!!.data
-//                        // configureRecyclerView(HotVideoDatas)
+//            override fun onResponse(
+//                call: Call<GetProfileNewVideoResponse>,
+//                response: Response<GetProfileNewVideoResponse>
+//            ) {
+//                if (response.isSuccessful) {
+//                    if (response.body()!!.status == 200) {
+//                        var newvideos: ArrayList<NewVideoData> = response.body()!!.data
+//                        profileHotVideoRecyclerViewAdapter =
+//                            ProfileHotVideoRecyclerViewAdapter(this@CreatorProfileActivity, newvideos)
+//                        activity_creator_profile_rv_hot_video.adapter = profileHotVideoRecyclerViewAdapter
+//                        activity_creator_profile_rv_hot_video.layoutManager =
+//                            LinearLayoutManager(this@CreatorProfileActivity, LinearLayoutManager.VERTICAL, false)
+//                        activity_creator_profile_rv_hot_video.addItemDecoration(
+//                            DividerItemDecoration(
+//                                this@CreatorProfileActivity,
+//                                DividerItemDecoration.VERTICAL
+//                            )
+//                        )
 //                    }
 //                }
 //            }
 //        })
 //    }
-
 //    private fun configureRecyclerView(){
+//
 //
 //
 //        var profileHotDataList : ArrayList<ProfileHotVideoData> = ArrayList()
@@ -321,6 +377,12 @@ class CreatorProfileActivity : FragmentActivity() {
             total += dataSet[i].value
         return total / dataSet.size
     }
-
-
 }
+//    private fun getKindVideo(creator_index: Int, flag: Int) {
+//        if (flag == 0) {
+//            getProfileHotVideo(creatorNetworkService.getProfileHotVideoResponse(creator_index))
+//        } else {
+//            getProfileHotVideo(creatorNetworkService.getProfileNewVideoResponse(creator_index))
+//        }
+//    }
+//}
