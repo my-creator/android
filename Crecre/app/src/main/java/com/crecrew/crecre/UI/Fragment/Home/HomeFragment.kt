@@ -163,10 +163,8 @@ class HomeFragment: Fragment() {
         val vScrollLayout = rootView.fragment_home_txt_today_hot_creator
         val items = ArrayList<CurrentRankData>()
 
-//        for (i in todayCreatorRankData.indices) {
-//            val item = CurrentRankData("$i + 1", "${todayCreatorRankData[i].creator_name}")
-//            items.add(item)
-//        }
+        // TODO: todayCreatorRankData 넣기!
+
         for (i in 1..10) {
             val item = CurrentRankData("$i", "항목$i")
             items.add(item)

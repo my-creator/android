@@ -5,9 +5,10 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.crecrew.crecre.Data.VoteItemData
 import com.crecrew.crecre.Data.VoteTestData
 import com.crecrew.crecre.R
-import com.crecrew.crecre.UI.Adapter.VoteTestAdapter
+import com.crecrew.crecre.UI.Adapter.VoteListRecyclerviewAdapter
 import kotlinx.android.synthetic.main.fragment_vote_current.view.*
 
 class VoteCurrentFragment : Fragment() {
@@ -29,35 +30,36 @@ class VoteCurrentFragment : Fragment() {
         dataList.add(VoteCurrentOverViewData("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRhrktf6ORs6WsmFEnxiB2KIdZe26_QhkqQTJqJFuOQoMrhuW9x",1, "@==(^0^@)", "선풍적 인기!"))
         */
 
+        var choiceList : ArrayList<VoteItemData> = ArrayList()
+        choiceList.add( VoteItemData("진라면","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJYBWWSb_aRjnJ3wCdWQfddr8guktDwhMhItH5JJx4ziO6KKuF",false))
+        choiceList.add( VoteItemData("참깨라면","https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJYBWWSb_aRjnJ3wCdWQfddr8guktDwhMhItH5JJx4ziO6KKuF",false))
+
+
         //this is for test
         var dataList : ArrayList<VoteTestData> = ArrayList()
         dataList.add(VoteTestData("https://ichef.bbci.co.uk/news/660/cpsprodpb/7624/production/_104444203_d03fb5eb-685c-42c3-8fa2-eea0ee2dac26.jpg", false, 2, "다음 중 가장 맛있는 라면은?", "컵라면 포함",
-            "진라면", "육개장", "참깨라면", "짜파게티","",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJYBWWSb_aRjnJ3wCdWQfddr8guktDwhMhItH5JJx4ziO6KKuF", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ__opO3mmxb-XiTNQi8sHVPeRcMgQCtfQC4QivTH32JHtN7c5b"
-        , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPopgm75mGeWIhsaRKVFg1wGmrYXTjV0R4g1cFnn_TNvYffrdw", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaZy-oN8sO58qr0xuGDI0383LMo6nfHk-13E1JVPTcBTrWVX6L", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv2BDLe72_Sd3C0c6Vhdkxl_f2KhEpVlconT4X5NZfJ_qG47KP",
-            5,4,3,2,1))
-
+            choiceList))
+/*
         dataList.add(VoteTestData("https://ichef.bbci.co.uk/news/660/cpsprodpb/7624/production/_104444203_d03fb5eb-685c-42c3-8fa2-eea0ee2dac26.jpg", true, 2, "다음 중 가장 맛있는 라면은?", "컵라면 포함",
             "진라면", "육개장", "참깨라면", "짜파게티","",
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJYBWWSb_aRjnJ3wCdWQfddr8guktDwhMhItH5JJx4ziO6KKuF", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ__opO3mmxb-XiTNQi8sHVPeRcMgQCtfQC4QivTH32JHtN7c5b"
             , "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPopgm75mGeWIhsaRKVFg1wGmrYXTjV0R4g1cFnn_TNvYffrdw", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaZy-oN8sO58qr0xuGDI0383LMo6nfHk-13E1JVPTcBTrWVX6L", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSv2BDLe72_Sd3C0c6Vhdkxl_f2KhEpVlconT4X5NZfJ_qG47KP",
             5,4,3,2,1))
-
+*/
         /*var voteCurrentRecyclerViewAdapter = VoteCurrentRecyclerViewAdapter(context!!, dataList)
         rootView.rv_fragment_vote_current.adapter = voteCurrentRecyclerViewAdapter
         arguments?.let {
         }*/
 
         //this is for test
-        var voteTestAdapter = VoteTestAdapter(context!!, dataList)
-        rootView.rv_fragment_vote_current.adapter = voteTestAdapter
+        var voteListRecyclerviewAdapter = VoteListRecyclerviewAdapter(context!!, dataList)
+        rootView.rv_fragment_vote_current.adapter = voteListRecyclerviewAdapter
         arguments?.let {
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-
         rootView = inflater.inflate(R.layout.fragment_vote_current, container, false)
         return rootView
     }

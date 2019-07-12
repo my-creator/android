@@ -13,6 +13,7 @@ import com.crecrew.crecre.R
 import android.widget.*
 import com.bumptech.glide.request.RequestOptions
 
+
 class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
     RecyclerView.Adapter<VoteTestAdapter.Holder>() {
     var check1:Int = 0; var check2:Int = 0; var check3:Int = 0; var check4:Int = 0; var check5:Int = 0;
@@ -24,6 +25,7 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
         var title = itemView.findViewById(R.id.rv_item_vote_title_test) as TextView
         var explain = itemView.findViewById(R.id.rv_item_vote_explain_test) as TextView
         //개별 아이템들ㅇㅇ
+       /*
         var img_item1 = itemView.findViewById(R.id.item_img1_test) as ImageView
         var img_item2 = itemView.findViewById(R.id.item_img2_test) as ImageView
         var img_item3 = itemView.findViewById(R.id.item_img3_test) as ImageView
@@ -53,7 +55,7 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
         var line2 = itemView.findViewById(R.id.ll2_test) as LinearLayout
         var line3 = itemView.findViewById(R.id.ll3_test) as LinearLayout
         var line4 = itemView.findViewById(R.id.ll4_test) as LinearLayout
-        var line5 = itemView.findViewById(R.id.ll5_test) as LinearLayout
+        var line5 = itemView.findViewById(R.id.ll5_test) as LinearLayout*/
         var letsVote = itemView.findViewById(R.id.lets_vote_test) as TextView
     }
 
@@ -71,6 +73,7 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
         Glide.with(ctx)
             .load(dataList[position].ImageURL)
             .into(holder.img_thumnail)
+        /*
         Glide.with(ctx)
             .load(dataList[position].itemimg1)
             .apply(RequestOptions().circleCrop()).into(holder.img_item1)
@@ -222,6 +225,7 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
             if (dataList[position].itemname3.isEmpty()) holder.line3.setVisibility(View.GONE)
             //holder.letsVote.setTextColor(Color.parseColor("#aaaaaa"));
         }
+        */
     }
 }
 

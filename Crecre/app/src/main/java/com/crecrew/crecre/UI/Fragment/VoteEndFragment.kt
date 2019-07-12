@@ -39,7 +39,7 @@ class VoteEndFragment : Fragment() {
                 "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo_lAqd_4POTcpabeytGIOxMbWxsQv7T-EahLXP8R-MKfws52TDg",
                 1532, 10, 5, 3, 2)
         )*/
-        getVoteEndResponse()
+       // getVoteEndResponse()
         /*arguments?.let {}*/
     }
 

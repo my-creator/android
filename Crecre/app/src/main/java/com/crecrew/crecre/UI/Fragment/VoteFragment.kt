@@ -30,19 +30,11 @@ class VoteFragment: Fragment(){
     ): View? {
 
         rootView = inflater.inflate(R.layout.fragment_vote, container, false)
-
         rootView.btn_fragment_vote_suggest.setOnClickListener() {
             startActivity<VoteSuggestActivity>()
         }
 
         return rootView
-
-        return inflater.inflate(R.layout.fragment_vote, container, false)
-
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
     }
 
@@ -57,27 +49,13 @@ class VoteFragment: Fragment(){
     //ViewPager
     private fun configureMainTab() {
 
-
         vote_viewpager.adapter = VoteMainPagerAdapter(fragmentManager!!, 2)
         vote_viewpager.offscreenPageLimit = 1
 
-
         vote_tab.setupWithViewPager(vote_viewpager)
         val topTabLayout: View = activity!!.layoutInflater.inflate(R.layout.fragment_vote_navigation, null, false)
-        vote_tab.getTabAt(0)!!.customView = topTabLayout.
-            findViewById(R.id.VoteBarcontinue) as RelativeLayout
-        vote_tab.getTabAt(1)!!.customView = topTabLayout.
-            findViewById(R.id.VoteBarPast) as RelativeLayout
-
-        //색깔 바뀌는거 해야함ㅇㅇ
-        /*VoteBarcontinue.setOnClickListener{
-
-        }
-        VoteBarPast.setOnClickListener{
-            VoteBarPastLetter.setTextColor(Color.parseColor("ff57f7"))
-            VoteBarcontinueLetter.setTextColor(Color.parseColor("aaaaaa"))
-        }*/
-
+        vote_tab.getTabAt(0)!!.customView = topTabLayout.findViewById(R.id.VoteBarcontinue) as RelativeLayout
+        vote_tab.getTabAt(1)!!.customView = topTabLayout.findViewById(R.id.VoteBarPast) as RelativeLayout
 
     }
 
