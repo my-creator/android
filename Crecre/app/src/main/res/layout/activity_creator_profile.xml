@@ -525,6 +525,7 @@
                             android:id="@+id/activity_creator_profile_review_number"/>
 
                     <com.github.mikephil.charting.charts.RadarChart
+                            android:layout_gravity="center"
                             android:id="@+id/activity_creator_profile_rc_chart"
                             android:layout_width="match_parent"
                             android:layout_height="352dp" />
