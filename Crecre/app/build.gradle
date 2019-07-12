@@ -26,6 +26,7 @@ repositories {
         dirs 'libs'
     }
     maven { url "https://jitpack.io" }
+    mavenCentral()
 }
 
 dependencies {
@@ -59,6 +60,7 @@ dependencies {
 
     // read more
     implementation 'com.borjabravo:readmoretextview:2.1.0'
+    compile 'at.blogc:expandabletextview:1.0.5'
 
     implementation(name: 'MPChartLib-release', ext: 'aar')
     implementation(name: 'AutoScrollLayoutLib-release', ext: 'aar')
