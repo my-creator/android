@@ -18,12 +18,14 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.bumptech.glide.Glide
+import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Data.CommunityWriteImageData
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.Network.Post.PostCommunityFavoriteLikeResponse
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.CommunityWriteImageRecyclerViewAdapter
+import com.crecrew.crecre.utils.ApplicationData
 import com.crecrew.crecre.utils.SearchAlarmDialog
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
@@ -156,6 +158,9 @@ class CommunityWriteActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community_write)
 
+        ApplicationData.auth = SharedPreferenceController.getUserToken(this)
+        Log.v("login_token", ApplicationData.auth)
+
         init()
 
 
@@ -184,8 +189,7 @@ class CommunityWriteActivity : AppCompatActivity(), View.OnClickListener {
 
         val getCommunitySmallNewPosts: Call<PostCommunityFavoriteLikeResponse> =
             communityNetworkService.postPostContentsWrite(
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                ,boardIdx, btn_anonymous, title,contents, imgs)
+                ApplicationData.auth,boardIdx, btn_anonymous, title,contents, imgs)
 
         getCommunitySmallNewPosts.enqueue(object : Callback<PostCommunityFavoriteLikeResponse> {
 

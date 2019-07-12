@@ -22,7 +22,7 @@ android {
 }
 
 repositories {
-    flatDir{
+    flatDir {
         dirs 'libs'
     }
     maven { url "https://jitpack.io" }
@@ -60,7 +60,7 @@ dependencies {
     // read more
     implementation 'com.borjabravo:readmoretextview:2.1.0'
 
-    implementation(name:'MPChartLib-release', ext:'aar')
-    implementation(name:'AutoScrollLayoutLib-release', ext:'aar')
+    implementation(name: 'MPChartLib-release', ext: 'aar')
+    implementation(name: 'AutoScrollLayoutLib-release', ext: 'aar')
 
 }
