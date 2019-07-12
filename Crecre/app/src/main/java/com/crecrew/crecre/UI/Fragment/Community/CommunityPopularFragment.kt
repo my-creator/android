@@ -46,14 +46,16 @@ class CommunityPopularFragment : Fragment() {
             startActivity<CommunityHotPostActivity>("flag" to 1, "title" to "인기글")
         }
 
+
+
         return rootView
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         setRecyclerView()
-
         getCommunityRecentResponse()
     }
 
