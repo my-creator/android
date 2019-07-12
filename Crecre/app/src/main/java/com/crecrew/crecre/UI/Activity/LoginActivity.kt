@@ -16,6 +16,7 @@ import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -100,12 +101,14 @@ class LoginActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<PostLoginResponse>, response: Response<PostLoginResponse>) {
                 if (response.isSuccessful) {
-                    if (response.body()!!.status == 200) {
-
+                    val status = response.body()!!.status
+                    if (status == 200) {
                         SharedPreferenceController.setUserToken(applicationContext, response.body()!!.data.token.token)
 
                         startActivity<MainActivity>()
-                    }else if(response.body()!!.status == 400){
+                        finish()
+                    } else if(status == 400 || status == 500){
+                        toast(response.body()!!.message)
                         Log.e("message",response.body()!!.message)
                     }
                 }
