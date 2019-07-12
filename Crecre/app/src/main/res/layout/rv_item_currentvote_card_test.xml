@@ -26,7 +26,6 @@
                     android:layout_height="212dp"
                     android:id="@+id/rl_test"
             >
-
                 <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
@@ -45,11 +44,6 @@
                         app:srcCompat="@drawable/icn_stemp"
                 />
 
-                <RelativeLayout android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-
-
-                </RelativeLayout>
                 <RelativeLayout
                         android:layout_width="80dp"
                         android:layout_height="24dp"
@@ -88,6 +82,18 @@
                 />
 
             </RelativeLayout>
+            <TextView
+                    android:id="@+id/rv_item_vote_title_test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
+                    android:text="템플스테이 묵언수행하면 가장 먼저 탈락할 것 같은 유튜버는?"
+                    app:lineHeight="24sp"
+                    android:fontFamily="@font/noto_sans_kr_regular"
+                    android:textColor="#1c1c1c"
+            />
             <TextView
                     android:id="@+id/rv_item_vote_explain_test"
                     android:layout_width="wrap_content"
