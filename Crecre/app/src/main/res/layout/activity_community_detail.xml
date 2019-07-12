@@ -177,17 +177,16 @@
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="24dp"
                     android:paddingHorizontal="16dp"
                     android:layout_marginTop="20dp"
-            >
+                    android:layout_alignParentStart="true">
 
                 <ImageView
                         android:id="@+id/img_main_community_detail"
                         android:layout_width="296dp"
                         android:layout_height="192dp"
+                        android:scaleType="centerCrop"
                         android:layout_centerHorizontal="true"
-                        android:scaleType="fitXY"
                         android:src="@drawable/icn_img_x"
                 />
 
@@ -195,7 +194,6 @@
                         android:id="@+id/tv_main_context_community_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/img_main_community_detail"
                         android:layout_below="@+id/img_main_community_detail"
                         android:layout_marginTop="14dp"
                         android:fontFamily="@font/noto_sans_kr_medium"
