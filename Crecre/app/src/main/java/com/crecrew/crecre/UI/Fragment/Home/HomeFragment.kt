@@ -3,6 +3,7 @@ package scom.crecrew.crecre.UI.Fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.DividerItemDecoration
@@ -15,6 +16,8 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
 import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -37,11 +40,13 @@ import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
 import com.crecrew.crecre.UI.Fragment.Home.RankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
 import com.crecrew.crecre.UI.Fragment.VoteCurrentFragment
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.ArrayList
-
 
 class HomeFragment: Fragment() {
 
@@ -62,14 +67,40 @@ class HomeFragment: Fragment() {
         ApplicationController.instance.voteNetworkService
     }
 
+    private lateinit var rank_time: TextView
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
+        rank_time = rootView.findViewById(R.id.fragment_home_today_rank_time) as TextView
 
-        Log.e("token", SharedPreferenceController.getUserToken(activity!!))
+        val handler = Handler()
 
-        // 통신
-        getCreatorTodayHotRank()
+        val handlerTask = object : Runnable{
+            override fun run(){
+                getCreatorTodayHotRank()
+
+                var sdf = SimpleDateFormat("yyyy.MM.dd HH:mm:ss")
+                var current_time = sdf.format(Date())
+
+                rank_time.setText(current_time)
+
+                /*
+                val innerHandler = Handler()
+
+                var position = 0
+                val innerHandlerTask = object : Runnable{
+                    override fun run() {
+                        todayCreatorRankData[position]
+                    }
+                }
+                */
+                handler.postDelayed(this,1000*20)
+            }
+        }
+
+        handler.post(handlerTask)
+
         getCommunityResponse()
         getLastVoteResponse()
 
@@ -269,7 +300,7 @@ class HomeFragment: Fragment() {
     }
 
     // post networking
-    private fun getCommunityResponse() {
+    fun getCommunityResponse() {
 
         // TODO: 가희한테 말해서 getCommunitySmallPosts로 이름 바꾸기 (new나 hot이 들어가지 않도록)
         val getCommunitySmallHotPosts : Call<GetCommunitySmallNewPostResponse> = communityNetworkService.getCommunitySmallHotPosts()
@@ -336,6 +367,5 @@ class HomeFragment: Fragment() {
             }
         })
     }
-
 
 }
