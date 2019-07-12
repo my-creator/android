@@ -156,7 +156,8 @@ class CommunityWriteActivity : AppCompatActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_community_write)
 
-        ApplicationData.auth = SharedPreferenceController.getUserToken(this)
+        if(ApplicationData.loginState)
+            ApplicationData.auth = SharedPreferenceController.getUserToken(this)
         Log.v("login_token", ApplicationData.auth)
 
         init()
@@ -188,6 +189,8 @@ class CommunityWriteActivity : AppCompatActivity(), View.OnClickListener {
         val getCommunitySmallNewPosts: Call<PostCommunityFavoriteLikeResponse> =
             communityNetworkService.postPostContentsWrite(
                 ApplicationData.auth,boardIdx, btn_anonymous, title,contents, imgs)
+
+        Log.v("TAGG", btn_anonymous.toString())
 
         getCommunitySmallNewPosts.enqueue(object : Callback<PostCommunityFavoriteLikeResponse> {
 

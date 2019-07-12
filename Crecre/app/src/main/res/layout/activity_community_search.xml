@@ -99,202 +99,218 @@
 
     </RelativeLayout>
 
-    <!--basic search view //초기 설정값 보이게 해야함-->
-    <LinearLayout
-            android:id="@+id/ll_first_search_view_com_act"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:orientation="vertical"
-    >
-
-
-        <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/img_search"
-        />
-
-        <TextView
-                android:id="@+id/tv_centerText_com_search_act"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:fontFamily="@font/noto_sans_kr_medium"
-                android:text="찾으시는 게시판이 있나요?"
-                android:textSize="14sp"
-                android:textColor="#a4a4a4"
-        />
-
-    </LinearLayout>
-
-    <!--검색결과가 안나왔을경우 view-->
-    <RelativeLayout
-            android:id="@+id/ll_no_resul_com_search_act"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone"
-    >
-
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical"
-        >
-
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/question_mark"
-            />
-
-            <TextView
-                    android:id="@+id/tv_no_result_com_search_act"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="6dp"
-                    android:fontFamily="@font/noto_sans_kr_medium"
-                    android:text="검색 결과가 없습니다."
-                    android:textSize="14sp"
-                    android:textColor="#a4a4a4"
-            />
-
-            <TextView
-                    android:id="@+id/tv2_no_result_com_search_act"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:text="찾으시는 내용을 확인하고 다시 검색해보세요."
-                    android:textSize="12sp"
-                    android:textColor="#a4a4a4"
-            />
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="56dp"
-                android:orientation="vertical"
-        >
-
-            <TextView
-                    android:id="@+id/tv_areyoufind_search_com_act"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_kr_medium"
-                    android:textSize="14sp"
-                    android:textColor="#a4a4a4"
-                    android:text="찾으시는 유투버의 게시판이 없나요?"
-            />
-
-            <RelativeLayout
-                    android:id="@+id/btn1_search_request_community_act"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_gravity="center_horizontal"
-            >
-
-                <ImageView
-                        android:layout_width="160dp"
-                        android:layout_height="36dp"
-                        android:src="@drawable/community_request_btn_box"
-                />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:fontFamily="@font/noto_sans_kr_medium"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"
-                        android:text="게시판 요청하기"
-                />
-            </RelativeLayout>
-
-        </LinearLayout>
-    </RelativeLayout>
-
-    <!--결과가 나왔을 경우 RecyclerView & hide view-->
-    <RelativeLayout
-            android:id="@+id/rl_after_search_view"
+    <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/rl_edit_box_community_search_act"
-            android:layout_marginTop="19dp"
-            android:layout_marginHorizontal="38dp"
-            android:visibility="gone"
     >
 
-        <TextView
-                android:id="@+id/tv_result_search_act"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="12sp"
-                android:textColor="@color/violet_pink"
-                android:text="게시판 검색 결과"
-        />
-
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_search_result_com_sear_act"
-                android:layout_below="@+id/tv_result_search_act"
+        <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-        </android.support.v7.widget.RecyclerView>
-
-        <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:orientation="vertical"
-                android:layout_marginBottom="56dp"
-        >
-
-            <TextView
-                    android:id="@+id/tv_noborad_search_commu_act"
+            <!--basic search view //초기 설정값 보이게 해야함-->
+            <LinearLayout
+                    android:id="@+id/ll_first_search_view_com_act"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="14sp"
-                    android:textColor="#a4a4a4"
-                    android:text="찾으시는 유투버의 게시판이 없나요?"
-            />
-
-            <RelativeLayout
-                    android:id="@+id/btn_search_request_community_act"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical"
             >
 
+
                 <ImageView
-                        android:layout_width="160dp"
-                        android:layout_height="36dp"
-                        android:src="@drawable/community_request_btn_box"
+                        android:layout_width="wrap_content"
+                        android:layout_height="129dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/img_search"
                 />
 
                 <TextView
+                        android:id="@+id/tv_centerText_com_search_act"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="28dp"
+                        android:fontFamily="@font/noto_sans_kr_medium"
+                        android:text="찾으시는 게시판이 있나요?"
+                        android:textSize="14sp"
+                        android:textColor="#a4a4a4"
+                />
+
+            </LinearLayout>
+
+            <!--검색결과가 안나왔을경우 view-->
+            <RelativeLayout
+                    android:id="@+id/ll_no_resul_com_search_act"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="420dp"
+                    android:visibility="gone"
+            >
+
+                <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"
-                        android:text="게시판 요청하기"
+                        android:orientation="vertical"
+                >
+
+                    <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:src="@drawable/question_mark"
+                    />
+
+                    <TextView
+                            android:id="@+id/tv_no_result_com_search_act"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/noto_sans_kr_medium"
+                            android:text="검색 결과가 없습니다."
+                            android:textSize="14sp"
+                            android:textColor="#a4a4a4"
+                    />
+
+                    <TextView
+                            android:id="@+id/tv2_no_result_com_search_act"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="찾으시는 내용을 확인하고 다시 검색해보세요."
+                            android:textSize="12sp"
+                            android:textColor="#a4a4a4"
+                    />
+
+                </LinearLayout>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="56dp"
+                        android:orientation="vertical"
+                >
+
+                    <TextView
+                            android:id="@+id/tv_areyoufind_search_com_act"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/noto_sans_kr_medium"
+                            android:textSize="14sp"
+                            android:textColor="#a4a4a4"
+                            android:text="찾으시는 유투버의 게시판이 없나요?"
+                    />
+
+                    <RelativeLayout
+                            android:id="@+id/btn1_search_request_community_act"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_gravity="center_horizontal"
+                    >
+
+                        <ImageView
+                                android:layout_width="160dp"
+                                android:layout_height="36dp"
+                                android:src="@drawable/community_request_btn_box"
+                        />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:fontFamily="@font/noto_sans_kr_medium"
+                                android:textSize="14sp"
+                                android:textColor="@color/white"
+                                android:text="게시판 요청하기"
+                        />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </RelativeLayout>
+
+            <!--결과가 나왔을 경우 RecyclerView & hide view-->
+            <RelativeLayout
+                    android:id="@+id/rl_after_search_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="500dp"
+                    android:layout_marginTop="19dp"
+                    android:layout_marginHorizontal="38dp"
+                    android:visibility="invisible"
+            >
+
+                <TextView
+                        android:id="@+id/tv_result_search_act"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="12sp"
+                        android:textColor="@color/violet_pink"
+                        android:text="게시판 검색 결과"
                 />
+
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_search_result_com_sear_act"
+                        android:layout_below="@+id/tv_result_search_act"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                >
+
+                </android.support.v7.widget.RecyclerView>
+
+                <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:orientation="vertical"
+                >
+
+                    <TextView
+                            android:id="@+id/tv_noborad_search_commu_act"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="#a4a4a4"
+                            android:text="찾으시는 유투버의 게시판이 없나요?"
+                    />
+
+                    <RelativeLayout
+                            android:id="@+id/btn_search_request_community_act"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:layout_gravity="center_horizontal"
+                    >
+
+                        <ImageView
+                                android:layout_width="160dp"
+                                android:layout_height="36dp"
+                                android:src="@drawable/community_request_btn_box"
+                        />
+
+                        <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:textSize="14sp"
+                                android:textColor="@color/white"
+                                android:text="게시판 요청하기"
+                        />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
 
             </RelativeLayout>
 
-        </LinearLayout>
+        </RelativeLayout>
 
-    </RelativeLayout>
+
+    </android.support.v4.widget.NestedScrollView>
 
 </RelativeLayout>

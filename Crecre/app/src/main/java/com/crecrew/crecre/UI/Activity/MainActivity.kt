@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //ApplicationData.loginState = false
         ApplicationData.auth =SharedPreferenceController.getUserToken(this)
         Log.v("login_token", ApplicationData.auth)
 
