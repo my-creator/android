@@ -5,11 +5,25 @@ import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.RelativeLayout
 import com.crecrew.crecre.Data.ProfileHotVideoData
 import android.widget.TextView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.crecrew.crecre.Base.BasePagerAdapter
+import com.crecrew.crecre.Data.CreatorData
+import com.crecrew.crecre.Data.CreatorProfileData
+import com.crecrew.crecre.Network.ApplicationController
+import com.crecrew.crecre.Network.CreatorNetworkService
+import com.crecrew.crecre.Network.Get.GetCreatorTodayHotRank
+import com.crecrew.crecre.Network.Get.GetProfileResponse
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Adapter.ProfileHotVideoRecyclerViewAdapter
+import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.RadarChart
 import com.github.mikephil.charting.components.AxisBase
@@ -19,7 +33,12 @@ import com.github.mikephil.charting.data.RadarEntry
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet
 import kotlinx.android.synthetic.main.activity_creator_profile.*
+import kotlinx.android.synthetic.main.fragment_home.view.*
+import org.jetbrains.anko.ctx
 import org.jetbrains.anko.startActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.ArrayList
 
 class CreatorProfileActivity : FragmentActivity() {
@@ -31,11 +50,21 @@ class CreatorProfileActivity : FragmentActivity() {
 
     val testItem = arrayListOf<String>("진행능력", "소통력", "참신성", "편집력", "핫 지수")
 
+    lateinit var creatorProfileData : CreatorProfileData
+
+    val creatorNetworkService: CreatorNetworkService by lazy{
+        ApplicationController.instance.creatorNetworkService
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator_profile)
         configureRecyclerView()
 
+
+        var creator_idx = 4366
+
+        getProfileResponse(creator_idx)
         val intent = intent
         val creator_name = intent.getStringExtra("creator_name")
 
@@ -59,7 +88,7 @@ class CreatorProfileActivity : FragmentActivity() {
             startActivity<ProfileClassQuestionActivity>()
         }
 
-        
+
         review = activity_creator_profile_review_number
         total = activity_creator_profile_total
 
@@ -150,6 +179,40 @@ class CreatorProfileActivity : FragmentActivity() {
         }
     }
 
+    private fun getProfileResponse(creatorIdx: Int){
+        val getProfileResponse = creatorNetworkService.getProfileResponse(creatorIdx)
+        getProfileResponse.enqueue(object : Callback<GetProfileResponse> {
+            override fun onFailure(call: Call<GetProfileResponse>, t: Throwable) {
+                Log.e("creator search fail",t.toString())
+            }
+            override fun onResponse(call: Call<GetProfileResponse>, response: Response<GetProfileResponse>) {
+                if(response.isSuccessful){
+                    if(response.body()!!.status == 200){
+                        creatorProfileData = response.body()!!.data
+                        Log.v("TAGG", creatorProfileData.profile_url)
+                        Glide.with(this@CreatorProfileActivity).load(creatorProfileData.profile_url).apply(RequestOptions().circleCrop()).into(profile_creator_main_img)
+                        Glide.with(this@CreatorProfileActivity).load(creatorProfileData.profile_asset).into(profile_creator_all_class)
+                        Glide.with(this@CreatorProfileActivity).load(creatorProfileData.follower_grade_img_url).into(profile_creator_rank)
+                        profile_creator_channel.text = creatorProfileData.creator_name
+                        creator_profile_category.text = creatorProfileData.category_name + " " + creatorProfileData.category_lank + "위"
+                        profile_follower_cnt.text = creatorProfileData.follower_cnt.toString() + "명"
+                        youtube_subscriber_cnt.text = String.format("%,d",creatorProfileData.youtube_subscriber_cnt) + "명"
+                        youtube_view_cnt.text = String.format("%,d",creatorProfileData.youtube_view_cnt) + "명"
+                        activity_creator_profile_description.text = creatorProfileData.contents
+                        activity_creator_profile_rank_tier.text = creatorProfileData.follower_grade_name + " " + creatorProfileData.follower_grade_level
+
+
+
+
+                    }
+                }
+            }
+        })
+
+        }
+
+
+
     private fun configureRecyclerView(){
         var profileHotDataList: ArrayList<ProfileHotVideoData> = ArrayList()
 
@@ -182,6 +245,8 @@ class CreatorProfileActivity : FragmentActivity() {
             total += dataSet[i].value
         return total / dataSet.size
     }
+
+
 
 
 }
