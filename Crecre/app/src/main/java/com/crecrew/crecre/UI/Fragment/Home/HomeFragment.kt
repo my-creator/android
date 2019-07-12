@@ -26,6 +26,8 @@ import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.Network.CreatorNetworkService
 import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
 import com.crecrew.crecre.Network.Get.GetCreatorTodayHotRank
+import com.crecrew.crecre.Network.Get.GetVoteEndResponse
+import com.crecrew.crecre.Network.VoteNetworkService
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
 import com.crecrew.crecre.UI.Adapter.TodayPostRecyclerViewAdapter
@@ -56,6 +58,9 @@ class HomeFragment: Fragment() {
     val communityNetworkService: CommunityNetworkService by lazy{
         ApplicationController.instance.communityNetworkService
     }
+    val voteNetworkService: VoteNetworkService by lazy{
+        ApplicationController.instance.voteNetworkService
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
@@ -66,6 +71,7 @@ class HomeFragment: Fragment() {
         // 통신
         getCreatorTodayHotRank()
         getCommunityResponse()
+        getLastVoteResponse()
 
         var voteCurrentFragment = VoteCurrentFragment()
         voteCurrentFragment.flag = 1
@@ -117,21 +123,6 @@ class HomeFragment: Fragment() {
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        configureRecyclerView()
-        //initVScrollLayout()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        /*
-        fragment_home_edit_search.setText(null)
-        fragment_home_edit_search.clearFocus();
-*/
-    }
 
     // 실시간 크리에이터 차트 열고 닫기
     private fun openTodayHotChart(){
@@ -149,25 +140,45 @@ class HomeFragment: Fragment() {
         }
     }
 
-    private fun configureRecyclerView(){
 
-        // last vote
-        var lastVoteData: ArrayList<LastVoteData> = ArrayList()
-
-        lastVoteData.add(LastVoteData("https://img.sbs.co.kr/newimg/news/20170907/201091232_1280.jpg","https://news.imaeil.com/inc/photos/2019/04/29/2019042900310562698_l.jpg", "시연조교",1,"크리크리 짱, 2줄 넘어갔을 때 처리도 해야 함 !! 홍루이젠 맛있다."))
-        lastVoteData.add(LastVoteData("https://s-i.huffpost.com/gen/1771947/images/n-DEFAULT-628x314.jpg","https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800", "가희바희보",1,"하나빼기 일 >___<"))
-        lastVoteData.add(LastVoteData("https://www.sanghafarm.co.kr/sanghafarm_Data/upload/shop/product/201803/A0000101_2018032109513585717.jpg","", "현희여신",1,"오늘은 잼을 가져오셨다."))
-        lastVoteData.add(LastVoteData("https://s-i.huffpost.com/gen/1771947/images/n-DEFAULT-628x314.jpg","https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800", "가희바희보",1,"하나빼기 일 >___<"))
-        lastVoteData.add(LastVoteData("https://www.sanghafarm.co.kr/sanghafarm_Data/upload/shop/product/201803/A0000101_2018032109513585717.jpg","", "현희여신",1,"오늘은 잼을 가져오셨다."))
-        lastVoteData.add(LastVoteData("https://img.sbs.co.kr/newimg/news/20170907/201091232_1280.jpg","https://news.imaeil.com/inc/photos/2019/04/29/2019042900310562698_l.jpg", "시연조교",1,"크리크리 짱, 2줄 넘어갔을 때 처리도 해야 함 !! 홍루이젠 맛있다."))
-
-        frag_home_vp_clsd.run {
-            adapter = BasePagerAdapter(fragmentManager!!).apply {
-                for (i in lastVoteData.indices)
-                    addFragment(ClosedVoteFragment.newInstance(lastVoteData[i]))
+    fun getLastVoteResponse(){
+        val getLastVote = voteNetworkService.getLastVote()
+        getLastVote.enqueue(object: Callback<GetVoteEndResponse> {
+            override fun onFailure(call: Call<GetVoteEndResponse>, t: Throwable) {
+                Log.e("last vote fail" , t.toString())
             }
-        }
 
+            override fun onResponse(call: Call<GetVoteEndResponse>, response: Response<GetVoteEndResponse>) {
+                if(response.isSuccessful) {
+                    if (response.body()!!.status == 200) {
+                        var tmp: ArrayList<GetVoteEndData> = response.body()!!.data
+                        var dataList: ArrayList<LastVoteData> = ArrayList()
+
+                        Log.e("size", tmp.size.toString())
+
+                        /*
+                        // data 넣기
+                        for (i in 0..2) {
+                            dataList[i].image = tmp[0].thumbnail_url
+                            dataList[i].content = tmp[0].title
+                            for (j in 0..tmp[i].choices.size - 1) {
+                                if (tmp[i].choices[j].rank == 1) {
+                                    dataList[i].creator = tmp[i].choices[j].name
+                                    dataList[i].profile = tmp[i].choices[j].creator_profile_url
+                                }
+                            }
+                        }
+                        frag_home_vp_clsd.run {
+                            adapter = BasePagerAdapter(fragmentManager!!).apply {
+                                for (i in dataList.indices)
+                                    addFragment(ClosedVoteFragment.newInstance(dataList[i]))
+                            }
+                        }
+                        */
+                    }
+                }
+            }
+        })
     }
 
     private fun downKeyboard(view: View) {
