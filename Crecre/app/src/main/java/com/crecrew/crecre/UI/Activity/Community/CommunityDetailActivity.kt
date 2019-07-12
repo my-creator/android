@@ -87,8 +87,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                     postLikeOnClickResponse(
                         communityNetworkService.deletePostunhateOff(
                             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                            , postidx
-                        )
+                            , postidx),0
                     )
                     btn_unlike = 0
 
@@ -101,8 +100,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         postLikeOnClickResponse(
                             communityNetworkService.postPostLikeOn(
                                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                                , postidx
-                            )
+                                , postidx),0
                         )
                         btn_like = 1
                     } else {
@@ -114,8 +112,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         postLikeOnClickResponse(
                             communityNetworkService.deletePostLikeOff(
                                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                                , postidx
-                            )
+                                , postidx),0
                         )
                         btn_like = 0
                     }
@@ -131,8 +128,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         postLikeOnClickResponse(
                             communityNetworkService.postPostLikeOn(
                                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                                , postidx
-                            )
+                                , postidx),0
                         )
                     } else {
                         btn_like_community_detail_act.isSelected = false
@@ -142,8 +138,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         postLikeOnClickResponse(
                             communityNetworkService.deletePostLikeOff(
                                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
-                                , postidx
-                            )
+                                , postidx),0
                         )
                         btn_like = 0
                     }
@@ -162,7 +157,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                         communityNetworkService.deletePostLikeOff(
                             "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
                             , postidx
-                        )
+                        ),0
                     )
                     btn_like = 0
 
@@ -175,7 +170,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                             communityNetworkService.postPosthateOn(
                                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
                                 , postidx
-                            )
+                            ),0
                         )
                         btn_unlike = 1
                     } else {
@@ -187,7 +182,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                             communityNetworkService.deletePostunhateOff(
                                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
                                 , postidx
-                            )
+                            ),0
                         )
                         btn_unlike = 0
                     }
@@ -201,7 +196,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                             communityNetworkService.postPosthateOn(
                                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
                                 , postidx
-                            )
+                            ),0
                         )
                         btn_unlike = 1
                     } else {
@@ -213,7 +208,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                             communityNetworkService.deletePostunhateOff(
                                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
                                 , postidx
-                            )
+                            ),0
                         )
                         btn_unlike = 0
                     }
@@ -255,7 +250,6 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                     postCommentReplyResponse()
                 }
             }
-
         }
     }
 
@@ -356,9 +350,14 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     //다이얼로그 -> 네
     private val completeConfirmListener = View.OnClickListener {
-        requestDialog!!.dismiss()
-        finish()
+
         //##글 삭제하는 서버통신
+        postLikeOnClickResponse(
+            communityNetworkService.deletePostComments(
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw"
+                , postidx) ,1
+        )
+
     }
 
     //다이얼로그 -> 아니요
@@ -427,6 +426,8 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
         Log.v("추천수", like_cnt.toString())
         tv_recommend_number_detail_act.setText("추천 " + dataList[0].like_cnt)
 
+
+
         //비추천수
         hate_cnt = dataList[0].hate_cnt
         Log.v("비추천수", hate_cnt.toString())
@@ -443,7 +444,7 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     //추천 누르기 보여주기 통신
-    fun postLikeOnClickResponse(networkfunction: Call<PostCommunityFavoriteLikeResponse>) {
+    fun postLikeOnClickResponse(networkfunction: Call<PostCommunityFavoriteLikeResponse>, flag : Int) {
         val postPostLikeOn: Call<PostCommunityFavoriteLikeResponse> = networkfunction
 
         postPostLikeOn.enqueue(object : Callback<PostCommunityFavoriteLikeResponse> {
@@ -452,12 +453,15 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                 Log.e("추천 누르기 fail", t.toString())
             }
 
-            override fun onResponse(
-                call: Call<PostCommunityFavoriteLikeResponse>,
-                response: Response<PostCommunityFavoriteLikeResponse>
+            override fun onResponse(call: Call<PostCommunityFavoriteLikeResponse>, response: Response<PostCommunityFavoriteLikeResponse>
             ) {
                 if (response.isSuccessful) {
 
+                    if(flag == 1)
+                    {
+                        requestDialog!!.dismiss()
+                        finish()
+                    }
                 }
             }
         })
