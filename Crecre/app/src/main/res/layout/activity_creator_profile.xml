@@ -87,13 +87,14 @@
                     />
 
                     <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="320dp"
+                            android:layout_height="40dp"
                             android:textSize="16sp"
                             android:textColor="@color/white"
                             android:letterSpacing="-0.03"
-                            android:layout_centerInParent="true"
+                            android:layout_centerHorizontal="true"
                             android:text="팬 게시판으로"
+                            android:background="@drawable/activity_creator_profile_btn_go_to_fanpage"
                             android:fontFamily="@font/noto_sans_kr_medium"
                             />
             </RelativeLayout>
@@ -217,31 +218,35 @@
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="120dp">
-                    <RelativeLayout
-                            android:layout_width="320dp"
-                            android:layout_height="64dp"
-                            android:background="#f7f7f7"
-                            android:layout_marginTop="20dp"
-                            android:layout_centerHorizontal="true">
+                <RelativeLayout
+                        xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:app="http://schemas.android.com/apk/res-auto"
+                        android:layout_width="320dp"
+                        android:layout_height="64dp"
+                        android:background="#f7f7f7"
+                        android:layout_marginTop="20dp">
 
-                        <TextView
-                                android:id="@+id/activity_creator_profile_description"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="8dp"/>
+                    <at.blogc.android.views.ExpandableTextView
+                            android:id="@+id/activity_creator_profile_description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:maxLines="2"
+                            android:ellipsize="end"
+                            app:animation_duration="750"/>
 
-                        <!--<TextView-->
-                                <!--android:id="@+id/activity_creator_profile_btn_read_more"-->
-                                <!--android:layout_width="wrap_content"-->
-                                <!--android:layout_height="wrap_content"-->
-                                <!--android:text="더보기"-->
-                                <!--android:layout_alignParentRight="true"-->
-                                <!--android:layout_marginTop="40dp"-->
-                                <!--android:layout_marginRight="20dp"-->
-                                <!--android:textSize="12sp"-->
-                                <!--android:textColor="#127cc5"/>-->
+                    <TextView
+                    android:id="@+id/activity_creator_profile_btn_read_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="더보기"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="20dp"
+                    android:textSize="12sp"
+                    android:textColor="#127cc5"/>
 
-                    </RelativeLayout>
+                </RelativeLayout>
             </RelativeLayout>
 
             <RelativeLayout
@@ -274,8 +279,7 @@
                                             android:indeterminate="false"
                                             android:layout_centerInParent="true"
                                             android:progressDrawable="@drawable/activity_creator_profile_progressbar"
-                                            android:secondaryProgress="100"
-                                    />
+                                            android:secondaryProgress="100"/>
 
                                     <ImageView
                                             android:id="@+id/activity_creator_profile_rank_img"
@@ -495,7 +499,7 @@
 
             <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="352dp">
+                    android:layout_height="wrap_content">
                 <LinearLayout
                               android:layout_width="match_parent"
                               android:layout_height="match_parent"
