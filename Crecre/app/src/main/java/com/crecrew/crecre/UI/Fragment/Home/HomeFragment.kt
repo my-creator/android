@@ -2,7 +2,6 @@ package scom.crecrew.crecre.UI.Fragment
 
 import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
@@ -18,7 +17,6 @@ import android.widget.RelativeLayout
 import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
-import java.util.*
 import com.crecrew.crecre.Base.BasePagerAdapter
 import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
@@ -31,11 +29,9 @@ import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
 import com.crecrew.crecre.UI.Adapter.TodayPostRecyclerViewAdapter
 import org.jetbrains.anko.support.v4.startActivity
 import com.crecrew.crecre.UI.Activity.CreatorSearchActivity
-import com.crecrew.crecre.UI.Adapter.TodayRankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
+import com.crecrew.crecre.UI.Fragment.Home.RankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
-import com.crecrew.crecre.UI.View.SimpleDividerItemDecoration
-import kotlinx.android.synthetic.main.fragment_home_today_rank.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -106,7 +102,7 @@ class HomeFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         configureRecyclerView()
-
+        initVScrollLayout()
     }
 
     override fun onResume() {
@@ -142,6 +138,9 @@ class HomeFragment: Fragment() {
         lastVoteData.add(LastVoteData("https://img.sbs.co.kr/newimg/news/20170907/201091232_1280.jpg","https://news.imaeil.com/inc/photos/2019/04/29/2019042900310562698_l.jpg", "시연조교",1,"크리크리 짱, 2줄 넘어갔을 때 처리도 해야 함 !! 홍루이젠 맛있다."))
         lastVoteData.add(LastVoteData("https://s-i.huffpost.com/gen/1771947/images/n-DEFAULT-628x314.jpg","https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800", "가희바희보",1,"하나빼기 일 >___<"))
         lastVoteData.add(LastVoteData("https://www.sanghafarm.co.kr/sanghafarm_Data/upload/shop/product/201803/A0000101_2018032109513585717.jpg","", "현희여신",1,"오늘은 잼을 가져오셨다."))
+        lastVoteData.add(LastVoteData("https://s-i.huffpost.com/gen/1771947/images/n-DEFAULT-628x314.jpg","https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800", "가희바희보",1,"하나빼기 일 >___<"))
+        lastVoteData.add(LastVoteData("https://www.sanghafarm.co.kr/sanghafarm_Data/upload/shop/product/201803/A0000101_2018032109513585717.jpg","", "현희여신",1,"오늘은 잼을 가져오셨다."))
+        lastVoteData.add(LastVoteData("https://img.sbs.co.kr/newimg/news/20170907/201091232_1280.jpg","https://news.imaeil.com/inc/photos/2019/04/29/2019042900310562698_l.jpg", "시연조교",1,"크리크리 짱, 2줄 넘어갔을 때 처리도 해야 함 !! 홍루이젠 맛있다."))
 
         frag_home_vp_clsd.run {
             adapter = BasePagerAdapter(fragmentManager!!).apply {
@@ -161,6 +160,20 @@ class HomeFragment: Fragment() {
         imm.hideSoftInputFromWindow(view.windowToken, 0)
 
         // fragment_home_edit_search.clearFocus()
+    }
+
+    private fun initVScrollLayout() {
+        val vScrollLayout = rootView.fragment_home_txt_today_hot_creator
+        val items = ArrayList<CurrentRankData>()
+
+        // TODO: todayCreatorRankData 넣기!
+
+        for (i in 1..10) {
+            val item = CurrentRankData("$i", "항목$i")
+            items.add(item)
+        }
+        val adapter = RankRecyclerViewAdapter(items)
+        vScrollLayout.setAdapter(adapter)
     }
 
 

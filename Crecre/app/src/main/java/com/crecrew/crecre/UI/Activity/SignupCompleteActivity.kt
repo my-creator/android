@@ -11,6 +11,11 @@ class SignupCompleteActivity :AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup_complete)
 
+        var user_name = intent.getStringExtra("user_name")
+
+        var str = user_name + "님,"
+        activity_signup_complete_name.setText(str)
+
         activity_signup_complete_btn.setOnClickListener {
             startActivity<MainActivity>()
         }

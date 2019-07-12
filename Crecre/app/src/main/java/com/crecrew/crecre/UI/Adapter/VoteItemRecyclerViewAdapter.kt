@@ -12,10 +12,10 @@ import com.bumptech.glide.Glide
 import com.crecrew.crecre.Data.VoteItemData
 import com.crecrew.crecre.R
 
-class VoteItemRecyclerViewAdapter(val ctx:Context, val dataList: ArrayList<VoteItemData>):RecyclerView.Adapter<VoteItemRecyclerViewAdapter.Holder>(){
+/*class VoteItemRecyclerViewAdapter(val ctx:Context, val dataList: ArrayList<VoteItemData>):RecyclerView.Adapter<VoteItemRecyclerViewAdapter.Holder>(){
     override fun onBindViewHolder(holder: Holder, position: Int) {
         Glide.with(ctx)
-            .load(dataList[position].ImageURL)
+            .load(dataList[position].)
             .into(holder.img_thumnail)
 
         holder.item_name.text = dataList[position].item_name;
@@ -36,3 +36,4 @@ class VoteItemRecyclerViewAdapter(val ctx:Context, val dataList: ArrayList<VoteI
         return Holder(view)
     }
 }
+*/

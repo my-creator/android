@@ -32,7 +32,7 @@ class TodayRankRecyclerViewAdapter(private val ctx : Context, private val dataLi
                 }
 
                 holder.number.text = dataList[position].ranking.toString()
-                holder.creator.text = dataList[position].creator_name
+                holder.creator.text = dataList[position].creatorName
                 if (dataList[position].searchCnt > 0)
                     Glide.with(ctx).load(R.drawable.icn_up).into(holder.arrow)
                 else
