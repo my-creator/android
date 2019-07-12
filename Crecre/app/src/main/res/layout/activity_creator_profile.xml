@@ -522,8 +522,8 @@
 
                     <com.github.mikephil.charting.charts.RadarChart
                             android:id="@+id/activity_creator_profile_rc_chart"
-                            android:layout_width="match_parent"
-                            android:layout_height="352dp" />
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
 
                 </LinearLayout>
             </RelativeLayout>

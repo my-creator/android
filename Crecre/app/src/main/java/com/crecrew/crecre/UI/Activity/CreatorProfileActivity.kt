@@ -64,10 +64,9 @@ class CreatorProfileActivity : FragmentActivity() {
         setContentView(R.layout.activity_creator_profile)
 
 
-        var creator_idx = 5123
         mTypeface = activity_creator_profile_review_number.typeface
 
-
+        
         getProfileResponse(creator_idx)
         getProfileStatResponse(creator_idx)
 
