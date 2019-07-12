@@ -25,7 +25,7 @@ class VoteCurrentRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<V
         var txt_dayleft = itemView.findViewById(R.id.rv_item_current_card_dayleft) as TextView
         var title = itemView.findViewById(R.id.rv_item_vote_title) as TextView
         var explain = itemView.findViewById(R.id.rv_item_vote_explain) as TextView
-        var items = itemView.findViewById(R.id.rv_item_invote_choicesList) as RecyclerView
+        var items = itemView.findViewById(R.id.rv_item_currenvote_card_test_choice_rv) as RecyclerView
         var letsVote = itemView.findViewById(R.id.lets_vote) as TextView
     }
 

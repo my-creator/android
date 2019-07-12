@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         ApplicationData.auth =SharedPreferenceController.getUserToken(this)
         Log.v("login_token", ApplicationData.auth)
 
+
         // ViewPager
         activity_main_vp_container.run {
             adapter = BasePagerAdapter(supportFragmentManager).apply {

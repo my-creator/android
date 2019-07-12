@@ -652,6 +652,7 @@
                         android:layout_marginTop="24dp"/>
 
                 <EditText
+                        android:id="@+id/activity_profile_join_stat_hashtag"
                         android:layout_width="320dp"
                         android:layout_height="wrap_content"
                         android:minHeight="80dp"
@@ -661,14 +662,16 @@
                         android:background="@drawable/activity_profile_join_stat_edittext_hashtag"/>
 
 
-                <Button
-                        android:text="완료"
-                        android:background="@drawable/background_rounding6_2"
-                        android:layout_width="300dp"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="100dp"
-                        />
+            <Button
+                    android:text="완료"
+                    android:layout_below="@+id/activity_profile_join_stat_hashtag"
+                    android:background="@drawable/background_rounding6_2"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="100dp"
+                    android:layout_weight="1"
+                    android:layout_alignParentStart="true"/>
         </RelativeLayout>
 
     </LinearLayout>

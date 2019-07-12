@@ -1,10 +1,7 @@
 package com.crecrew.crecre.Network
 
 import android.util.Log
-import com.crecrew.crecre.Network.Get.GetCreatorNum
-import com.crecrew.crecre.Network.Get.GetCreatorSearch
-import com.crecrew.crecre.Network.Get.GetCreatorTodayHotRank
-import com.crecrew.crecre.Network.Get.GetProfileResponse
+import com.crecrew.crecre.Network.Get.*
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -29,5 +26,15 @@ interface CreatorNetworkService {
     fun getProfileResponse(
         @Path("creatorIdx") creatorIdx : Int
     ): Call<GetProfileResponse>
+
+    @GET("creators/profiles/stat/{creatorIdx}")
+    fun getProfileStatResponse(
+        @Path("creatorIdx") creatorIdx: Int
+    ): Call<GetProfileStatResponse>
+
+    @GET("creators/{creatorIdx}/popularvideo/three")
+    fun getProfileHotVideoResponse(
+        @Path("creatorIdx") creatorIdx: Int
+    ): Call<GetProfileHotVideoResponse>
 }
 

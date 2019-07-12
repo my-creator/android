@@ -18,6 +18,9 @@ import com.crecrew.crecre.Data.VoteTestData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.utils.calculateLastime
 import kotlinx.android.synthetic.main.fragment_rank.*
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 import kotlin.collections.ArrayList
 
 class VoteListRecyclerviewAdapter(val ctx: Context, val dataList: ArrayList<VoteData>) :
