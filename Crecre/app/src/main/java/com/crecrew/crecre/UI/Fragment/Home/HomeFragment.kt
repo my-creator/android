@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +33,7 @@ import com.crecrew.crecre.UI.Activity.CreatorSearchActivity
 import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
 import com.crecrew.crecre.UI.Fragment.Home.RankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
+import com.crecrew.crecre.UI.Fragment.VoteCurrentFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,7 +46,6 @@ class HomeFragment: Fragment() {
     private var isChartOpen = false
 
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
-
 
     var todayCreatorRankData : ArrayList<CreatorData> = ArrayList()
 
@@ -59,8 +60,13 @@ class HomeFragment: Fragment() {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
         // 통신
-        //getCreatorTodayHotRank()
+        getCreatorTodayHotRank()
         getCommunityResponse()
+
+        var voteCurrentFragment = VoteCurrentFragment()
+        voteCurrentFragment.flag = 1
+
+        fragmentManager!!.beginTransaction().add(R.id.fragment_home_now_vote_rl,voteCurrentFragment).commit()
 
         // 화면 전환
         rootView.run {
@@ -149,8 +155,6 @@ class HomeFragment: Fragment() {
             }
         }
 
-
-
     }
 
     private fun downKeyboard(view: View) {
@@ -191,6 +195,7 @@ class HomeFragment: Fragment() {
                     if(response.body()!!.status == 200){
                         todayCreatorRankData = response.body()!!.data
 
+                        Log.e("homefragment:",todayCreatorRankData[0].creatorName)
                         var todayCreatorRankTopData : ArrayList<CreatorData> = ArrayList(5)
                         var todayCreatorRankBottomData: ArrayList<CreatorData> = ArrayList(5)
 

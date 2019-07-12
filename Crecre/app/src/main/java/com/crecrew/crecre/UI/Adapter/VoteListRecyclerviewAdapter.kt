@@ -9,11 +9,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.crecrew.crecre.Data.VoteData
 import com.crecrew.crecre.Data.VoteTestData
 import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.fragment_rank.*
 
-class VoteListRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<VoteTestData>) : RecyclerView.Adapter<VoteListRecyclerviewAdapter.Holder>() {
+class VoteListRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<VoteData>) : RecyclerView.Adapter<VoteListRecyclerviewAdapter.Holder>() {
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var img_thumnail = itemView.findViewById(R.id.card_main_image_test) as ImageView
@@ -38,16 +39,19 @@ class VoteListRecyclerviewAdapter (val ctx: Context, val dataList: ArrayList<Vot
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         Glide.with(ctx)
-            .load(dataList[position].ImageURL)
+            .load(dataList[position].thumbnail_url)
             .into(holder.img_thumnail)
 
         holder.title.text = dataList[position].title
-        holder.explain.text = "# " + dataList[position].explain
+        holder.explain.text = "# " + dataList[position].contents
 
         holder.txt_ongoing.setVisibility(View.GONE)
-        holder.txt_dayleft.text = "${dataList[position].date}일 후 개표"
 
-        var voteChoiceRecyclerviewAdapter = VoteChoiceRecyclerviewAdapter(ctx, dataList[position].choice)
+        // TODO: 시간 계산
+        //holder.txt_dayleft.text = "${dataList[position]}일 후 개표"
+        holder.txt_dayleft.text = "0일 후 개표"
+
+        var voteChoiceRecyclerviewAdapter = VoteChoiceRecyclerviewAdapter(ctx, dataList[position].choices)
         holder.choice_container.adapter = voteChoiceRecyclerviewAdapter
         holder.choice_container.layoutManager = LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false)
 
