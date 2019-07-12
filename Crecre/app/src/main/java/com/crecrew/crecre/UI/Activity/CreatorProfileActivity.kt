@@ -14,7 +14,12 @@ import com.bumptech.glide.request.RequestOptions
 import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CreatorNetworkService
+<<<<<<< HEAD
 import com.crecrew.crecre.Network.Get.*
+=======
+import com.crecrew.crecre.Network.Get.GetProfileResponse
+import com.crecrew.crecre.Network.Get.GetProfileStatResponse
+>>>>>>> c9d800d21c39214146addf933e5cea8baf942ad2
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Adapter.ProfileHotVideoRecyclerViewAdapter
@@ -27,8 +32,6 @@ import com.github.mikephil.charting.data.RadarEntry
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet
 import kotlinx.android.synthetic.main.activity_creator_profile.*
-import kotlinx.android.synthetic.main.fragment_home.view.*
-import org.jetbrains.anko.ctx
 import org.jetbrains.anko.startActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -44,24 +47,22 @@ class CreatorProfileActivity : FragmentActivity() {
     var creator_idx: Int = -1
 
     //"진행능력", "소통력", "참신성", "편집력", "핫 지수"
-    val testItem = arrayListOf<String>()
+    val testItem = ArrayList<String>()
     val entries1 = ArrayList<RadarEntry>()
 
     lateinit var creatorProfileData: CreatorProfileData //크리에이터 정보
-    lateinit var statData: StatDataTest //xAxis
+    //lateinit var statData: StatDataTest //xAxis
     lateinit var mTypeface: Typeface
-    val statDataTest = StatDataTest(
-        4.8,
-        32,
-        arrayListOf(
-            StatDataTest2("진행능력", 0, 4.8.toFloat()),
-            StatDataTest2("소통력", 0, 4.8.toFloat()),
-            StatDataTest2("참신성", 0, 4.8.toFloat()),
-            StatDataTest2("편집력", 0, 4.8.toFloat()),
-            StatDataTest2("핫 지수", 0, 4.8.toFloat())
-        )
-    )
+    val statDataTest = ArrayList<StatData>()
 
+    val statSetData = arrayListOf(
+        StatData(null, null, "항목", 0, 0.0),
+        StatData(null, null, "항목", 0, 0.0),
+        StatData(null, null, "항목", 0, 0.0),
+        StatData(null, null, "항목", 0, 0.0),
+        StatData(null, null, "핫 항목", 0, 0.0),
+        StatData(4.8, 32, null, null, null)
+    )
     val creatorNetworkService: CreatorNetworkService by lazy {
         ApplicationController.instance.creatorNetworkService
     }
@@ -70,8 +71,12 @@ class CreatorProfileActivity : FragmentActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator_profile)
 
-
         mTypeface = activity_creator_profile_review_number.typeface
+        for (i in 0..4) {
+            testItem.add(statSetData[i].name!!)
+            entries1.add(RadarEntry(statSetData[i].stat_score!!.toFloat()))
+        }
+        makeGraph(testItem, entries1)
 
         var intent = intent.getIntExtra("creator_idx", 5123)
         getProfileResponse(intent)
@@ -90,6 +95,8 @@ class CreatorProfileActivity : FragmentActivity() {
         makeGraph(testItem, entries1)
         activity_creator_profile_total.text = "토탈 " + String.format("%.2f", statDataTest.avg_stat) + "점"
         activity_creator_profile_review_number.text = "(" + statDataTest.join_cnt_stat.toString() + "명 리뷰)"
+        getProfileStatResponse(intent)
+
 
         activity_creator_profile_btn_go_fanpage.setOnClickListener {
             startActivity<CommunityHotPostActivity>()
@@ -274,16 +281,20 @@ class CreatorProfileActivity : FragmentActivity() {
             override fun onResponse(call: Call<GetProfileStatResponse>, response: Response<GetProfileStatResponse>) {
                 if (response.isSuccessful) {
                     if (response.body()!!.status == 200) {
-                        statData = response.body()!!.data
-                        activity_creator_profile_total.text = "토탈 " + String.format("%.2f", statData.avg_stat) + "점"
-                        activity_creator_profile_review_number.text = "(" + statData.join_cnt_stat.toString() + "명 리뷰)"
-                        statData.stat?.let {
-                            for (i in it.indices)
-                                testItem.add(it[i].name)
-                            for (i in it.indices)
-                                entries1.add(RadarEntry(it[i].stat_score))
+                        if(response.body()!!.data.size != 1) {
+                            testItem.clear()
+                            entries1.clear()
+                            statDataTest.addAll(response.body()!!.data)
+                            activity_creator_profile_total.text =
+                                "토탈 " + String.format("%.2f", statDataTest[5].avg_stat) + "점"
+                            activity_creator_profile_review_number.text =
+                                "(" + statDataTest[5].join_cnt_stat.toString() + "명 리뷰)"
+                            for (i in 0..4) {
+                                testItem.add(statDataTest[i].name!!)
+                                entries1.add(RadarEntry(statDataTest[i].stat_score!!.toFloat()))
+                            }
+                            makeGraph(testItem, entries1)
                         }
-//                        makeGraph(testItem, entries1)
                     }
                 }
             }

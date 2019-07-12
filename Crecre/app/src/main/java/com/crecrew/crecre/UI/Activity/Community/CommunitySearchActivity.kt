@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Data.CommunitySmallNewGetData
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.Get.CommunityBoardData
@@ -16,6 +17,7 @@ import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.CoummunitySearchRecyclerViewAdapter
+import com.crecrew.crecre.utils.ApplicationData
 import com.crecrew.crecre.utils.SearchAlarmDialog
 import kotlinx.android.synthetic.main.activity_community_search.*
 import org.jetbrains.anko.startActivity
@@ -29,6 +31,7 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var communitycontentsearchRecyclerViewAdapter: CommunityHotPostRecyclerViewAdapter
     var board_flag = -1
     var search_tv: String = ""
+    var search_content: String = ""
 
     val communityNetworkService: CommunityNetworkService by lazy {
         ApplicationController.instance.communityNetworkService
@@ -59,11 +62,11 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
             btn_find_search_com_act -> {
 
                 search_tv = et_searchword_search_act.text.toString()
+                downKeyboard(btn_find_search_com_act)
 
                 if (search_tv == "") {
                     requestEnterDialog.show()
-                }
-                else {
+                } else {
                     //게시판
                     if (board_flag == 0) {
                         //제대로 검색이 되었을 경우
@@ -71,9 +74,9 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
                         configureboardRecyclerView()
                     }
                     //게시글 검색
-                    else{
+                    else {
                         tv_result_search_act.setText("게시글 검색 결과")
-                        tv_noborad_search_commu_act.visibility= View.GONE
+                        tv_noborad_search_commu_act.visibility = View.GONE
                         btn_search_request_community_act.visibility = View.GONE
                         configurecontensRecyclerView()
                         getContentsSearchResultResponse()
@@ -114,6 +117,8 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
         init()
         configureEditText()
 
+        ApplicationData.auth = SharedPreferenceController.getUserToken(this)
+
     }
 
     private fun init() {
@@ -136,8 +141,8 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
 
     }
 
-    private fun configurecontensRecyclerView(){
-        var dataList2 : ArrayList<CommunitySmallNewGetData> = ArrayList()
+    private fun configurecontensRecyclerView() {
+        var dataList2: ArrayList<CommunitySmallNewGetData> = ArrayList()
 
         communitycontentsearchRecyclerViewAdapter = CommunityHotPostRecyclerViewAdapter(this, dataList2, 3)
         rv_search_result_com_sear_act.adapter = communitycontentsearchRecyclerViewAdapter
@@ -155,6 +160,7 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
     private fun configureEditText() {
         //게시글인지 작성글인지
         board_flag = intent.getIntExtra("board_flag", -1)
+        search_content = et_searchword_search_act.text.toString()
 
         //게시판검색
         if (board_flag == 0) {
@@ -167,7 +173,7 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
     //검색버튼 누른 후 게시판 통신
     private fun getCommunitySearchResultResponse() {
         val getCommunitySmallNewPosts: Call<GetCommunityUnlikeBoardsResponse> =
-            communityNetworkService.getBoardsSearch("", "", search_tv)
+            communityNetworkService.getBoardsSearch(ApplicationData.auth, "", search_tv)
 
         getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunityUnlikeBoardsResponse> {
 
@@ -181,31 +187,33 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
             ) {
                 if (response.isSuccessful) {
                     val temp: ArrayList<CommunityBoardData> = response.body()!!.data
+                    val status = response.body()!!.status
                     if (temp.size > 0) {
 
-                        val position = communitysearchRecyclerViewAdapter.itemCount
-                        communitysearchRecyclerViewAdapter.dataList.addAll(temp)
-                        communitysearchRecyclerViewAdapter.notifyItemInserted(position)
-                        response?.takeIf { it.isSuccessful }
-                            ?.body()
-                            ?.let {
-                                if (it.status == 200) {
-                                    rl_after_search_view.visibility = View.VISIBLE
-                                    ll_no_resul_com_search_act.visibility = View.GONE
-                                    ll_first_search_view_com_act.visibility = View.GONE
-                                } else if (it.status == 500) {
-                                    ll_no_resul_com_search_act.visibility = View.VISIBLE
-                                    rl_after_search_view.visibility = View.GONE
-                                    ll_first_search_view_com_act.visibility = View.GONE
-                                }
-                            }
+                        if (status == 200) {
+                            rl_after_search_view.visibility = View.VISIBLE
+                            ll_no_resul_com_search_act.visibility = View.GONE
+                            ll_first_search_view_com_act.visibility = View.GONE
 
+                            val position = communitysearchRecyclerViewAdapter.itemCount
+                            communitysearchRecyclerViewAdapter.dataList.addAll(temp)
+                            communitysearchRecyclerViewAdapter.notifyItemInserted(position)
 
-                    } else {
+                        } else if (status == 500) {
+                            ll_no_resul_com_search_act.visibility = View.VISIBLE
+                            rl_after_search_view.visibility = View.GONE
+                            ll_first_search_view_com_act.visibility = View.GONE
+                        }
+                    }
+                    else{
+
+                        ll_no_resul_com_search_act.visibility = View.VISIBLE
+                        rl_after_search_view.visibility = View.GONE
+                        ll_first_search_view_com_act.visibility = View.GONE
                     }
 
-
                 }
+
             }
         })
     }
@@ -213,7 +221,7 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
     //검색버튼 누른 후 글 제목, 내용 검색 통신
     private fun getContentsSearchResultResponse() {
         val getPostSearchTitle: Call<GetCommunitySmallNewPostResponse> =
-            communityNetworkService.getPostSearchTitle("", "", search_tv)
+            communityNetworkService.getPostSearchTitle(ApplicationData.auth, search_tv, "")
 
         getPostSearchTitle.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
 

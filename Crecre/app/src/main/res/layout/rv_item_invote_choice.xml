@@ -42,6 +42,7 @@
                 android:textColor="#666666"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/noto_sans_kr_medium"
+                android:id="@+id/count_text"
         />
         <TextView
                 android:layout_width="wrap_content"
@@ -50,6 +51,7 @@
                 android:textColor="#333333"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/noto_sans_kr_regular"
+                android:id="@+id/rank_text"
         />
         <ImageView
                 android:layout_width="wrap_content"

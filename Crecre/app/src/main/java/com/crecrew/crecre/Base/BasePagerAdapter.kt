@@ -3,6 +3,7 @@ package com.crecrew.crecre.Base
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
+import android.view.ViewGroup
 
 class BasePagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm){
 
@@ -18,4 +19,5 @@ class BasePagerAdapter(fm: FragmentManager): FragmentStatePagerAdapter(fm){
         setOfFragments.add(fragment)
         notifyDataSetChanged()
     }
+
 }

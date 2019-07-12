@@ -10,5 +10,7 @@ class VoteChoiceData (
     var follower_grade_level: Int,
     var follower_grade_img_url: String,
     var view_grade_img_url: String,
-    var rank:Int
+    var rank:Int,
+    var cho: Int,
+    var checked: Boolean
 )

@@ -1,4 +1,4 @@
-package com.crecrew.crecre.Data
+package com.crecrew.crecre.Network.Post
 
 data class PostVoteChoiceResponse (
     var status: Int,
