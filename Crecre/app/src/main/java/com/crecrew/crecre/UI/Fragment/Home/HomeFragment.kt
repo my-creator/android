@@ -3,6 +3,7 @@ package scom.crecrew.crecre.UI.Fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v7.widget.DividerItemDecoration
@@ -15,16 +16,22 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
 import android.widget.RelativeLayout
+import android.widget.TextView
+import android.widget.Toast
 import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import com.crecrew.crecre.Base.BasePagerAdapter
+import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.Network.CreatorNetworkService
 import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
 import com.crecrew.crecre.Network.Get.GetCreatorTodayHotRank
+import com.crecrew.crecre.Network.Get.GetLastVoteHomeResponse
+import com.crecrew.crecre.Network.Get.GetVoteEndResponse
+import com.crecrew.crecre.Network.VoteNetworkService
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
 import com.crecrew.crecre.UI.Adapter.TodayPostRecyclerViewAdapter
@@ -34,11 +41,14 @@ import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
 import com.crecrew.crecre.UI.Fragment.Home.RankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
 import com.crecrew.crecre.UI.Fragment.VoteCurrentFragment
+import com.crecrew.crecre.UI.Fragment.VoteFragment
+import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 import kotlin.collections.ArrayList
-
 
 class HomeFragment: Fragment() {
 
@@ -55,13 +65,37 @@ class HomeFragment: Fragment() {
     val communityNetworkService: CommunityNetworkService by lazy{
         ApplicationController.instance.communityNetworkService
     }
+    val voteNetworkService: VoteNetworkService by lazy{
+        ApplicationController.instance.voteNetworkService
+    }
+
+    private lateinit var rank_time: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
 
-        // 통신
-        getCreatorTodayHotRank()
+        rank_time = rootView.findViewById(R.id.fragment_home_today_rank_time) as TextView
+
+        val handler = Handler()
+
+        val handlerTask = object : Runnable{
+            override fun run(){
+                getCreatorTodayHotRank()
+
+                var sdf = SimpleDateFormat("yyyy.MM.dd HH:mm:ss")
+                var current_time = sdf.format(Date())
+
+                rank_time.setText(current_time)
+
+
+                handler.postDelayed(this,1000*20)
+            }
+        }
+
+        handler.post(handlerTask)
+
         getCommunityResponse()
+        //getLastVoteResponse()
 
         var voteCurrentFragment = VoteCurrentFragment()
         voteCurrentFragment.flag = 1
@@ -75,16 +109,25 @@ class HomeFragment: Fragment() {
                 openTodayHotChart()
             }
 
+            fragment_home_now_vote_more.setOnClickListener{
+                // TODO: 투표탭으로 화면전환
+            }
+
             fragment_home_vote_recommendation_btn.setOnClickListener {
                 startActivity<VoteSuggestActivity>()
             }
             fragment_home_txt_today_hot_post_more.setOnClickListener {
-                Log.e("click","click more btn")
-                startActivity<CommunityHotPostActivity>()
-                // TODO: hot과 new 구분하기!
+                val intent = Intent(activity, CommunityHotPostActivity::class.java)
+                intent.putExtra("flag",1)
+                intent.putExtra("title","인기글")
+                startActivity(intent)
+
             }
             fragment_home_txt_today_new_post_more.setOnClickListener {
-                startActivity<CommunityHotPostActivity>()
+                val intent = Intent(activity, CommunityHotPostActivity::class.java)
+                intent.putExtra("flag",0)
+                intent.putExtra("title","최신글")
+                startActivity(intent)
             }
 
             // search bar 누르면 검색 화면으로 넘어가기
@@ -92,6 +135,13 @@ class HomeFragment: Fragment() {
                 val intent = Intent(activity, CreatorSearchActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
                 startActivity(intent)
+
+            }
+
+            fragment_home_now_vote_more.setOnClickListener {
+                var fm = fragmentManager!!.beginTransaction()
+                fm.replace(R.id.activity_main_vp_container, VoteFragment())
+                fm.commit()
 
             }
 
@@ -104,21 +154,6 @@ class HomeFragment: Fragment() {
         return rootView
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        configureRecyclerView()
-        initVScrollLayout()
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        /*
-        fragment_home_edit_search.setText(null)
-        fragment_home_edit_search.clearFocus();
-*/
-    }
 
     // 실시간 크리에이터 차트 열고 닫기
     private fun openTodayHotChart(){
@@ -136,25 +171,32 @@ class HomeFragment: Fragment() {
         }
     }
 
-    private fun configureRecyclerView(){
 
-        // last vote
-        var lastVoteData: ArrayList<LastVoteData> = ArrayList()
-
-        lastVoteData.add(LastVoteData("https://img.sbs.co.kr/newimg/news/20170907/201091232_1280.jpg","https://news.imaeil.com/inc/photos/2019/04/29/2019042900310562698_l.jpg", "시연조교",1,"크리크리 짱, 2줄 넘어갔을 때 처리도 해야 함 !! 홍루이젠 맛있다."))
-        lastVoteData.add(LastVoteData("https://s-i.huffpost.com/gen/1771947/images/n-DEFAULT-628x314.jpg","https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800", "가희바희보",1,"하나빼기 일 >___<"))
-        lastVoteData.add(LastVoteData("https://www.sanghafarm.co.kr/sanghafarm_Data/upload/shop/product/201803/A0000101_2018032109513585717.jpg","", "현희여신",1,"오늘은 잼을 가져오셨다."))
-        lastVoteData.add(LastVoteData("https://s-i.huffpost.com/gen/1771947/images/n-DEFAULT-628x314.jpg","https://mblogthumb-phinf.pstatic.net/MjAxODA1MTlfOSAg/MDAxNTI2NzQwNjY5OTUx.VcucGKX52noaAETS5acZgeovzLRSCWs8AkzGJVJUuasg.PIDUYkcbI_IaBRJ25-Lgu4-pnrDdVuP8uWK4ZRQbxl8g.JPEG.okyunju0309/PicsArt_05-19-01.19.40.jpg?type=w800", "가희바희보",1,"하나빼기 일 >___<"))
-        lastVoteData.add(LastVoteData("https://www.sanghafarm.co.kr/sanghafarm_Data/upload/shop/product/201803/A0000101_2018032109513585717.jpg","", "현희여신",1,"오늘은 잼을 가져오셨다."))
-        lastVoteData.add(LastVoteData("https://img.sbs.co.kr/newimg/news/20170907/201091232_1280.jpg","https://news.imaeil.com/inc/photos/2019/04/29/2019042900310562698_l.jpg", "시연조교",1,"크리크리 짱, 2줄 넘어갔을 때 처리도 해야 함 !! 홍루이젠 맛있다."))
-
-        frag_home_vp_clsd.run {
-            adapter = BasePagerAdapter(fragmentManager!!).apply {
-                for (i in lastVoteData.indices)
-                    addFragment(ClosedVoteFragment.newInstance(lastVoteData[i]))
+    fun getLastVoteResponse(){
+        val getLastVoteHome = voteNetworkService.getLastVoteHome()
+        getLastVoteHome.enqueue(object: Callback<GetLastVoteHomeResponse> {
+            override fun onFailure(call: Call<GetLastVoteHomeResponse>, t: Throwable) {
+                Log.e("last vote fail" , t.toString())
             }
-        }
 
+            override fun onResponse(call: Call<GetLastVoteHomeResponse>, response: Response<GetLastVoteHomeResponse>) {
+                if(response.isSuccessful) {
+                    Log.e("status",response.body()!!.status.toString())
+                    if (response.body()!!.status == 200) {
+                        var tmp: ArrayList<LastVoteHomeData> = response.body()!!.data
+                        Log.e("data",tmp[0].title)
+
+                        frag_home_vp_clsd.run {
+                            adapter = BasePagerAdapter(fragmentManager!!).apply {
+                                for (i in tmp.indices)
+                                    addFragment(ClosedVoteFragment.newInstance(tmp[i]))
+                            }
+                        }
+
+                    }
+                }
+            }
+        })
     }
 
     private fun downKeyboard(view: View) {
@@ -172,8 +214,8 @@ class HomeFragment: Fragment() {
 
         // TODO: todayCreatorRankData 넣기!
 
-        for (i in 1..10) {
-            val item = CurrentRankData("$i", "항목$i")
+        for (i in 0..todayCreatorRankData.size-1) {
+            val item = CurrentRankData((todayCreatorRankData[i].ranking).toString(), todayCreatorRankData[i].creatorName)
             items.add(item)
         }
         val adapter = RankRecyclerViewAdapter(items)
@@ -191,20 +233,20 @@ class HomeFragment: Fragment() {
                 Log.e("creator search fail",t.toString())
             }
             override fun onResponse(call: Call<GetCreatorTodayHotRank>, response: Response<GetCreatorTodayHotRank>) {
+
                 if(response.isSuccessful){
+
                     if(response.body()!!.status == 200){
                         todayCreatorRankData = response.body()!!.data
-
-                        Log.e("homefragment:",todayCreatorRankData[0].creatorName)
                         var todayCreatorRankTopData : ArrayList<CreatorData> = ArrayList(5)
                         var todayCreatorRankBottomData: ArrayList<CreatorData> = ArrayList(5)
 
                         var index = 0
                         for(i in 0 ..4)
                             todayCreatorRankTopData.add(todayCreatorRankData[index++])
-                        for(i in 0 ..2)
+                        for(i in 0 ..4) {
                             todayCreatorRankBottomData.add(todayCreatorRankData[index++])
-
+                        }
                         rootView.fragment_home_vp_today_rank.run {
                             adapter = BasePagerAdapter(fragmentManager!!).apply {
 
@@ -232,6 +274,8 @@ class HomeFragment: Fragment() {
                                     navigationLayout.findViewById(R.id.fragment_home_today_rank_navi_bottom) as RelativeLayout
                             }
                         }
+
+                        initVScrollLayout()
                     }
                 }
             }
@@ -239,7 +283,7 @@ class HomeFragment: Fragment() {
     }
 
     // post networking
-    private fun getCommunityResponse() {
+    fun getCommunityResponse() {
 
         // TODO: 가희한테 말해서 getCommunitySmallPosts로 이름 바꾸기 (new나 hot이 들어가지 않도록)
         val getCommunitySmallHotPosts : Call<GetCommunitySmallNewPostResponse> = communityNetworkService.getCommunitySmallHotPosts()
@@ -306,6 +350,5 @@ class HomeFragment: Fragment() {
             }
         })
     }
-
 
 }

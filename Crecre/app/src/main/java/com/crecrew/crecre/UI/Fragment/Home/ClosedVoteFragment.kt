@@ -8,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.crecrew.crecre.Data.LastVoteData
+import com.crecrew.crecre.Data.LastVoteHomeData
 import com.crecrew.crecre.R
+import kotlinx.android.synthetic.main.fragment_clsd_vote.*
 import kotlinx.android.synthetic.main.fragment_clsd_vote.view.*
 
 class ClosedVoteFragment : Fragment() {
     lateinit var rootView: View
-    var lastVoteData: LastVoteData? = null
+    var lastVoteData: LastVoteHomeData? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_clsd_vote, container, false)
         return rootView
@@ -26,43 +27,32 @@ class ClosedVoteFragment : Fragment() {
         lastVoteData?.let {
             rootView.run {
                 Glide.with(this@ClosedVoteFragment)
-                    .load(it.image)
+                    .load(it.thumbnail_url)
                     .into(frag_clsd_vote_iv_img)
 
-                //Log.e("profile",lastVoteData.profile)
-
-                if (it.profile == "") {
+                if (it.profile_url.equals("")) {
                     Glide.with(this@ClosedVoteFragment)
                         .load(R.drawable.icn_profile)
                         .into(frag_clsd_vote_iv_profile)
                 } else {
                     Glide.with(this@ClosedVoteFragment)
-                        .load(it.image)
+                        .load(it.profile_url).apply(RequestOptions().circleCrop())
                         .into(frag_clsd_vote_iv_img)
                 }
-                Log.e("profile", it.profile)
 
-                if (it.profile == "") {
-                    Glide.with(this@ClosedVoteFragment)
-                        .load(R.drawable.icn_profile)
-                        .into(frag_clsd_vote_iv_profile)
-                } else {
-                    Glide.with(this@ClosedVoteFragment)
-                        .load(it.profile)
-                        .apply(RequestOptions().circleCrop())
-                        .into(frag_clsd_vote_iv_profile)
+
                 }
-                frag_clsd_vote_tv_name.text = it.creator
-                frag_clsd_vote_tv_rank.text = "${it.ranking}등"
-                frag_clsd_vote_tv_title.text = it.content
+                frag_clsd_vote_tv_name.text = it.choice_name
+                frag_clsd_vote_tv_rank.text = "1등"
+                frag_clsd_vote_tv_title.text = it.title
             }
         }
-    }
+
 
     companion object {
         private val TAG = "ClosedVoteFragment"
 
-        fun newInstance(data: LastVoteData): ClosedVoteFragment {
+        fun newInstance(data: LastVoteHomeData): ClosedVoteFragment {
             val frg = ClosedVoteFragment()
             frg.lastVoteData = data
             return frg

@@ -26,6 +26,7 @@ class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<GetVoteEndData>) 
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
+
         if (dataList[position].thumbnail_url != null){
             Glide.with(ctx)
                 .load(dataList[position].thumbnail_url)
@@ -34,61 +35,67 @@ class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<GetVoteEndData>) 
 
         // Todo: choice의 개수에 따라 처리
 
-        if (dataList[position].choices[0].creator_profile_url!= null || dataList[position].choices[0].creator_profile_url.equals("")==false ) {
+
+        if (dataList[position].choices.size >= 1) {
             Glide.with(ctx)
                 .load(dataList[position].choices[0].creator_profile_url)
                 .apply(RequestOptions().circleCrop()).into(holder.img_item1)
-        }
-        if (dataList[position].choices[1].creator_profile_url != null){
-            Glide.with(ctx)
-                .load(dataList[position].choices[1].creator_profile_url)
-                .apply(RequestOptions().circleCrop()).into(holder.img_item2)
-        }
+            holder.txt_itemname1.text = dataList[position].choices[0].name
+            holder.txt_votenum1.text = "${dataList[position].choices[0].count}표"
+            holder.txt_rank1.text = "${dataList[position].choices[0].rank}등"
 
-
-        if (dataList[position].choices.size >= 3) {
-            Glide.with(ctx)
-                .load(dataList[position].choices[2].creator_profile_url)
-                .apply(RequestOptions().circleCrop()).into(holder.img_item3)
-            holder.txt_itemname3.text = dataList[position].choices[2].name
-            holder.txt_votenum3.text = "${8}표"
-            holder.txt_rank3.text = "3등"
-
-            if (dataList[position].choices.size >= 4) {
+            if (dataList[position].choices.size >= 2) {
                 Glide.with(ctx)
-                    .load(dataList[position].choices[3].creator_profile_url)
-                    .apply(RequestOptions().circleCrop()).into(holder.img_item4)
-                holder.txt_itemname4.text = dataList[position].choices[3].name
-                holder.txt_votenum4.text = "${11}표"
-                holder.txt_rank4.text = "4등"
+                    .load(dataList[position].choices[1].creator_profile_url)
+                    .apply(RequestOptions().circleCrop()).into(holder.img_item2)
+                holder.txt_itemname2.text = dataList[position].choices[1].name
+                holder.txt_votenum2.text = "${dataList[position].choices[1].count}표"
+                holder.txt_rank2.text = "${dataList[position].choices[1].rank}등"
 
-                if (dataList[position].choices.size >= 5) {
+                if (dataList[position].choices.size >= 3) {
                     Glide.with(ctx)
-                        .load(dataList[position].choices[4].creator_profile_url)
-                        .apply(RequestOptions().circleCrop()).into(holder.img_item5)
-                    holder.txt_itemname5.text = dataList[position].choices[4].name
-                    holder.txt_votenum5.text = "${99}표"
-                    holder.txt_rank5.text = "5등"
+                        .load(dataList[position].choices[2].creator_profile_url)
+                        .apply(RequestOptions().circleCrop()).into(holder.img_item3)
+                    holder.txt_itemname3.text = dataList[position].choices[2].name
+                    holder.txt_votenum3.text = "${dataList[position].choices[2].count}표"
+                    holder.txt_rank3.text = "${dataList[position].choices[2].rank}등"
+
+                    if (dataList[position].choices.size >= 4) {
+                        Glide.with(ctx)
+                            .load(dataList[position].choices[3].creator_profile_url)
+                            .apply(RequestOptions().circleCrop()).into(holder.img_item4)
+                        holder.txt_itemname4.text = dataList[position].choices[3].name
+                        holder.txt_votenum4.text = "${dataList[position].choices[3].count}표"
+                        holder.txt_rank4.text = "${dataList[position].choices[3].rank}등"
+
+                        if (dataList[position].choices.size >= 5) {
+                            Glide.with(ctx)
+                                .load(dataList[position].choices[4].creator_profile_url)
+                                .apply(RequestOptions().circleCrop()).into(holder.img_item5)
+                            holder.txt_itemname5.text = dataList[position].choices[4].name
+                            holder.txt_votenum5.text = "${dataList[position].choices[4].count}표"
+                            holder.txt_rank5.text = "${dataList[position].choices[4].rank}등"
+                        } else {
+                            holder.li5.setVisibility(View.GONE)
+                        }
+                    } else {
+                        holder.li5.setVisibility(View.GONE)
+                        holder.li4.setVisibility(View.GONE)
+                    }
                 } else {
                     holder.li5.setVisibility(View.GONE)
+                    holder.li4.setVisibility(View.GONE)
+                    holder.li3.setVisibility(View.GONE)
                 }
             } else {
                 holder.li5.setVisibility(View.GONE)
                 holder.li4.setVisibility(View.GONE)
+                holder.li3.setVisibility(View.GONE)
+                holder.li2.setVisibility(View.GONE)
             }
-        } else {
-            holder.li5.setVisibility(View.GONE)
-            holder.li4.setVisibility(View.GONE)
-            holder.li3.setVisibility(View.GONE)
         }
         holder.title.text = dataList[position].title
         holder.explain.text = dataList[position].contents
-        //holder.txt_itemname1.text = dataList[position].choices[0].name
-        //holder.txt_itemname2.text = dataList[position].choices[1].name
-        holder.txt_votenum1.text = "${4}표"
-        holder.txt_votenum2.text = "${5}표"
-        holder.txt_rank1.text = "1등"
-        holder.txt_rank2.text = "2등"
 
     }
 
