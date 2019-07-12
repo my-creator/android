@@ -102,6 +102,7 @@ class LoginActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     if (response.body()!!.status == 200) {
                         SharedPreferenceController.setUserToken(applicationContext, response.body()!!.data.token.token)
+
                         startActivity<MainActivity>()
                     }else if(response.body()!!.status == 400){
                         Log.e("message",response.body()!!.message)

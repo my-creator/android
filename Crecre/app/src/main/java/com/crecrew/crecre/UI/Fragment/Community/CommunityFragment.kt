@@ -1,5 +1,6 @@
 package com.crecrew.crecre.UI.Fragment.Community
 
+import android.app.Application
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -8,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
+import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.Get.CommunityBoardData
 import com.crecrew.crecre.Network.Get.GetCommunityUnlikeBoardsResponse
@@ -17,8 +19,11 @@ import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Activity.Community.CommunitySearchActivity
 import com.crecrew.crecre.UI.Adapter.CommunityFavoriteRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.CommunityPostFragmentAdapter
+import com.crecrew.crecre.utils.ApplicationData
 import kotlinx.android.synthetic.main.fragment_community.*
 import kotlinx.android.synthetic.main.fragment_community.view.*
+import org.jetbrains.anko.ctx
+import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -40,6 +45,9 @@ class CommunityFragment : Fragment(), CommunityFavoriteRecyclerViewAdapter.OnIte
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_community, container, false)
+
+        ApplicationData.auth =SharedPreferenceController.getUserToken(activity!!)
+        Log.v("login_token", ApplicationData.auth)
 
         //검색버튼을 눌렀을때
         rootView.btn_search_community_frag.setOnClickListener() {
@@ -161,7 +169,7 @@ class CommunityFragment : Fragment(), CommunityFavoriteRecyclerViewAdapter.OnIte
         if (isFavorite) {
 
             getBoardResponse =
-                communityNetworkService.getCommunityLikeBoards("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw")
+                communityNetworkService.getCommunityLikeBoards(ApplicationData.auth)
             getBoardResponse.enqueue(object : Callback<GetCommunityUnlikeBoardsResponse> {
                 override fun onFailure(call: Call<GetCommunityUnlikeBoardsResponse>, t: Throwable) {
                     Log.e("즐겨찾기나 아닌거나 list fail", t.toString())
@@ -192,7 +200,7 @@ class CommunityFragment : Fragment(), CommunityFavoriteRecyclerViewAdapter.OnIte
             }
 
             getBoardResponse =
-                communityNetworkService.getCommunityUnlikeBoards("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6MTIsImdyYWRlIjoiQURNSU4iLCJuYW1lIjoi66qF64uk7JewIiwiaWF0IjoxNTYyNDIzOTUyLCJleHAiOjE1NjM2MzM1NTIsImlzcyI6InlhbmcifQ.DbGROLSRyAm_NN1qcQ5sLmjxKpUACyMsFQRiDd2z3Lw")
+                communityNetworkService.getCommunityUnlikeBoards(ApplicationData.auth)
             getBoardResponse.enqueue(object : Callback<GetCommunityUnlikeBoardsResponse> {
                 override fun onFailure(call: Call<GetCommunityUnlikeBoardsResponse>, t: Throwable) {
                     Log.e("즐겨찾기나 아닌거나 list fail", t.toString())
