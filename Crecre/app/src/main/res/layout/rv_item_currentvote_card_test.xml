@@ -26,25 +26,15 @@
                     android:layout_height="212dp"
                     android:id="@+id/rl_test"
             >
-                <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                >
-                    <ImageView
-                            android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:id="@+id/card_main_image_test"
-                            android:src="@drawable/logo"
-                            android:layout_alignParentTop="true"
-                            android:scaleType="fitXY"
-                            android:background="@drawable/background_vote_mainimg"
-                    />
-                    <View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="#ccffffff"
-                    />
-                </RelativeLayout>
+                <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:id="@+id/card_main_image_test"
+                        android:src="@drawable/logo"
+                        android:layout_alignParentTop="true"
+                        android:scaleType="fitXY"
+                        android:background="@drawable/background_vote_mainimg"
+                />
                 <ImageView
                         android:id="@+id/rv_item_current_card_stamp_test"
                         android:layout_width="120dp"
@@ -110,8 +100,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:layout_marginTop="12dp"
-                    android:layout_marginStart="16dp"
                     android:layout_marginBottom="12dp"
+                    android:layout_marginHorizontal="16dp"
                     android:text="# 이 투표에 대한 운영자의 서브 설명"
                     app:lineHeight="18sp"
                     android:textColor="#1c1c1c"
@@ -122,7 +112,9 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginBottom="8dp"
                     android:background="#e0e0e0"/>
-            <LinearLayout
+
+
+            <!--<LinearLayout
                     android:id="@+id/ll1_test"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
@@ -395,7 +387,27 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginEnd="16dp"
                 />
-            </LinearLayout>
+            </LinearLayout>-->
+
+            <TextView
+                    android:id="@+id/rv_item_vote_title_test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_marginTop="11dp"
+                    android:text="템플스테이 묵언수행하면 가장 먼저 탈락할 것 같은 유튜버는?"
+                    app:lineHeight="24sp"
+                    android:layout_marginHorizontal="16dp"
+                    android:fontFamily="@font/noto_sans_kr_regular"
+                    android:textColor="#1c1c1c"
+                    android:layout_alignParentStart="true"/>
+            <android.support.v7.widget.RecyclerView
+                    android:layout_marginHorizontal="16dp"
+                    android:id="@+id/rv_item_currenvote_card_test_choice_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
 
             <TextView
                     android:id="@+id/lets_vote_test"
@@ -408,7 +420,7 @@
                     android:text="투표하기"
                     android:textSize="16sp"
                     android:lineHeight="24sp"
-                    android:textColor="#aaaaaa"
+                    android:textColor="@drawable/signup_duplicate_check_text_selector"
                     android:gravity="center"
                     android:fontFamily="@font/noto_sans_kr_medium"
             />

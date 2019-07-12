@@ -3,6 +3,8 @@ package com.crecrew.crecre.Network
 import com.crecrew.crecre.Network.Get.*
 import com.crecrew.crecre.Network.Post.PostCommunityFavoriteLikeResponse
 import com.google.gson.JsonObject
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -144,10 +146,31 @@ interface CommunityNetworkService {
         @Path("postIdx") postIdx : Int
     ) : Call<GetPostReplyResponse>
 
+    //댓글 작성
     @POST("replies/")
     fun postCommentReply(
         @Header("token") token : String,
         @Body() body : JsonObject
     ) : Call<PostCommunityFavoriteLikeResponse>
+
+    //게시글 삭제
+    @DELETE("posts/{postIdx}")
+    fun deletePostComments(
+        @Header("token") token : String,
+        @Path("postIdx") postIdx : Int
+    ) : Call<PostCommunityFavoriteLikeResponse>
+
+    //게시글 작성
+    @Multipart
+    @POST("posts")
+    fun postPostContentsWrite(
+        @Header("token") token : String,
+        @Part("boardIdx") boardIdx : Int,
+        @Part("is_anonymous") is_anonymous : Int,
+        @Part("title") title: RequestBody,
+        @Part("contents") contents : RequestBody,
+        @Part imgs : MultipartBody.Part?
+    ):Call<PostCommunityFavoriteLikeResponse>
+
 
 }

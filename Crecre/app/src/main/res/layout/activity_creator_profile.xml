@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
         <LinearLayout
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
@@ -19,7 +19,8 @@
             <RelativeLayout
                     android:id="@+id/activity_creator_profile_container"
                     android:layout_width="match_parent"
-                    android:layout_height="300dp" android:layout_alignParentStart="true">
+                    android:layout_height="300dp"
+                    android:layout_alignParentStart="true">
 
                 <ImageView
                         android:id="@+id/activity_creator_profile_btn_back"
@@ -32,44 +33,46 @@
 
                 <ImageView
                         android:id="@+id/profile_creator_all_class"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="176dp"
+                        android:layout_height="216dp"
                         android:layout_marginTop="16dp"
+                        android:layout_centerHorizontal="true"/>
+                <ImageView
+                        android:id="@+id/profile_creator_main_img"
+                        android:layout_width="128dp"
+                        android:layout_height="128dp"
                         android:layout_centerHorizontal="true"
-                        android:src="@drawable/icn_allclass6"/>
+                        android:layout_marginTop="79dp"
 
-                <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true">
+                />
+
+
 
                     <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginBottom="16dp"
+                            android:orientation="horizontal"
                             android:layout_centerHorizontal="true"
-                            android:orientation="horizontal">
+                            android:layout_marginTop="243dp">
 
-                        <ImageView
-                                android:id="@+id/profile_creator_rank"
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@drawable/icn_rank6"/>
+                    <ImageView
+                            android:id="@+id/profile_creator_rank"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginRight="8dp"/>
 
-                        <TextView
-
-                                android:id="@+id/profile_creator_channel"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="백종원의 요리교실"
-                                android:textSize="20sp"
-                                android:fontFamily="@font/noto_sans_kr_bold"
-                                android:layout_gravity="center"
-                                android:textColor="@color/black"
-                                android:layout_marginLeft="8dp"/>
-
+                    <TextView
+                            android:id="@+id/profile_creator_channel"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:fontFamily="@font/noto_sans_kr_bold"
+                            android:layout_marginVertical="6dp"
+                            android:textColor="@color/black"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="249dp"/>
                     </LinearLayout>
-                </RelativeLayout>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -81,8 +84,7 @@
                             android:layout_width="320dp"
                             android:layout_height="40dp"
                             android:layout_centerInParent="true"
-                            android:background="@drawable/profile_go_community"
-                    />
+                            android:background="@drawable/profile_go_community"/>
 
                     <TextView
                             android:layout_width="wrap_content"
@@ -112,7 +114,7 @@
                             android:layout_centerHorizontal="true"
                             android:textColor="@color/brownish_grey"/>
                     <TextView
-                            android:text="먹방 2위"
+                            android:id="@+id/creator_profile_category"
                             android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -143,7 +145,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:textColor="@color/brownish_grey"/>
                         <TextView
-                                android:text="302명"
+                                android:id="@+id/profile_follower_cnt"
                                 android:textSize="16sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -163,14 +165,14 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1">
                     <TextView
-                            android:text="구독자"
+                           android:text="구독자"
                             android:textSize="14sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true"
                             android:textColor="@color/brownish_grey"/>
                     <TextView
-                            android:text="1,999,131명"
+                            android:id="@+id/youtube_subscriber_cnt"
                             android:textSize="16sp"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -201,7 +203,7 @@
                                 android:layout_centerHorizontal="true"
                                 android:textColor="@color/brownish_grey"/>
                         <TextView
-                                android:text="30,635,258명"
+                                android:id="@+id/youtube_view_cnt"
                                 android:textSize="16sp"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -266,9 +268,15 @@
                                     android:layout_width="144dp"
                                     android:layout_height="144dp">
                                     <ProgressBar
-                                            android:layout_width="100dp"
-                                            android:layout_height="100dp"
-                                            android:layout_centerInParent="true"/>
+                                            android:id="@+id/activity_creator_profile_rank_bar"
+                                            style="?android:progressBarStyleHorizontal"
+                                            android:layout_width="120dp"
+                                            android:layout_height="120dp"
+                                            android:progress="20"
+                                            android:layout_centerInParent="true"
+                                            android:progressDrawable="@drawable/activity_creator_profile_progressbar"
+                                    />
+
                             </RelativeLayout>
                             <RelativeLayout
                                     android:layout_width="wrap_content"
@@ -283,9 +291,9 @@
                                             android:layout_marginTop="26dp"
                                             android:fontFamily="@font/noto_sans_kr_medium"/>
                                     <TextView
+                                            android:id="@+id/activity_creator_profile_rank_tier"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="마스터 5"
                                             android:textSize="16sp"
                                             android:layout_marginTop="45dp"
                                             android:textColor="@color/black"
@@ -341,9 +349,12 @@
                                 android:layout_width="144dp"
                                 android:layout_height="144dp">
                                 <ProgressBar
-                                    android:layout_width="100dp"
-                                    android:layout_height="100dp"
-                                    android:layout_centerInParent="true"/>
+                                    android:id="@+id/activity_creator_profile_class_bar"
+                                    android:layout_width="120dp"
+                                    android:layout_height="120dp"
+                                    android:progress="30"
+                                    android:layout_centerInParent="true"
+                                    android:progressDrawable="@drawable/activity_creator_profile_progressbar"/>
                         </RelativeLayout>
                         <RelativeLayout
                                 android:layout_width="wrap_content"

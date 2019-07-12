@@ -1,5 +1,4 @@
 @file:Suppress("UNREACHABLE_CODE")
-
 package com.crecrew.crecre.UI.Adapter
 
 import android.content.Context
@@ -37,6 +36,7 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
         var title = itemView.findViewById(R.id.rv_item_vote_title_test) as TextView
         var explain = itemView.findViewById(R.id.rv_item_vote_explain_test) as TextView
         //개별 아이템들ㅇㅇ
+         /*
         var img_item1 = itemView.findViewById(R.id.item_img1_test) as ImageView
         var img_item2 = itemView.findViewById(R.id.item_img2_test) as ImageView
         var img_item3 = itemView.findViewById(R.id.item_img3_test) as ImageView
@@ -67,20 +67,14 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
         var line2 = itemView.findViewById(R.id.ll2_test) as LinearLayout
         var line3 = itemView.findViewById(R.id.ll3_test) as LinearLayout
         var line4 = itemView.findViewById(R.id.ll4_test) as LinearLayout
-        var line5 = itemView.findViewById(R.id.ll5_test) as LinearLayout
+        var line5 = itemView.findViewById(R.id.ll5_test) as LinearLayout*/
         var letsVote = itemView.findViewById(R.id.lets_vote_test) as TextView
 
-        var imgItemList : ArrayList<ImageView> = arrayListOf(img_item1,img_item2,img_item3,img_item4,img_item5)
-        var txtItemList : ArrayList<TextView> = arrayListOf(txt_votenum1,txt_votenum2,txt_votenum3,txt_votenum4,txt_votenum5 )
-        var txtVoteItemList : ArrayList<ImageView> = arrayListOf(img_item1,img_item2,img_item3,img_item4,img_item5)
-        var txtRankList : ArrayList<ImageView> = arrayListOf(img_item1,img_item2,img_item3,img_item4,img_item5)
-        var imageViewItemList : ArrayList<ImageView> = arrayListOf(img_item1,img_item2,img_item3,img_item4,img_item5)
-        var lineList : ArrayList<ImageView> = arrayListOf(img_item1,img_item2,img_item3,img_item4,img_item5)
 
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): VoteTestAdapter.Holder {
-        val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_currentvote_card_test, p0, false)
+        val view:View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_currentvote_card_test, p0, false)
         return Holder(view)
     }
 
@@ -89,57 +83,26 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        var x:Int=2
-        var y = dataList[position].choices.size
-        if (dataList[position].thumbnail_url != null) {
-            Glide.with(ctx)
-                .load(dataList[position].thumbnail_url)
-                .into(holder.img_thumnail)
-            holder.img_thumnail.scaleType = ImageView.ScaleType.CENTER_CROP
-        }
 
-        for(choice in dataList[position].choices){
-            Glide.with(ctx)
-                .load(choice.creator_profile_url)
-                .apply(RequestOptions().circleCrop()).into(holder.img_item1)
-        }
-
-        /*if (dataList[position].choices[0].creator_profile_url != null) {
-            Glide.with(ctx)
-                .load(dataList[position].choices[0].creator_profile_url)
-                .apply(RequestOptions().circleCrop()).into(holder.img_item1)
-        } else holder.img_item1.setVisibility(View.GONE)
-
-        if (dataList[position].choices[1].creator_profile_url != null) {
-            Glide.with(ctx)
-                .load(dataList[position].choices[1].creator_profile_url)
-                .apply(RequestOptions().circleCrop()).into(holder.img_item2)
-        } else holder.img_item2.setVisibility(View.GONE)*/
-
-        if (dataList[position].choices.size >=3 ){
-
-            /*if (dataList[position].choices[2].creator_profile_url != null) {
-                Glide.with(ctx)
-                    .load(dataList[position].choices[2].creator_profile_url)
-                    .apply(RequestOptions().circleCrop()).into(holder.img_item3)
-            } else holder.img_item3.setVisibility(View.GONE)*/
-
-            if (dataList[position].choices.size >= 4){
-                if (dataList[position].choices[3].creator_profile_url != null) {
-                    Glide.with(ctx)
-                        .load(dataList[position].choices[3].creator_profile_url)
-                        .apply(RequestOptions().circleCrop()).into(holder.img_item4)
-                } else holder.img_item4.setVisibility(View.GONE)
-
-                if (dataList[position].choices.size == 5){
-                    if (dataList[position].choices.size >= 5 && dataList[position].choices[4].creator_profile_url != null) {
-                        Glide.with(ctx)
-                            .load(dataList[position].choices[4].creator_profile_url)
-                            .apply(RequestOptions().circleCrop()).into(holder.img_item5)
-                    } else holder.img_item5.setVisibility(View.GONE)
-                }
-            }
-        }
+        Glide.with(ctx)
+            .load(dataList[position].thumbnail_url)
+            .into(holder.img_thumnail)
+        /*
+        Glide.with(ctx)
+            .load(dataList[position].itemimg1)
+            .apply(RequestOptions().circleCrop()).into(holder.img_item1)
+        Glide.with(ctx)
+            .load(dataList[position].itemimg2)
+            .apply(RequestOptions().circleCrop()).into(holder.img_item2)
+        Glide.with(ctx)
+            .load(dataList[position].itemimg3)
+            .apply(RequestOptions().circleCrop()).into(holder.img_item3)
+        Glide.with(ctx)
+            .load(dataList[position].itemimg4)
+            .apply(RequestOptions().circleCrop()).into(holder.img_item4)
+        Glide.with(ctx)
+            .load(dataList[position].itemimg5)
+            .apply(RequestOptions().circleCrop()).into(holder.img_item5)
 
         holder.title.text = dataList[position].title
         if (dataList[position].contents != null) {
@@ -292,23 +255,9 @@ class VoteTestAdapter(val ctx: Context, val dataList: ArrayList<VoteTestData>) :
 
             //if (dataList[position].my_choice == dataList[position].choices[0])
         }
+        */
 
     }
-    fun postVoteResponse(x:Int, y:Int){
-        //var jsonObject: JSONObject
-       /* var jsonObject: JSONObject()
-        //jsonObject.put("token","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6OSwiZ3JhZGUiOiJBRE1JTiIsIm5hbWUiOiJjcmVjcmUiLCJpYXQiOjE1NjI4NTAwMDgsImV4cCI6MTU2NDA1OTYwOCwiaXNzIjoieWFuZyJ9.hxJxPliUE0puOrDvUpSibnIZUyn7sdR6az0Amg-uR8o")
-        //jsonObject.put("voteIdx", x)
-        jsonObject.put("choiceidx",y)
-
-        val gsonObject = JsonParser().parse(jsonObject.toString()) as JsonObject
-
-        val postVoteResponse: Call<PostVoteChoiceResponse> =
-            VoteNetworkService.postVoteResponse
-        //("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkeCI6OSwiZ3JhZGUiOiJBRE1JTiIsIm5hbWUiOiJjcmVjcmUiLCJpYXQiOjE1NjI4NTAwMDgsImV4cCI6MTU2NDA1OTYwOCwiaXNzIjoieWFuZyJ9.hxJxPliUE0puOrDvUpSibnIZUyn7sdR6az0Amg-uR8o", gsonObject)
-        //postVoteResponse*/
-    }
-
 }
 
 

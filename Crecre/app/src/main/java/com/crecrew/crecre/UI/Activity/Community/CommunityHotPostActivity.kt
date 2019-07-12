@@ -30,6 +30,8 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
     var user_idx = -1
     var flag = -1
     var title = ""
+    var size = -1
+    var is_anonymous = -1
 
 
     override fun onClick(v: View?) {
@@ -44,10 +46,19 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
             }
             //글 작성버튼
             writing_btn_hotpost_community_act -> {
-                startActivity<CommunityWriteActivity>()
+                startActivity<CommunityWriteActivity>("boardIdx" to board_idx)
             }
 
         }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+
+        configureTitleBar()
+        configureRecyclerView()
 
     }
 
@@ -56,8 +67,6 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_community_hot_post)
 
         init()
-        configureTitleBar()
-        configureRecyclerView()
     }
 
     private fun configureTitleBar() {
@@ -116,8 +125,9 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
                 response: Response<GetCommunitySmallNewPostResponse>
             ) {
 
+                val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+
                 if (response.isSuccessful) {
-                    val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
 
                     Log.v("community", response.message())
                     for (i in 0..temp.size - 1)
@@ -127,14 +137,11 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
                         val position = communityHotPostRecyclerViewAdapter.itemCount
                         communityHotPostRecyclerViewAdapter.dataList.addAll(temp)
                         communityHotPostRecyclerViewAdapter.notifyItemInserted(position)
-                        
-                    }
-                    //temp.size가 0일때,,, 예외처리
-                    else{
-
 
                     }
                 }
+
+
             }
         })
     }

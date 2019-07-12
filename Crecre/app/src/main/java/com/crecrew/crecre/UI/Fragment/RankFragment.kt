@@ -84,10 +84,16 @@ class RankFragment: Fragment(), View.OnClickListener{
         rootView.fragment_rank_rl_subscriber_navi.setOnClickListener(this)
         rootView.fragment_rank_rl_views_navi.setOnClickListener(this)
 
+        rootView.fragment_rank_fab.setOnClickListener(this)
+
     }
 
     override fun onClick(v: View?){
         when(v!!){
+
+            fragment_rank_fab->{
+                fragment_rank_sv_container.smoothScrollTo(0,0)
+            }
 
             fragment_rank_category_navi_all->{
                 // view 용
