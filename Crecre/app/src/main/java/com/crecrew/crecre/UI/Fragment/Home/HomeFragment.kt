@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
@@ -139,10 +140,7 @@ class HomeFragment: Fragment() {
             }
 
             fragment_home_now_vote_more.setOnClickListener {
-                var fm = fragmentManager!!.beginTransaction()
-                fm.replace(R.id.activity_main_vp_container, VoteFragment())
-                fm.commit()
-
+                // TODO: 정호한테 물어보기
             }
 
             // 다른 화면 누르면 키보드 내리고 edittext focus 삭제

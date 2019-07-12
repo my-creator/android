@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Data.VoteData
 import com.crecrew.crecre.Data.VoteTestData
@@ -57,7 +58,7 @@ class VoteListRecyclerviewAdapter(val ctx: Context, val dataList: ArrayList<Vote
         var userToken = SharedPreferenceController.getUserToken(ctx)
 
         Glide.with(ctx)
-            .load(dataList[position].thumbnail_url)
+            .load(dataList[position].thumbnail_url).apply(RequestOptions().circleCrop())
             .into(holder.img_thumnail)
 
         holder.title.text = dataList[position].title

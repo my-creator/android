@@ -17,7 +17,7 @@ class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<GetVoteEndData>) 
     RecyclerView.Adapter<VoteEndAdapter.Holder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): Holder {
-        val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_endvote_card, p0, false)
+        val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_currentvote_card, p0, false)
         return Holder(view)
     }
 
