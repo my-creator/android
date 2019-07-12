@@ -1,6 +1,7 @@
 package com.crecrew.crecre.UI.Activity
 
 import android.graphics.Color
+import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.DividerItemDecoration
@@ -9,17 +10,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.RelativeLayout
-import com.crecrew.crecre.Data.ProfileHotVideoData
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.crecrew.crecre.Base.BasePagerAdapter
-import com.crecrew.crecre.Data.CreatorData
-import com.crecrew.crecre.Data.CreatorProfileData
+import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CreatorNetworkService
 import com.crecrew.crecre.Network.Get.GetCreatorTodayHotRank
+import com.crecrew.crecre.Network.Get.GetProfileHotVideoResponse
 import com.crecrew.crecre.Network.Get.GetProfileResponse
+import com.crecrew.crecre.Network.Get.GetProfileStatResponse
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Adapter.ProfileHotVideoRecyclerViewAdapter
@@ -39,7 +40,6 @@ import org.jetbrains.anko.startActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.ArrayList
 
 class CreatorProfileActivity : FragmentActivity() {
 
@@ -48,9 +48,11 @@ class CreatorProfileActivity : FragmentActivity() {
     lateinit var review: TextView
     lateinit var mChart: RadarChart
 
-    val testItem = arrayListOf<String>("진행능력", "소통력", "참신성", "편집력", "핫 지수")
+    //"진행능력", "소통력", "참신성", "편집력", "핫 지수"
+    // val testItem = arrayListOf<String>("진행능력", "소통력", "참신성", "편집력", "핫 지수")
 
     lateinit var creatorProfileData : CreatorProfileData
+    lateinit var statData: StatData
 
     val creatorNetworkService: CreatorNetworkService by lazy{
         ApplicationController.instance.creatorNetworkService
@@ -59,42 +61,37 @@ class CreatorProfileActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_creator_profile)
-        configureRecyclerView()
 
-
-        var creator_idx = 4366
+        var creator_idx = 5123
 
         getProfileResponse(creator_idx)
+        getProfileStatResponse(creator_idx)
         val intent = intent
         val creator_name = intent.getStringExtra("creator_name")
 
-        activity_creator_profile_btn_go_fanpage.setOnClickListener{
+        activity_creator_profile_btn_go_fanpage.setOnClickListener {
             startActivity<CommunityHotPostActivity>()
         }
 
-        activity_creator_profile_btn_join_stat.setOnClickListener{
+        activity_creator_profile_btn_join_stat.setOnClickListener {
             startActivity<ProfileJoinStatActivity>()
         }
 
-        activity_creator_profile_btn_back.setOnClickListener{
+        activity_creator_profile_btn_back.setOnClickListener {
             finish()
         }
         // activity_creator_profile_tv_name.setText(creator_name)
-        activity_creator_profile_btn_rank_question.setOnClickListener{
+        activity_creator_profile_btn_rank_question.setOnClickListener {
             startActivity<ProfileRankQuestionActivity>()
         }
 
-        activity_creator_profile_btn_class_question.setOnClickListener{
+        activity_creator_profile_btn_class_question.setOnClickListener {
             startActivity<ProfileClassQuestionActivity>()
         }
 
+    }
 
-        review = activity_creator_profile_review_number
-        total = activity_creator_profile_total
-
-        val fontReguler = total.typeface
-
-        total.setTextColor(Color.rgb(51, 51, 51))
+    fun makeGraph(testItem : ArrayList<String>){
 
         mChart = activity_creator_profile_rc_chart
         mChart.run {
@@ -131,7 +128,7 @@ class CreatorProfileActivity : FragmentActivity() {
 
         val data = RadarData(sets)
         data.run {
-            setValueTypeface(fontReguler)
+            setValueTypeface(Typeface.DEFAULT)
             setValueTextSize(8f)
             setDrawValues(false)
             setValueTextColor(Color.WHITE)
@@ -141,14 +138,14 @@ class CreatorProfileActivity : FragmentActivity() {
         mChart.data = data
         mChart.invalidate()
 
-        total.text = "토탈${dataSetAvg(entries1)}점"
-        review.text = "(192명 리뷰)"
+        // total.text = "토탈${dataSetAvg(entries1)}점"
+        // review.text = "(192명 리뷰)"
 
         mChart.animateXY(1400, 1400, Easing.EaseInOutQuad)
 
         mChart.run {
             xAxis.run {
-                typeface = fontReguler
+                typeface = Typeface.DEFAULT
                 textSize = 14f
                 yOffset = 0f
                 xOffset = 0f
@@ -179,6 +176,7 @@ class CreatorProfileActivity : FragmentActivity() {
         }
     }
 
+
     private fun getProfileResponse(creatorIdx: Int){
         val getProfileResponse = creatorNetworkService.getProfileResponse(creatorIdx)
         getProfileResponse.enqueue(object : Callback<GetProfileResponse> {
@@ -199,11 +197,18 @@ class CreatorProfileActivity : FragmentActivity() {
                         youtube_subscriber_cnt.text = String.format("%,d",creatorProfileData.youtube_subscriber_cnt) + "명"
                         youtube_view_cnt.text = String.format("%,d",creatorProfileData.youtube_view_cnt) + "명"
                         activity_creator_profile_description.text = creatorProfileData.contents
+                        Glide.with(this@CreatorProfileActivity).load(creatorProfileData.follower_grade_img_url).into(activity_creator_profile_rank_img)
+                        Glide.with(this@CreatorProfileActivity).load(creatorProfileData.view_grade_img_url).into(activity_creator_profile_class_img)
                         activity_creator_profile_rank_tier.text = creatorProfileData.follower_grade_name + " " + creatorProfileData.follower_grade_level
-
-
-
-
+                        activity_creator_profile_rank_percent.text = creatorProfileData.follower_grade_percent.toString() + "%"
+                        activity_creator_profile_front_rank1_exp.text = "(" + creatorProfileData.front_lank_exp.toString()
+                        activity_creator_profile_back_rank1_exp.text = "/" + creatorProfileData.back_lank_exp.toString() + ")"
+                        activity_creator_profile_class_tier.text = "클래스 " + creatorProfileData.view_grade_name
+                        activity_creator_profile_class_percentage.text = creatorProfileData.view_grade_percent.toString() + "%"
+                        activity_creator_profile_front_rank2_exp.text = "(" + creatorProfileData.front_lank2_exp.toString()
+                        activity_creator_profile_back_rank2_exp.text = "/" + creatorProfileData.back_lank2_exp.toString() + ")"
+                        circularProgressbar1.progress = creatorProfileData.follower_grade_percent
+                        circularProgressbar2.progress = creatorProfileData.view_grade_percent
                     }
                 }
             }
@@ -212,30 +217,60 @@ class CreatorProfileActivity : FragmentActivity() {
         }
 
 
+    private fun getProfileStatResponse(creatorIdx: Int){
+        val getProfileStatResponse = creatorNetworkService.getProfileStatResponse(creatorIdx)
+        getProfileStatResponse.enqueue(object : Callback<GetProfileStatResponse> {
+            override fun onFailure(call : Call<GetProfileStatResponse>, t: Throwable) {
+                Log.e("creator search fail", t.toString())
+            }
+            override fun onResponse(call: Call<GetProfileStatResponse>, response: Response<GetProfileStatResponse>){
+                if(response.isSuccessful){
+                    if(response.body()!!.status == 200){
+                        // Log.e("dfdfdf", "dfdfdf")
+                        var creatorStatData: ArrayList<StatData> = response.body()!!.data
+                        // Log.e("success", "success")
+                        activity_creator_profile_total.text = "토탈 " + String.format("%.2f", creatorStatData[5].avg_stat) + "점"
+                        activity_creator_profile_review_number.text = "(" + creatorStatData[5].join_cnt_stat.toString() + "명 리뷰)"
+                        val testItem = arrayListOf(creatorStatData[0].name, creatorStatData[1].name, creatorStatData[2].name, creatorStatData[3].name, creatorStatData[4].name)
+                        makeGraph(testItem)
+                    }
+                }
+            }
+        })
+    }
+    private fun getProfileHotVideo(creatorIdx: Int){
+        val getProfileHotVideResponse = creatorNetworkService.getProfileHotVideoResponse(creatorIdx)
+        getProfileHotVideResponse.enqueue(object : Callback<GetProfileHotVideoResponse> {
+            override fun onFailure(call: Call<GetProfileHotVideoResponse>, t: Throwable) {
+                Log.e("creator search fail", t.toString())
+            }
+            override fun onResponse(call: Call<GetProfileHotVideoResponse>, response: Response<GetProfileHotVideoResponse>){
+                if(response.isSuccessful){
+                    if(response.body()!!.status == 200){
+                        var HotVideoDatas : ArrayList<HotVideoData> = response.body()!!.data
+                        configureRecyclerView(HotVideoDatas)
+                    }
+                }
+            }
+        })
+    }
 
-    private fun configureRecyclerView(){
-        var profileHotDataList: ArrayList<ProfileHotVideoData> = ArrayList()
+    private fun configureRecyclerView(profileHotDataList : ArrayList<HotVideoData>){
 
-        profileHotDataList.add(ProfileHotVideoData(2, "대박대박 정호의 누네띄네 100개 먹방 영상", "https://www.naver.com", 1200000, "https://i.ytimg.com/vi/SzJo9QfhZg8/maxresdefault.jpg","2019-08-07 04:51","정호네식당"))
-        profileHotDataList.add(ProfileHotVideoData(4, "대박대박 시연의 좋은데이 100개 먹방 영상", "https://www.naver.com", 1000000,"https://i.ytimg.com/vi/SzJo9QfhZg8/maxresdefault.jpg","2019-10-07 04:51","시연네식당"))
-        profileHotDataList.add(ProfileHotVideoData(6, "대박대박 홍삼의 고구마간식 100개 먹방 영상", "https://www.naver.com", 120000, "https://i.ytimg.com/vi/SzJo9QfhZg8/maxresdefault.jpg","2019-07-02 04:51","홍삼네식당"))
 
+        // dfsljfsdajasdfjla;njajananagnanavnavnoananarvn
         profileHotVideoRecyclerViewAdapter = ProfileHotVideoRecyclerViewAdapter(this, profileHotDataList)
         activity_creator_profile_rv_hot_video.adapter = profileHotVideoRecyclerViewAdapter
         activity_creator_profile_rv_hot_video.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         activity_creator_profile_rv_hot_video.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         // new post
-        var profileNewDataList: ArrayList<ProfileHotVideoData> = ArrayList()
-
-        profileNewDataList.add(ProfileHotVideoData(2, "대박대박 정호의 누네띄네 100개 먹방 영상", "https://www.naver.com", 1200000, "https://i.ytimg.com/vi/SzJo9QfhZg8/maxresdefault.jpg","2019-07-07 04:51","정호네식당"))
-        profileNewDataList.add(ProfileHotVideoData(4, "대박대박 시연의 좋은데이 100개 먹방 영상", "https://www.naver.com", 1000000,"https://i.ytimg.com/vi/SzJo9QfhZg8/maxresdefault.jpg","2019-07-03 04:51","시연네식당"))
-        profileNewDataList.add(ProfileHotVideoData(6, "대박대박 홍삼의 고구마간식 100개 먹방 영상", "https://www.naver.com", 120000,"https://i.ytimg.com/vi/SzJo9QfhZg8/maxresdefault.jpg","2019-07-07 12:51","홍삼네식당"))
-
-        profileHotVideoRecyclerViewAdapter = ProfileHotVideoRecyclerViewAdapter(this, profileNewDataList)
-        activity_creator_profile_rv_new_video.adapter = profileHotVideoRecyclerViewAdapter
-        activity_creator_profile_rv_new_video.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        activity_creator_profile_rv_new_video.addItemDecoration(DividerItemDecoration(this!!, DividerItemDecoration.VERTICAL))
+//        var profileNewDataList: ArrayList<ProfileHotVideoData> = ArrayList()
+//
+//        profileHotVideoRecyclerViewAdapter = ProfileHotVideoRecyclerViewAdapter(this, profileNewDataList)
+//        activity_creator_profile_rv_new_video.adapter = profileHotVideoRecyclerViewAdapter
+//        activity_creator_profile_rv_new_video.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+//        activity_creator_profile_rv_new_video.addItemDecoration(DividerItemDecoration(this!!, DividerItemDecoration.VERTICAL))
 
     }
 
