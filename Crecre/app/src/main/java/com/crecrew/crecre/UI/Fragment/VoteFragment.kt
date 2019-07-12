@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RelativeLayout
-import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunitySearchActivity
 import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
 import com.crecrew.crecre.UI.Adapter.CommunityPostFragmentAdapter
@@ -21,6 +20,10 @@ import kotlinx.android.synthetic.main.fragment_vote_navigation.*
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.support.v4.startActivity
 
+
+
+
+
 class VoteFragment: Fragment(){
 
     private lateinit var rootView: View
@@ -29,7 +32,7 @@ class VoteFragment: Fragment(){
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
 
-        rootView = inflater.inflate(R.layout.fragment_vote, container, false)
+        rootView = inflater.inflate(com.crecrew.crecre.R.layout.fragment_vote, container, false)
 
         rootView.btn_fragment_vote_suggest.setOnClickListener() {
             startActivity<VoteSuggestActivity>()
@@ -37,7 +40,7 @@ class VoteFragment: Fragment(){
 
         return rootView
 
-        return inflater.inflate(R.layout.fragment_vote, container, false)
+        return inflater.inflate(com.crecrew.crecre.R.layout.fragment_vote, container, false)
 
     }
 
@@ -63,11 +66,31 @@ class VoteFragment: Fragment(){
 
 
         vote_tab.setupWithViewPager(vote_viewpager)
-        val topTabLayout: View = activity!!.layoutInflater.inflate(R.layout.fragment_vote_navigation, null, false)
+        val topTabLayout: View = activity!!.layoutInflater.inflate(com.crecrew.crecre.R.layout.fragment_vote_navigation, null, false)
         vote_tab.getTabAt(0)!!.customView = topTabLayout.
-            findViewById(R.id.VoteBarcontinue) as RelativeLayout
+            findViewById(com.crecrew.crecre.R.id.VoteBarcontinue) as RelativeLayout
         vote_tab.getTabAt(1)!!.customView = topTabLayout.
-            findViewById(R.id.VoteBarPast) as RelativeLayout
+            findViewById(com.crecrew.crecre.R.id.VoteBarPast) as RelativeLayout
+
+        //vote_tab.addOnTabSelectedListener()
+        vote_tab.addOnTabSelectedListener(object:TabLayout.OnTabSelectedListener{
+            @Override
+            override fun onTabSelected(p0:TabLayout.Tab?) {
+            }
+
+            @Override
+            override fun onTabUnselected(p0:TabLayout.Tab?) {
+                //p0!!.customView!!.
+            }
+
+            @Override
+            override fun onTabReselected(p0:TabLayout.Tab?) {
+
+            }
+        });
+
+    }
+
 
         //색깔 바뀌는거 해야함ㅇㅇ
         /*VoteBarcontinue.setOnClickListener{
@@ -78,8 +101,6 @@ class VoteFragment: Fragment(){
             VoteBarcontinueLetter.setTextColor(Color.parseColor("aaaaaa"))
         }*/
 
-
     }
 
 
-}

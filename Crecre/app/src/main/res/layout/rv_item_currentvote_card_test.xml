@@ -26,15 +26,25 @@
                     android:layout_height="212dp"
                     android:id="@+id/rl_test"
             >
-                <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:id="@+id/card_main_image_test"
-                        android:src="@drawable/logo"
-                        android:layout_alignParentTop="true"
-                        android:scaleType="fitXY"
-                        android:background="@drawable/background_vote_mainimg"
-                />
+                <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                >
+                    <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:id="@+id/card_main_image_test"
+                            android:src="@drawable/logo"
+                            android:layout_alignParentTop="true"
+                            android:scaleType="fitXY"
+                            android:background="@drawable/background_vote_mainimg"
+                    />
+                    <View
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="#ccffffff"
+                    />
+                </RelativeLayout>
                 <ImageView
                         android:id="@+id/rv_item_current_card_stamp_test"
                         android:layout_width="120dp"

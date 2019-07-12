@@ -14,10 +14,10 @@ import com.crecrew.crecre.Data.GetVoteEndData
 import com.crecrew.crecre.R
 
 class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<GetVoteEndData>) :
-    RecyclerView.Adapter<VoteEndAdapter.Holder>(){
+    RecyclerView.Adapter<VoteEndAdapter.Holder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): Holder {
-        val view:View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_endvote_card, p0, false)
+        val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_endvote_card, p0, false)
         return Holder(view)
     }
 
@@ -26,21 +26,27 @@ class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<GetVoteEndData>) 
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        Glide.with(ctx)
-            .load(dataList[position].thumbnail_url)
-            .into(holder.img_thumnail)
+        if (dataList[position].thumbnail_url != null){
+            Glide.with(ctx)
+                .load(dataList[position].thumbnail_url)
+                .into(holder.img_thumnail)
+        }
 
         // Todo: choice의 개수에 따라 처리
 
-        Glide.with(ctx)
-            .load(dataList[position].choices[0].creator_profile_url)
-            .apply(RequestOptions().circleCrop()).into(holder.img_item1)
-        Glide.with(ctx)
-            .load(dataList[position].choices[1].creator_profile_url)
-            .apply(RequestOptions().circleCrop()).into(holder.img_item2)
+        /*if (dataList[position].choices[0].creator_profile_url!= null || dataList[position].choices[0].creator_profile_url.equals("")==false ) {
+            Glide.with(ctx)
+                .load(dataList[position].choices[0].creator_profile_url)
+                .apply(RequestOptions().circleCrop()).into(holder.img_item1)
+        }*/
+        /*if (dataList[position].choices[1].creator_profile_url != null){
+            Glide.with(ctx)
+                .load(dataList[position].choices[1].creator_profile_url)
+                .apply(RequestOptions().circleCrop()).into(holder.img_item2)
+        }*/
 
 
-        if (dataList[position].choices.size >= 3 ){
+        if (dataList[position].choices.size >= 3) {
             Glide.with(ctx)
                 .load(dataList[position].choices[2].creator_profile_url)
                 .apply(RequestOptions().circleCrop()).into(holder.img_item3)
@@ -48,7 +54,7 @@ class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<GetVoteEndData>) 
             holder.txt_votenum3.text = "${8}표"
             holder.txt_rank3.text = "3등"
 
-            if (dataList[position].choices.size >= 4){
+            if (dataList[position].choices.size >= 4) {
                 Glide.with(ctx)
                     .load(dataList[position].choices[3].creator_profile_url)
                     .apply(RequestOptions().circleCrop()).into(holder.img_item4)
@@ -56,43 +62,37 @@ class VoteEndAdapter(val ctx: Context, val dataList: ArrayList<GetVoteEndData>) 
                 holder.txt_votenum4.text = "${11}표"
                 holder.txt_rank4.text = "4등"
 
-                if (dataList[position].choices.size >= 5){
+                if (dataList[position].choices.size >= 5) {
                     Glide.with(ctx)
                         .load(dataList[position].choices[4].creator_profile_url)
                         .apply(RequestOptions().circleCrop()).into(holder.img_item5)
                     holder.txt_itemname5.text = dataList[position].choices[4].name
                     holder.txt_votenum5.text = "${99}표"
                     holder.txt_rank5.text = "5등"
-                }
-                else{
+                } else {
                     holder.li5.setVisibility(View.GONE)
                 }
-            }
-            else{
+            } else {
                 holder.li5.setVisibility(View.GONE)
                 holder.li4.setVisibility(View.GONE)
             }
-        }
-        else{
+        } else {
             holder.li5.setVisibility(View.GONE)
             holder.li4.setVisibility(View.GONE)
             holder.li3.setVisibility(View.GONE)
         }
         holder.title.text = dataList[position].title
         holder.explain.text = dataList[position].contents
-        holder.txt_itemname1.text = dataList[position].choices[0].name
-        holder.txt_itemname2.text = dataList[position].choices[1].name
-
+        //holder.txt_itemname1.text = dataList[position].choices[0].name
+        //holder.txt_itemname2.text = dataList[position].choices[1].name
         holder.txt_votenum1.text = "${4}표"
         holder.txt_votenum2.text = "${5}표"
-
         holder.txt_rank1.text = "1등"
         holder.txt_rank2.text = "2등"
 
     }
 
-    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView)
-    {
+    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var img_thumnail = itemView.findViewById(R.id.card_main_image_end) as ImageView
         var title = itemView.findViewById(R.id.rv_item_vote_title_end) as TextView
         var explain = itemView.findViewById(R.id.rv_item_vote_explain_end) as TextView
