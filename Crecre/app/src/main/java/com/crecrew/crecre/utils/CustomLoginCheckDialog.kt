@@ -42,16 +42,16 @@ class CustomLoginCheckDialog(
 
         //##??
         if (mRightResponseClickListener != null) {
-            btn_left_custom_dialog_community_detail.setOnClickListener(mRightResponseClickListener)
+            btn_left_custom_dialog_community_logincheck.setOnClickListener(mRightResponseClickListener)
 
         } else {
-            btn_left_custom_dialog_community_detail.setOnClickListener(mRightResponseClickListener)
+            btn_left_custom_dialog_community_logincheck.setOnClickListener(mRightResponseClickListener)
         }
 
         if(mLeftResponseClickListener != null)
-            btn_right_custom_dialog_community_detail.setOnClickListener(mLeftResponseClickListener)
+            btn_right_custom_dialog_login_check.setOnClickListener(mLeftResponseClickListener)
         else
-            btn_right_custom_dialog_community_detail.setOnClickListener(mLeftResponseClickListener)
+            btn_right_custom_dialog_login_check.setOnClickListener(mLeftResponseClickListener)
     }
 }
 

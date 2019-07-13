@@ -1,20 +1,26 @@
 package com.crecrew.crecre.UI.Activity
 
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.Toast
 import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.Post.PostLoginResponse
 import com.crecrew.crecre.Network.UserNetworkService
 import com.crecrew.crecre.R
+import com.crecrew.crecre.utils.ApplicationData
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.ctx
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 import org.json.JSONObject
@@ -84,6 +90,10 @@ class LoginActivity : AppCompatActivity() {
         activity_login_txt_join.setOnClickListener {
             startActivity<SignupActivity>()
         }
+
+        rl_login_act.setOnClickListener {
+            downKeyboard(rl_login_act)
+        }
     }
 
     fun postLoginResponse(id :String, pw: String) {
@@ -107,13 +117,22 @@ class LoginActivity : AppCompatActivity() {
 
                         startActivity<MainActivity>()
                         finish()
+
                     } else if(status == 400 || status == 500){
                         toast(response.body()!!.message)
+
                         Log.e("message",response.body()!!.message)
                     }
                 }
             }
         })
+    }
+
+    //키보드 다운
+    private fun downKeyboard(view: View) {
+        val imm: InputMethodManager =
+            applicationContext!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 
 }

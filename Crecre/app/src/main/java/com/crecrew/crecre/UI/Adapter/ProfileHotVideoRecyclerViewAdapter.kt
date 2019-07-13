@@ -72,8 +72,9 @@ class ProfileHotVideoRecyclerViewAdapter(private val ctx : Context, private val 
 
     fun calculatePostTime(time : String) : String{
 
+        var new_time = time.replace("T", " ")
         val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm")
-        val write_time : Date =  sdf.parse(time)
+        val write_time : Date =  sdf.parse(new_time)
         val cur_time = Date()
 
         val diff : Long = cur_time.time - write_time.time
