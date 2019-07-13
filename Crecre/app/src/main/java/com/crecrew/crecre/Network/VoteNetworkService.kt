@@ -19,24 +19,29 @@ interface VoteNetworkService {
 
     @GET("votes/lasts")
     fun getLastVote(
+        @Header("token") token: String?
     ): Call<GetVoteEndResponse>
     // TODO: GetVoteEndResponse랑 GetVoteResponse 합치기!
 
     @GET("votes/lasts/home")
     fun getLastVoteHome(
+        @Header("token") token: String?
     ):Call<GetLastVoteHomeResponse>
 
     @GET("votes/ings/newest")
     fun getCurrentVoteHome(
+        @Header("token") token: String?
     ): Call<GetVoteHomeResponse>
 
     @GET("votes/ings")
     fun getCurrentVote(
-    ): Call<GetVoteResponse>
+        @Header("token") token: String?
+    ):Call<GetVoteResponse>
 
     @POST("votes/{voteIdx}/take")
     fun postVoteChoiceResponse(
         @Header("token") token: String,
+        @Header("Content-Type") content_type: String,
         @Body() body: JsonObject,
         @Path("voteIdx") voteIdx: Int
     ): Call<PostVoteChoiceResponse>

@@ -1,7 +1,5 @@
 package com.crecrew.crecre.Data
 
-import java.util.ArrayList
-
 data class VoteData (
     var vote_idx : Int,
     var thumbnail_url: String,
@@ -11,6 +9,7 @@ data class VoteData (
     var title: String,
     var contents: String?,
     var type: String,
-    var my_choice:Int,
-    var choices: ArrayList<VoteChoiceData>
+    var my_choice:Int?,
+    var choices: ArrayList<VoteChoiceData>,
+    var isChecked: Boolean = false
 )
