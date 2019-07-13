@@ -51,12 +51,11 @@ class ProfileHotVideoRecyclerViewAdapter(private val ctx : Context, private val 
             Glide.with(ctx).load(dataList[position].thumbnail_url).into(holder.thumbnail_url)
         holder.title.text = dataList[position].title
         holder.view_cnt.text = "조회수" + dataList[position].view_cnt.toString()
-        holder.create_time.text = calculatePostTime(dataList[position].create_time.toString())
+        dataList[position].create_time.replace("T", " ")
+        holder.create_time.text = calculatePostTime(dataList[position].create_time)
 
         holder.container.setOnClickListener {
-            ctx.startActivity<CommunityDetailActivity>(
-                // TODO: 정보 넣기
-            )
+
         }
     }
 

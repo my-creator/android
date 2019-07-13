@@ -40,11 +40,11 @@ interface CreatorNetworkService {
     @GET("creators/{creatorIdx}/newvideo/three")
     fun getProfileNewVideoResponse(
         @Path("creatorIdx") creatorIdx: Int
-    ): Call<GetProfileNewVideoResponse>
+    ): Call<GetProfileHotVideoResponse>
 
-    @GET("creators/profiles/stat/detail/{creatorIdx}")
-    fun getCreatorStatResponse(
-        @Path("creatorIdx") creatorIdx" Int
-    ): Call<GetCreatorStatResponse>
+//    @GET("creators/profiles/stat/detail/{creatorIdx}")
+//    fun getCreatorStatResponse(
+//        @Path("creatorIdx") creatorIdx" Int
+//    ): Call<GetCreatorStatResponse>
 }
 
