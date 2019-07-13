@@ -2,7 +2,6 @@ package com.crecrew.crecre.Data
 
 data class VoteItemData(
     var choice_idx :Int,
-    var vote_idx: Int,
     var name: String,
     var count: Int,
     var creator_profile_url : String,

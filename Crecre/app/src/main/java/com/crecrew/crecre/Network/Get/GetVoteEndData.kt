@@ -9,6 +9,7 @@ data class GetVoteEndData (
     var title: String,
     var contents: String,
     var type:String,
+    var my_choice:Int?,
     var is_permitted :Int, // 이거 머임 ㅇㅅㅇ
-    var choices :ArrayList<VoteItemData>
+    var choices :ArrayList<VoteChoiceData>
 )
