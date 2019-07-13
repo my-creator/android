@@ -95,7 +95,7 @@ class HomeFragment: Fragment() {
         handler.post(handlerTask)
 
         getCommunityResponse()
-        //getLastVoteResponse()
+        getLastVoteResponse()
 
         var voteCurrentFragment = VoteCurrentFragment()
         voteCurrentFragment.flag = 1

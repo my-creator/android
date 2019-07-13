@@ -32,7 +32,7 @@ interface VoteNetworkService {
 
     @GET("votes/ings")
     fun getCurrentVote(
-    ):Call<GetVoteResponse>
+    ): Call<GetVoteResponse>
 
     @POST("votes/{voteIdx}/take")
     fun postVoteChoiceResponse(

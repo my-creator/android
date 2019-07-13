@@ -67,6 +67,7 @@ class VoteCurrentFragment : Fragment() {
     fun getVoteHomeResponse() {
         val getVoteHomeResponse = voteNetworkService.getCurrentVoteHome()
         getVoteHomeResponse.enqueue(object : Callback<GetVoteHomeResponse> {
+
             override fun onFailure(call: Call<GetVoteHomeResponse>, t: Throwable) {
                 Log.e("vote response fail: ", t.toString())
             }
