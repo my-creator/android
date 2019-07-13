@@ -4,14 +4,19 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
+
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CreatorNetworkService
+import com.crecrew.crecre.Network.Get.GetProfileHotVideoResponse
 import com.crecrew.crecre.Network.Get.GetProfileResponse
 import com.crecrew.crecre.Network.Get.GetProfileStatResponse
 import com.crecrew.crecre.R
@@ -35,7 +40,7 @@ import retrofit2.Response
 
 class CreatorProfileActivity : FragmentActivity() {
 
-    lateinit var profileHotVideoRecyclerViewAdapter: ProfileHotVideoRecyclerViewAdapter
+    lateinit var profileVideoRecyclerViewAdapter: ProfileHotVideoRecyclerViewAdapter
     lateinit var total: TextView
     lateinit var review: TextView
     lateinit var mChart: RadarChart
@@ -83,11 +88,15 @@ class CreatorProfileActivity : FragmentActivity() {
         }
         makeGraph(testItem, entries1)
 
-        var creator_idx = 5123
-
         var intent = intent.getIntExtra("creator_idx", 5123)
+
+
+
         getProfileResponse(intent)
         getProfileStatResponse(intent)
+        getProfileHotVideo(creatorNetworkService.getProfileHotVideoResponse(intent), 0)
+        getProfileHotVideo(creatorNetworkService.getProfileNewVideoResponse(intent), 1)
+
 
         activity_creator_profile_btn_go_fanpage.setOnClickListener {
             startActivity<CommunityHotPostActivity>()
@@ -111,6 +120,8 @@ class CreatorProfileActivity : FragmentActivity() {
             //다이얼로그 생성
             creatorprofileclassDialog!!.show()
         }
+
+
 
     }
 
@@ -226,7 +237,7 @@ class CreatorProfileActivity : FragmentActivity() {
                         youtube_subscriber_cnt.text =
                             String.format("%,d", creatorProfileData.youtube_subscriber_cnt) + "명"
                         youtube_view_cnt.text = String.format("%,d", creatorProfileData.youtube_view_cnt) + "명"
-                        activity_creator_profile_description.text = creatorProfileData.contents
+                        //activity_creator_profile_description.text = creatorProfileData.contents
                         Glide.with(this@CreatorProfileActivity).load(creatorProfileData.follower_grade_img_url)
                             .into(activity_creator_profile_rank_img)
                         Glide.with(this@CreatorProfileActivity).load(creatorProfileData.view_grade_img_url)
@@ -286,42 +297,39 @@ class CreatorProfileActivity : FragmentActivity() {
         })
     }
 
+    private fun getProfileHotVideo(call : Call<GetProfileHotVideoResponse>, flag: Int){
 
-//    private fun getProfileHotVideo(creatorIdx: Int){
-//        val getProfileHotVideResponse = creatorNetworkService.getProfileHotVideoResponse(creatorIdx)
-//        getProfileHotVideResponse.enqueue(object : Callback<GetProfileHotVideoResponse> {
-//            override fun onFailure(call: Call<GetProfileHotVideoResponse>, t: Throwable) {
-//                Log.e("creator search fail", t.toString())
-//            }
-//            override fun onResponse(call: Call<GetProfileHotVideoResponse>, response: Response<GetProfileHotVideoResponse>){
-//                if(response.isSuccessful){
-//                    if(response.body()!!.status == 200){
-//                        var HotVideoDatas : ArrayList<HotVideoData> = response.body()!!.data
-//                        // configureRecyclerView(HotVideoDatas)
-//                    }
-//                }
-//            }
-//        })
-//    }
+        call.enqueue(object : Callback<GetProfileHotVideoResponse> {
+            override fun onFailure(call: Call<GetProfileHotVideoResponse>, t: Throwable) {
+                Log.e("creator search fail", t.toString())
+            }
+            override fun onResponse(call: Call<GetProfileHotVideoResponse>, response: Response<GetProfileHotVideoResponse>){
+                if(response.isSuccessful){
+                    if(response.body()!!.status == 200){
+                        var HotVideoDatas : ArrayList<HotVideoData> = response.body()!!.data
+                        configureRecyclerView(HotVideoDatas, flag)
+                    }
+                }
+            }
+        })
+    }
 
-//    private fun configureRecyclerView(){
-//
-//
-//        var profileHotDataList : ArrayList<ProfileHotVideoData> = ArrayList()
-//        profileHotVideoRecyclerViewAdapter = ProfileHotVideoRecyclerViewAdapter(this, profileHotDataList)
-//        activity_creator_profile_rv_hot_video.adapter = profileHotVideoRecyclerViewAdapter
-//        activity_creator_profile_rv_hot_video.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        activity_creator_profile_rv_hot_video.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-//
-//        // new post
-//        var profileNewDataList: ArrayList<ProfileHotVideoData> = ArrayList()
-//
-//        profileHotVideoRecyclerViewAdapter = ProfileHotVideoRecyclerViewAdapter(this, profileNewDataList)
-//        activity_creator_profile_rv_new_video.adapter = profileHotVideoRecyclerViewAdapter
-//        activity_creator_profile_rv_new_video.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        activity_creator_profile_rv_new_video.addItemDecoration(DividerItemDecoration(this!!, DividerItemDecoration.VERTICAL))
-//
-//    }
+    private fun configureRecyclerView(dataList: ArrayList<HotVideoData>, flag : Int){
+
+        profileVideoRecyclerViewAdapter = ProfileHotVideoRecyclerViewAdapter(this, dataList)
+        lateinit var container : RecyclerView
+        // 0: 인기, 1: new
+        if(flag == 0){
+            container = activity_creator_profile_rv_hot_video
+        }else if(flag == 1)
+            container = activity_creator_profile_rv_new_video
+
+        container.adapter = profileVideoRecyclerViewAdapter
+        container.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        container.addItemDecoration(DividerItemDecoration(this!!, DividerItemDecoration.VERTICAL))
+
+
+    }
 
     private fun dataSetAvg(dataSet: ArrayList<RadarEntry>): Float {
         var total = 0f

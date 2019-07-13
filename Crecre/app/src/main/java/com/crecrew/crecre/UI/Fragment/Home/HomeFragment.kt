@@ -5,8 +5,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
@@ -18,7 +16,6 @@ import android.view.View.VISIBLE
 import android.view.inputmethod.InputMethodManager
 import android.widget.RelativeLayout
 import android.widget.TextView
-import android.widget.Toast
 import com.crecrew.crecre.R
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -28,10 +25,7 @@ import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.Network.CreatorNetworkService
-import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
-import com.crecrew.crecre.Network.Get.GetCreatorTodayHotRank
-import com.crecrew.crecre.Network.Get.GetLastVoteHomeResponse
-import com.crecrew.crecre.Network.Get.GetVoteEndResponse
+import com.crecrew.crecre.Network.Get.*
 import com.crecrew.crecre.Network.VoteNetworkService
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
@@ -41,9 +35,7 @@ import com.crecrew.crecre.UI.Activity.CreatorSearchActivity
 import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
 import com.crecrew.crecre.UI.Fragment.Home.RankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
-import com.crecrew.crecre.UI.Fragment.VoteCurrentFragment
-import com.crecrew.crecre.UI.Fragment.VoteFragment
-import org.w3c.dom.Text
+import com.crecrew.crecre.UI.Fragment.vote.votePage.VotePageFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -55,6 +47,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var rootView: View
     private var isChartOpen = false
+    private var isInit = false
 
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
 
@@ -71,6 +64,15 @@ class HomeFragment : Fragment() {
     }
 
     private lateinit var rank_time: TextView
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(isInit) {
+            var voteFragment = VotePageFragment.newInstance(true, 0)
+
+            fragmentManager!!.beginTransaction().add(R.id.fragment_home_now_vote_rl, voteFragment).commit()
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
@@ -96,12 +98,13 @@ class HomeFragment : Fragment() {
         handler.post(handlerTask)
 
         getCommunityResponse()
+
         getLastVoteResponse()
 
-        var voteCurrentFragment = VoteCurrentFragment()
-        voteCurrentFragment.flag = 1
 
-        fragmentManager!!.beginTransaction().add(R.id.fragment_home_now_vote_rl, voteCurrentFragment).commit()
+        var voteFragment = VotePageFragment.newInstance(true, 0)
+
+        fragmentManager!!.beginTransaction().add(R.id.fragment_home_now_vote_rl, voteFragment).commit()
 
         // 화면 전환
         rootView.run {
@@ -140,7 +143,9 @@ class HomeFragment : Fragment() {
             }
 
             fragment_home_now_vote_more.setOnClickListener {
-                // TODO: 정호한테 물어보기
+
+                //activity.supportFragmentManager(fragmentManager)
+
             }
 
             // 다른 화면 누르면 키보드 내리고 edittext focus 삭제
@@ -148,7 +153,7 @@ class HomeFragment : Fragment() {
                 downKeyboard(fragment_home_container)
             }
         }
-
+        isInit = true
         return rootView
     }
 
@@ -170,7 +175,7 @@ class HomeFragment : Fragment() {
 
 
     fun getLastVoteResponse() {
-        val getLastVoteHome = voteNetworkService.getLastVoteHome()
+        val getLastVoteHome = voteNetworkService.getLastVoteHome(SharedPreferenceController.getUserToken(activity!!))
         getLastVoteHome.enqueue(object : Callback<GetLastVoteHomeResponse> {
             override fun onFailure(call: Call<GetLastVoteHomeResponse>, t: Throwable) {
                 Log.e("last vote fail", t.toString())
@@ -285,23 +290,19 @@ class HomeFragment : Fragment() {
     fun getCommunityResponse() {
 
         // TODO: 가희한테 말해서 getCommunitySmallPosts로 이름 바꾸기 (new나 hot이 들어가지 않도록)
-        val getCommunitySmallHotPosts: Call<GetCommunitySmallNewPostResponse> =
-            communityNetworkService.getCommunitySmallHotPosts()
-        getCommunitySmallHotPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
+        val getTodayHotPost : Call<GetTodayPostResponse> = communityNetworkService.getTodayHotPost()
+        getTodayHotPost.enqueue(object : Callback<GetTodayPostResponse> {
 
-            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetTodayPostResponse>, t: Throwable) {
                 Log.e("hot post list fail", t.toString())
             }
 
-            override fun onResponse(
-                call: Call<GetCommunitySmallNewPostResponse>,
-                response: Response<GetCommunitySmallNewPostResponse>
-            ) {
+            override fun onResponse(call: Call<GetTodayPostResponse>, response: Response<GetTodayPostResponse>) {
                 if (response.isSuccessful) {
-                    if (response.body()!!.status == 200) {
-                        val tmp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                    if(response.body()!!.status == 200) {
+                        val tmp: ArrayList<TodayPost> = response.body()!!.data
                         if (tmp.size > 0) {
-                            var todayDataList: ArrayList<CommunitySmallNewGetData> = ArrayList(3)
+                            var todayDataList : ArrayList<TodayPost> = ArrayList(3)
 
                             for (i in 0..2) {
                                 todayDataList.add(tmp[i])
@@ -324,23 +325,18 @@ class HomeFragment : Fragment() {
 
         })
 
-        val getCommunitySmallNewPosts: Call<GetCommunitySmallNewPostResponse> =
-            communityNetworkService.getCommunitySmallNewPosts()
-        getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
-
-            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+        val getTodayNewPost : Call<GetTodayPostResponse> = communityNetworkService.getTodayNewPost()
+        getTodayNewPost.enqueue(object : Callback<GetTodayPostResponse> {
+            override fun onFailure(call: Call<GetTodayPostResponse>, t: Throwable) {
                 Log.e("new post list fail", t.toString())
             }
 
-            override fun onResponse(
-                call: Call<GetCommunitySmallNewPostResponse>,
-                response: Response<GetCommunitySmallNewPostResponse>
-            ) {
+            override fun onResponse(call: Call<GetTodayPostResponse>, response: Response<GetTodayPostResponse>) {
                 if (response.isSuccessful) {
-                    if (response.body()!!.status == 200) {
-                        val tmp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                    if(response.body()!!.status == 200) {
+                        val tmp: ArrayList<TodayPost> = response.body()!!.data
                         if (tmp.size > 0) {
-                            var todayDataList: ArrayList<CommunitySmallNewGetData> = ArrayList(3)
+                            var todayDataList : ArrayList<TodayPost> = ArrayList(3)
 
                             for (i in 0..2) {
                                 todayDataList.add(tmp[i])
@@ -363,5 +359,4 @@ class HomeFragment : Fragment() {
             }
         })
     }
-
 }
