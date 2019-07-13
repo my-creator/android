@@ -58,10 +58,12 @@ class VoteEndFragment : Fragment() {
                     if ( response.body()!!.status == 200 ){
                         val tmp: ArrayList<GetVoteEndData> = response.body()!!.data!!
 
+
+                        /*
                         voteEndAdapter = VoteEndAdapter(activity!!, tmp)
                         rv_fragment_vote_last!!.adapter = voteEndAdapter
                         rv_fragment_vote_last!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-
+                    */
                     }
                 }
             }
