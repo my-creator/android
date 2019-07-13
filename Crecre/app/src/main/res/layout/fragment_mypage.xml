@@ -1,9 +1,177 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/mypage"
->
-    
-</FrameLayout>
+        android:background="@color/white">
+
+    <RelativeLayout
+            android:paddingBottom="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+            <TextView
+                    android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="마이페이지"
+                    android:fontFamily="@font/noto_sans_kr_bold"
+                    android:textSize="18sp"
+                    android:lineHeight="27sp"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="18dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="122dp"
+                android:paddingHorizontal="25dp"
+                android:layout_marginTop="102dp">
+            <RelativeLayout
+                    android:id="@+id/profile_image"
+                    android:layout_width="122dp"
+                    android:layout_height="122dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="122dp"
+                        android:layout_height="122dp"
+                        android:src="@color/greyish"/>
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_margin="1dp"
+                        android:layout_width="120dp"
+                        android:layout_height="120dp"
+                        android:src="@color/white"/>
+                <de.hdodenhof.circleimageview.CircleImageView android:layout_width="112dp" android:layout_height="112dp"
+                                                              android:layout_marginTop="5dp"
+                                                              android:layout_marginLeft="5dp"
+                                                              android:src="@drawable/profile_image_sample"/>
+                <ImageView android:layout_width="36dp"
+                           android:layout_height="36dp"
+                           android:layout_alignParentBottom="true"
+                           android:layout_alignParentRight="true"
+                           android:src="@drawable/btn_camera"/>
+
+            </RelativeLayout>
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="크리크루"
+                      android:id="@+id/user_name"
+                      android:fontFamily="@font/noto_sans_kr_bold"
+                      android:textSize="18dp"
+                      android:lineHeight="27sp"
+                      android:textColor="#707070"
+                      android:layout_marginLeft="17sp"
+                      android:layout_centerVertical="true"
+                      android:layout_toRightOf="@+id/profile_image"/>
+
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="님"
+                      android:fontFamily="@font/noto_sans_kr_medium"
+                      android:textSize="16dp"
+                      android:lineHeight="27sp"
+                      android:textColor="#707070"
+                      android:layout_marginLeft="4sp"
+                      android:layout_toRightOf="@+id/user_name"
+                      android:layout_alignBottom="@+id/user_name"/>
+
+            <TextView
+                    android:id="@+id/my_posting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="내가 쓴 글"
+                    android:textSize="14sp"
+                    android:textColor="#acacac"
+                    android:textAlignment="center"
+                    android:padding="2dp"
+                    android:layout_marginLeft="139dp"
+                    android:background="@drawable/btn_myposting"
+                    android:layout_alignParentBottom="true"/>
+            <TextView
+                    android:layout_toRightOf="@+id/my_posting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="내가 쓴 댓글"
+                    android:textSize="14sp"
+                    android:textColor="#acacac"
+                    android:textAlignment="center"
+                    android:padding="2dp"
+                    android:layout_toEndOf="@+id/my_posting"
+                    android:background="@drawable/btn_mycomment"
+                    android:layout_alignParentBottom="true"
+            />
+        </RelativeLayout>
+
+        <LinearLayout
+                android:layout_below="@+id/container"
+                android:paddingHorizontal="32dp"
+                android:orientation="vertical"
+                android:layout_width="match_parent" android:layout_height="match_parent">
+            <View android:layout_width="match_parent" android:layout_height="0.5dp"
+                  android:background="@color/greyish"
+                  android:layout_marginTop="50dp"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="48dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="닉네임 변경"
+                          android:layout_marginLeft="20dp"
+                          android:fontFamily="@font/noto_sans_kr_medium"
+                          android:textColor="#707070"
+                          android:textSize="16sp"
+                          android:layout_centerVertical="true"/>
+
+            </RelativeLayout>
+            <View android:layout_width="match_parent" android:layout_height="0.5dp"
+                  android:background="@color/greyish"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="48dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="비밀번호 변경"
+                          android:layout_marginLeft="20dp"
+                          android:fontFamily="@font/noto_sans_kr_medium"
+                          android:textColor="#707070"
+                          android:textSize="16sp"
+                          android:layout_centerVertical="true"/>
+            </RelativeLayout>
+            <View android:layout_width="match_parent" android:layout_height="0.5dp"
+                  android:background="@color/greyish"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="48dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="이용약관"
+                          android:layout_marginLeft="20dp"
+                          android:fontFamily="@font/noto_sans_kr_medium"
+                          android:textColor="#707070"
+                          android:textSize="16sp"
+                          android:layout_centerVertical="true"/>
+            </RelativeLayout>
+            <View android:layout_width="match_parent" android:layout_height="0.5dp"
+                  android:background="@color/greyish"/>
+            <RelativeLayout android:layout_width="match_parent" android:layout_height="48dp">
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                          android:text="개인정보 처리방침"
+                          android:layout_marginLeft="20dp"
+                          android:fontFamily="@font/noto_sans_kr_medium"
+                          android:textColor="#707070"
+                          android:textSize="16sp"
+                          android:layout_centerVertical="true"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+        <RelativeLayout
+                android:layout_marginHorizontal="28dp"
+                android:layout_alignParentBottom="true"
+                android:paddingVertical="8dp"
+                android:background="@drawable/btn_logout"
+                android:layout_width="match_parent" android:layout_height="wrap_content">
+
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      android:text="로그아웃"
+                      android:textSize="16sp"
+                      android:layout_centerInParent="true"
+                      android:textColor="#acacac"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>
+

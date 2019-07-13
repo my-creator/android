@@ -186,7 +186,6 @@
                         android:layout_width="296dp"
                         android:layout_height="192dp"
                         android:scaleType="centerCrop"
-                        android:layout_centerHorizontal="true"
                         android:src="@drawable/icn_img_x"
                 />
 

@@ -49,10 +49,8 @@ class VoteFragment: Fragment(){
     //ViewPager
     private fun configureMainTab() {
 
-
         vote_viewpager.adapter = VoteMainPagerAdapter(fragmentManager!!, 2)
         vote_viewpager.offscreenPageLimit = 1
-
 
         vote_tab.setupWithViewPager(vote_viewpager)
         val topTabLayout: View = activity!!.layoutInflater.inflate(R.layout.fragment_vote_navigation, null, false)

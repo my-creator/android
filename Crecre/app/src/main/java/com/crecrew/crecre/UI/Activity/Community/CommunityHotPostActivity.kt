@@ -57,7 +57,6 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
 
-
         configureTitleBar()
         configureRecyclerView()
 
@@ -101,7 +100,6 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
             getCommunityRecentAllResponse(communityNetworkService.getPostListAllBoards(board_idx))*/
 
         }
-
     }
 
     //recyclerView
@@ -123,9 +121,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
                 Log.e("최신글 전체 list fail", t.toString())
             }
 
-            override fun onResponse(
-                call: Call<GetCommunitySmallNewPostResponse>,
-                response: Response<GetCommunitySmallNewPostResponse>
+            override fun onResponse(call: Call<GetCommunitySmallNewPostResponse>, response: Response<GetCommunitySmallNewPostResponse>
             ) {
 
                 val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
@@ -145,7 +141,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
                     if (temp.size > 0) {
                         val position = communityHotPostRecyclerViewAdapter.itemCount
                         communityHotPostRecyclerViewAdapter.dataList.addAll(temp)
-                        communityHotPostRecyclerViewAdapter.notifyItemInserted(position)
+                        communityHotPostRecyclerViewAdapter.notifyItemChanged(position)
 
                     }
                 }
@@ -193,7 +189,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
                     if (temp.size > 0) {
                         val position = communityHotPostRecyclerViewAdapter.itemCount
                         communityHotPostRecyclerViewAdapter.dataList.addAll(temp)
-                        communityHotPostRecyclerViewAdapter.notifyItemInserted(position)
+                        communityHotPostRecyclerViewAdapter.notifyItemChanged(position)
 
 
                     }

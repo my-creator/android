@@ -13,7 +13,9 @@ import com.crecrew.crecre.Network.Get.GetVoteEndResponse
 import com.crecrew.crecre.Network.VoteNetworkService
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.VoteEndAdapter
+import kotlinx.android.synthetic.main.fragment_vote_current.*
 import kotlinx.android.synthetic.main.fragment_vote_last.*
+import kotlinx.android.synthetic.main.fragment_vote_last.view.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,6 +28,17 @@ class VoteEndFragment : Fragment() {
     }
 
     lateinit var rootView: View
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+
+        rootView = inflater.inflate(R.layout.fragment_vote_last, container, false)
+        return rootView
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -45,10 +58,12 @@ class VoteEndFragment : Fragment() {
                     if ( response.body()!!.status == 200 ){
                         val tmp: ArrayList<GetVoteEndData> = response.body()!!.data!!
 
-                        voteEndAdapter = VoteEndAdapter(activity!!, tmp)
-                        rv_fragment_vote_last.adapter = voteEndAdapter
-                        rv_fragment_vote_last.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
+                        /*
+                        voteEndAdapter = VoteEndAdapter(activity!!, tmp)
+                        rv_fragment_vote_last!!.adapter = voteEndAdapter
+                        rv_fragment_vote_last!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                    */
                     }
                 }
             }
@@ -58,14 +73,5 @@ class VoteEndFragment : Fragment() {
         })
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
 
-        rootView = inflater.inflate(R.layout.fragment_vote_last, container, false)
-        return rootView
-    }
 }

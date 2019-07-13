@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v7.widget.DividerItemDecoration
 import android.view.LayoutInflater
 import android.view.View
@@ -139,9 +140,8 @@ class HomeFragment: Fragment() {
             }
 
             fragment_home_now_vote_more.setOnClickListener {
-                var fm = fragmentManager!!.beginTransaction()
-                fm.replace(R.id.activity_main_vp_container, VoteFragment())
-                fm.commit()
+
+                //activity.supportFragmentManager(fragmentManager)
 
             }
 

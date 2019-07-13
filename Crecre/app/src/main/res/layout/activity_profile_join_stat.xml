@@ -58,9 +58,9 @@
                         android:textSize="14sp"
                         android:textColor="@color/greyish"/>
                 <TextView
+                        android:id="@+id/score1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="4점"
                         android:fontFamily="@font/noto_sans_kr_medium"
                         android:textColor="@color/black_two"
                         android:layout_marginTop="31dp"
@@ -74,71 +74,71 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                 <TextView
-                    android:id="@+id/activity_profile_join_stat_btn_1_0"
-                    android:padding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textSize="14sp"
-                    android:textColor="@color/greyish"
-                    android:layout_marginTop="62dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_weight="1"/>
+                        android:id="@+id/activity_profile_join_stat_btn_1_0"
+                        android:padding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyish"
+                        android:layout_marginTop="62dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_weight="1"/>
                 <TextView
                         android:id="@+id/activity_profile_join_stat_btn_1_1"
-                    android:padding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1"
-                    android:textSize="14sp"
-                    android:textColor="@color/greyish"
-                    android:layout_marginTop="62dp"
-                    android:layout_weight="1"/>
+                        android:padding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyish"
+                        android:layout_marginTop="62dp"
+                        android:layout_weight="1"/>
                 <TextView
-                    android:id="@+id/activity_profile_join_stat_btn_1_2"
-                    android:padding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2"
-                    android:textSize="14sp"
-                    android:textColor="@color/greyish"
-                    android:layout_marginTop="62dp"
-                    android:layout_weight="1"
-                    />
+                        android:id="@+id/activity_profile_join_stat_btn_1_2"
+                        android:padding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyish"
+                        android:layout_marginTop="62dp"
+                        android:layout_weight="1"
+                />
                 <TextView
                         android:id="@+id/activity_profile_join_stat_btn_1_3"
-                    android:padding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3"
-                    android:textSize="14sp"
-                    android:textColor="@color/greyish"
-                    android:layout_marginTop="62dp"
-                    android:layout_weight="1"
+                        android:padding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyish"
+                        android:layout_marginTop="62dp"
+                        android:layout_weight="1"
                 />
                 <TextView
                         android:id="@+id/activity_profile_join_stat_btn_1_4"
-                    android:padding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="4"
-                    android:textSize="14sp"
-                    android:textColor="@color/greyish"
-                    android:layout_marginTop="62dp"
-                    android:layout_weight="1"
+                        android:padding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="4"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyish"
+                        android:layout_marginTop="62dp"
+                        android:layout_weight="1"
                 />
                 <TextView
                         android:id="@+id/activity_profile_join_stat_btn_1_5"
-                    android:padding="10dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5"
-                    android:textSize="14sp"
-                    android:textColor="@color/greyish"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginTop="62dp"
-                    android:layout_marginRight="20dp"
-                 />
+                        android:padding="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="5"
+                        android:textSize="14sp"
+                        android:textColor="@color/greyish"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="62dp"
+                        android:layout_marginRight="20dp"
+                />
             </LinearLayout>
 
                 <ProgressBar
@@ -179,9 +179,9 @@
                     android:textSize="14sp"
                     android:textColor="@color/greyish"/>
             <TextView
+                    android:id="@+id/score2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4점"
                     android:fontFamily="@font/noto_sans_kr_medium"
                     android:textColor="@color/black_two"
                     android:layout_marginTop="31dp"
@@ -299,9 +299,9 @@
                     android:textSize="14sp"
                     android:textColor="@color/greyish"/>
             <TextView
+                    android:id="@+id/score3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4점"
                     android:fontFamily="@font/noto_sans_kr_medium"
                     android:textColor="@color/black_two"
                     android:layout_marginTop="31dp"
@@ -421,9 +421,9 @@
                     android:textSize="14sp"
                     android:textColor="@color/greyish"/>
             <TextView
+                    android:id="@+id/score4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4점"
                     android:fontFamily="@font/noto_sans_kr_medium"
                     android:textColor="@color/black_two"
                     android:layout_marginTop="31dp"
@@ -543,9 +543,9 @@
                     android:textSize="14sp"
                     android:textColor="@color/greyish"/>
             <TextView
+                    android:id="@+id/score5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="4점"
                     android:fontFamily="@font/noto_sans_kr_medium"
                     android:textColor="@color/black_two"
                     android:layout_marginTop="31dp"
@@ -654,24 +654,23 @@
                 <EditText
                         android:id="@+id/activity_profile_join_stat_hashtag"
                         android:layout_width="320dp"
-                        android:layout_height="wrap_content"
-                        android:minHeight="80dp"
+                        android:layout_height="100dp"
                         android:text="# 딕헌터파트너"
                         android:layout_centerHorizontal="true"
                         android:layout_marginTop="56dp"
                         android:background="@drawable/activity_profile_join_stat_edittext_hashtag"/>
-
-
-            <Button
+        </RelativeLayout>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="104dp">
+                <Button
+                    android:id="@+id/activity_profile_join_stat_complete"
                     android:text="완료"
-                    android:layout_below="@+id/activity_profile_join_stat_hashtag"
                     android:background="@drawable/background_rounding6_2"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="100dp"
-                    android:layout_weight="1"
-                    android:layout_alignParentStart="true"/>
+                />
         </RelativeLayout>
 
     </LinearLayout>

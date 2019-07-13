@@ -3,6 +3,7 @@ package com.crecrew.crecre.UI.Fragment.Community
 import android.app.Application
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -46,7 +47,7 @@ class CommunityFragment : Fragment(), CommunityFavoriteRecyclerViewAdapter.OnIte
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_community, container, false)
 
-        ApplicationData.auth =SharedPreferenceController.getUserToken(activity!!)
+        ApplicationData.auth = SharedPreferenceController.getUserToken(activity!!)
         Log.v("login_token", ApplicationData.auth)
 
         //검색버튼을 눌렀을때
@@ -62,19 +63,17 @@ class CommunityFragment : Fragment(), CommunityFavoriteRecyclerViewAdapter.OnIte
         super.onActivityCreated(savedInstanceState)
 
         configureMainTab()
-
-
 //        tablayoutTextColor()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setRecyclerView()
 
     }
 
     private fun setRecyclerView() {
-
 
         /*  var dataList: ArrayList<CommunityBoardData> = ArrayList()
 

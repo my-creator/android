@@ -27,7 +27,7 @@ class ClosedVoteFragment : Fragment() {
         lastVoteData?.let {
             rootView.run {
                 Glide.with(this@ClosedVoteFragment)
-                    .load(it.thumbnail_url)
+                    .load(R.drawable.img_imagebox)
                     .into(frag_clsd_vote_iv_img)
 
                 if (it.profile_url.equals("")) {
@@ -37,7 +37,7 @@ class ClosedVoteFragment : Fragment() {
                 } else {
                     Glide.with(this@ClosedVoteFragment)
                         .load(it.profile_url).apply(RequestOptions().circleCrop())
-                        .into(frag_clsd_vote_iv_img)
+                        .into(frag_clsd_vote_iv_profile)
                 }
 
 

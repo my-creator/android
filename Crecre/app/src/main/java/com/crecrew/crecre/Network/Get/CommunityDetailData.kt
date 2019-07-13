@@ -17,5 +17,10 @@ data class CommunityDetailData(
     val media_url : String,
     val board_name : String,
     val like_cnt : Int,
-    val hate_cnt : Int
+    val hate_cnt : Int,
+    val is_like : Int,
+    val is_hate : Int,
+    val write_user_idx : Int,
+    val login_userIdx : Int
+
 )
