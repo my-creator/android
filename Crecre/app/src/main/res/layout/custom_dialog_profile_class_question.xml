@@ -41,11 +41,11 @@
                 android:layout_height="match_parent"
                 android:layout_below="@+id/rl_request_response_compelte"
                 android:layout_above="@+id/ll_bottom_box_search_custom_dialog"
-                android:background="@color/white"
+                android:background="@drawable/custom_dialog_box"
                 android:orientation="vertical">
             <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
+                    android:layout_height="1dp"
                     android:layout_alignParentTop="true"
                     android:background="@color/violet_pink">
             </RelativeLayout>

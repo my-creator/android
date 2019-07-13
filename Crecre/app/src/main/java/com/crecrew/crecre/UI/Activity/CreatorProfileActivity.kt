@@ -5,6 +5,7 @@ import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
 import android.util.Log
+import android.view.View
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -16,6 +17,8 @@ import com.crecrew.crecre.Network.Get.GetProfileStatResponse
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Adapter.ProfileHotVideoRecyclerViewAdapter
+import com.crecrew.crecre.utils.CustomDialogProfileQuestion
+import com.crecrew.crecre.utils.SearchAlarmDialog
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.RadarChart
 import com.github.mikephil.charting.components.AxisBase
@@ -45,6 +48,17 @@ class CreatorProfileActivity : FragmentActivity() {
     //lateinit var statData: StatDataTest //xAxis
     lateinit var mTypeface: Typeface
     val statDataTest = ArrayList<StatData>()
+
+    val creatorprofileDialog: CustomDialogProfileQuestion by lazy {
+        CustomDialogProfileQuestion(
+            this@CreatorProfileActivity, CloseListener)
+    }
+
+    val creatorprofileclassDialog: ProfileClassQuestionActivity by lazy {
+        ProfileClassQuestionActivity(
+            this@CreatorProfileActivity, CloseListener)
+    }
+
 
     val statSetData = arrayListOf(
         StatData(null, null, "항목", 0, 0.0),
@@ -88,11 +102,14 @@ class CreatorProfileActivity : FragmentActivity() {
         }
         // activity_creator_profile_tv_name.setText(creator_name)
         activity_creator_profile_btn_rank_question.setOnClickListener {
-            startActivity<ProfileRankQuestionActivity>()
+            //다이얼로그 생성
+            creatorprofileDialog!!.show()
+
         }
 
         activity_creator_profile_btn_class_question.setOnClickListener {
-            startActivity<ProfileClassQuestionActivity>()
+            //다이얼로그 생성
+            creatorprofileclassDialog!!.show()
         }
 
     }
@@ -311,6 +328,12 @@ class CreatorProfileActivity : FragmentActivity() {
         for (i in dataSet.indices)
             total += dataSet[i].value
         return total / dataSet.size
+    }
+
+    private val CloseListener = View.OnClickListener {
+        creatorprofileDialog!!.dismiss()
+        creatorprofileclassDialog!!.dismiss()
+        //##title EditText에 포커스 주기
     }
 
 

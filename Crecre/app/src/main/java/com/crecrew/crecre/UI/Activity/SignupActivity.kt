@@ -53,6 +53,10 @@ class SignupActivity :AppCompatActivity(){
             getIdDuplicateResponse(activity_signup_et_id.text.toString())
          }
 
+        btn_back_request_community_act.setOnClickListener {
+            finish()
+        }
+
         // TODO: 위에 내용 다 입력하면 select 가능하게 (나중에!)
         // TODO: 화면 자동으로 내려가도록
         // TODO: 생년월일 parsing
@@ -91,7 +95,6 @@ class SignupActivity :AppCompatActivity(){
                 requestDialog.show()
             }
         }
-
     }
 
     private fun getIdDuplicateResponse(id :String){
@@ -100,6 +103,8 @@ class SignupActivity :AppCompatActivity(){
         var userNetworkingService =  userNetworkService.getIdDuplicate(id)
         userNetworkingService.enqueue(object: Callback<GetIdDuplicateResponse>{
             override fun onFailure(call: Call<GetIdDuplicateResponse>, t: Throwable) {
+
+
                 Log.e("check duplicate fail", t.toString())
             }
 

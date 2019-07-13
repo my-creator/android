@@ -1,4 +1,4 @@
-package com.crecrew.crecre.UI.Activity
+package com.crecrew.crecre.utils
 
 import android.app.Dialog
 import android.content.Context
@@ -12,9 +12,10 @@ import kotlinx.android.synthetic.main.custom_dialog_contents_delete.*
 import kotlinx.android.synthetic.main.custom_dialog_profile_class_question.*
 import kotlinx.android.synthetic.main.custom_dialog_profile_rank_question.*
 
-class ProfileClassQuestionActivity (context: Context,
-                                    private val closeClickListener: View.OnClickListener?)
-    : Dialog(context, android.R.style.Theme_Translucent_NoTitleBar) {
+class CustomDialogProfileQuestion(
+    context: Context,
+    private val closeClickListener: View.OnClickListener?
+) : Dialog(context, android.R.style.Theme_Translucent_NoTitleBar) {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,15 +28,19 @@ class ProfileClassQuestionActivity (context: Context,
         // window에 환경적용
         window!!.attributes = lpWindow
 
-        setContentView(R.layout.custom_dialog_profile_class_question)
 
+        setContentView(R.layout.custom_dialog_profile_rank_question)
+
+        //##??
         if (closeClickListener != null) {
-            custom_dialog_profile_class_question_btn_back.setOnClickListener(closeClickListener)
+            custom_dialog_profile_rank_question_btn_back.setOnClickListener(closeClickListener)
 
         } else {
-            custom_dialog_profile_class_question_btn_back.setOnClickListener(closeClickListener)
+            custom_dialog_profile_rank_question_btn_back.setOnClickListener(closeClickListener)
         }
 
     }
 
+
 }
+

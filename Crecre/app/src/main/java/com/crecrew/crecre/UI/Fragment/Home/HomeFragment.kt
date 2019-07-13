@@ -51,22 +51,22 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class HomeFragment: Fragment() {
+class HomeFragment : Fragment() {
 
     private lateinit var rootView: View
     private var isChartOpen = false
 
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
 
-    var todayCreatorRankData : ArrayList<CreatorData> = ArrayList()
+    var todayCreatorRankData: ArrayList<CreatorData> = ArrayList()
 
-    val creatorNetworkService: CreatorNetworkService by lazy{
+    val creatorNetworkService: CreatorNetworkService by lazy {
         ApplicationController.instance.creatorNetworkService
     }
-    val communityNetworkService: CommunityNetworkService by lazy{
+    val communityNetworkService: CommunityNetworkService by lazy {
         ApplicationController.instance.communityNetworkService
     }
-    val voteNetworkService: VoteNetworkService by lazy{
+    val voteNetworkService: VoteNetworkService by lazy {
         ApplicationController.instance.voteNetworkService
     }
 
@@ -79,8 +79,8 @@ class HomeFragment: Fragment() {
 
         val handler = Handler()
 
-        val handlerTask = object : Runnable{
-            override fun run(){
+        val handlerTask = object : Runnable {
+            override fun run() {
                 getCreatorTodayHotRank()
 
                 var sdf = SimpleDateFormat("yyyy.MM.dd HH:mm:ss")
@@ -89,7 +89,7 @@ class HomeFragment: Fragment() {
                 rank_time.setText(current_time)
 
 
-                handler.postDelayed(this,1000*20)
+                handler.postDelayed(this, 1000 * 20)
             }
         }
 
@@ -101,7 +101,7 @@ class HomeFragment: Fragment() {
         var voteCurrentFragment = VoteCurrentFragment()
         voteCurrentFragment.flag = 1
 
-        fragmentManager!!.beginTransaction().add(R.id.fragment_home_now_vote_rl,voteCurrentFragment).commit()
+        fragmentManager!!.beginTransaction().add(R.id.fragment_home_now_vote_rl, voteCurrentFragment).commit()
 
         // 화면 전환
         rootView.run {
@@ -110,7 +110,7 @@ class HomeFragment: Fragment() {
                 openTodayHotChart()
             }
 
-            fragment_home_now_vote_more.setOnClickListener{
+            fragment_home_now_vote_more.setOnClickListener {
                 // TODO: 투표탭으로 화면전환
             }
 
@@ -119,15 +119,15 @@ class HomeFragment: Fragment() {
             }
             fragment_home_txt_today_hot_post_more.setOnClickListener {
                 val intent = Intent(activity, CommunityHotPostActivity::class.java)
-                intent.putExtra("flag",1)
-                intent.putExtra("title","인기글")
+                intent.putExtra("flag", 1)
+                intent.putExtra("title", "인기글")
                 startActivity(intent)
 
             }
             fragment_home_txt_today_new_post_more.setOnClickListener {
                 val intent = Intent(activity, CommunityHotPostActivity::class.java)
-                intent.putExtra("flag",0)
-                intent.putExtra("title","최신글")
+                intent.putExtra("flag", 0)
+                intent.putExtra("title", "최신글")
                 startActivity(intent)
             }
 
@@ -154,14 +154,13 @@ class HomeFragment: Fragment() {
 
 
     // 실시간 크리에이터 차트 열고 닫기
-    private fun openTodayHotChart(){
-        if(isChartOpen == false) {
+    private fun openTodayHotChart() {
+        if (isChartOpen == false) {
             fragment_home_today_rank_container.visibility = VISIBLE
             fragment_home_iv_today_hot_btn.setImageResource(R.drawable.icn_hide_off)
             fragment_home_today_hot_creator_container.visibility = GONE
             isChartOpen = true
-        }
-        else {
+        } else {
             fragment_home_today_rank_container.visibility = GONE
             fragment_home_iv_today_hot_btn.setImageResource(R.drawable.icn_hide_on)
             fragment_home_today_hot_creator_container.visibility = VISIBLE
@@ -170,19 +169,19 @@ class HomeFragment: Fragment() {
     }
 
 
-    fun getLastVoteResponse(){
+    fun getLastVoteResponse() {
         val getLastVoteHome = voteNetworkService.getLastVoteHome()
-        getLastVoteHome.enqueue(object: Callback<GetLastVoteHomeResponse> {
+        getLastVoteHome.enqueue(object : Callback<GetLastVoteHomeResponse> {
             override fun onFailure(call: Call<GetLastVoteHomeResponse>, t: Throwable) {
-                Log.e("last vote fail" , t.toString())
+                Log.e("last vote fail", t.toString())
             }
 
             override fun onResponse(call: Call<GetLastVoteHomeResponse>, response: Response<GetLastVoteHomeResponse>) {
-                if(response.isSuccessful) {
-                    Log.e("status",response.body()!!.status.toString())
+                if (response.isSuccessful) {
+                    Log.e("status", response.body()!!.status.toString())
                     if (response.body()!!.status == 200) {
                         var tmp: ArrayList<LastVoteHomeData> = response.body()!!.data
-                        Log.e("data",tmp[0].title)
+                        Log.e("data", tmp[0].title)
 
                         frag_home_vp_clsd.run {
                             adapter = BasePagerAdapter(fragmentManager!!).apply {
@@ -212,8 +211,9 @@ class HomeFragment: Fragment() {
 
         // TODO: todayCreatorRankData 넣기!
 
-        for (i in 0..todayCreatorRankData.size-1) {
-            val item = CurrentRankData((todayCreatorRankData[i].ranking).toString(), todayCreatorRankData[i].creatorName)
+        for (i in 0..todayCreatorRankData.size - 1) {
+            val item =
+                CurrentRankData((todayCreatorRankData[i].ranking).toString(), todayCreatorRankData[i].creatorName)
             items.add(item)
         }
         val adapter = RankRecyclerViewAdapter(items)
@@ -221,28 +221,28 @@ class HomeFragment: Fragment() {
     }
 
 
-
     // creator ranking networking
-    private fun getCreatorTodayHotRank(){
+    private fun getCreatorTodayHotRank() {
 
         val getCreatorTodayHotRank = creatorNetworkService.getCreatorTodayHotRank()
-        getCreatorTodayHotRank.enqueue(object: Callback<GetCreatorTodayHotRank> {
+        getCreatorTodayHotRank.enqueue(object : Callback<GetCreatorTodayHotRank> {
             override fun onFailure(call: Call<GetCreatorTodayHotRank>, t: Throwable) {
-                Log.e("creator search fail",t.toString())
+                Log.e("creator search fail", t.toString())
             }
+
             override fun onResponse(call: Call<GetCreatorTodayHotRank>, response: Response<GetCreatorTodayHotRank>) {
 
-                if(response.isSuccessful){
+                if (response.isSuccessful) {
 
-                    if(response.body()!!.status == 200){
+                    if (response.body()!!.status == 200) {
                         todayCreatorRankData = response.body()!!.data
-                        var todayCreatorRankTopData : ArrayList<CreatorData> = ArrayList(5)
+                        var todayCreatorRankTopData: ArrayList<CreatorData> = ArrayList(5)
                         var todayCreatorRankBottomData: ArrayList<CreatorData> = ArrayList(5)
 
                         var index = 0
-                        for(i in 0 ..4)
+                        for (i in 0..4)
                             todayCreatorRankTopData.add(todayCreatorRankData[index++])
-                        for(i in 0 ..4) {
+                        for (i in 0..4) {
                             todayCreatorRankBottomData.add(todayCreatorRankData[index++])
                         }
                         rootView.fragment_home_vp_today_rank.run {
@@ -264,7 +264,8 @@ class HomeFragment: Fragment() {
                             // tab설정
                             it.fragment_home_tl_today_rank.run {
                                 val navigationLayout: View =
-                                    LayoutInflater.from(activity!!).inflate(R.layout.fragment_home_today_rank_navi, null, false)
+                                    LayoutInflater.from(activity!!)
+                                        .inflate(R.layout.fragment_home_today_rank_navi, null, false)
                                 setupWithViewPager(it.fragment_home_vp_today_rank)
                                 getTabAt(0)!!.customView =
                                     navigationLayout.findViewById(R.id.fragment_home_today_rank_navi_top) as RelativeLayout
@@ -284,21 +285,25 @@ class HomeFragment: Fragment() {
     fun getCommunityResponse() {
 
         // TODO: 가희한테 말해서 getCommunitySmallPosts로 이름 바꾸기 (new나 hot이 들어가지 않도록)
-        val getCommunitySmallHotPosts : Call<GetCommunitySmallNewPostResponse> = communityNetworkService.getCommunitySmallHotPosts()
+        val getCommunitySmallHotPosts: Call<GetCommunitySmallNewPostResponse> =
+            communityNetworkService.getCommunitySmallHotPosts()
         getCommunitySmallHotPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
 
             override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
                 Log.e("hot post list fail", t.toString())
             }
 
-            override fun onResponse(call: Call<GetCommunitySmallNewPostResponse>, response: Response<GetCommunitySmallNewPostResponse>) {
+            override fun onResponse(
+                call: Call<GetCommunitySmallNewPostResponse>,
+                response: Response<GetCommunitySmallNewPostResponse>
+            ) {
                 if (response.isSuccessful) {
-                    if(response.body()!!.status == 200) {
+                    if (response.body()!!.status == 200) {
                         val tmp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
                         if (tmp.size > 0) {
-                            var todayDataList : ArrayList<CommunitySmallNewGetData> = ArrayList(3)
+                            var todayDataList: ArrayList<CommunitySmallNewGetData> = ArrayList(3)
 
-                            for(i in 0..2) {
+                            for (i in 0..2) {
                                 todayDataList.add(tmp[i])
                             }
                             todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayDataList)
@@ -319,28 +324,38 @@ class HomeFragment: Fragment() {
 
         })
 
-        val getCommunitySmallNewPosts : Call<GetCommunitySmallNewPostResponse> = communityNetworkService.getCommunitySmallNewPosts()
+        val getCommunitySmallNewPosts: Call<GetCommunitySmallNewPostResponse> =
+            communityNetworkService.getCommunitySmallNewPosts()
         getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
 
             override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
                 Log.e("new post list fail", t.toString())
             }
 
-            override fun onResponse(call: Call<GetCommunitySmallNewPostResponse>, response: Response<GetCommunitySmallNewPostResponse>) {
+            override fun onResponse(
+                call: Call<GetCommunitySmallNewPostResponse>,
+                response: Response<GetCommunitySmallNewPostResponse>
+            ) {
                 if (response.isSuccessful) {
-                    if(response.body()!!.status == 200) {
+                    if (response.body()!!.status == 200) {
                         val tmp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
                         if (tmp.size > 0) {
-                            var todayDataList : ArrayList<CommunitySmallNewGetData> = ArrayList(3)
+                            var todayDataList: ArrayList<CommunitySmallNewGetData> = ArrayList(3)
 
-                            for(i in 0..2) {
+                            for (i in 0..2) {
                                 todayDataList.add(tmp[i])
                             }
 
                             todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayDataList)
                             fragment_home_rv_today_new_post.adapter = todayPostRecyclerViewAdapter
-                            fragment_home_rv_today_new_post.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-                            fragment_home_rv_today_new_post.addItemDecoration(DividerItemDecoration(context!!, DividerItemDecoration.VERTICAL))
+                            fragment_home_rv_today_new_post.layoutManager =
+                                LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+                            fragment_home_rv_today_new_post.addItemDecoration(
+                                DividerItemDecoration(
+                                    context!!,
+                                    DividerItemDecoration.VERTICAL
+                                )
+                            )
                         }
                     }
                 }

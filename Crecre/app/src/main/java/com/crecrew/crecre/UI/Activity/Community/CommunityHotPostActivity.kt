@@ -12,9 +12,7 @@ import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_community_hot_post.*
-import org.jetbrains.anko.networkStatsManager
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.toast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +30,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
     var flag = -1
     var title = ""
     var size = -1
+    var size1 = -1
     var is_anonymous = -1
 
 
@@ -57,7 +56,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
 
-        configureTitleBar()
+        //configureTitleBar()
         configureRecyclerView()
 
     }
@@ -67,6 +66,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_community_hot_post)
 
         init()
+        configureTitleBar()
     }
 
     private fun configureTitleBar() {
@@ -94,6 +94,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
             //##hot인기글 3개가 먼저 나오도록 해야함 --> 통신 속도?때문에 그런가 먼저 나올때도 있고 아닐때도 있음...
             getCommunityCommentResponse()
             getCommunityRecentAllResponse(communityNetworkService.getPostListAllBoards(board_idx))
+
 
             /*
             getCommunityRecentAllResponse(communityNetworkService.getPostListBoards(board_idx))
@@ -126,15 +127,18 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
 
                 val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
 
+                Log.v("TAGG : size1 ", temp.size.toString())
+
+                if (temp.size == 0) {
+                    size1 = 0
+                }
                 if (response.isSuccessful) {
 
                     Log.v("community", response.message())
                     Log.v("community", temp.size.toString())
 
                     //##확인필요
-                    if (temp.size == 0) {
-                        size = 9898
-                    }
+
                     for (i in 0..temp.size - 1)
                         Log.v("community", temp[i].contents)
 
@@ -144,8 +148,12 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
                         communityHotPostRecyclerViewAdapter.notifyItemChanged(position)
 
                     }
-                }
 
+                   if(size ==0 && size1 ==0)
+                    {
+                        rl_noresult_commu_hot_post_act.visibility = View.VISIBLE
+                    }
+                }
 
             }
         })
@@ -168,21 +176,19 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
             ) {
 
                 val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                Log.v("TAGG : size", temp.size.toString())
+                //##확인필요
+                if (temp.size == 0) {
+                    size =0
+
+                }
 
                 if (response.isSuccessful) {
 
                     Log.v("community", response.message())
                     Log.v("community", temp.size.toString())
 
-                    //##확인필요
-                    if (temp.size == 0) {
 
-                        if (size == 9898)
-                        {
-                            rl_noresult_commu_hot_post_act.visibility = View.VISIBLE
-                        }
-
-                    }
                     for (i in 0..temp.size - 1)
                         Log.v("community", temp[i].contents)
 
@@ -191,7 +197,10 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
                         communityHotPostRecyclerViewAdapter.dataList.addAll(temp)
                         communityHotPostRecyclerViewAdapter.notifyItemChanged(position)
 
-
+                    }
+                    if(size ==0 && size1 ==0)
+                    {
+                        rl_noresult_commu_hot_post_act.visibility = View.VISIBLE
                     }
                 }
 

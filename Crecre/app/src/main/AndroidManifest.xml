@@ -53,7 +53,7 @@
 
         <activity android:name=".UI.Activity.SignupActivity"/>
         <activity android:name=".UI.Activity.SignupCompleteActivity"/>
-        <activity android:name=".UI.Activity.ProfileRankQuestionActivity"/>
+        <activity android:name=".utils.CustomDialogProfileQuestion"/>
         <activity android:name=".UI.Activity.ProfileClassQuestionActivity"/>
     </application>
 
