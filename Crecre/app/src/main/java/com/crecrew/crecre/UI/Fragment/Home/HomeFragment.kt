@@ -25,9 +25,7 @@ import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.Network.CreatorNetworkService
-import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
-import com.crecrew.crecre.Network.Get.GetCreatorTodayHotRank
-import com.crecrew.crecre.Network.Get.GetLastVoteHomeResponse
+import com.crecrew.crecre.Network.Get.*
 import com.crecrew.crecre.Network.VoteNetworkService
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Activity.VoteSuggestActivity
@@ -37,8 +35,6 @@ import com.crecrew.crecre.UI.Activity.CreatorSearchActivity
 import com.crecrew.crecre.UI.Fragment.Home.ClosedVoteFragment
 import com.crecrew.crecre.UI.Fragment.Home.RankRecyclerViewAdapter
 import com.crecrew.crecre.UI.Fragment.HomeTodayRankFragment
-import com.crecrew.crecre.UI.Fragment.VoteCurrentFragment
-import com.crecrew.crecre.UI.Fragment.vote.VoteFragment
 import com.crecrew.crecre.UI.Fragment.vote.votePage.VotePageFragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -93,12 +89,8 @@ class HomeFragment : Fragment() {
 
         getCommunityResponse()
 
-//        rootView.fragment_home_now_vote_vp.adapter = BasePagerAdapter(fragmentManager!!).apply {
-//            addFragment(VotePageFragment.newInstance(true, 0))
-//        }
-//
+        getLastVoteResponse()
 
-        //getLastVoteResponse()
 
         var voteFragment = VotePageFragment.newInstance(true, 0)
 
@@ -141,9 +133,8 @@ class HomeFragment : Fragment() {
             }
 
             fragment_home_now_vote_more.setOnClickListener {
-                var fm = fragmentManager!!.beginTransaction()
-                fm.replace(R.id.activity_main_vp_container, VoteFragment())
-                fm.commit()
+
+                //activity.supportFragmentManager(fragmentManager)
 
             }
 
@@ -289,23 +280,19 @@ class HomeFragment : Fragment() {
     fun getCommunityResponse() {
 
         // TODO: 가희한테 말해서 getCommunitySmallPosts로 이름 바꾸기 (new나 hot이 들어가지 않도록)
-        val getCommunitySmallHotPosts: Call<GetCommunitySmallNewPostResponse> =
-            communityNetworkService.getCommunitySmallHotPosts()
-        getCommunitySmallHotPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
+        val getTodayHotPost : Call<GetTodayPostResponse> = communityNetworkService.getTodayHotPost()
+        getTodayHotPost.enqueue(object : Callback<GetTodayPostResponse> {
 
-            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetTodayPostResponse>, t: Throwable) {
                 Log.e("hot post list fail", t.toString())
             }
 
-            override fun onResponse(
-                call: Call<GetCommunitySmallNewPostResponse>,
-                response: Response<GetCommunitySmallNewPostResponse>
-            ) {
+            override fun onResponse(call: Call<GetTodayPostResponse>, response: Response<GetTodayPostResponse>) {
                 if (response.isSuccessful) {
-                    if (response.body()!!.status == 200) {
-                        val tmp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                    if(response.body()!!.status == 200) {
+                        val tmp: ArrayList<TodayPost> = response.body()!!.data
                         if (tmp.size > 0) {
-                            var todayDataList: ArrayList<CommunitySmallNewGetData> = ArrayList(3)
+                            var todayDataList : ArrayList<TodayPost> = ArrayList(3)
 
                             for (i in 0..2) {
                                 todayDataList.add(tmp[i])
@@ -328,23 +315,18 @@ class HomeFragment : Fragment() {
 
         })
 
-        val getCommunitySmallNewPosts: Call<GetCommunitySmallNewPostResponse> =
-            communityNetworkService.getCommunitySmallNewPosts()
-        getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
-
-            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+        val getTodayNewPost : Call<GetTodayPostResponse> = communityNetworkService.getTodayNewPost()
+        getTodayNewPost.enqueue(object : Callback<GetTodayPostResponse> {
+            override fun onFailure(call: Call<GetTodayPostResponse>, t: Throwable) {
                 Log.e("new post list fail", t.toString())
             }
 
-            override fun onResponse(
-                call: Call<GetCommunitySmallNewPostResponse>,
-                response: Response<GetCommunitySmallNewPostResponse>
-            ) {
+            override fun onResponse(call: Call<GetTodayPostResponse>, response: Response<GetTodayPostResponse>) {
                 if (response.isSuccessful) {
-                    if (response.body()!!.status == 200) {
-                        val tmp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                    if(response.body()!!.status == 200) {
+                        val tmp: ArrayList<TodayPost> = response.body()!!.data
                         if (tmp.size > 0) {
-                            var todayDataList: ArrayList<CommunitySmallNewGetData> = ArrayList(3)
+                            var todayDataList : ArrayList<TodayPost> = ArrayList(3)
 
                             for (i in 0..2) {
                                 todayDataList.add(tmp[i])
@@ -367,5 +349,4 @@ class HomeFragment : Fragment() {
             }
         })
     }
-
 }

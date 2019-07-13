@@ -65,7 +65,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:paddingLeft="12dp"
-                            android:inputType="text"
+                            android:inputType="textEmailAddress"
                             android:background="@null"
                             android:hint="아이디"
                             android:textCursorDrawable="@null"

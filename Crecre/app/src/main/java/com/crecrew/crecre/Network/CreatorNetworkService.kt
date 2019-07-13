@@ -36,5 +36,10 @@ interface CreatorNetworkService {
     fun getProfileHotVideoResponse(
         @Path("creatorIdx") creatorIdx: Int
     ): Call<GetProfileHotVideoResponse>
+
+    @GET("creators/{creatorIdx}/newvideo/three")
+    fun getProfileNewVideoResponse(
+        @Path("creatorIdx") creatorIdx: Int
+    ): Call<GetProfileNewVideoResponse>
 }
 

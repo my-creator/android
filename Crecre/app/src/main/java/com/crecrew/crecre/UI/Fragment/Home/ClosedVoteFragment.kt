@@ -30,14 +30,14 @@ class ClosedVoteFragment : Fragment() {
                     .load(it.thumbnail_url)
                     .into(frag_clsd_vote_iv_img)
 
-                if (it.profile_url.equals("")) {
+                if (it.profile_url == null) {
                     Glide.with(this@ClosedVoteFragment)
                         .load(R.drawable.icn_profile)
                         .into(frag_clsd_vote_iv_profile)
                 } else {
                     Glide.with(this@ClosedVoteFragment)
                         .load(it.profile_url).apply(RequestOptions().circleCrop())
-                        .into(frag_clsd_vote_iv_img)
+                        .into(frag_clsd_vote_iv_profile)
                 }
 
 
