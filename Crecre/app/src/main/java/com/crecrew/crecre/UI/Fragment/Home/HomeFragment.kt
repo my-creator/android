@@ -139,9 +139,7 @@ class HomeFragment: Fragment() {
             }
 
             fragment_home_now_vote_more.setOnClickListener {
-                var fm = fragmentManager!!.beginTransaction()
-                fm.replace(R.id.activity_main_vp_container, VoteFragment())
-                fm.commit()
+                //activity.supportFragmentManager(fragmentManager)
 
             }
 
