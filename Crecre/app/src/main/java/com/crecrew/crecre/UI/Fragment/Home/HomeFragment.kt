@@ -47,6 +47,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var rootView: View
     private var isChartOpen = false
+    private var isInit = false
 
     lateinit var todayPostRecyclerViewAdapter: TodayPostRecyclerViewAdapter
 
@@ -63,6 +64,15 @@ class HomeFragment : Fragment() {
     }
 
     private lateinit var rank_time: TextView
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(isInit) {
+            var voteFragment = VotePageFragment.newInstance(true, 0)
+
+            fragmentManager!!.beginTransaction().add(R.id.fragment_home_now_vote_rl, voteFragment).commit()
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_home, container, false)
@@ -143,7 +153,7 @@ class HomeFragment : Fragment() {
                 downKeyboard(fragment_home_container)
             }
         }
-
+        isInit = true
         return rootView
     }
 
