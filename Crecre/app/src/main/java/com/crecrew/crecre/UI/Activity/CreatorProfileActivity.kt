@@ -4,6 +4,8 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.widget.TextView
 import com.bumptech.glide.Glide
@@ -11,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.crecrew.crecre.Data.*
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CreatorNetworkService
+import com.crecrew.crecre.Network.Get.GetProfileHotVideoResponse
 import com.crecrew.crecre.Network.Get.GetProfileResponse
 import com.crecrew.crecre.Network.Get.GetProfileStatResponse
 import com.crecrew.crecre.R
@@ -269,41 +272,41 @@ class CreatorProfileActivity : FragmentActivity() {
         })
     }
 
-//    private fun getProfileHotVideo(creatorIdx: Int){
-//        val getProfileHotVideResponse = creatorNetworkService.getProfileHotVideoResponse(creatorIdx)
-//        getProfileHotVideResponse.enqueue(object : Callback<GetProfileHotVideoResponse> {
-//            override fun onFailure(call: Call<GetProfileHotVideoResponse>, t: Throwable) {
-//                Log.e("creator search fail", t.toString())
-//            }
-//            override fun onResponse(call: Call<GetProfileHotVideoResponse>, response: Response<GetProfileHotVideoResponse>){
-//                if(response.isSuccessful){
-//                    if(response.body()!!.status == 200){
-//                        var HotVideoDatas : ArrayList<HotVideoData> = response.body()!!.data
-//                        // configureRecyclerView(HotVideoDatas)
-//                    }
-//                }
-//            }
-//        })
-//    }
+    private fun getProfileHotVideo(creatorIdx: Int){
+        val getProfileHotVideResponse = creatorNetworkService.getProfileHotVideoResponse(creatorIdx)
+        getProfileHotVideResponse.enqueue(object : Callback<GetProfileHotVideoResponse> {
+            override fun onFailure(call: Call<GetProfileHotVideoResponse>, t: Throwable) {
+                Log.e("creator search fail", t.toString())
+            }
+            override fun onResponse(call: Call<GetProfileHotVideoResponse>, response: Response<GetProfileHotVideoResponse>){
+                if(response.isSuccessful){
+                    if(response.body()!!.status == 200){
+                        var HotVideoDatas : ArrayList<HotVideoData> = response.body()!!.data
+                        // configureRecyclerView(HotVideoDatas)
+                    }
+                }
+            }
+        })
+    }
 
-//    private fun configureRecyclerView(){
-//
-//
-//        var profileHotDataList : ArrayList<ProfileHotVideoData> = ArrayList()
-//        profileHotVideoRecyclerViewAdapter = ProfileHotVideoRecyclerViewAdapter(this, profileHotDataList)
-//        activity_creator_profile_rv_hot_video.adapter = profileHotVideoRecyclerViewAdapter
-//        activity_creator_profile_rv_hot_video.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        activity_creator_profile_rv_hot_video.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
-//
-//        // new post
-//        var profileNewDataList: ArrayList<ProfileHotVideoData> = ArrayList()
-//
-//        profileHotVideoRecyclerViewAdapter = ProfileHotVideoRecyclerViewAdapter(this, profileNewDataList)
-//        activity_creator_profile_rv_new_video.adapter = profileHotVideoRecyclerViewAdapter
-//        activity_creator_profile_rv_new_video.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-//        activity_creator_profile_rv_new_video.addItemDecoration(DividerItemDecoration(this!!, DividerItemDecoration.VERTICAL))
-//
-//    }
+    private fun configureRecyclerView(){
+
+
+        var profileHotDataList : ArrayList<HotVideoData> = ArrayList()
+        profileHotVideoRecyclerViewAdapter = ProfileHotVideoRecyclerViewAdapter(this, profileHotDataList)
+        activity_creator_profile_rv_hot_video.adapter = profileHotVideoRecyclerViewAdapter
+        activity_creator_profile_rv_hot_video.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        activity_creator_profile_rv_hot_video.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+
+        // new post
+        var profileNewDataList: ArrayList<HotVideoData> = ArrayList()
+
+        profileHotVideoRecyclerViewAdapter = ProfileHotVideoRecyclerViewAdapter(this, profileNewDataList)
+        activity_creator_profile_rv_new_video.adapter = profileHotVideoRecyclerViewAdapter
+        activity_creator_profile_rv_new_video.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        activity_creator_profile_rv_new_video.addItemDecoration(DividerItemDecoration(this!!, DividerItemDecoration.VERTICAL))
+
+    }
 
     private fun dataSetAvg(dataSet: ArrayList<RadarEntry>): Float {
         var total = 0f
