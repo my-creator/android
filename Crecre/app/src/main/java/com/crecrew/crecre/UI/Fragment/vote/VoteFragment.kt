@@ -17,6 +17,7 @@ import org.jetbrains.anko.support.v4.startActivity
 class VoteFragment : Fragment() {
 
     private lateinit var rootView: View
+    private var isInit = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
@@ -24,6 +25,17 @@ class VoteFragment : Fragment() {
 
         rootView = inflater.inflate(R.layout.fragment_vote, container, false)
         return rootView
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        super.setUserVisibleHint(isVisibleToUser)
+        if(isInit) {
+            //ui
+            setViewPager()
+            setTabLayout()
+            //event
+            setClickListener()
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,6 +46,8 @@ class VoteFragment : Fragment() {
         setTabLayout()
         //event
         setClickListener()
+
+        isInit = true
     }
 
     private fun setViewPager() {
