@@ -29,6 +29,8 @@ class ProfileJoinStatActivity : AppCompatActivity() {
 //                activity_profile_join_stat_progressbar_5
 //            )
 //        )
+
+
         activity_profile_join_stat_btn_back.setOnClickListener {
             finish()
         }

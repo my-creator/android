@@ -44,7 +44,7 @@
                 <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="진행능력"
+                        android:text="소통"
                         android:layout_marginTop="16dp"
                         android:layout_marginLeft="20dp"
                         android:textSize="16sp"
@@ -54,7 +54,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="40dp"
                         android:layout_marginLeft="20dp"
-                        android:text="이 능력에 대한 부가 설명입니다"
+                        android:text="구독자와 얼마나 소통을 잘하나요?"
                         android:textSize="14sp"
                         android:textColor="@color/greyish"/>
                 <TextView
@@ -165,7 +165,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="진행능력"
+                    android:text="매력"
                     android:layout_marginTop="16dp"
                     android:layout_marginLeft="20dp"
                     android:textSize="16sp"
@@ -175,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:layout_marginLeft="20dp"
-                    android:text="이 능력에 대한 부가 설명입니다"
+                    android:text="이 크리에이터가 얼마나 매력이 있나요?"
                     android:textSize="14sp"
                     android:textColor="@color/greyish"/>
             <TextView
@@ -285,7 +285,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="진행능력"
+                    android:text="실력"
                     android:layout_marginTop="16dp"
                     android:layout_marginLeft="20dp"
                     android:textSize="16sp"
@@ -295,7 +295,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:layout_marginLeft="20dp"
-                    android:text="이 능력에 대한 부가 설명입니다"
+                    android:text="가창력 / 연주력이 얼마나 좋은가요?"
                     android:textSize="14sp"
                     android:textColor="@color/greyish"/>
             <TextView
@@ -407,7 +407,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="진행능력"
+                    android:text="고막정화"
                     android:layout_marginTop="16dp"
                     android:layout_marginLeft="20dp"
                     android:textSize="16sp"
@@ -417,7 +417,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:layout_marginLeft="20dp"
-                    android:text="이 능력에 대한 부가 설명입니다"
+                    android:text="얼마나 고막이 정화되나요?"
                     android:textSize="14sp"
                     android:textColor="@color/greyish"/>
             <TextView
@@ -529,7 +529,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="진행능력"
+                    android:text="개성"
                     android:layout_marginTop="16dp"
                     android:layout_marginLeft="20dp"
                     android:textSize="16sp"
@@ -539,7 +539,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
                     android:layout_marginLeft="20dp"
-                    android:text="이 능력에 대한 부가 설명입니다"
+                    android:text="얼마나 유니크한 개성이 있나요?"
                     android:textSize="14sp"
                     android:textColor="@color/greyish"/>
             <TextView
