@@ -23,7 +23,7 @@ import java.util.*
 import kotlin.collections.ArrayList
 
 
-class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<CommunitySmallNewGetData>) : RecyclerView.Adapter<TodayPostRecyclerViewAdapter.Holder>() {
+class TodayPostRecyclerViewAdapter(private val ctx : Context, private val dataList : ArrayList<TodayPost>) : RecyclerView.Adapter<TodayPostRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx)!!.inflate(R.layout.rv_item_today_post, viewGroup, false)
         return Holder(view)

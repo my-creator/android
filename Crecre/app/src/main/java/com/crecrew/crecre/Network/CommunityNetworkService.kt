@@ -172,5 +172,12 @@ interface CommunityNetworkService {
         @Part imgs : MultipartBody.Part?
     ):Call<PostCommunityFavoriteLikeResponse>
 
+    @GET("posts/todaynew")
+    fun getTodayNewPost(
+    ):Call<GetTodayPostResponse>
+
+    @GET("posts/todayhot")
+    fun getTodayHotPost(
+    ):Call<GetTodayPostResponse>
 
 }

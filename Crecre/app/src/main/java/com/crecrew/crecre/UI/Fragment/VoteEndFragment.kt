@@ -49,21 +49,17 @@ class VoteEndFragment : Fragment() {
     private fun getVoteEndResponse() {
 
         val getVoteEndResponse = voteNetworkService.getLastVote()
-
         getVoteEndResponse.enqueue(object : Callback<GetVoteEndResponse> {
 
             override fun onResponse(call: Call<GetVoteEndResponse>, response: Response<GetVoteEndResponse>) {
-                Log.e("isSuccessful",response.isSuccessful.toString())
                 if (response.isSuccessful){
                     if ( response.body()!!.status == 200 ){
                         val tmp: ArrayList<GetVoteEndData> = response.body()!!.data!!
 
-
-                        /*
                         voteEndAdapter = VoteEndAdapter(activity!!, tmp)
                         rv_fragment_vote_last!!.adapter = voteEndAdapter
                         rv_fragment_vote_last!!.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-                    */
+
                     }
                 }
             }

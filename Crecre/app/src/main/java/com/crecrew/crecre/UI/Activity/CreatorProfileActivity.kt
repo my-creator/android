@@ -209,7 +209,7 @@ class CreatorProfileActivity : FragmentActivity() {
                         youtube_subscriber_cnt.text =
                             String.format("%,d", creatorProfileData.youtube_subscriber_cnt) + "명"
                         youtube_view_cnt.text = String.format("%,d", creatorProfileData.youtube_view_cnt) + "명"
-                        activity_creator_profile_description.text = creatorProfileData.contents
+                        //activity_creator_profile_description.text = creatorProfileData.contents
                         Glide.with(this@CreatorProfileActivity).load(creatorProfileData.follower_grade_img_url)
                             .into(activity_creator_profile_rank_img)
                         Glide.with(this@CreatorProfileActivity).load(creatorProfileData.view_grade_img_url)
@@ -268,7 +268,6 @@ class CreatorProfileActivity : FragmentActivity() {
             }
         })
     }
-
 
 //    private fun getProfileHotVideo(creatorIdx: Int){
 //        val getProfileHotVideResponse = creatorNetworkService.getProfileHotVideoResponse(creatorIdx)
