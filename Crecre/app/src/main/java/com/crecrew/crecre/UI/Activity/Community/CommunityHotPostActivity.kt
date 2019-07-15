@@ -56,7 +56,8 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
 
-        //configureTitleBar()
+
+        configureTitleBar()
         configureRecyclerView()
 
     }
@@ -66,10 +67,12 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         setContentView(R.layout.activity_community_hot_post)
 
         init()
-        configureTitleBar()
+        //configureTitleBar()
     }
 
     private fun configureTitleBar() {
+
+
 
         flag = intent.getIntExtra("flag", -1)
         user_idx = intent.getIntExtra("user_idx", -1)
@@ -94,6 +97,9 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
             //##hot인기글 3개가 먼저 나오도록 해야함 --> 통신 속도?때문에 그런가 먼저 나올때도 있고 아닐때도 있음...
             getCommunityCommentResponse()
             getCommunityRecentAllResponse(communityNetworkService.getPostListAllBoards(board_idx))
+
+            if(size ==0 && size1 ==0)
+                rl_noresult_commu_hot_post_act.visibility = View.VISIBLE
 
 
             /*
