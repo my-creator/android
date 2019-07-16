@@ -5,9 +5,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.View
-import com.crecrew.crecre.Data.CommunitySmallNewGetData
+import com.crecrew.crecre.Data.CommunitySmallGetData
 import com.crecrew.crecre.Network.ApplicationController
-import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
+import com.crecrew.crecre.Network.Get.GetCommunitySmallPostResponse
 import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
@@ -111,7 +111,7 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
 
     //recyclerView
     private fun configureRecyclerView() {
-        var dataList: ArrayList<CommunitySmallNewGetData> = ArrayList()
+        var dataList: ArrayList<CommunitySmallGetData> = ArrayList()
 
         communityHotPostRecyclerViewAdapter = CommunityHotPostRecyclerViewAdapter(this, dataList, flag)
         rv_community_hotpost_act_list.adapter = communityHotPostRecyclerViewAdapter
@@ -119,19 +119,19 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     //최신글, 인기글
-    private fun getCommunityRecentAllResponse(networkfunction: Call<GetCommunitySmallNewPostResponse>) {
-        val getCommunitySmallNewPosts: Call<GetCommunitySmallNewPostResponse> = networkfunction
+    private fun getCommunityRecentAllResponse(networkfunction: Call<GetCommunitySmallPostResponse>) {
+        val getCommunitySmallNewPosts: Call<GetCommunitySmallPostResponse> = networkfunction
 
-        getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
+        getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallPostResponse> {
 
-            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetCommunitySmallPostResponse>, t: Throwable) {
                 Log.e("최신글 전체 list fail", t.toString())
             }
 
-            override fun onResponse(call: Call<GetCommunitySmallNewPostResponse>, response: Response<GetCommunitySmallNewPostResponse>
+            override fun onResponse(call: Call<GetCommunitySmallPostResponse>, response: Response<GetCommunitySmallPostResponse>
             ) {
 
-                val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                val temp: ArrayList<CommunitySmallGetData> = response.body()!!.data
 
                 Log.v("TAGG : size1 ", temp.size.toString())
 
@@ -167,21 +167,21 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
 
     //게시판별 게시글 통신
     private fun getCommunityCommentResponse() {
-        val getCommunitySmallNewPosts: Call<GetCommunitySmallNewPostResponse> =
+        val getCommunitySmallNewPosts: Call<GetCommunitySmallPostResponse> =
             communityNetworkService.getPostListBoards(board_idx)
 
-        getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
+        getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallPostResponse> {
 
-            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetCommunitySmallPostResponse>, t: Throwable) {
                 Log.e("게시판별 게시글 통신 list fail", t.toString())
             }
 
             override fun onResponse(
-                call: Call<GetCommunitySmallNewPostResponse>,
-                response: Response<GetCommunitySmallNewPostResponse>
+                call: Call<GetCommunitySmallPostResponse>,
+                response: Response<GetCommunitySmallPostResponse>
             ) {
 
-                val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                val temp: ArrayList<CommunitySmallGetData> = response.body()!!.data
                 Log.v("TAGG : size", temp.size.toString())
                 //##확인필요
                 if (temp.size == 0) {

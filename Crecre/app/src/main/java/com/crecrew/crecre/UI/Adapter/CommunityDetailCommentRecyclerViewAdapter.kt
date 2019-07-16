@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.crecrew.crecre.Network.Get.CommunityReplyData
+import com.crecrew.crecre.Data.CommunityReplyData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.utils.calculatePostTime
 

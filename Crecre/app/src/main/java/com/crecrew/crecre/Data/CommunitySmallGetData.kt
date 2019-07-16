@@ -1,6 +1,6 @@
 package com.crecrew.crecre.Data
 
-data class CommunitySmallNewGetData(
+data class CommunitySmallGetData(
     val board_idx: Int,
     val contents: String,
     val create_time: String,

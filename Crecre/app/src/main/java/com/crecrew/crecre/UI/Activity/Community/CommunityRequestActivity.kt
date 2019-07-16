@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
@@ -13,27 +12,22 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.crecrew.crecre.DB.SharedPreferenceController
-import com.crecrew.crecre.Data.CommunitySmallNewGetData
+import com.crecrew.crecre.Data.CommunityRequestCntData
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.Network.Get.*
 import com.crecrew.crecre.Network.Post.PostCommunityFavoriteLikeResponse
 import com.crecrew.crecre.R
-import com.crecrew.crecre.UI.Fragment.Community.CommunityFragment
 import com.crecrew.crecre.utils.ApplicationData
 import com.crecrew.crecre.utils.CustomRequestCompleteDialog
 import com.crecrew.crecre.utils.CustomRequestDialog
-import com.crecrew.crecre.utils.SearchAlarmDialog
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import kotlinx.android.synthetic.main.activity_community_request.*
-import kotlinx.android.synthetic.main.activity_creator_search.*
-import kotlinx.android.synthetic.main.custom_dialog_response_complete.*
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.*
 import kotlin.collections.ArrayList
 
 class CommunityRequestActivity : AppCompatActivity(), View.OnClickListener {

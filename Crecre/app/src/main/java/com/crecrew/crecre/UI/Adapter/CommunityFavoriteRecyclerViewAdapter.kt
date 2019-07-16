@@ -7,15 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Network.ApplicationController
-import com.crecrew.crecre.Network.Get.CommunityBoardData
+import com.crecrew.crecre.Data.CommunityBoardData
 import com.crecrew.crecre.Network.CommunityNetworkService
-import com.crecrew.crecre.Network.Get.CommunityRequestCntData
-import com.crecrew.crecre.Network.Get.GetBoardRequestNumResponse
 import com.crecrew.crecre.Network.Post.PostCommunityFavoriteLikeResponse
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity

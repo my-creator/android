@@ -11,13 +11,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.PopupMenu
-import com.crecrew.crecre.Data.CommentData
 import com.crecrew.crecre.UI.Adapter.CommunityDetailCommentRecyclerViewAdapter
 import kotlinx.android.synthetic.main.activity_community_detail.*
-import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.crecrew.crecre.DB.SharedPreferenceController
-import com.crecrew.crecre.Data.CommunitySmallNewGetData
+import com.crecrew.crecre.Data.CommunityDetailData
+import com.crecrew.crecre.Data.CommunityReplyData
 import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.Network.Get.*
@@ -27,10 +26,7 @@ import com.crecrew.crecre.UI.Activity.LoginActivity
 import com.crecrew.crecre.utils.*
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import kotlinx.android.synthetic.main.activity_community_detail.view.*
-import kotlinx.android.synthetic.main.activity_community_request.*
 import org.jetbrains.anko.ctx
-import org.jetbrains.anko.networkStatsManager
 import org.jetbrains.anko.startActivity
 import org.json.JSONObject
 import retrofit2.Call

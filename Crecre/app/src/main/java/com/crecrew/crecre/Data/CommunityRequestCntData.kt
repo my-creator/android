@@ -1,4 +1,4 @@
-package com.crecrew.crecre.Network.Get
+package com.crecrew.crecre.Data
 
 data class CommunityRequestCntData(
     val idx: Int,

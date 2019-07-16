@@ -1,10 +1,7 @@
 package com.crecrew.crecre.UI.Fragment.Community
 
-import android.app.Application
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,19 +9,16 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Network.ApplicationController
-import com.crecrew.crecre.Network.Get.CommunityBoardData
+import com.crecrew.crecre.Data.CommunityBoardData
 import com.crecrew.crecre.Network.Get.GetCommunityUnlikeBoardsResponse
 import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.R
-import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Activity.Community.CommunitySearchActivity
 import com.crecrew.crecre.UI.Adapter.CommunityFavoriteRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.CommunityPostFragmentAdapter
 import com.crecrew.crecre.utils.ApplicationData
 import kotlinx.android.synthetic.main.fragment_community.*
 import kotlinx.android.synthetic.main.fragment_community.view.*
-import org.jetbrains.anko.ctx
-import org.jetbrains.anko.support.v4.ctx
 import org.jetbrains.anko.support.v4.startActivity
 import retrofit2.Call
 import retrofit2.Callback
@@ -245,7 +239,7 @@ import android.view.ViewGroup
 import android.widget.RelativeLayout
 import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.Network.ApplicationController
-import com.crecrew.crecre.Network.Get.CommunityBoardData
+import com.crecrew.crecre.Data.CommunityBoardData
 import com.crecrew.crecre.Network.Get.GetCommunityUnlikeBoardsResponse
 import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.R

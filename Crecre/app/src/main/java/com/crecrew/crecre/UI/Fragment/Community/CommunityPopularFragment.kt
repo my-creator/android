@@ -8,8 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.crecrew.crecre.Network.ApplicationController
-import com.crecrew.crecre.Data.CommunitySmallNewGetData
-import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
+import com.crecrew.crecre.Data.CommunitySmallGetData
+import com.crecrew.crecre.Network.Get.GetCommunitySmallPostResponse
 import com.crecrew.crecre.Network.CommunityNetworkService
 
 import com.crecrew.crecre.R
@@ -62,7 +62,7 @@ class CommunityPopularFragment : Fragment() {
     //인기글 RecyclerView
     private fun setRecyclerView() {
 
-        var dataList: ArrayList<CommunitySmallNewGetData> = ArrayList()
+        var dataList: ArrayList<CommunitySmallGetData> = ArrayList()
 
         communityPopularRecyclerViewAdapter = CommunityHotPostRecyclerViewAdapter(context!!, dataList,1)
         rv_popular_community_fg.adapter = communityPopularRecyclerViewAdapter
@@ -72,18 +72,18 @@ class CommunityPopularFragment : Fragment() {
 
     //인기글 5개 보여주기
     private fun getCommunityRecentResponse() {
-        val getCommunitySmallNewPosts : Call<GetCommunitySmallNewPostResponse> = communityNetworkService.getCommunitySmallHotPosts()
+        val getCommunitySmallNewPosts : Call<GetCommunitySmallPostResponse> = communityNetworkService.getCommunitySmallHotPosts()
 
-        getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
+        getCommunitySmallNewPosts.enqueue(object : Callback<GetCommunitySmallPostResponse> {
 
-            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetCommunitySmallPostResponse>, t: Throwable) {
                 Log.e("최신글 5개 list fail", t.toString())
             }
 
-            override fun onResponse(call: Call<GetCommunitySmallNewPostResponse>, response: Response<GetCommunitySmallNewPostResponse>) {
+            override fun onResponse(call: Call<GetCommunitySmallPostResponse>, response: Response<GetCommunitySmallPostResponse>) {
 
                 if (response.isSuccessful) {
-                    val temp : ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                    val temp : ArrayList<CommunitySmallGetData> = response.body()!!.data
                     if (temp.size > 0) {
 
                         val position = communityPopularRecyclerViewAdapter.itemCount
