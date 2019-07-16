@@ -8,12 +8,12 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.crecrew.crecre.DB.SharedPreferenceController
-import com.crecrew.crecre.Data.CommunitySmallNewGetData
+import com.crecrew.crecre.Data.CommunitySmallGetData
 import com.crecrew.crecre.Network.ApplicationController
-import com.crecrew.crecre.Network.Get.CommunityBoardData
+import com.crecrew.crecre.Data.CommunityBoardData
 import com.crecrew.crecre.Network.Get.GetCommunityUnlikeBoardsResponse
 import com.crecrew.crecre.Network.CommunityNetworkService
-import com.crecrew.crecre.Network.Get.GetCommunitySmallNewPostResponse
+import com.crecrew.crecre.Network.Get.GetCommunitySmallPostResponse
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
 import com.crecrew.crecre.UI.Adapter.CoummunitySearchRecyclerViewAdapter
@@ -142,7 +142,7 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun configurecontensRecyclerView() {
-        var dataList2: ArrayList<CommunitySmallNewGetData> = ArrayList()
+        var dataList2: ArrayList<CommunitySmallGetData> = ArrayList()
 
         communitycontentsearchRecyclerViewAdapter = CommunityHotPostRecyclerViewAdapter(this, dataList2, 3)
         rv_search_result_com_sear_act.adapter = communitycontentsearchRecyclerViewAdapter
@@ -220,21 +220,21 @@ class CommunitySearchActivity : AppCompatActivity(), View.OnClickListener {
 
     //검색버튼 누른 후 글 제목, 내용 검색 통신
     private fun getContentsSearchResultResponse() {
-        val getPostSearchTitle: Call<GetCommunitySmallNewPostResponse> =
+        val getPostSearchTitle: Call<GetCommunitySmallPostResponse> =
             communityNetworkService.getPostSearchTitle(ApplicationData.auth, search_tv, "")
 
-        getPostSearchTitle.enqueue(object : Callback<GetCommunitySmallNewPostResponse> {
+        getPostSearchTitle.enqueue(object : Callback<GetCommunitySmallPostResponse> {
 
-            override fun onFailure(call: Call<GetCommunitySmallNewPostResponse>, t: Throwable) {
+            override fun onFailure(call: Call<GetCommunitySmallPostResponse>, t: Throwable) {
                 Log.e("검색 게시글 fail", t.toString())
             }
 
             override fun onResponse(
-                call: Call<GetCommunitySmallNewPostResponse>,
-                response: Response<GetCommunitySmallNewPostResponse>
+                call: Call<GetCommunitySmallPostResponse>,
+                response: Response<GetCommunitySmallPostResponse>
             ) {
                 if (response.isSuccessful) {
-                    val temp: ArrayList<CommunitySmallNewGetData> = response.body()!!.data
+                    val temp: ArrayList<CommunitySmallGetData> = response.body()!!.data
                     if (temp.size > 0) {
 
                         val position = communitycontentsearchRecyclerViewAdapter.itemCount

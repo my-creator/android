@@ -14,25 +14,25 @@ interface CommunityNetworkService {
     @GET("posts/new")
     fun getCommunitySmallNewPosts(
 
-    ): Call<GetCommunitySmallNewPostResponse>
+    ): Call<GetCommunitySmallPostResponse>
 
     //인기글 5개 보여주기
     @GET("posts/hot")
     fun getCommunitySmallHotPosts(
 
-    ): Call<GetCommunitySmallNewPostResponse>
+    ): Call<GetCommunitySmallPostResponse>
 
     //최신글 전체 보여주기
     @GET("posts/allnew")
     fun getCommunityAllNewPosts(
 
-    ): Call<GetCommunitySmallNewPostResponse>
+    ): Call<GetCommunitySmallPostResponse>
 
     //인기글 전체 보여주기
     @GET("posts/allhot")
     fun getCommunityAllHotPosts(
 
-    ): Call<GetCommunitySmallNewPostResponse>
+    ): Call<GetCommunitySmallPostResponse>
 
     //즐겨찾지 않은 게시판 보여주기
     @GET("boards/unlike")
@@ -73,13 +73,13 @@ interface CommunityNetworkService {
     @GET("posts/listhot/{boardIdx}")
     fun getPostListBoards(
         @Path("boardIdx") boardIdx : Int
-    ):Call<GetCommunitySmallNewPostResponse>
+    ):Call<GetCommunitySmallPostResponse>
 
     //게시판 게시글 리스트 보여주기
     @GET("posts/list/{boardIdx}")
     fun getPostListAllBoards(
         @Path("boardIdx") boardIdx : Int
-    ):Call<GetCommunitySmallNewPostResponse>
+    ):Call<GetCommunitySmallPostResponse>
 
     //게시글 상세보기
     @GET("posts/detail/{postIdx}")
@@ -94,7 +94,7 @@ interface CommunityNetworkService {
         @Header("token") token: String,
         @Query("title") title: String,
         @Query("contents") contents : String
-    ) : Call<GetCommunitySmallNewPostResponse>
+    ) : Call<GetCommunitySmallPostResponse>
 
 
     //게시판 즐겨찾기

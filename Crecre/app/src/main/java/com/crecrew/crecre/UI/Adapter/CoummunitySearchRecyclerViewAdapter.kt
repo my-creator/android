@@ -7,8 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.crecrew.crecre.Data.SearchResultData
-import com.crecrew.crecre.Network.Get.CommunityBoardData
+import com.crecrew.crecre.Data.CommunityBoardData
 import com.crecrew.crecre.R
 
 class CoummunitySearchRecyclerViewAdapter (val ctx : Context, val dataList : ArrayList<CommunityBoardData>) : RecyclerView.Adapter<CoummunitySearchRecyclerViewAdapter.Holder>() {

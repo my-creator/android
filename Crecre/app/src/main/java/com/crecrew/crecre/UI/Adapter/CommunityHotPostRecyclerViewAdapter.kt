@@ -2,7 +2,6 @@ package com.crecrew.crecre.UI.Adapter
 
 import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,16 +9,13 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.bumptech.glide.Glide
-import com.crecrew.crecre.DB.SharedPreferenceController
-import com.crecrew.crecre.Data.CommunitySmallNewGetData
+import com.crecrew.crecre.Data.CommunitySmallGetData
 import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityDetailActivity
-import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
-import com.crecrew.crecre.utils.ApplicationData
 import com.crecrew.crecre.utils.calculatePostTime
 import org.jetbrains.anko.startActivity
 
-class CommunityHotPostRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<CommunitySmallNewGetData>, val flag: Int
+class CommunityHotPostRecyclerViewAdapter(val ctx: Context, val dataList: ArrayList<CommunitySmallGetData>, val flag: Int
 ) : RecyclerView.Adapter<CommunityHotPostRecyclerViewAdapter.Holder>() {
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): Holder {
         val view: View = LayoutInflater.from(ctx).inflate(R.layout.rv_item_hotpost_community_act, viewGroup, false)
