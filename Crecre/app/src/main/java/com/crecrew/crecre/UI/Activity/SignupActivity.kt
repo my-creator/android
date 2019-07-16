@@ -97,6 +97,7 @@ class SignupActivity :AppCompatActivity(){
         }
     }
 
+
     private fun getIdDuplicateResponse(id :String){
 
         Log.e("id : ", id)

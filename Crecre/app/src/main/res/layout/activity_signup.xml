@@ -48,6 +48,7 @@
                     android:layout_height="match_parent"
                     android:paddingHorizontal="38dp"
                     android:paddingTop="23dp"
+                    android:paddingBottom="20dp"
                     android:orientation="vertical">
 
                 <RelativeLayout

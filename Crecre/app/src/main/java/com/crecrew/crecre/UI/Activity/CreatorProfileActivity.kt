@@ -24,6 +24,7 @@ import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Adapter.ProfileHotVideoRecyclerViewAdapter
 import com.crecrew.crecre.utils.CustomDialogProfileQuestion
 import com.crecrew.crecre.utils.SearchAlarmDialog
+import com.crecrew.crecre.utils.SignupIdCheckDialog
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.RadarChart
 import com.github.mikephil.charting.components.AxisBase
@@ -99,7 +100,7 @@ class CreatorProfileActivity : FragmentActivity() {
 
 
         activity_creator_profile_btn_go_fanpage.setOnClickListener {
-            startActivity<CommunityHotPostActivity>()
+            requestDialog.show()
         }
 
         activity_creator_profile_btn_join_stat.setOnClickListener {
@@ -237,7 +238,7 @@ class CreatorProfileActivity : FragmentActivity() {
                         youtube_subscriber_cnt.text =
                             String.format("%,d", creatorProfileData.youtube_subscriber_cnt) + "명"
                         youtube_view_cnt.text = String.format("%,d", creatorProfileData.youtube_view_cnt) + "명"
-                        //activity_creator_profile_description.text = creatorProfileData.contents
+                        activity_creator_profile_description.text = creatorProfileData.contents
                         Glide.with(this@CreatorProfileActivity).load(creatorProfileData.follower_grade_img_url)
                             .into(activity_creator_profile_rank_img)
                         Glide.with(this@CreatorProfileActivity).load(creatorProfileData.view_grade_img_url)
@@ -307,7 +308,9 @@ class CreatorProfileActivity : FragmentActivity() {
                 if(response.isSuccessful){
                     if(response.body()!!.status == 200){
                         var HotVideoDatas : ArrayList<HotVideoData> = response.body()!!.data
-                        configureRecyclerView(HotVideoDatas, flag)
+
+                        if(HotVideoDatas.size > 0)
+                            configureRecyclerView(HotVideoDatas, flag)
                     }
                 }
             }
@@ -342,6 +345,16 @@ class CreatorProfileActivity : FragmentActivity() {
         creatorprofileDialog!!.dismiss()
         creatorprofileclassDialog!!.dismiss()
         //##title EditText에 포커스 주기
+    }
+
+    val requestDialog : SignupIdCheckDialog by lazy {
+        SignupIdCheckDialog(
+            this@CreatorProfileActivity, "알림",
+            "준비중인 기능입니다.", "확인", completeConfirmListener)
+    }
+
+    private val completeConfirmListener = View.OnClickListener {
+        requestDialog!!.dismiss()
     }
 
 

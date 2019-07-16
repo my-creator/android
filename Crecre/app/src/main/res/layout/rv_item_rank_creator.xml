@@ -24,10 +24,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginLeft="-5dp"
+                android:layout_marginLeft="-7dp"
                 android:layout_marginBottom="-12dp"
                 android:layout_toRightOf="@+id/rv_item_rank_creator_ranking"
-                android:layout_alignBottom="@id/rv_item_rank_creator_ranking">
+                android:layout_alignBottom="@id/rv_item_rank_creator_ranking"
+                android:layout_centerHorizontal="true">
             <ImageView
                     android:id="@+id/rv_item_rank_creator_arrow"
                     android:layout_width="10dp"
