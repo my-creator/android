@@ -20,8 +20,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
-        <activity android:name=".UI.Activity.MypageActivity">
-        </activity>
+
         <activity android:name=".UI.Activity.LoginActivity">
         </activity>
         <activity android:name=".UI.Activity.ProfileJoinStatActivity">
@@ -37,11 +36,11 @@
         </activity>
         <activity android:name=".UI.Activity.Community.CommunityHotPostActivity">
         </activity>
-        <activity android:name=".UI.Activity.MainActivity">
-        </activity>
+
         <activity android:name=".UI.Activity.CreatorProfileActivity"/>
         <activity android:name=".UI.Activity.VoteSuggestActivity"/>
         <activity android:name=".UI.Activity.CreatorSearchActivity"/>
+        <activity android:name=".UI.Activity.MainActivity"/>
         <activity android:name=".UI.Activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -53,8 +52,6 @@
 
         <activity android:name=".UI.Activity.SignupActivity"/>
         <activity android:name=".UI.Activity.SignupCompleteActivity"/>
-        <activity android:name=".utils.CustomDialogProfileQuestion"/>
-        <activity android:name=".UI.Activity.ProfileClassQuestionActivity"/>
     </application>
 
 </manifest>

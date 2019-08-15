@@ -23,7 +23,7 @@ import com.crecrew.crecre.R
 import com.crecrew.crecre.UI.Activity.Community.CommunityHotPostActivity
 import com.crecrew.crecre.UI.Adapter.ProfileHotVideoRecyclerViewAdapter
 import com.crecrew.crecre.utils.CustomDialogProfileQuestion
-import com.crecrew.crecre.utils.SearchAlarmDialog
+import com.crecrew.crecre.utils.ProfileClassQuestionDialog
 import com.github.mikephil.charting.animation.Easing
 import com.github.mikephil.charting.charts.RadarChart
 import com.github.mikephil.charting.components.AxisBase
@@ -59,9 +59,10 @@ class CreatorProfileActivity : FragmentActivity() {
             this@CreatorProfileActivity, CloseListener)
     }
 
-    val creatorprofileclassDialog: ProfileClassQuestionActivity by lazy {
-        ProfileClassQuestionActivity(
-            this@CreatorProfileActivity, CloseListener)
+    val creatorprofileclassDialog: ProfileClassQuestionDialog by lazy {
+        ProfileClassQuestionDialog(
+            this@CreatorProfileActivity, CloseListener
+        )
     }
 
 
