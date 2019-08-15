@@ -109,7 +109,7 @@ class HomeFragment : Fragment() {
         // 화면 전환
         rootView.run {
 
-            fragment_home_iv_today_hot_btn.setOnClickListener() {
+            fragment_home_rl_today_hot_btn_container.setOnClickListener() {
                 openTodayHotChart()
             }
 
@@ -194,7 +194,6 @@ class HomeFragment : Fragment() {
                                     addFragment(ClosedVoteFragment.newInstance(tmp[i]))
                             }
                         }
-
                     }
                 }
             }
@@ -245,11 +244,24 @@ class HomeFragment : Fragment() {
                         var todayCreatorRankBottomData: ArrayList<CreatorData> = ArrayList(5)
 
                         var index = 0
-                        for (i in 0..4)
-                            todayCreatorRankTopData.add(todayCreatorRankData[index++])
+                        var isEmpty = false
                         for (i in 0..4) {
-                            todayCreatorRankBottomData.add(todayCreatorRankData[index++])
+                            if(todayCreatorRankData[index].searchCnt != 0)
+                                todayCreatorRankTopData.add(todayCreatorRankData[index++])
+                            else {
+                                isEmpty = true
+                                break
+                            }
                         }
+                        if(!isEmpty) {
+                            for (i in 0..4) {
+                                if (todayCreatorRankData[index].searchCnt != 0)
+                                    todayCreatorRankBottomData.add(todayCreatorRankData[index++])
+                                else
+                                    break
+                            }
+                        }
+
                         rootView.fragment_home_vp_today_rank.run {
                             adapter = BasePagerAdapter(fragmentManager!!).apply {
 
@@ -304,7 +316,12 @@ class HomeFragment : Fragment() {
                         if (tmp.size > 0) {
                             var todayDataList : ArrayList<TodayPost> = ArrayList(3)
 
-                            for (i in 0..2) {
+                            // max size 이런걸로 설정할 수 있나?
+                            var size = tmp.size-1
+                            if(size > 2)
+                                size = 2
+
+                            for (i in 0..size) {
                                 todayDataList.add(tmp[i])
                             }
                             todayPostRecyclerViewAdapter = TodayPostRecyclerViewAdapter(activity!!, todayDataList)
@@ -317,7 +334,8 @@ class HomeFragment : Fragment() {
                                     DividerItemDecoration.VERTICAL
                                 )
                             )
-                        }
+                        } else
+                            fragment_home_rl_hot_post_null.visibility = VISIBLE
                     }
                 }
 
@@ -338,7 +356,11 @@ class HomeFragment : Fragment() {
                         if (tmp.size > 0) {
                             var todayDataList : ArrayList<TodayPost> = ArrayList(3)
 
-                            for (i in 0..2) {
+                            var size = tmp.size-1
+                            if(size > 2)
+                                size = 2
+
+                            for (i in 0..size) {
                                 todayDataList.add(tmp[i])
                             }
 
@@ -353,6 +375,8 @@ class HomeFragment : Fragment() {
                                 )
                             )
                         }
+                        else
+                            fragment_home_rl_new_post_null.visibility = VISIBLE
                     }
                 }
 

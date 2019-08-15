@@ -32,7 +32,6 @@ class ProfileHotVideoRecyclerViewAdapter(private val ctx : Context, private val 
 
     fun init(v :View){
 
-        Log.e("hi","i'm in")
         var post_time = v.findViewById(R.id.rv_item_today_post_time) as TextView
         var post_comment = v.findViewById(R.id.rv_item_today_post_comment) as TextView
 
@@ -51,9 +50,10 @@ class ProfileHotVideoRecyclerViewAdapter(private val ctx : Context, private val 
             Glide.with(ctx).load(dataList[position].thumbnail_url).into(holder.thumbnail_url)
         holder.title.text = dataList[position].title
         holder.view_cnt.text = "조회수" + dataList[position].view_cnt.toString()
+        /*
         dataList[position].create_time.replace("T", " ")
         holder.create_time.text = calculatePostTime(dataList[position].create_time)
-
+*/
         holder.container.setOnClickListener {
 
         }
