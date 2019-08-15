@@ -101,72 +101,73 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
             //추천 누르기
             btn_like_community_detail_act -> {
 
-                if (btn_unlike == 1) {
-                    btn_unlike_community_detail_act.isSelected = false
-                    tv_unlike_community_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
-                    tv_unlike_community_detail_act.setText("비추천 " + --hate_cnt)
+                if(ApplicationData.auth == "")
+                    customLoginCheckDialog.show()
+                else
+                {
+                    if (btn_unlike == 1) {
+                        btn_unlike_community_detail_act.isSelected = false
+                        tv_unlike_community_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
+                        tv_unlike_community_detail_act.setText("비추천 " + --hate_cnt)
 
-                    //비추천 통신
-                    postLikeOnClickResponse(
-                        communityNetworkService.deletePostunhateOff(
-                            ApplicationData.auth, postidx
-                        ), 0
-                    )
-                    btn_unlike = 0
-
-                    if (btn_like == 0) {
-                        btn_like_community_detail_act.isSelected = true
-                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#ff4343"))
-                        tv_recommend_number_detail_act.setText("추천 " + ++like_cnt)
-
-                        //좋아요 통신
+                        //비추천 통신
                         postLikeOnClickResponse(
-                            communityNetworkService.postPostLikeOn(
+                            communityNetworkService.deletePostunhateOff(
                                 ApplicationData.auth, postidx
                             ), 0
                         )
-                        btn_like = 1
+                        btn_unlike = 0
+
+                        if (btn_like == 0) {
+                            btn_like_community_detail_act.isSelected = true
+                            tv_recommend_number_detail_act.setTextColor(Color.parseColor("#ff4343"))
+                            tv_recommend_number_detail_act.setText("추천 " + ++like_cnt)
+
+                            //좋아요 통신
+                            postLikeOnClickResponse(
+                                communityNetworkService.postPostLikeOn(
+                                    ApplicationData.auth, postidx
+                                ), 0
+                            )
+                            btn_like = 1
+                        } else {
+                            btn_like_community_detail_act.isSelected = false
+                            tv_recommend_number_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
+                            tv_recommend_number_detail_act.setText("추천 " + --like_cnt)
+
+                            //좋아요 취소 통신
+                            postLikeOnClickResponse(
+                                communityNetworkService.deletePostLikeOff(
+                                    ApplicationData.auth, postidx
+                                ), 0
+                            )
+                            btn_like = 0
+                        }
+
                     } else {
-                        btn_like_community_detail_act.isSelected = false
-                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
-                        tv_recommend_number_detail_act.setText("추천 " + --like_cnt)
+                        if (btn_like == 0) {
+                            btn_like_community_detail_act.isSelected = true
+                            tv_recommend_number_detail_act.setTextColor(Color.parseColor("#ff4343"))
+                            btn_like = 1
+                            tv_recommend_number_detail_act.setText("추천 " + ++like_cnt)
 
-                        //좋아요 취소 통신
-                        postLikeOnClickResponse(
-                            communityNetworkService.deletePostLikeOff(
-                                ApplicationData.auth, postidx
-                            ), 0
-                        )
-                        btn_like = 0
-                    }
-
-                } else {
-                    if (btn_like == 0) {
-                        btn_like_community_detail_act.isSelected = true
-                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#ff4343"))
-                        btn_like = 1
-                        tv_recommend_number_detail_act.setText("추천 " + ++like_cnt)
-
-                        //좋아요 통신
-                        postLikeOnClickResponse(
-                            communityNetworkService.postPostLikeOn(
-                                ApplicationData.auth, postidx
-                            ),0
-                        )
-                    } else {
-                        btn_like_community_detail_act.isSelected = false
-                        tv_recommend_number_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
-                        tv_recommend_number_detail_act.setText("추천 " + --like_cnt)
-                        //좋아요 취소 통신
-                        postLikeOnClickResponse(
-                            communityNetworkService.deletePostLikeOff(
-                                ApplicationData.auth, postidx
-                            ),0
-                        )
-                        btn_like = 0
+                            //좋아요 통신
+                            postLikeOnClickResponse(
+                                communityNetworkService.postPostLikeOn(ApplicationData.auth, postidx),0)
+                        } else {
+                            btn_like_community_detail_act.isSelected = false
+                            tv_recommend_number_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
+                            tv_recommend_number_detail_act.setText("추천 " + --like_cnt)
+                            //좋아요 취소 통신
+                            postLikeOnClickResponse(
+                                communityNetworkService.deletePostLikeOff(
+                                    ApplicationData.auth, postidx
+                                ),0
+                            )
+                            btn_like = 0
+                        }
                     }
                 }
-
             }
 
             //비추천 누르기
@@ -270,12 +271,19 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
             //댓글 작성 버튼
             btn_find_search_com_act -> {
 
-                if (et_commnets_reply_commu_detail_act.text.length == 0) {
-                    requestEnterDialog.show()
-                } else {
-                    postCommentReplyResponse()
+                if(ApplicationData.auth == "")
+                    customLoginCheckDialog.show()
+                else
+                {
+                    if (et_commnets_reply_commu_detail_act.text.length == 0) {
+                        requestEnterDialog.show()
+                    } else {
+                        postCommentReplyResponse()
 
+                    }
                 }
+
+
             }
         }
     }
@@ -374,6 +382,8 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
                     if (login_userIdx == write_userIdx)
                     //삭제하시겠습니까?
                         requestDialog.show()
+                    else if(ApplicationData.auth == "")
+                        customLoginCheckDialog.show()
                     else
                     //본인이 아닙니다.
                         writeSelfDialog.show()
@@ -387,8 +397,6 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     //다이얼로그 -> 네
     private val completeConfirmListener = View.OnClickListener {
-
-        //##글 삭제하는 서버통신
         postLikeOnClickResponse(communityNetworkService.deletePostComments(ApplicationData.auth, postidx),1)
     }
 
@@ -396,13 +404,13 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
     private val completeNoListener = View.OnClickListener {
         requestDialog!!.dismiss()
         customLoginCheckDialog!!.dismiss()
-
     }
 
     //다이얼로그 -> 로그인하시겠습니까? -> 네
     private val completeLoginConfirmListener = View.OnClickListener {
         customLoginCheckDialog!!.dismiss()
         startActivity<LoginActivity>()
+        //##쌓여있는 엑티비티 지우기...근데 마지막 상태로 돌아와야 할 것 같은데?
         finish()
     }
 
@@ -470,9 +478,6 @@ class CommunityDetailActivity : AppCompatActivity(), View.OnClickListener {
             btn_unlike_community_detail_act.isSelected = false
             tv_unlike_community_detail_act.setTextColor(Color.parseColor("#a4a4a4"))
         }
-
-
-
 
         //user_porfile
         if (dataList[0].profile_url == null)

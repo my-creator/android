@@ -59,7 +59,7 @@ class CommunityHotPostRecyclerViewAdapter(val ctx: Context, val dataList: ArrayL
         //추천수
         holder.recommendation.text = "추천 " + dataList[position].like_cnt.toString() + " | "
 
-        //댓글수##수정reply_cnt로 수정
+        //댓글수
         holder.comment.text = "댓글 " + dataList[position].reply_cnt.toString() + " | "
 
         //작성시간

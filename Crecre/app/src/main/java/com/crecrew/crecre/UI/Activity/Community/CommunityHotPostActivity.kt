@@ -10,7 +10,10 @@ import com.crecrew.crecre.Network.ApplicationController
 import com.crecrew.crecre.Network.Get.GetCommunitySmallPostResponse
 import com.crecrew.crecre.Network.CommunityNetworkService
 import com.crecrew.crecre.R
+import com.crecrew.crecre.UI.Activity.LoginActivity
 import com.crecrew.crecre.UI.Adapter.CommunityHotPostRecyclerViewAdapter
+import com.crecrew.crecre.utils.ApplicationData
+import com.crecrew.crecre.utils.CustomLoginCheckDialog
 import kotlinx.android.synthetic.main.activity_community_hot_post.*
 import org.jetbrains.anko.startActivity
 import retrofit2.Call
@@ -24,6 +27,14 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
     val communityNetworkService: CommunityNetworkService by lazy {
         ApplicationController.instance.communityNetworkService
     }
+
+    val customLoginCheckDialog: CustomLoginCheckDialog by lazy {
+        CustomLoginCheckDialog(
+            this@CommunityHotPostActivity, "알림", "로그인이 필요한 서비스입니다.", "로그인 하시겠습니까?", "네"
+            , "아니요", completeLoginConfirmListener, completeNoListener
+        )
+    }
+
 
     var board_idx = -1
     var user_idx = -1
@@ -46,7 +57,11 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
             }
             //글 작성버튼
             writing_btn_hotpost_community_act -> {
-                startActivity<CommunityWriteActivity>("boardIdx" to board_idx)
+
+                if(ApplicationData.auth == "")
+                    customLoginCheckDialog.show()
+                else
+                    startActivity<CommunityWriteActivity>("boardIdx" to board_idx)
             }
 
         }
@@ -220,4 +235,19 @@ class CommunityHotPostActivity : AppCompatActivity(), View.OnClickListener {
         btn_search_community_hotpost_act.setOnClickListener(this)
         writing_btn_hotpost_community_act.setOnClickListener(this)
     }
+
+    //다이얼로그 -> 로그인하시겠습니까? -> 네
+    private val completeLoginConfirmListener = View.OnClickListener {
+        customLoginCheckDialog!!.dismiss()
+        startActivity<LoginActivity>()
+        //##쌓여있는 엑티비티 지우기...근데 마지막 상태로 돌아와야 할 것 같은데?
+        finish()
+    }
+
+    //다이얼로그 -> 아니요
+    private val completeNoListener = View.OnClickListener {
+        customLoginCheckDialog!!.dismiss()
+    }
+
+
 }

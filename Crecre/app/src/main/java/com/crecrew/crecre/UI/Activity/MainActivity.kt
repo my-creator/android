@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.crecrew.crecre.Base.BasePagerAdapter
 import com.crecrew.crecre.DB.SharedPreferenceController
 import com.crecrew.crecre.R
@@ -21,6 +22,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        var flag = intent.getIntExtra("flag", -1)
+
+        if(flag == 1)
+            Toast.makeText(this, "회원님 안녕하세요!!", Toast.LENGTH_LONG).show()
+        else
+            Toast.makeText(this, "둘러보기를 시작합니다", Toast.LENGTH_LONG).show()
+
 
         //ApplicationData.loginState = false
         ApplicationData.auth =SharedPreferenceController.getUserToken(this)

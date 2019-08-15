@@ -1,4 +1,4 @@
-package com.crecrew.crecre.UI.Activity
+package com.crecrew.crecre.utils
 
 import android.app.Dialog
 import android.content.Context
@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.custom_dialog_contents_delete.*
 import kotlinx.android.synthetic.main.custom_dialog_profile_class_question.*
 import kotlinx.android.synthetic.main.custom_dialog_profile_rank_question.*
 
-class ProfileClassQuestionActivity (context: Context,
-                                    private val closeClickListener: View.OnClickListener?)
+class ProfileClassQuestionDialog (context: Context,
+                                  private val closeClickListener: View.OnClickListener?)
     : Dialog(context, android.R.style.Theme_Translucent_NoTitleBar) {
 
 
