@@ -6,7 +6,7 @@
         android:id="@+id/rl_community_write_act"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".UI.Activity.Community.CommunityWriteActivity">
+        tools:context=".ui.activity.Community.CommunityWriteActivity">
 
     <!--toolbar-->
     <RelativeLayout
@@ -15,6 +15,7 @@
             android:layout_height="64dp"
             android:background="@drawable/community_header"
     >
+
         <!--btn_back-->
         <RelativeLayout
                 android:id="@+id/btn_back_community_write"
@@ -67,6 +68,7 @@
             android:orientation="vertical"
             android:layout_below="@+id/rl_toolbar_community_write_act"
     >
+
         <EditText
                 android:id="@+id/et_title_commu_write_act"
                 android:layout_width="match_parent"
@@ -113,8 +115,6 @@
                     android:layout_below="@+id/et_context_commu_write_act"
             />
 
-
-
         </RelativeLayout>
 
     </LinearLayout>
@@ -126,7 +126,6 @@
             android:layout_marginBottom="48dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-
     >
         <RelativeLayout
                 android:layout_width="match_parent"
@@ -150,7 +149,6 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/icn_camera"
-
             />
         </RelativeLayout>
 
@@ -166,6 +164,5 @@
         />
 
     </RelativeLayout>
-
 
 </RelativeLayout>

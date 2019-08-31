@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
-            android:name=".Network.ApplicationController"
+            android:name=".network.ApplicationController"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher_custom"
             android:label="@string/app_name"
@@ -23,27 +23,27 @@
             android:theme="@style/AppTheme"
             android:usesCleartextTraffic="true">
 
-        <activity android:name=".UI.Activity.LoginActivity">
+        <activity android:name=".ui.activity.LoginActivity">
         </activity>
-        <activity android:name=".UI.Activity.ProfileJoinStatActivity">
+        <activity android:name=".ui.activity.ProfileJoinStatActivity">
         </activity>
         <activity
-                android:name=".UI.Activity.Community.CommunitySearchActivity"
+                android:name=".ui.activity.Community.CommunitySearchActivity"
                 android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".UI.Activity.Community.CommunityWriteActivity">
+        <activity android:name=".ui.activity.Community.CommunityWriteActivity">
         </activity>
-        <activity android:name=".UI.Activity.Community.CommunityRequestActivity">
+        <activity android:name=".ui.activity.Community.CommunityRequestActivity">
         </activity>
-        <activity android:name=".UI.Activity.Community.CommunityDetailActivity">
+        <activity android:name=".ui.activity.Community.CommunityDetailActivity">
         </activity>
-        <activity android:name=".UI.Activity.Community.CommunityHotPostActivity">
+        <activity android:name=".ui.activity.Community.CommunityHotPostActivity">
         </activity>
 
-        <activity android:name=".UI.Activity.CreatorProfileActivity"/>
-        <activity android:name=".UI.Activity.VoteSuggestActivity"/>
-        <activity android:name=".UI.Activity.CreatorSearchActivity"/>
-        <activity android:name=".UI.Activity.MainActivity"/>
-        <activity android:name=".UI.Activity.SplashActivity">
+        <activity android:name=".ui.activity.CreatorProfileActivity"/>
+        <activity android:name=".ui.activity.VoteSuggestActivity"/>
+        <activity android:name=".ui.activity.CreatorSearchActivity"/>
+        <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <action android:name="android.intent.action.VIEW"/>
@@ -52,8 +52,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".UI.Activity.SignupActivity"/>
-        <activity android:name=".UI.Activity.SignupCompleteActivity"/>
+        <activity android:name=".ui.activity.SignupActivity"/>
+        <activity android:name=".ui.activity.SignupCompleteActivity"/>
     </application>
 
 </manifest>

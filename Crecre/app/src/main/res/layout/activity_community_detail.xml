@@ -1,379 +1,382 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-        android:id="@+id/rl_commu_detail_act"
+<layout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".UI.Activity.Community.CommunityDetailActivity"
-        android:fitsSystemWindows="true"
-        android:background="@color/white"
 >
-    <LinearLayout
-            android:id="@+id/linearLayout_focus"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:layout_width="0px"
-            android:orientation="horizontal"
-            android:layout_height="0px"/>
+    <data>
+        <variable name="communityDetail" type="com.crecrew.crecre.data.CommunityDetailData"/>
+    </data>
 
-    <!--Toolbar-->
     <RelativeLayout
-            android:id="@+id/rl_toolbar_community_detail_act"
+            android:id="@+id/rl_commu_detail_act"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="@drawable/community_header"
-    >
-        <!--btn_back-->
-        <RelativeLayout
-                android:id="@+id/btn_back_community_detail_act"
-                android:layout_width="48dp"
-                android:layout_height="64dp">
-
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/icn_back_white"
-            />
-
-        </RelativeLayout>
-
-        <!--title_category-->
-        <TextView
-                android:id="@+id/tv_category_community_detail_act"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans_kr_bold"
-                android:text="자유게시판"
-                android:textSize="18sp"
-                android:textColor="@color/white"
-                android:layout_centerInParent="true"
-        />
-
-        <!--btn alter, delete-->
-        <RelativeLayout
-                android:id="@+id/btn_delete_detail_community_act"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-        >
-
-            <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginVertical="20dp"
-                    android:src="@drawable/btn_delete"/>
-
-        </RelativeLayout>
-
-    </RelativeLayout>
-
-    <android.support.v4.widget.NestedScrollView
-            android:id="@+id/sv_content_community_detail_act"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/rl_toolbar_community_detail_act"
-            android:layout_above="@+id/rl_comment_container_community_search_act"
-            android:focusable="false"
+            android:layout_height="match_parent"
+            android:fitsSystemWindows="true"
+            android:background="@color/white"
     >
         <LinearLayout
+                android:id="@+id/linearLayout_focus"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_width="0px"
+                android:orientation="horizontal"
+                android:layout_height="0px"/>
+
+        <!--Toolbar-->
+        <RelativeLayout
+                android:id="@+id/rl_toolbar_community_detail_act"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="56dp"
+                android:background="@drawable/community_header"
         >
+            <!--btn_back-->
+
+
+                <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/icn_back_white"
+                        android:layout_alignParentBottom="true"
+                        android:onClick="onBackBtnClick"
+                        android:padding="5dp"/>
+
+            <!--title_category-->
             <TextView
-                    android:id="@+id/tv_title_community_detail_act"
+                    android:id="@+id/tv_category_community_detail_act"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/noto_sans_kr_medium"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="18dp"
-                    android:layout_marginHorizontal="24dp"
-                    android:text="종강이 싫은 대학생의 에타후기.jpg"
+                    android:fontFamily="@font/noto_sans_kr_bold"
+                    android:text="자유게시판"
+                    android:textSize="18sp"
+                    android:textColor="@color/white"
+                    android:layout_centerInParent="true"
             />
 
+            <!--btn alter, delete-->
+            <RelativeLayout
+                    android:id="@+id/btn_delete_detail_community_act"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+            >
+
+                <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginVertical="20dp"
+                        android:src="@drawable/btn_delete"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <android.support.v4.widget.NestedScrollView
+                android:id="@+id/sv_content_community_detail_act"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_toolbar_community_detail_act"
+                android:layout_above="@+id/rl_comment_container_community_search_act"
+                android:focusable="false"
+        >
             <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="24dp"
-                    android:layout_marginTop="9dp"
-                    android:layout_marginBottom="13dp"
+                    android:orientation="vertical"
             >
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/img_user_profile_circleImageView"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/icn_profile"
+                <TextView
+                        android:id="@+id/tv_title_community_detail_act"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/noto_sans_kr_medium"
+                        android:textSize="16sp"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="18dp"
+                        android:layout_marginHorizontal="24dp"
+                        android:text="종강이 싫은 대학생의 에타후기.jpg"
                 />
 
                 <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:layout_marginLeft="10dp"
-                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="24dp"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginBottom="13dp"
                 >
 
-                    <TextView
-                            android:id="@+id/tv_user_nickname_detail_act"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="10sp"
-                            android:fontFamily="@font/noto_sans_kr_medium"
-                            android:textColor="@color/black"
-                            android:text="익명"
+                    <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/img_user_profile_circleImageView"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/icn_profile"
                     />
 
                     <LinearLayout
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-
-                        <TextView
-                                android:id="@+id/tv_createtime_commu_detail_act"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/noto_sans_kr_medium"
-                                android:textColor="#a4a4a4"
-                                android:textSize="10sp"
-                                android:text="18초 전"
-                        />
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginLeft="10dp"
+                            android:layout_gravity="center_vertical"
+                    >
 
                         <TextView
-                                android:id="@+id/tv_viewcnt_commu_detail_act"
+                                android:id="@+id/tv_user_nickname_detail_act"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/noto_sans_kr_medium"
-                                android:layout_marginLeft="4dp"
-                                android:textColor="#a4a4a4"
                                 android:textSize="10sp"
-                                android:text="조회수 21"
+                                android:fontFamily="@font/noto_sans_kr_medium"
+                                android:textColor="@color/black"
+                                android:text="익명"
                         />
+
+                        <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+
+                            <TextView
+                                    android:id="@+id/tv_createtime_commu_detail_act"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/noto_sans_kr_medium"
+                                    android:textColor="#a4a4a4"
+                                    android:textSize="10sp"
+                                    android:text="18초 전"
+                            />
+
+                            <TextView
+                                    android:id="@+id/tv_viewcnt_commu_detail_act"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/noto_sans_kr_medium"
+                                    android:layout_marginLeft="4dp"
+                                    android:textColor="#a4a4a4"
+                                    android:textSize="10sp"
+                                    android:text="조회수 21"
+                            />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
+                <!--main화면의 사용자 정보, title-->
+                <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#f0f0f0"
+                        android:layout_marginHorizontal="24dp"
+                >
+
+                </LinearLayout>
+
+                <!--Image-->
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="16dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_alignParentStart="true">
+
+                    <ImageView
+                            android:id="@+id/img_main_community_detail"
+                            android:layout_width="296dp"
+                            android:layout_height="192dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/icn_img_x"
+                    />
+
+                    <TextView
+                            android:id="@+id/tv_main_context_community_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/img_main_community_detail"
+                            android:layout_marginTop="14dp"
+                            android:fontFamily="@font/noto_sans_kr_medium"
+                            android:textSize="14sp"
+                            android:textColor="@color/black"
+                            android:text="ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
+                    />
+
+                    <!--추천,비추천-->
+                    <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="48dp"
+                            android:layout_below="@+id/tv_main_context_community_detail"
+                            android:orientation="horizontal"
+                    >
+                        <!--추천-->
+                        <LinearLayout
+                                android:id="@+id/btn_like_community_detail_act"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                        >
+
+                            <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/community_detail_like_btn"
+                            />
+
+                            <TextView
+                                    android:id="@+id/tv_recommend_number_detail_act"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/noto_sans_kr_medium"
+                                    android:textSize="10sp"
+                                    android:textColor="#a4a4a4"
+                                    android:text="추천 1"
+                            />
+
+                        </LinearLayout>
+
+                        <!--비추천-->
+                        <LinearLayout
+                                android:id="@+id/btn_unlike_community_detail_act"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:layout_marginLeft="36dp"
+                        >
+
+                            <ImageView
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:background="@drawable/community_detail_unlike_btn"
+                            />
+
+                            <TextView
+                                    android:id="@+id/tv_unlike_community_detail_act"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
+                                    android:fontFamily="@font/noto_sans_kr_medium"
+                                    android:textSize="10sp"
+                                    android:textColor="#a4a4a4"
+                                    android:text="비추천 1"
+                            />
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <!--댓글들...-->
+                <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                >
+                    <View
+                            android:id="@+id/view_comments_commu_detail_act"
+                            android:layout_width="match_parent"
+                            android:layout_height="16dp"
+                            android:background="#F0F3F4"
+                    />
+
+                    <android.support.v7.widget.RecyclerView
+                            android:id="@+id/rv_comment_commu_detail_act"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/view_comments_commu_detail_act"
+                    >
+                    </android.support.v7.widget.RecyclerView>
+
+                </RelativeLayout>
+
             </LinearLayout>
 
-            <!--main화면의 사용자 정보, title-->
-            <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#f0f0f0"
-                    android:layout_marginHorizontal="24dp"
-            >
+        </android.support.v4.widget.NestedScrollView>
 
-            </LinearLayout>
-
-            <!--Image-->
+        <!--댓글창-->
+        <RelativeLayout
+                android:id="@+id/rl_comment_container_community_search_act"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="#f3f3f3"
+                android:layout_alignParentBottom="true"
+        >
+            <!--editbox-->
             <RelativeLayout
+                    android:id="@+id/rl_edit_box_community_search_act"
+                    android:layout_margin="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_alignParentStart="true">
+                    android:layout_centerInParent="true"
+                    android:layout_below="@+id/rl_toolbar_community_search_act"
+                    android:background="@drawable/community_search_edittext_box"
+            >
 
+                <!--익명버튼-->
                 <ImageView
-                        android:id="@+id/img_main_community_detail"
-                        android:layout_width="296dp"
-                        android:layout_height="192dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/icn_img_x"
-                />
-
-                <TextView
-                        android:id="@+id/tv_main_context_community_detail"
+                        android:id="@+id/btn_anonymous_detail_com_act"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/img_main_community_detail"
-                        android:layout_marginTop="14dp"
-                        android:fontFamily="@font/noto_sans_kr_medium"
-                        android:textSize="14sp"
-                        android:textColor="@color/black"
-                        android:text="ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ"
+                        android:background="@drawable/community_anonymous_btn"
+                        android:layout_marginHorizontal="12dp"
+                        android:layout_centerVertical="true"
                 />
 
-                <!--추천,비추천-->
+                <!--editText-->
                 <LinearLayout
+                        android:id="@+id/et_community_search"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginRight="12dp"
+                        android:background="#FFFFFF"
+                        android:layout_toRightOf="@+id/btn_anonymous_detail_com_act"
+                >
+
+                    <EditText
+                            android:id="@+id/et_commnets_reply_commu_detail_act"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="12sp"
+                            android:textColorHint="#a4a4a4"
+                            android:paddingLeft="12dp"
+                            android:fontFamily="@font/noto_sans_kr_medium"
+                            android:hint="댓글을 입력하세요."
+                            android:background="@null"
+                    />
+
+                </LinearLayout>
+
+                <!--검색 버튼-->
+                <LinearLayout
+                        android:id="@+id/btn_find_search_com_act"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="48dp"
-                        android:layout_below="@+id/tv_main_context_community_detail"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_below="@+id/rl_toolbar_community_search_act"
                         android:orientation="horizontal"
                 >
-                    <!--추천-->
-                    <LinearLayout
-                            android:id="@+id/btn_like_community_detail_act"
+                    <ImageView
                             android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                    >
-
-                        <ImageView
-                                android:layout_width="48dp"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/community_detail_like_btn"
-                        />
-
-                        <TextView
-                                android:id="@+id/tv_recommend_number_detail_act"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/noto_sans_kr_medium"
-                                android:textSize="10sp"
-                                android:textColor="#a4a4a4"
-                                android:text="추천 1"
-                        />
-
-                    </LinearLayout>
-
-                    <!--비추천-->
-                    <LinearLayout
-                            android:id="@+id/btn_unlike_community_detail_act"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:layout_marginLeft="36dp"
-                    >
-
-                        <ImageView
-                                android:layout_width="48dp"
-                                android:layout_height="48dp"
-                                android:background="@drawable/community_detail_unlike_btn"
-                        />
-
-                        <TextView
-                                android:id="@+id/tv_unlike_community_detail_act"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_horizontal"
-                                android:fontFamily="@font/noto_sans_kr_medium"
-                                android:textSize="10sp"
-                                android:textColor="#a4a4a4"
-                                android:text="비추천 1"
-                        />
-
-
-                    </LinearLayout>
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="18dp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_alignParentEnd="true"
+                            android:src="@drawable/icn_go"
+                    />
 
                 </LinearLayout>
 
             </RelativeLayout>
-
-            <!--댓글들...-->
-            <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-            >
-                <View
-                        android:id="@+id/view_comments_commu_detail_act"
-                        android:layout_width="match_parent"
-                        android:layout_height="16dp"
-                        android:background="#F0F3F4"
-                        />
-
-                <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_comment_commu_detail_act"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/view_comments_commu_detail_act"
-                >
-                </android.support.v7.widget.RecyclerView>
-
-            </RelativeLayout>
-
-        </LinearLayout>
-
-    </android.support.v4.widget.NestedScrollView>
-
-    <!--댓글창-->
-    <RelativeLayout
-            android:id="@+id/rl_comment_container_community_search_act"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="#f3f3f3"
-            android:layout_alignParentBottom="true"
-    >
-        <!--editbox-->
-        <RelativeLayout
-                android:id="@+id/rl_edit_box_community_search_act"
-                android:layout_margin="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_below="@+id/rl_toolbar_community_search_act"
-                android:background="@drawable/community_search_edittext_box"
-        >
-
-            <!--익명버튼-->
-            <ImageView
-                    android:id="@+id/btn_anonymous_detail_com_act"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/community_anonymous_btn"
-                    android:layout_marginHorizontal="12dp"
-                    android:layout_centerVertical="true"
-            />
-
-            <!--editText-->
-            <LinearLayout
-                    android:id="@+id/et_community_search"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:layout_marginRight="12dp"
-                    android:background="#FFFFFF"
-                    android:layout_toRightOf="@+id/btn_anonymous_detail_com_act"
-            >
-
-                <EditText
-                        android:id="@+id/et_commnets_reply_commu_detail_act"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:textSize="12sp"
-                        android:textColorHint="#a4a4a4"
-                        android:paddingLeft="12dp"
-                        android:fontFamily="@font/noto_sans_kr_medium"
-                        android:hint="댓글을 입력하세요."
-                        android:background="@null"
-                />
-
-            </LinearLayout>
-
-            <!--검색 버튼-->
-            <LinearLayout
-                    android:id="@+id/btn_find_search_com_act"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_below="@+id/rl_toolbar_community_search_act"
-                    android:orientation="horizontal"
-            >
-                <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="18dp"
-                        android:layout_gravity="center_vertical"
-                        android:layout_alignParentEnd="true"
-                        android:src="@drawable/icn_go"
-                />
-
-            </LinearLayout>
 
         </RelativeLayout>
 
     </RelativeLayout>
 
-</RelativeLayout>
+</layout>
